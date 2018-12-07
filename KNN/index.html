@@ -1,7 +1,1663 @@
-<!DOCTYPE html>
+<!doctype html>
+
 <html>
+<head>
+  <meta charset="utf-8">
+
+  <title>KNN</title>
+  <!-- Blockly imports -->
+  <script src="blockly/blockly_compressed.js"></script>
+  <script src="blockly/blocks_compressed.js"></script>
+  <script src="blockly/javascript_compressed.js"></script>
+
+
+  <!-- Other imports -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+  <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+  <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+  <!-- My Scripts -->
+  <script src="customJS/KNNFunctions.js"></script>
+  <script src="customJS/GraphFunctions.js"></script>
+
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+<main role="main" class="container" style="max-width: 95%">
+  <!--<h1><a href="https://developers.google.com/blockly/">Blockly</a> &gt;-->
+  <!--<a href="../index.html">Demos</a> &gt; Fixed Blockly</h1>-->
+
+  <!--<p>This is a simple demo of injecting Blockly into a fixed-sized 'div' element.</p>-->
+
+  <!--<p>&rarr; More info on <a href="https://developers.google.com/blockly/guides/configure-blockly/web/fixed-size">injecting fixed-sized Blockly</a>&hellip;</p>-->
+  <h1><span class="B_title"> </span></h1>
+
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+      <!-- Utilities -->
+      <li class="nav-item button">
+        <button id="newCodeButton" type="button" class="btn btn-outline-secondary" onclick="LanguageCode.discard()" data-toggle="tooltip" data-tooltip="new"><i class="far fa-file"></i></button>
+      </li>
+      <li class="nav-item button">
+        <button id="dlCodeButton" type="button" class="btn btn-outline-secondary" onclick="downloadProject()" data-toggle="tooltip" data-tooltip="download"><i class="fas fa-save"></i></button>
+      </li>
+
+      <li class="nav-item button" data-toggle="tooltip" data-tooltip="upload">
+        <label for="upload_project" class="btn btn-outline-secondary" style="margin-bottom: 0px">
+          <i class="fa fa-folder-open"></i>
+        </label>
+        <input id="upload_project" type="file" hidden>
+      </li>
+
+      <li class="nav-item dropdown" data-toggle="tooltip" data-tooltip="export">
+        <button class="btn btn-outline-secondary dropdown-toggle" id="navbarDropdown" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-file-export"></i>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
+          <a class="dropdown-item" href="#" onclick="downloadSvg()"><i class="fas fa-shapes"></i> SVG</a>
+          <a class="dropdown-item" href="#" onclick="convertSvgToPng()"><i class="fas fa-image"></i> PNG</a>
+        </div>
+      </li>
+
+
+      <!-- Testings button -->
+      <li class="nav-item button">
+        <button id="showCodeButton" type="button" class="btn btn-info" onclick="showCode()" data-toggle="tooltip" data-tooltip="showCode"><i class="far fa-eye"></i></button>
+      </li>
+      <li class="nav-item button">
+        <button id="runCodeButton" type="button" class="btn btn-primary" onclick="runBlocklyCode()" data-toggle="tooltip" data-tooltip="executeCode"><i class="fas fa-play"></i> <i class="fas fa-vial"></i></button>
+      </li>
+
+      <!-- Run prediction -->
+      <li class="nav-item button">
+        <button id="runPredictionCodeButton" type="button" class="btn btn-primary" onclick="runPredictionCode()" data-toggle="tooltip" data-tooltip="executeCode"><i class="fas fa-play"></i> <i class="fas fa-dice"></i></button>
+      </li>
+    </ul>
+
+    <!-- Help -->
+    <a target="_blank" href="files/BlocklyKNN.pdf" role="button" id="helpButton" class="btn btn-warning" data-toggle="tooltip" data-tooltip="help"><i class="fas fa-question-circle"></i></a>
+
+
+    <!-- Language -->
+    <form class="form-inline" >
+      <div class="form-group">
+        <label for="languageMenu" class="control-label" style="padding-right: 4px; padding-left: 14px;"><i class="fas fa-globe"></i>  </label>
+        <select class="form-control" id="languageMenu" data-toggle="tooltip" data-tooltip="langage"></select>
+      </div>
+    </form>
+  </nav>
+
+  <!-- Progress bar of prediction -->
+  <div class="mt-2 col-md-12">
+    <h6 style="float: left; margin-right: 1em;"> <span class="B_predictionProgress"></span> : </h6>
+    <div class="progress" style="height: 32px;">
+      <div id="predictionProgressBar" class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">?</div>
+    </div>
+  </div>
+
+  <!-- 2 Rows -->
+  <div class="row h-100 mt-2 col-md-12">
+    <div class="col-sm-4" >
+
+      <div class="accordion" id="accordionControlPanel">
+        <!-- Graph -->
+        <div class="card">
+          <div class="card-header" style="padding: 0;" id="headingGraph">
+            <h5 class="mb-0">
+              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseGraph" aria-expanded="true" aria-controls="collapseGraph">
+                <i class="fas fa-chart-area"></i> <span class="B_graphAndDatas"></span>
+              </button>
+            </h5>
+          </div>
+
+          <div id="collapseGraph" class="collapse show" aria-labelledby="headingGraph">
+            <div class="card-body">
+              <div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+              <!-- Boutton pour afficher une fenêtre modal avec le tableau utilisé -->
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#irisDataModal">
+                <i class="fas fa-table"></i> <span class="B_trainingSet"></span>
+              </button>
+              <button type="button" class="btn btn-warning" onclick="deleteAddedMarkers()">
+                <i class="fas fa-eraser"></i> <span class="B_erasedMarkers"></span>
+              </button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="irisDataModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Training set :</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <table class="table-sm table-hover">
+                        <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Sepal Length</th>
+                          <th scope="col">Sepal Width</th>
+                          <th scope="col">Petal Length</th>
+                          <th scope="col">Petal Width</th>
+                          <th scope="col">Class</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="table-primary">
+                          <th scope="row">1</th>
+                          <td>5.1</td>
+                          <td>3.5</td>
+                          <td>1.4</td>
+                          <td>0.2</td>
+                          <td>Iris-setosa</td>
+                        </tr>
+
+                        <tr class="table-primary">
+                          <th scope="row">2</th>
+                          <td>4.9</td>
+                          <td>3.0</td>
+                          <td>1.4</td>
+                          <td>0.2</td>
+                          <td>Iris-setosa</td>
+                        </tr>
+
+                        <tr class="table-primary">
+                          <th scope="row">3</th>
+                          <td>4.7</td>
+                          <td>3.2</td>
+                          <td>1.3</td>
+                          <td>0.2</td>
+                          <td>Iris-setosa</td>
+                        </tr>
+
+                        <tr class="table-primary">
+                          <th scope="row">4</th>
+                          <td>4.6</td>
+                          <td>3.1</td>
+                          <td>1.5</td>
+                          <td>0.2</td>
+                          <td>Iris-setosa</td>
+                        </tr>
+
+                        <tr class="table-primary">
+                          <th scope="row">5</th>
+                          <td>5.0</td>
+                          <td>3.6</td>
+                          <td>1.4</td>
+                          <td>0.2</td>
+                          <td>Iris-setosa</td>
+                        </tr>
+
+                        <tr class="table-primary">
+                          <th scope="row">6</th>
+                          <td>5.4</td>
+                          <td>3.9</td>
+                          <td>1.7</td>
+                          <td>0.4</td>
+                          <td>Iris-setosa</td>
+                        </tr>
+
+                        <tr class="table-primary">
+                          <th scope="row">7</th>
+                          <td>4.6</td>
+                          <td>3.4</td>
+                          <td>1.4</td>
+                          <td>0.3</td>
+                          <td>Iris-setosa</td>
+                        </tr>
+
+                        <tr class="table-primary">
+                          <th scope="row">8</th>
+                          <td>5.0</td>
+                          <td>3.4</td>
+                          <td>1.5</td>
+                          <td>0.2</td>
+                          <td>Iris-setosa</td>
+                        </tr>
+
+                        <tr class="table-primary">
+                          <th scope="row">9</th>
+                          <td>4.4</td>
+                          <td>2.9</td>
+                          <td>1.4</td>
+                          <td>0.2</td>
+                          <td>Iris-setosa</td>
+                        </tr>
+
+                        <tr class="table-primary">
+                          <th scope="row">10</th>
+                          <td>4.9</td>
+                          <td>3.1</td>
+                          <td>1.5</td>
+                          <td>0.1</td>
+                          <td>Iris-setosa</td>
+                        </tr>
+
+                        <tr class="table-primary">
+                          <th scope="row">11</th>
+                          <td>5.4</td>
+                          <td>3.7</td>
+                          <td>1.5</td>
+                          <td>0.2</td>
+                          <td>Iris-setosa</td>
+                        </tr>
+
+                        <tr class="table-primary">
+                          <th scope="row">12</th>
+                          <td>4.8</td>
+                          <td>3.4</td>
+                          <td>1.6</td>
+                          <td>0.2</td>
+                          <td>Iris-setosa</td>
+                        </tr>
+
+                        <tr class="table-primary">
+                          <th scope="row">13</th>
+                          <td>4.8</td>
+                          <td>3.0</td>
+                          <td>1.4</td>
+                          <td>0.1</td>
+                          <td>Iris-setosa</td>
+                        </tr>
+
+                        <tr class="table-primary">
+                          <th scope="row">14</th>
+                          <td>4.3</td>
+                          <td>3.0</td>
+                          <td>1.1</td>
+                          <td>0.1</td>
+                          <td>Iris-setosa</td>
+                        </tr>
+
+                        <tr class="table-primary">
+                          <th scope="row">15</th>
+                          <td>5.8</td>
+                          <td>4.0</td>
+                          <td>1.2</td>
+                          <td>0.2</td>
+                          <td>Iris-setosa</td>
+                        </tr>
+
+                        <tr class="table-primary">
+                          <th scope="row">16</th>
+                          <td>5.7</td>
+                          <td>4.4</td>
+                          <td>1.5</td>
+                          <td>0.4</td>
+                          <td>Iris-setosa</td>
+                        </tr>
+
+                        <tr class="table-primary">
+                          <th scope="row">17</th>
+                          <td>5.4</td>
+                          <td>3.9</td>
+                          <td>1.3</td>
+                          <td>0.4</td>
+                          <td>Iris-setosa</td>
+                        </tr>
+
+                        <tr class="table-primary">
+                          <th scope="row">18</th>
+                          <td>5.1</td>
+                          <td>3.5</td>
+                          <td>1.4</td>
+                          <td>0.3</td>
+                          <td>Iris-setosa</td>
+                        </tr>
+
+                        <tr class="table-primary">
+                          <th scope="row">19</th>
+                          <td>5.7</td>
+                          <td>3.8</td>
+                          <td>1.7</td>
+                          <td>0.3</td>
+                          <td>Iris-setosa</td>
+                        </tr>
+
+                        <tr class="table-primary">
+                          <th scope="row">20</th>
+                          <td>5.1</td>
+                          <td>3.8</td>
+                          <td>1.5</td>
+                          <td>0.3</td>
+                          <td>Iris-setosa</td>
+                        </tr>
+
+                        <tr class="table-primary">
+                          <th scope="row">21</th>
+                          <td>5.4</td>
+                          <td>3.4</td>
+                          <td>1.7</td>
+                          <td>0.2</td>
+                          <td>Iris-setosa</td>
+                        </tr>
+
+                        <tr class="table-primary">
+                          <th scope="row">22</th>
+                          <td>5.1</td>
+                          <td>3.7</td>
+                          <td>1.5</td>
+                          <td>0.4</td>
+                          <td>Iris-setosa</td>
+                        </tr>
+
+                        <tr class="table-primary">
+                          <th scope="row">23</th>
+                          <td>4.6</td>
+                          <td>3.6</td>
+                          <td>1.0</td>
+                          <td>0.2</td>
+                          <td>Iris-setosa</td>
+                        </tr>
+
+                        <tr class="table-primary">
+                          <th scope="row">24</th>
+                          <td>5.1</td>
+                          <td>3.3</td>
+                          <td>1.7</td>
+                          <td>0.5</td>
+                          <td>Iris-setosa</td>
+                        </tr>
+
+                        <tr class="table-primary">
+                          <th scope="row">25</th>
+                          <td>4.8</td>
+                          <td>3.4</td>
+                          <td>1.9</td>
+                          <td>0.2</td>
+                          <td>Iris-setosa</td>
+                        </tr>
+
+                        <tr class="table-primary">
+                          <th scope="row">26</th>
+                          <td>5.0</td>
+                          <td>3.0</td>
+                          <td>1.6</td>
+                          <td>0.2</td>
+                          <td>Iris-setosa</td>
+                        </tr>
+
+                        <tr class="table-primary">
+                          <th scope="row">27</th>
+                          <td>5.0</td>
+                          <td>3.4</td>
+                          <td>1.6</td>
+                          <td>0.4</td>
+                          <td>Iris-setosa</td>
+                        </tr>
+
+                        <tr class="table-primary">
+                          <th scope="row">28</th>
+                          <td>5.2</td>
+                          <td>3.5</td>
+                          <td>1.5</td>
+                          <td>0.2</td>
+                          <td>Iris-setosa</td>
+                        </tr>
+
+                        <tr class="table-primary">
+                          <th scope="row">29</th>
+                          <td>5.2</td>
+                          <td>3.4</td>
+                          <td>1.4</td>
+                          <td>0.2</td>
+                          <td>Iris-setosa</td>
+                        </tr>
+
+                        <tr class="table-primary">
+                          <th scope="row">30</th>
+                          <td>4.7</td>
+                          <td>3.2</td>
+                          <td>1.6</td>
+                          <td>0.2</td>
+                          <td>Iris-setosa</td>
+                        </tr>
+
+                        <tr class="table-primary">
+                          <th scope="row">31</th>
+                          <td>4.8</td>
+                          <td>3.1</td>
+                          <td>1.6</td>
+                          <td>0.2</td>
+                          <td>Iris-setosa</td>
+                        </tr>
+
+                        <tr class="table-primary">
+                          <th scope="row">32</th>
+                          <td>5.4</td>
+                          <td>3.4</td>
+                          <td>1.5</td>
+                          <td>0.4</td>
+                          <td>Iris-setosa</td>
+                        </tr>
+
+                        <tr class="table-primary">
+                          <th scope="row">33</th>
+                          <td>5.2</td>
+                          <td>4.1</td>
+                          <td>1.5</td>
+                          <td>0.1</td>
+                          <td>Iris-setosa</td>
+                        </tr>
+
+                        <tr class="table-primary">
+                          <th scope="row">34</th>
+                          <td>5.5</td>
+                          <td>4.2</td>
+                          <td>1.4</td>
+                          <td>0.2</td>
+                          <td>Iris-setosa</td>
+                        </tr>
+
+                        <tr class="table-primary">
+                          <th scope="row">35</th>
+                          <td>4.9</td>
+                          <td>3.1</td>
+                          <td>1.5</td>
+                          <td>0.1</td>
+                          <td>Iris-setosa</td>
+                        </tr>
+
+                        <tr class="table-primary">
+                          <th scope="row">36</th>
+                          <td>5.0</td>
+                          <td>3.2</td>
+                          <td>1.2</td>
+                          <td>0.2</td>
+                          <td>Iris-setosa</td>
+                        </tr>
+
+                        <tr class="table-primary">
+                          <th scope="row">37</th>
+                          <td>5.5</td>
+                          <td>3.5</td>
+                          <td>1.3</td>
+                          <td>0.2</td>
+                          <td>Iris-setosa</td>
+                        </tr>
+
+                        <tr class="table-primary">
+                          <th scope="row">38</th>
+                          <td>4.9</td>
+                          <td>3.1</td>
+                          <td>1.5</td>
+                          <td>0.1</td>
+                          <td>Iris-setosa</td>
+                        </tr>
+
+                        <tr class="table-primary">
+                          <th scope="row">39</th>
+                          <td>4.4</td>
+                          <td>3.0</td>
+                          <td>1.3</td>
+                          <td>0.2</td>
+                          <td>Iris-setosa</td>
+                        </tr>
+
+                        <tr class="table-primary">
+                          <th scope="row">40</th>
+                          <td>5.1</td>
+                          <td>3.4</td>
+                          <td>1.5</td>
+                          <td>0.2</td>
+                          <td>Iris-setosa</td>
+                        </tr>
+
+                        <tr class="table-danger">
+                          <th scope="row">41</th>
+                          <td>7.0</td>
+                          <td>3.2</td>
+                          <td>4.7</td>
+                          <td>1.4</td>
+                          <td>Iris-versicolor</td>
+                        </tr>
+
+                        <tr class="table-danger">
+                          <th scope="row">42</th>
+                          <td>6.4</td>
+                          <td>3.2</td>
+                          <td>4.5</td>
+                          <td>1.5</td>
+                          <td>Iris-versicolor</td>
+                        </tr>
+
+                        <tr class="table-danger">
+                          <th scope="row">43</th>
+                          <td>6.9</td>
+                          <td>3.1</td>
+                          <td>4.9</td>
+                          <td>1.5</td>
+                          <td>Iris-versicolor</td>
+                        </tr>
+
+                        <tr class="table-danger">
+                          <th scope="row">44</th>
+                          <td>5.5</td>
+                          <td>2.3</td>
+                          <td>4.0</td>
+                          <td>1.3</td>
+                          <td>Iris-versicolor</td>
+                        </tr>
+
+                        <tr class="table-danger">
+                          <th scope="row">45</th>
+                          <td>6.5</td>
+                          <td>2.8</td>
+                          <td>4.6</td>
+                          <td>1.5</td>
+                          <td>Iris-versicolor</td>
+                        </tr>
+
+                        <tr class="table-danger">
+                          <th scope="row">46</th>
+                          <td>5.7</td>
+                          <td>2.8</td>
+                          <td>4.5</td>
+                          <td>1.3</td>
+                          <td>Iris-versicolor</td>
+                        </tr>
+
+                        <tr class="table-danger">
+                          <th scope="row">47</th>
+                          <td>6.3</td>
+                          <td>3.3</td>
+                          <td>4.7</td>
+                          <td>1.6</td>
+                          <td>Iris-versicolor</td>
+                        </tr>
+
+                        <tr class="table-danger">
+                          <th scope="row">48</th>
+                          <td>4.9</td>
+                          <td>2.4</td>
+                          <td>3.3</td>
+                          <td>1.0</td>
+                          <td>Iris-versicolor</td>
+                        </tr>
+
+                        <tr class="table-danger">
+                          <th scope="row">49</th>
+                          <td>6.6</td>
+                          <td>2.9</td>
+                          <td>4.6</td>
+                          <td>1.3</td>
+                          <td>Iris-versicolor</td>
+                        </tr>
+
+                        <tr class="table-danger">
+                          <th scope="row">50</th>
+                          <td>5.2</td>
+                          <td>2.7</td>
+                          <td>3.9</td>
+                          <td>1.4</td>
+                          <td>Iris-versicolor</td>
+                        </tr>
+
+                        <tr class="table-danger">
+                          <th scope="row">51</th>
+                          <td>5.0</td>
+                          <td>2.0</td>
+                          <td>3.5</td>
+                          <td>1.0</td>
+                          <td>Iris-versicolor</td>
+                        </tr>
+
+                        <tr class="table-danger">
+                          <th scope="row">52</th>
+                          <td>5.9</td>
+                          <td>3.0</td>
+                          <td>4.2</td>
+                          <td>1.5</td>
+                          <td>Iris-versicolor</td>
+                        </tr>
+
+                        <tr class="table-danger">
+                          <th scope="row">53</th>
+                          <td>6.0</td>
+                          <td>2.2</td>
+                          <td>4.0</td>
+                          <td>1.0</td>
+                          <td>Iris-versicolor</td>
+                        </tr>
+
+                        <tr class="table-danger">
+                          <th scope="row">54</th>
+                          <td>6.1</td>
+                          <td>2.9</td>
+                          <td>4.7</td>
+                          <td>1.4</td>
+                          <td>Iris-versicolor</td>
+                        </tr>
+
+                        <tr class="table-danger">
+                          <th scope="row">55</th>
+                          <td>5.6</td>
+                          <td>2.9</td>
+                          <td>3.6</td>
+                          <td>1.3</td>
+                          <td>Iris-versicolor</td>
+                        </tr>
+
+                        <tr class="table-danger">
+                          <th scope="row">56</th>
+                          <td>6.7</td>
+                          <td>3.1</td>
+                          <td>4.4</td>
+                          <td>1.4</td>
+                          <td>Iris-versicolor</td>
+                        </tr>
+
+                        <tr class="table-danger">
+                          <th scope="row">57</th>
+                          <td>5.6</td>
+                          <td>3.0</td>
+                          <td>4.5</td>
+                          <td>1.5</td>
+                          <td>Iris-versicolor</td>
+                        </tr>
+
+                        <tr class="table-danger">
+                          <th scope="row">58</th>
+                          <td>5.8</td>
+                          <td>2.7</td>
+                          <td>4.1</td>
+                          <td>1.0</td>
+                          <td>Iris-versicolor</td>
+                        </tr>
+
+                        <tr class="table-danger">
+                          <th scope="row">59</th>
+                          <td>6.2</td>
+                          <td>2.2</td>
+                          <td>4.5</td>
+                          <td>1.5</td>
+                          <td>Iris-versicolor</td>
+                        </tr>
+
+                        <tr class="table-danger">
+                          <th scope="row">60</th>
+                          <td>5.6</td>
+                          <td>2.5</td>
+                          <td>3.9</td>
+                          <td>1.1</td>
+                          <td>Iris-versicolor</td>
+                        </tr>
+
+                        <tr class="table-danger">
+                          <th scope="row">61</th>
+                          <td>5.9</td>
+                          <td>3.2</td>
+                          <td>4.8</td>
+                          <td>1.8</td>
+                          <td>Iris-versicolor</td>
+                        </tr>
+
+                        <tr class="table-danger">
+                          <th scope="row">62</th>
+                          <td>6.1</td>
+                          <td>2.8</td>
+                          <td>4.0</td>
+                          <td>1.3</td>
+                          <td>Iris-versicolor</td>
+                        </tr>
+
+                        <tr class="table-danger">
+                          <th scope="row">63</th>
+                          <td>6.3</td>
+                          <td>2.5</td>
+                          <td>4.9</td>
+                          <td>1.5</td>
+                          <td>Iris-versicolor</td>
+                        </tr>
+
+                        <tr class="table-danger">
+                          <th scope="row">64</th>
+                          <td>6.1</td>
+                          <td>2.8</td>
+                          <td>4.7</td>
+                          <td>1.2</td>
+                          <td>Iris-versicolor</td>
+                        </tr>
+
+                        <tr class="table-danger">
+                          <th scope="row">65</th>
+                          <td>6.4</td>
+                          <td>2.9</td>
+                          <td>4.3</td>
+                          <td>1.3</td>
+                          <td>Iris-versicolor</td>
+                        </tr>
+
+                        <tr class="table-danger">
+                          <th scope="row">66</th>
+                          <td>6.6</td>
+                          <td>3.0</td>
+                          <td>4.4</td>
+                          <td>1.4</td>
+                          <td>Iris-versicolor</td>
+                        </tr>
+
+                        <tr class="table-danger">
+                          <th scope="row">67</th>
+                          <td>6.8</td>
+                          <td>2.8</td>
+                          <td>4.8</td>
+                          <td>1.4</td>
+                          <td>Iris-versicolor</td>
+                        </tr>
+
+                        <tr class="table-danger">
+                          <th scope="row">68</th>
+                          <td>6.7</td>
+                          <td>3.0</td>
+                          <td>5.0</td>
+                          <td>1.7</td>
+                          <td>Iris-versicolor</td>
+                        </tr>
+
+                        <tr class="table-danger">
+                          <th scope="row">69</th>
+                          <td>6.0</td>
+                          <td>2.9</td>
+                          <td>4.5</td>
+                          <td>1.5</td>
+                          <td>Iris-versicolor</td>
+                        </tr>
+
+                        <tr class="table-danger">
+                          <th scope="row">70</th>
+                          <td>5.7</td>
+                          <td>2.6</td>
+                          <td>3.5</td>
+                          <td>1.0</td>
+                          <td>Iris-versicolor</td>
+                        </tr>
+
+                        <tr class="table-danger">
+                          <th scope="row">71</th>
+                          <td>5.5</td>
+                          <td>2.4</td>
+                          <td>3.8</td>
+                          <td>1.1</td>
+                          <td>Iris-versicolor</td>
+                        </tr>
+
+                        <tr class="table-danger">
+                          <th scope="row">72</th>
+                          <td>5.5</td>
+                          <td>2.4</td>
+                          <td>3.7</td>
+                          <td>1.0</td>
+                          <td>Iris-versicolor</td>
+                        </tr>
+
+                        <tr class="table-danger">
+                          <th scope="row">73</th>
+                          <td>5.8</td>
+                          <td>2.7</td>
+                          <td>3.9</td>
+                          <td>1.2</td>
+                          <td>Iris-versicolor</td>
+                        </tr>
+
+                        <tr class="table-danger">
+                          <th scope="row">74</th>
+                          <td>6.0</td>
+                          <td>2.7</td>
+                          <td>5.1</td>
+                          <td>1.6</td>
+                          <td>Iris-versicolor</td>
+                        </tr>
+
+                        <tr class="table-danger">
+                          <th scope="row">75</th>
+                          <td>5.4</td>
+                          <td>3.0</td>
+                          <td>4.5</td>
+                          <td>1.5</td>
+                          <td>Iris-versicolor</td>
+                        </tr>
+
+                        <tr class="table-danger">
+                          <th scope="row">76</th>
+                          <td>6.0</td>
+                          <td>3.4</td>
+                          <td>4.5</td>
+                          <td>1.6</td>
+                          <td>Iris-versicolor</td>
+                        </tr>
+
+                        <tr class="table-danger">
+                          <th scope="row">77</th>
+                          <td>6.7</td>
+                          <td>3.1</td>
+                          <td>4.7</td>
+                          <td>1.5</td>
+                          <td>Iris-versicolor</td>
+                        </tr>
+
+                        <tr class="table-danger">
+                          <th scope="row">78</th>
+                          <td>6.3</td>
+                          <td>2.3</td>
+                          <td>4.4</td>
+                          <td>1.3</td>
+                          <td>Iris-versicolor</td>
+                        </tr>
+
+                        <tr class="table-danger">
+                          <th scope="row">79</th>
+                          <td>5.6</td>
+                          <td>3.0</td>
+                          <td>4.1</td>
+                          <td>1.3</td>
+                          <td>Iris-versicolor</td>
+                        </tr>
+
+                        <tr class="table-danger">
+                          <th scope="row">80</th>
+                          <td>5.5</td>
+                          <td>2.5</td>
+                          <td>4.0</td>
+                          <td>1.3</td>
+                          <td>Iris-versicolor</td>
+                        </tr>
+
+                        <tr class="table-success">
+                          <th scope="row">81</th>
+                          <td>6.3</td>
+                          <td>3.3</td>
+                          <td>6.0</td>
+                          <td>2.5</td>
+                          <td>Iris-virginica</td>
+                        </tr>
+
+                        <tr class="table-success">
+                          <th scope="row">82</th>
+                          <td>5.8</td>
+                          <td>2.7</td>
+                          <td>5.1</td>
+                          <td>1.9</td>
+                          <td>Iris-virginica</td>
+                        </tr>
+
+                        <tr class="table-success">
+                          <th scope="row">83</th>
+                          <td>7.1</td>
+                          <td>3.0</td>
+                          <td>5.9</td>
+                          <td>2.1</td>
+                          <td>Iris-virginica</td>
+                        </tr>
+
+                        <tr class="table-success">
+                          <th scope="row">84</th>
+                          <td>6.3</td>
+                          <td>2.9</td>
+                          <td>5.6</td>
+                          <td>1.8</td>
+                          <td>Iris-virginica</td>
+                        </tr>
+
+                        <tr class="table-success">
+                          <th scope="row">85</th>
+                          <td>6.5</td>
+                          <td>3.0</td>
+                          <td>5.8</td>
+                          <td>2.2</td>
+                          <td>Iris-virginica</td>
+                        </tr>
+
+                        <tr class="table-success">
+                          <th scope="row">86</th>
+                          <td>7.6</td>
+                          <td>3.0</td>
+                          <td>6.6</td>
+                          <td>2.1</td>
+                          <td>Iris-virginica</td>
+                        </tr>
+
+                        <tr class="table-success">
+                          <th scope="row">87</th>
+                          <td>4.9</td>
+                          <td>2.5</td>
+                          <td>4.5</td>
+                          <td>1.7</td>
+                          <td>Iris-virginica</td>
+                        </tr>
+
+                        <tr class="table-success">
+                          <th scope="row">88</th>
+                          <td>7.3</td>
+                          <td>2.9</td>
+                          <td>6.3</td>
+                          <td>1.8</td>
+                          <td>Iris-virginica</td>
+                        </tr>
+
+                        <tr class="table-success">
+                          <th scope="row">89</th>
+                          <td>6.7</td>
+                          <td>2.5</td>
+                          <td>5.8</td>
+                          <td>1.8</td>
+                          <td>Iris-virginica</td>
+                        </tr>
+
+                        <tr class="table-success">
+                          <th scope="row">90</th>
+                          <td>7.2</td>
+                          <td>3.6</td>
+                          <td>6.1</td>
+                          <td>2.5</td>
+                          <td>Iris-virginica</td>
+                        </tr>
+
+                        <tr class="table-success">
+                          <th scope="row">91</th>
+                          <td>6.5</td>
+                          <td>3.2</td>
+                          <td>5.1</td>
+                          <td>2.0</td>
+                          <td>Iris-virginica</td>
+                        </tr>
+
+                        <tr class="table-success">
+                          <th scope="row">92</th>
+                          <td>6.4</td>
+                          <td>2.7</td>
+                          <td>5.3</td>
+                          <td>1.9</td>
+                          <td>Iris-virginica</td>
+                        </tr>
+
+                        <tr class="table-success">
+                          <th scope="row">93</th>
+                          <td>6.8</td>
+                          <td>3.0</td>
+                          <td>5.5</td>
+                          <td>2.1</td>
+                          <td>Iris-virginica</td>
+                        </tr>
+
+                        <tr class="table-success">
+                          <th scope="row">94</th>
+                          <td>5.7</td>
+                          <td>2.5</td>
+                          <td>5.0</td>
+                          <td>2.0</td>
+                          <td>Iris-virginica</td>
+                        </tr>
+
+                        <tr class="table-success">
+                          <th scope="row">95</th>
+                          <td>5.8</td>
+                          <td>2.8</td>
+                          <td>5.1</td>
+                          <td>2.4</td>
+                          <td>Iris-virginica</td>
+                        </tr>
+
+                        <tr class="table-success">
+                          <th scope="row">96</th>
+                          <td>6.4</td>
+                          <td>3.2</td>
+                          <td>5.3</td>
+                          <td>2.3</td>
+                          <td>Iris-virginica</td>
+                        </tr>
+
+                        <tr class="table-success">
+                          <th scope="row">97</th>
+                          <td>6.5</td>
+                          <td>3.0</td>
+                          <td>5.5</td>
+                          <td>1.8</td>
+                          <td>Iris-virginica</td>
+                        </tr>
+
+                        <tr class="table-success">
+                          <th scope="row">98</th>
+                          <td>7.7</td>
+                          <td>3.8</td>
+                          <td>6.7</td>
+                          <td>2.2</td>
+                          <td>Iris-virginica</td>
+                        </tr>
+
+                        <tr class="table-success">
+                          <th scope="row">99</th>
+                          <td>7.7</td>
+                          <td>2.6</td>
+                          <td>6.9</td>
+                          <td>2.3</td>
+                          <td>Iris-virginica</td>
+                        </tr>
+
+                        <tr class="table-success">
+                          <th scope="row">100</th>
+                          <td>6.0</td>
+                          <td>2.2</td>
+                          <td>5.0</td>
+                          <td>1.5</td>
+                          <td>Iris-virginica</td>
+                        </tr>
+
+                        <tr class="table-success">
+                          <th scope="row">101</th>
+                          <td>6.9</td>
+                          <td>3.2</td>
+                          <td>5.7</td>
+                          <td>2.3</td>
+                          <td>Iris-virginica</td>
+                        </tr>
+
+                        <tr class="table-success">
+                          <th scope="row">102</th>
+                          <td>5.6</td>
+                          <td>2.8</td>
+                          <td>4.9</td>
+                          <td>2.0</td>
+                          <td>Iris-virginica</td>
+                        </tr>
+
+                        <tr class="table-success">
+                          <th scope="row">103</th>
+                          <td>7.7</td>
+                          <td>2.8</td>
+                          <td>6.7</td>
+                          <td>2.0</td>
+                          <td>Iris-virginica</td>
+                        </tr>
+
+                        <tr class="table-success">
+                          <th scope="row">104</th>
+                          <td>6.3</td>
+                          <td>2.7</td>
+                          <td>4.9</td>
+                          <td>1.8</td>
+                          <td>Iris-virginica</td>
+                        </tr>
+
+                        <tr class="table-success">
+                          <th scope="row">105</th>
+                          <td>6.7</td>
+                          <td>3.3</td>
+                          <td>5.7</td>
+                          <td>2.1</td>
+                          <td>Iris-virginica</td>
+                        </tr>
+
+                        <tr class="table-success">
+                          <th scope="row">106</th>
+                          <td>7.2</td>
+                          <td>3.2</td>
+                          <td>6.0</td>
+                          <td>1.8</td>
+                          <td>Iris-virginica</td>
+                        </tr>
+
+                        <tr class="table-success">
+                          <th scope="row">107</th>
+                          <td>6.2</td>
+                          <td>2.8</td>
+                          <td>4.8</td>
+                          <td>1.8</td>
+                          <td>Iris-virginica</td>
+                        </tr>
+
+                        <tr class="table-success">
+                          <th scope="row">108</th>
+                          <td>6.1</td>
+                          <td>3.0</td>
+                          <td>4.9</td>
+                          <td>1.8</td>
+                          <td>Iris-virginica</td>
+                        </tr>
+
+                        <tr class="table-success">
+                          <th scope="row">109</th>
+                          <td>6.4</td>
+                          <td>2.8</td>
+                          <td>5.6</td>
+                          <td>2.1</td>
+                          <td>Iris-virginica</td>
+                        </tr>
+
+                        <tr class="table-success">
+                          <th scope="row">110</th>
+                          <td>7.2</td>
+                          <td>3.0</td>
+                          <td>5.8</td>
+                          <td>1.6</td>
+                          <td>Iris-virginica</td>
+                        </tr>
+
+                        <tr class="table-success">
+                          <th scope="row">111</th>
+                          <td>7.4</td>
+                          <td>2.8</td>
+                          <td>6.1</td>
+                          <td>1.9</td>
+                          <td>Iris-virginica</td>
+                        </tr>
+
+                        <tr class="table-success">
+                          <th scope="row">112</th>
+                          <td>7.9</td>
+                          <td>3.8</td>
+                          <td>6.4</td>
+                          <td>2.0</td>
+                          <td>Iris-virginica</td>
+                        </tr>
+
+                        <tr class="table-success">
+                          <th scope="row">113</th>
+                          <td>6.4</td>
+                          <td>2.8</td>
+                          <td>5.6</td>
+                          <td>2.2</td>
+                          <td>Iris-virginica</td>
+                        </tr>
+
+                        <tr class="table-success">
+                          <th scope="row">114</th>
+                          <td>6.3</td>
+                          <td>2.8</td>
+                          <td>5.1</td>
+                          <td>1.5</td>
+                          <td>Iris-virginica</td>
+                        </tr>
+
+                        <tr class="table-success">
+                          <th scope="row">115</th>
+                          <td>6.1</td>
+                          <td>2.6</td>
+                          <td>5.6</td>
+                          <td>1.4</td>
+                          <td>Iris-virginica</td>
+                        </tr>
+
+                        <tr class="table-success">
+                          <th scope="row">116</th>
+                          <td>7.7</td>
+                          <td>3.0</td>
+                          <td>6.1</td>
+                          <td>2.3</td>
+                          <td>Iris-virginica</td>
+                        </tr>
+
+                        <tr class="table-success">
+                          <th scope="row">117</th>
+                          <td>6.3</td>
+                          <td>3.4</td>
+                          <td>5.6</td>
+                          <td>2.4</td>
+                          <td>Iris-virginica</td>
+                        </tr>
+
+                        <tr class="table-success">
+                          <th scope="row">118</th>
+                          <td>6.4</td>
+                          <td>3.1</td>
+                          <td>5.5</td>
+                          <td>1.8</td>
+                          <td>Iris-virginica</td>
+                        </tr>
+
+                        <tr class="table-success">
+                          <th scope="row">119</th>
+                          <td>6.0</td>
+                          <td>3.0</td>
+                          <td>4.8</td>
+                          <td>1.8</td>
+                          <td>Iris-virginica</td>
+                        </tr>
+
+                        <tr class="table-success">
+                          <th scope="row">120</th>
+                          <td>6.9</td>
+                          <td>3.1</td>
+                          <td>5.4</td>
+                          <td>2.1</td>
+                          <td>Iris-virginica</td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Axis dropdowns & K -->
+        <div class="card">
+          <div class="card-header" style="padding: 0;" id="headingParam">
+            <h5 class="mb-0">
+              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseParam" aria-expanded="true" aria-controls="collapseParam">
+                <i class="fas fa-sliders-h"></i> <span class="B_parameters"></span>
+              </button>
+            </h5>
+          </div>
+
+          <div id="collapseParam" class="collapse show" aria-labelledby="headingParam">
+            <div class="card-body">
+              <div class="form-group row">
+                <label for="axisXChoice" class="col-sm-3 col-form-label"><span class="B_axisX"></span> :</label>
+                <select class="form-control col-sm-9" id="axisXChoice">
+                  <option selected="selected">sepal length</option>
+                  <option>sepal width</option>
+                  <option>petal length</option>
+                  <option>petal width</option>
+                </select>
+              </div>
+
+              <div class="form-group row">
+                <label for="axisYChoice" class="col-sm-3 col-form-label"><span class="B_axisY"></span> :</label>
+                <select class="form-control col-sm-9" id="axisYChoice">
+                  <option>sepal length</option>
+                  <option selected="selected">sepal width</option>
+                  <option>petal length</option>
+                  <option>petal width</option>
+                </select>
+              </div>
+
+              <div class="form-group row">
+                <label for="KChoice" class="col-sm-3 col-form-label">K :</label>
+                <input type="number" class="form-control col-sm-9" id="KChoice" value="3" min="1" max="100">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div id="blocklyArea" class="col-sm-8">
+      <!-- Blockly here -->
+      <div id="blocklyDiv" style="position: static"></div>
+    </div>
+  </div>
+
+
+
+</main>
+<xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
+  <category name="KNN" colour="#a55b5b">
+    <block type="getknearestneighboursclasses"></block>
+    <block type="getflowernames"></block>
+  </category>
+  <category name="KNN-Test" colour="#a56d5b">
+    <block type="classifyinstance">
+      <value name="instanceX">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="instanceY">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+    </block>
+  </category>
+  <category name="TODO" colour="#5ba593">
+    <block type="procedures_defreturn">
+      <mutation>
+        <arg name="newIris" varid="`3qAECs_S:%l~(}@TC]u"></arg>
+      </mutation>
+      <field name="NAME">classify</field>
+      <comment pinned="false" h="80" w="160">Describe this function...</comment>
+      <statement name="STACK">
+        <block type="variables_set">
+          <field name="VAR" id="y5s**F}q(J;k4q?V)PES" variabletype="">predicatedFlower</field>
+          <value name="VALUE">
+            <block type="lists_getIndex">
+              <mutation statement="false" at="false"></mutation>
+              <field name="MODE">GET</field>
+              <field name="WHERE">RANDOM</field>
+              <value name="VALUE">
+                <block type="getflowernames"></block>
+              </value>
+            </block>
+          </value>
+          <next>
+            <block type="variables_set">
+              <field name="VAR" id="}YXsdw19Ad8,U,}Ou`?{" variabletype="">kNearestNeigboursClasses</field>
+              <value name="VALUE">
+                <block type="getknearestneighboursclasses">
+                  <value name="instance">
+                    <block type="variables_get">
+                      <field name="VAR" id="`3qAECs_S:%l~(}@TC]u" variabletype="">newIris</field>
+                    </block>
+                  </value>
+                </block>
+              </value>
+            </block>
+          </next>
+        </block>
+      </statement>
+      <value name="RETURN">
+        <block type="variables_get">
+          <field name="VAR" id="y5s**F}q(J;k4q?V)PES" variabletype="">predicatedFlower</field>
+        </block>
+      </value>
+    </block>
+  </category>
+  <sep></sep>
+  <category name="%{BKY_CATLOGIC}" colour="%{BKY_LOGIC_HUE}">
+    <block type="controls_if"></block>
+    <block type="logic_compare"></block>
+    <block type="logic_operation"></block>
+    <block type="logic_negate"></block>
+    <block type="logic_boolean"></block>
+    <block type="logic_null"></block>
+    <block type="logic_ternary"></block>
+  </category>
+  <category name="%{BKY_CATLOOPS}" colour="%{BKY_LOOPS_HUE}">
+    <block type="controls_repeat_ext">
+      <value name="TIMES">
+        <shadow type="math_number">
+          <field name="NUM">10</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="controls_whileUntil"></block>
+    <block type="controls_for">
+      <value name="FROM">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+      <value name="TO">
+        <shadow type="math_number">
+          <field name="NUM">10</field>
+        </shadow>
+      </value>
+      <value name="BY">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="controls_forEach"></block>
+    <block type="controls_flow_statements"></block>
+  </category>
+  <category name="%{BKY_CATMATH}" colour="%{BKY_MATH_HUE}">
+    <block type="math_number">
+      <field name="NUM">123</field>
+    </block>
+    <block type="math_arithmetic">
+      <value name="A">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+      <value name="B">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="math_single">
+      <value name="NUM">
+        <shadow type="math_number">
+          <field name="NUM">9</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="math_trig">
+      <value name="NUM">
+        <shadow type="math_number">
+          <field name="NUM">45</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="math_constant"></block>
+    <block type="math_number_property">
+      <value name="NUMBER_TO_CHECK">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="math_round">
+      <value name="NUM">
+        <shadow type="math_number">
+          <field name="NUM">3.1</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="math_on_list"></block>
+    <block type="math_modulo">
+      <value name="DIVIDEND">
+        <shadow type="math_number">
+          <field name="NUM">64</field>
+        </shadow>
+      </value>
+      <value name="DIVISOR">
+        <shadow type="math_number">
+          <field name="NUM">10</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="math_constrain">
+      <value name="VALUE">
+        <shadow type="math_number">
+          <field name="NUM">50</field>
+        </shadow>
+      </value>
+      <value name="LOW">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+      <value name="HIGH">
+        <shadow type="math_number">
+          <field name="NUM">100</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="math_random_int">
+      <value name="FROM">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+      <value name="TO">
+        <shadow type="math_number">
+          <field name="NUM">100</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="math_random_float"></block>
+  </category>
+  <category name="%{BKY_CATTEXT}" colour="%{BKY_TEXTS_HUE}">
+    <block type="text"></block>
+    <block type="text_join"></block>
+    <block type="text_append">
+      <value name="TEXT">
+        <shadow type="text"></shadow>
+      </value>
+    </block>
+    <block type="text_length">
+      <value name="VALUE">
+        <shadow type="text">
+          <field name="TEXT">abc</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="text_isEmpty">
+      <value name="VALUE">
+        <shadow type="text">
+          <field name="TEXT"></field>
+        </shadow>
+      </value>
+    </block>
+    <block type="text_indexOf">
+      <value name="VALUE">
+        <block type="variables_get">
+          <field name="VAR">{textVariable}</field>
+        </block>
+      </value>
+      <value name="FIND">
+        <shadow type="text">
+          <field name="TEXT">abc</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="text_charAt">
+      <value name="VALUE">
+        <block type="variables_get">
+          <field name="VAR">{textVariable}</field>
+        </block>
+      </value>
+    </block>
+    <block type="text_getSubstring">
+      <value name="STRING">
+        <block type="variables_get">
+          <field name="VAR">{textVariable}</field>
+        </block>
+      </value>
+    </block>
+    <block type="text_changeCase">
+      <value name="TEXT">
+        <shadow type="text">
+          <field name="TEXT">abc</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="text_trim">
+      <value name="TEXT">
+        <shadow type="text">
+          <field name="TEXT">abc</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="text_print">
+      <value name="TEXT">
+        <shadow type="text">
+          <field name="TEXT">abc</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="text_prompt_ext">
+      <value name="TEXT">
+        <shadow type="text">
+          <field name="TEXT">abc</field>
+        </shadow>
+      </value>
+    </block>
+  </category>
+  <category name="%{BKY_CATLISTS}" colour="%{BKY_LISTS_HUE}">
+    <block type="lists_create_with">
+      <mutation items="0"></mutation>
+    </block>
+    <block type="lists_create_with"></block>
+    <block type="lists_repeat">
+      <value name="NUM">
+        <shadow type="math_number">
+          <field name="NUM">5</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="lists_length"></block>
+    <block type="lists_isEmpty"></block>
+    <block type="lists_indexOf">
+      <value name="VALUE">
+        <block type="variables_get">
+          <field name="VAR">{listVariable}</field>
+        </block>
+      </value>
+    </block>
+    <block type="lists_getIndex">
+      <value name="VALUE">
+        <block type="variables_get">
+          <field name="VAR">{listVariable}</field>
+        </block>
+      </value>
+    </block>
+    <block type="lists_setIndex">
+      <value name="LIST">
+        <block type="variables_get">
+          <field name="VAR">{listVariable}</field>
+        </block>
+      </value>
+    </block>
+    <block type="lists_getSublist">
+      <value name="LIST">
+        <block type="variables_get">
+          <field name="VAR">{listVariable}</field>
+        </block>
+      </value>
+    </block>
+    <block type="lists_split">
+      <value name="DELIM">
+        <shadow type="text">
+          <field name="TEXT">,</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="lists_sort"></block>
+  </category>
+  <category name="%{BKY_CATCOLOUR}" colour="%{BKY_COLOUR_HUE}">
+    <block type="colour_picker"></block>
+    <block type="colour_random"></block>
+    <block type="colour_rgb">
+      <value name="RED">
+        <shadow type="math_number">
+          <field name="NUM">100</field>
+        </shadow>
+      </value>
+      <value name="GREEN">
+        <shadow type="math_number">
+          <field name="NUM">50</field>
+        </shadow>
+      </value>
+      <value name="BLUE">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="colour_blend">
+      <value name="COLOUR1">
+        <shadow type="colour_picker">
+          <field name="COLOUR">#ff0000</field>
+        </shadow>
+      </value>
+      <value name="COLOUR2">
+        <shadow type="colour_picker">
+          <field name="COLOUR">#3333ff</field>
+        </shadow>
+      </value>
+      <value name="RATIO">
+        <shadow type="math_number">
+          <field name="NUM">0.5</field>
+        </shadow>
+      </value>
+    </block>
+  </category>
+  <sep></sep>
+  <category name="%{BKY_CATVARIABLES}" colour="%{BKY_VARIABLES_HUE}" custom="VARIABLE"></category>
+  <category name="%{BKY_CATFUNCTIONS}" colour="%{BKY_PROCEDURES_HUE}" custom="PROCEDURE"></category>
+</xml>
+
+<script src="customJS/languageCode.js"></script>
+<script src="customJS/BlocklyScripts.js"></script>
 </body>
 </html>
