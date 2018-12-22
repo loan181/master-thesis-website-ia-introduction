@@ -1,0 +1,65 @@
+<h1>Exercices intéractif de Machine Learning</h1>
+
+<div class="card-deck">
+    {% for card in page.cards %}
+
+        {% assign cardClass = "card custom-card" %}
+        {% unless card.available %} <!-- equivalent à if not -->
+            {% assign cardClass = cardClass | append : " isDisabled" %}
+        {% endunless %}
+
+        <a href= "{{ card.href }}" class= "{{ cardClass }}">
+            <img class="card-img-top" src={{ "img/" | append : card.picture }} style="height:220px; padding: 8px" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">{{ card.title }}</h5>
+                <p class="card-text">
+                    {{ card.text }}
+                </p>
+            </div>
+            <div class="card-footer">
+                <p class="text-muted"><small class="text-muted">{{ card.version }}</small></p>
+            </div>
+        </a>
+    {% endfor %}
+</div>
+
+<div class="card-deck">
+    <a href="KNN" class="card custom-card">
+        <img class="card-img-top" src="img/KNN.svg" style="height:220px; padding: 8px" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">K voisins les plus proche</h5>
+            <p class="card-text">
+                Cette mission consiste à déterminer le type d'une certaine fleur en comptant la majorité parmis les K fleurs les plus proche.
+            </p>
+        </div>
+        <div class="card-footer">
+            <p class="text-muted"><small class="text-muted">v 1.0</small></p>
+        </div>
+    </a>
+
+    <a href="arbre" class="card custom-card isDisabled">
+        <img class="card-img-top" src="img/ArbreDecision.svg" style="height:220px; padding: 8px" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">Arbre de décisions</h5>
+            <p class="card-text">
+                Cette mission intéractive consiste à déterminer un certain objet en créant manuellement un arbre de décision pertinent.
+            </p>
+        </div>
+        <div class="card-footer">
+            <p class="text-muted"><small class="text-muted">(Pas encore disponible)</small></p>
+        </div>
+    </a>
+
+    <a href="nn" class="card custom-card isDisabled">
+        <img class="card-img-top" src="img/NN.svg" style="height:220px; padding: 8px" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">Réseau neuronal</h5>
+            <p class="card-text">
+                Cette mission consiste à utiliser un réseau de neuronne existant afin de reconnaitre un certain chiffre.
+            </p>
+        </div>
+        <div class="card-footer">
+            <p class="text-muted"><small class="text-muted">(Pas encore disponible)</small></p>
+        </div>
+    </a>
+</div>
