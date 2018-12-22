@@ -556,7 +556,7 @@ LanguageCode.discard = function() {
 };
 
 // Load the Code demo's language strings.
-document.write('<script src="msg/_DEF.js"></script>\n');
+document.write('<script src="msg/0DEF.js"></script>\n');
 document.write('<script src="msg/' + LanguageCode.LANG + '.js"></script>\n');
 // Load Blockly's language strings.
 document.write('<script src="blockly/msg/js/' + LanguageCode.LANG + '.js"></script>\n');
