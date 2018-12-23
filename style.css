@@ -19,3 +19,7 @@ a.isDisabled {
     /*max-height: 300px;*/
     margin-bottom: 1rem;
 }
+
+.onlyTeacher {
+    display: none;
+}
