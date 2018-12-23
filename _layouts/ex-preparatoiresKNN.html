@@ -30,6 +30,7 @@
 
     <p>
         Une récente recherche scientifique suggère que l’on peut discerner les 3 fleurs en mesurant certaines éléments de la fleur, plus particulièrement les longueur et largeur du <a href="https://fr.wikipedia.org/wiki/S%C3%A9pale">sépale</a> et de la pétale.
+        <br>Après avoir prélevé et analysé les échantillons aux labos voici les résultats obtenus :
     </p>
 
     <table class="table table-hover" id="table1">
@@ -72,33 +73,27 @@
     Regarde attentivement les résultats obtenus dans le <a href="#table1">premier tableau</a> et choisi parmi les 4 mesures (longueur sépale, largeur sépale, longueur pétale et largeur pétale) <strong>2</strong> mesures qui selon toi te permettent de discerner au mieux les fleurs.
     </p>
 
-    <div class="card border-primary mb-3">
-        <div class="card-header">Réponse</div>
 
-        <div class="card-body text-primary">
-            <select class="form-control">
-                <option>sepal length</option>
-                <option>sepal width</option>
-                <option>petal length</option>
-                <option>petal width</option>
-            </select>
-            <select class="form-control">
-                <option>sepal length</option>
-                <option>sepal width</option>
-                <option>petal length</option>
-                <option>petal width</option>
-            </select>
-        </div>
-    </div>
+    {% answer %}
+    <select class="form-control">
+        <option>sepal length</option>
+        <option>sepal width</option>
+        <option>petal length</option>
+        <option>petal width</option>
+    </select>
 
-    <div class="card border-success mb-3 onlyTeacher">
-        <div class="card-header">Correction</div>
-        <div class="card-body text-success">
-            <p class="card-text">
-                Les 2 meilleurs critères à choisir ici sont les 2 derniers (longueur pétale et largeur pétale).
-            </p>
-        </div>
-    </div>
+    <select class="form-control">
+        <option>sepal length</option>
+        <option>sepal width</option>
+        <option>petal length</option>
+        <option>petal width</option>
+    </select>
+    {% endanswer %}
+
+
+    {% correction %}
+        Les 2 meilleurs critères à choisir ici sont les 2 derniers (longueur pétale et largeur pétale).
+    {% endcorrection %}
 
 
 
