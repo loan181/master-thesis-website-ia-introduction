@@ -1,7 +1,302 @@
----
-layout: ex-preparatoiresKNN
-flowers:
- - {name: "Iris-setosa", picture: "https://www.plant-world-seeds.com/images/item_images/000/007/023/large_square/iris_baby_blue.jpg"}
- - {name: "Iris-versicolor", picture: "https://www.promessedefleurs.com/media/catalog/product/cache/1/image/615x/9df78eab33525d08d6e5fb8d27136e95/I/r/Iris-versicolor-9345-2.jpg"}
- - {name: "Iris-virginica", picture: "https://www.fs.fed.us/wildflowers/beauty/iris/Blue_Flag/images/iris_virginica_virginica_lg.jpg"}
----
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    
+
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<!-- Font Awesome-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+
+<!-- Custom css -->
+<link rel="stylesheet" href="/style.css">
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+    <script src="/js/contentForTeacher.js"></script>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!--<a class="navbar-brand" href="#">Titre</a>-->
+    <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
+        <!--<span class="navbar-toggler-icon"></span>-->
+    <!--</button>-->
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/"><i class="fas fa-home"></i></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/KNN">K plus proches voisins</a>
+            </li>
+            <!--<li class="nav-item dropdown">-->
+                <!--<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                    <!--Dropdown-->
+                <!--</a>-->
+                <!--<div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+                    <!--<a class="dropdown-item" href="#">Action</a>-->
+                    <!--<a class="dropdown-item" href="#">Another action</a>-->
+                    <!--<div class="dropdown-divider"></div>-->
+                    <!--<a class="dropdown-item" href="#">Something else here</a>-->
+                <!--</div>-->
+            <!--</li>-->
+            <!--<li class="nav-item">-->
+                <!--<a class="nav-link disabled" href="#">Disabled</a>-->
+            <!--</li>-->
+        </ul>
+        <!--<form class="form-inline my-2 my-lg-0">-->
+            <!--<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
+            <!--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
+        <!--</form>-->
+    </div>
+</nav>
+<main role="main" class="container">
+    <h1>Exercices préparatoires pour la méthode des K plus proche voisins</h1>
+
+    <h2>Introduction</h2>
+    <p>
+        Il existe plusieurs variation de la fleur d’Iris, parmi celles-ci 3 sont particulièrement difficile à identifier et demande des test biologiques très couteux et qui prennent longtemps afin d’affirmer avec certitude l’origine de la fleur. Ces 3 fleurs sont l’Iris-setosa, l’Iris-versicolor et l’Iris-viginica
+    </p>
+
+    <div class="card-deck">
+        
+        <div class="card">
+
+            <img class="rounded center-thumb" src="https://www.plant-world-seeds.com/images/item_images/000/007/023/large_square/iris_baby_blue.jpg">
+            <div class="card-body">
+                <h5 class="card-title">Iris-setosa</h5>
+            </div>
+        </div>
+        
+        <div class="card">
+
+            <img class="rounded center-thumb" src="https://www.promessedefleurs.com/media/catalog/product/cache/1/image/615x/9df78eab33525d08d6e5fb8d27136e95/I/r/Iris-versicolor-9345-2.jpg">
+            <div class="card-body">
+                <h5 class="card-title">Iris-versicolor</h5>
+            </div>
+        </div>
+        
+        <div class="card">
+
+            <img class="rounded center-thumb" src="https://www.fs.fed.us/wildflowers/beauty/iris/Blue_Flag/images/iris_virginica_virginica_lg.jpg">
+            <div class="card-body">
+                <h5 class="card-title">Iris-virginica</h5>
+            </div>
+        </div>
+        
+    </div>
+
+    <p>
+        Une récente recherche scientifique suggère que l’on peut discerner les 3 fleurs en mesurant certaines éléments de la fleur, plus particulièrement les longueur et largeur du <a href="https://fr.wikipedia.org/wiki/S%C3%A9pale">sépale</a> et de la pétale.
+        <br>Après avoir prélevé et analysé les échantillons aux labos voici les résultats obtenus :
+    </p>
+
+    <table class="table table-hover" id="table1">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Classe</th>
+            <th scope="col">Longueur Sépale</th>
+            <th scope="col">Largeur Sépale</th>
+            <th scope="col">Longueur Pétale</th>
+            <th scope="col">Largeur Pétale</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        
+
+        
+        <tr class="table-primary">
+            <th scope="row"> 1</th>
+            <td>Iris-setosa</td>
+            <td>4.6</td>
+            <td>3.6</td>
+            <td>1.0</td>
+            <td>0.2</td>
+        </tr>
+        
+
+        
+        <tr class="table-primary">
+            <th scope="row"> 2</th>
+            <td>Iris-setosa</td>
+            <td>4.3</td>
+            <td>3.0</td>
+            <td>1.1</td>
+            <td>0.1</td>
+        </tr>
+        
+
+        
+        <tr class="table-primary">
+            <th scope="row"> 3</th>
+            <td>Iris-setosa</td>
+            <td>5.0</td>
+            <td>3.2</td>
+            <td>1.2</td>
+            <td>0.2</td>
+        </tr>
+        
+
+        
+        <tr class="table-primary">
+            <th scope="row"> 4</th>
+            <td>Iris-setosa</td>
+            <td>5.8</td>
+            <td>4.0</td>
+            <td>1.2</td>
+            <td>0.2</td>
+        </tr>
+        
+
+        
+        <tr class="table-danger">
+            <th scope="row"> 5</th>
+            <td>Iris-versicolor</td>
+            <td>5.1</td>
+            <td>2.5</td>
+            <td>3.0</td>
+            <td>1.1</td>
+        </tr>
+        
+
+        
+        <tr class="table-danger">
+            <th scope="row"> 6</th>
+            <td>Iris-versicolor</td>
+            <td>5.0</td>
+            <td>2.3</td>
+            <td>3.3</td>
+            <td>1.0</td>
+        </tr>
+        
+
+        
+        <tr class="table-danger">
+            <th scope="row"> 7</th>
+            <td>Iris-versicolor</td>
+            <td>4.9</td>
+            <td>2.4</td>
+            <td>3.3</td>
+            <td>1.0</td>
+        </tr>
+        
+
+        
+        <tr class="table-danger">
+            <th scope="row"> 8</th>
+            <td>Iris-versicolor</td>
+            <td>5.0</td>
+            <td>2.0</td>
+            <td>3.5</td>
+            <td>1.0</td>
+        </tr>
+        
+
+        
+        <tr class="table-success">
+            <th scope="row"> 9</th>
+            <td>Iris-virginica</td>
+            <td>4.9</td>
+            <td>2.5</td>
+            <td>4.5</td>
+            <td>1.7</td>
+        </tr>
+        
+
+        
+        <tr class="table-success">
+            <th scope="row"> 10</th>
+            <td>Iris-virginica</td>
+            <td>6.2</td>
+            <td>2.8</td>
+            <td>4.8</td>
+            <td>1.8</td>
+        </tr>
+        
+
+        
+        <tr class="table-success">
+            <th scope="row"> 11</th>
+            <td>Iris-virginica</td>
+            <td>6.0</td>
+            <td>3.0</td>
+            <td>4.8</td>
+            <td>1.8</td>
+        </tr>
+        
+
+        
+        <tr class="table-success">
+            <th scope="row"> 12</th>
+            <td>Iris-virginica</td>
+            <td>6.3</td>
+            <td>2.7</td>
+            <td>4.9</td>
+            <td>1.8</td>
+        </tr>
+        
+        </tbody>
+        <caption>Différentes mesures (en cm) pour 4 fleurs de chaque variété</caption>
+    </table>
+
+    <h2>1) Identification de 2 facteurs importants </h2>
+    <p>
+    Regarde attentivement les résultats obtenus dans le <a href="#table1">premier tableau</a> et choisi parmi les 4 mesures (longueur sépale, largeur sépale, longueur pétale et largeur pétale) <strong>2</strong> mesures qui selon toi te permettent de discerner au mieux les fleurs.
+    </p>
+
+
+    
+      <div class="card border-primary mb-3">
+        <div class="card-header">Réponse</div>
+        <div class="card-body text-primary">
+    <select class="form-control">
+        <option>sepal length</option>
+        <option>sepal width</option>
+        <option>petal length</option>
+        <option>petal width</option>
+    </select>
+
+    <select class="form-control">
+        <option>sepal length</option>
+        <option>sepal width</option>
+        <option>petal length</option>
+        <option>petal width</option>
+    </select>
+    
+          </div>
+        </div>
+      
+
+
+    
+      <div class="card border-success mb-3 onlyTeacher">
+        <div class="card-header">Correction</div>
+        <div class="card-body text-success">
+          <p class="card-text">
+        Les 2 meilleurs critères à choisir ici sont les 2 derniers (longueur pétale et largeur pétale).
+    
+          </p>
+          </div>
+        </div>
+      
+
+
+
+</main>
+</body>
+
+</html>
