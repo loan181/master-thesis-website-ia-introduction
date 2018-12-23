@@ -356,7 +356,7 @@ LanguageCode.init = function() {
                     length: 3,
                     colour: '#ccc',
                     snap: true},
-            media: 'blockly/media/',
+            media: 'blocklySrc/media/',
             oneBasedIndex: false, // Indice commence à 0 (pas à 1)
             rtl: rtl,
             toolbox: toolboxXml,
