@@ -11,6 +11,14 @@ a.isDisabled {
     pointer-events: none;
 }
 
+.pop {
+    cursor: zoom-in;
+}
+
+.imagepreview {
+    cursor: zoom-out;
+}
+
 .center-thumb {
     object-fit: none; /* Do not scale the image */
     object-position: center; /* Center the image within the element */
