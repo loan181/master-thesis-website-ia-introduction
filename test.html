@@ -47,5 +47,39 @@
 </div>
 
 
+
+    <div id="raphaelContainer">
+    </div>
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"> </script>
+    <script>
+
+        class Node {
+            constructor(val) {
+                this.val = val;
+                this.drawShape = paper.circle(120 + this.val * 128, 240, 20).attr({
+                    fill: "#FFF",
+                    stroke: "#000",
+                    "stroke-width": 1
+                });
+                // Source : https://stackoverflow.com/a/36498180
+                this.drawShape.mouseup(
+                    (e) => {this.test(this.val, e)}
+                );
+            }
+
+            test(val1, val2) {
+                console.log("TEST " + val1 + " | " + val2);
+                console.log(this);
+            }
+        }
+
+        let paper = Raphael("raphaelContainer", 640, 480);
+        var background = paper.rect(-1, -1, 5000, 5000).attr({
+            fill: 'gray'
+        });
+        var node1 = new Node(1);
+        var node2 = new Node(2);
+    </script>
 </body>
 </html>
