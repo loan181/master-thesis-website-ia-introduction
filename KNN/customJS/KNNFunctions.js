@@ -322,6 +322,7 @@ function getK() {
     return Number(document.getElementById("KChoice").value);
 }
 
+
 /**
  * Used by Blockly to create an artificial flower
  *
@@ -343,4 +344,52 @@ function createFlower(x, y) {
     options.data[3].dataPoints.push({x: x, y: y});
     refreshGraph();
     return new Flower(args[0], args[1], args[2], args[3], "");
+}
+
+
+function getRandomFlower() {
+    return getClassesName()[Math.floor(Math.random() * getClassesName().length)];
+}
+
+let flowerCounter = {};
+let cacheNN = null;
+let needRefreshCache = true;
+function resetCounters() {
+    flowerCounter = {};
+    for (let i = 0; i < flowerName.length; i++) {
+        flowerCounter[flowerName[i]] = 0;
+    }
+    needRefreshCache = true;
+}
+
+function increaseCounters(XthFlower, increaseAmount, irisToCompare) {
+    if (needRefreshCache) {
+        cacheNN = findKNearestNeighboursNames(irisToCompare);
+        needRefreshCache = false;
+    }
+    flowerCounter[cacheNN[XthFlower-1]] += increaseAmount; // -1 car la 1ere est celle d'indice 0
+}
+
+function retrievecounterflower(maxOrMin) {
+    let minFlower = flowerName[0];
+    let maxFlower = flowerName[0];
+
+    for (var key in flowerCounter) {
+        let currentValue = flowerCounter[key];
+
+        if (currentValue < flowerCounter[minFlower]) {
+            minFlower = key;
+        }
+        if (currentValue > flowerCounter[maxFlower]) {
+            maxFlower = key;
+        }
+    }
+
+
+    if (maxOrMin === 'min') {
+        return minFlower;
+    }
+    else {
+        return maxFlower;
+    }
 }
