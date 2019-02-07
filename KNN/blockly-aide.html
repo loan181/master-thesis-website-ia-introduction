@@ -41,23 +41,27 @@
             <li class="nav-item active">
                 <a class="nav-link" href="/"><i class="fas fa-home"></i></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/KNN">K plus proches voisins</a>
+            <li class="nav-item dropdown">
+                <a class="nav-link" href="/KNN/" role="button" aria-haspopup="true" aria-expanded="false">
+                    K plus proches voisins <i class="fas fa-caret-down"></i>
+                </a>
+                <div class="dropdown-menu showOnHover" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/KNN/ex-preparatoires">Exercices préparatoires</a>
+                    <a class="dropdown-item" href="/KNN/blockly-aide">Consignes et utilisation pour la phase pratique</a>
+                    <a class="dropdown-item" href="/KNN/blockly">Phase pratique (Blockly)</a>
+                </div>
             </li>
-            <!--<li class="nav-item dropdown">-->
-                <!--<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-                    <!--Dropdown-->
-                <!--</a>-->
-                <!--<div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
-                    <!--<a class="dropdown-item" href="#">Action</a>-->
-                    <!--<a class="dropdown-item" href="#">Another action</a>-->
-                    <!--<div class="dropdown-divider"></div>-->
-                    <!--<a class="dropdown-item" href="#">Something else here</a>-->
-                <!--</div>-->
-            <!--</li>-->
-            <!--<li class="nav-item">-->
-                <!--<a class="nav-link disabled" href="#">Disabled</a>-->
-            <!--</li>-->
+
+            <li class="nav-item dropdown">
+                <a class="nav-link" href="/arbre/" role="button" aria-haspopup="true" aria-expanded="false">
+                    Arbre de décisions <i class="fas fa-caret-down"></i>
+                </a>
+                <div class="dropdown-menu showOnHover" aria-labelledby="navbarDropdown">
+                    <!--<a class="dropdown-item" href="/KNN/ex-preparatoires">Exercices préparatoires</a>-->
+                    <!--<a class="dropdown-item" href="/KNN/blockly-aide">Consignes et utilisation pour la phase pratique</a>-->
+                    <!--<a class="dropdown-item" href="/KNN/blockly">Phase pratique (Blockly)</a>-->
+                </div>
+            </li>
         </ul>
         <!--<form class="form-inline my-2 my-lg-0">-->
             <!--<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
@@ -65,6 +69,18 @@
         <!--</form>-->
     </div>
 </nav>
+
+<script>
+    // Automatically highlight in the dropdown if the link match
+    var allLinks = document.getElementsByTagName("a");
+    for(var i = 0; i < allLinks.length; i++){
+        var curLink = allLinks[i];
+        if (curLink.href === window.location.href) {
+            curLink.className += " active";
+            break;
+        }
+    }
+</script>
 <div class="container">
     <div class="row">
         <!-- sidebar, which will move to the top on a small screen -->
@@ -195,25 +211,40 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td><img src="/img/blocklyBlocks/getAllFlowers.svg" class="img-fluid"></td>
-                        <td>Donne le nom des différentes fleurs/classes.<br> Dans l'ordre : <code>["Iris-setosa", "Iris-versicolor", "Iris-virginica"]</code></td>
-                        <td>Liste de Strings</td>
+                        <td><img src="/img/blocklyBlocks/getK.svg" class="img-fluid"></td>
+                        <td>Donne la valeur de K définie dans le <a href="#parameterPanel">Panneau Paramètres</a> </td>
+                        <td>Nombre</td>
+                    </tr>
+                    <tr>
+                        <td><img src="/img/blocklyBlocks/countersReset.svg" class="img-fluid"></td>
+                        <td>Permet de réinitialiser le compteur de chaque fleur à zéro</td>
+                        <td><i>Rien</i></td>
+                    </tr>
+                    <tr>
+                        <td><img src="/img/blocklyBlocks/countersIncrease.svg" class="img-fluid"></td>
+                        <td>Ajoute la valeur donné à la i-ème fleur la plus proche</td>
+                        <td><i>Rien</i></td>
+                    </tr>
+                    <tr>
+                        <td><img src="/img/blocklyBlocks/countersGetMinMax.svg" class="img-fluid"></td>
+                        <td>Récupère la fleur associée au compteur avec la valeur minimale/maximale</td>
+                        <td>Texte (nom de fleur)</td>
+                    </tr>
+                    <tr>
+                        <td><img src="/img/blocklyBlocks/getCounters.svg" class="img-fluid"></td>
+                        <td>Permet de consulter la valeur des compteurs.<br>Ce bloc est utile seulement pour débugger afin de pouvoir voir les valeurs des compteurs</td>
+                        <td>Texte</td>
                     </tr>
                     <tr>
                         <td><img src="/img/blocklyBlocks/createFlower.svg" class="img-fluid"></td>
-                        <td>Permet de créer une fleur qui aura les valeurs données en <code>x</code> et <code>y</code> (dépend de ce que tu as fixer comme paramètres).</td>
+                        <td>Permet de créer une fleur artificielle qui aura les valeurs données en <code>x</code> et <code>y</code> (dépend de ce que tu as fixer comme paramètres).<br>Voir <a href="#createArtificalFlower">ci-dessous</a></td>
                         <td>Fleur</td>
-                    </tr>
-                    <tr>
-                        <td><img src="/img/blocklyBlocks/kNearest.svg" class="img-fluid"></td>
-                        <td>Renvoie le nom des K plus proches fleurs de <code>iris</code></td>
-                        <td>Liste de Strings</td>
                     </tr>
                     </tbody>
                 </table>
 
                 <h2>Exemples</h2>
-                <h3>Créer une fleur artificielle</h3>
+                <h3 id="createArtificalFlower">Créer une fleur artificielle</h3>
                 <p>
                     Pour tester ton programme, il peut être utile de créer des fleurs "artificielles".
                     Ce sont des fleurs qui apparaîtront sur le graphe, mais qui ne sont pas dans le training set.<br>
@@ -250,23 +281,43 @@
 
                 <h4>Manipuler une fleur artificielle</h4>
                 <p>
-                    Les fleurs que tu créés artificiellement sont considérées comme des fleurs classiques dans le code.
+                    Les fleurs que tu créés artificiellement sont considérées comme des fleurs "classiques" dans le code.
                     Tu peux les utiliser avec tous les autres blocs utilisant des fleurs.
                 </p>
                 <p>
-                    Tu peux par exemple tester le bloc <img src="/img/blocklyBlocks/kNearest.svg" class="img-fluid"> pour tester s'il renvoie bien les K fleurs les plus proches de la fleur ajoutée.
+                    Voici un exemple un peu complexe d'utilisation possible:
                 </p>
                 <div class="mx-auto" align="center">
-                    <img src="/img/KNN/exampleBlockAppKNN.svg" class="img-fluid"><br>
+                    <img src="/img/KNN/exampleBlockAppCompteur2.svg" class="img-fluid"><br>
                 </div>
+                <br>
                 <div class="mx-auto" align="center">
-                    <img src="/img/KNN/exampleBlockAppKNNRes.PNG" class="img-fluid">
+                    <img src="/img/KNN/exampleBlockAppCompteurRes2.PNG" class="img-fluid">
                 </div>
                 <small class="text-muted">
-                    Dans cet exemple, on ajoute une fleur artificielle en (4.9, 4.2) avec comme axe x le sepal length et y le petal length.
-                    On demande les K (ici 3) plus proche voisins qu’on affiche à l’écran dans une boite de dialogue.<br>
-                    On voit graphiquement que les 3 plus proche de la croix sont 1e carré vert (virginica) et 2 triangles rouge (versicolor),
-                    ce qui est bien le résultat annoncé dans la boite de dialogue
+                    Dans cet exemple, on ajoute une fleur artificielle en (4.9, 4.2) avec comme axe x le sepal length et y le petal length.<br>
+                    On commence par réinitialiser les compteurs des 3 fleurs en les mettant à zéro<br>
+                    Ensuite, on ajoute au compteur de la fleur la plus proche la valeur -10. Dans notre cas, la fleur la plus proche est un carré vert (virginica), son compteur étant de 0, il passe à -10.<br>
+                    Après cela, on ajoute au compteur de la 2ème fleur la plus proche la valeur 20. Dans notre cas, la 2ème fleur la plus proche est un triangle rouge (versicolor), son compteur étant de 0, il passe à 20.<br>
+                    Enfin, on affiche la valeur des compteurs :
+                    <ul>
+                        <li>0 pour les Iris-setosa</li>
+                        <li>20 pour les Iris-versicolor</li>
+                        <li>-10 pour les Iris-virginica</li>
+                    </ul>
+                    Attention que <code>K</code> est totalement ignoré dans cet exemple, il faudra le prendre en compte quand tu devras résoudre le problème ;)
+                </small>
+                <br>
+                <br>
+                <div class="mx-auto" align="center">
+                    <img src="/img/KNN/exampleBlockAppCompteur.svg" class="img-fluid"><br>
+                </div>
+                <br>
+                <div class="mx-auto" align="center">
+                    <img src="/img/KNN/exampleBlockAppCompteurRes.PNG" class="img-fluid">
+                </div>
+                <small class="text-muted">
+                   Pareil que l'exemple précédent, sauf qu'au lieu d'afficher les valeurs des compteurs on indique les fleurs avec les valeurs de compteur minimale et maximale
                 </small>
 
                 <h2>Objectif</h2>
@@ -315,7 +366,7 @@
                     Normalement tu devrais avoir un résultat d’environ 33% et chaque fois que tu re-test le prédicteur,
                     il donnera un résultat différent.<br>
                     C’est normal car le prédicteur que je te donne ici est totalement aléatoire et se contente de donner un nom parmi ceux disponible de manière aléatoire.
-                    Autrement dit, pour chaque fleur il a 1 chance sur 3 de deviner correctement (d’où les 33%).
+                    Autrement dit, pour chaque fleur il a 1 chance sur 3 de deviner correctement (d’ou les 33%).
                 </p>
 
                 <div class="mt-2 col-md-12">
@@ -325,37 +376,77 @@
                     </div>
                 </div>
 
-                <h3>Etape 1 : Compteur pour chaque fleur</h3>
+                <h3>Etape principale : K plus proches voisins</h3>
                 <p>
-                    Dans l’état actuel des choses la variable <code>kNearestNeighboursClasses</code>
-                    contient une liste (de longueur K) avec le nom des K fleurs les plus proche qu'on n'utilise pas.<br>
-                    Il faut créer un compteur qui compte le nombre de fois que chaque nom de fleur apparait.<br>
-                    Tu peux utiliser la liste renvoyé par <img src="/img/blocklyBlocks/getAllFlowers.svg" class="img-fluid"> pour l’ordre des noms dans le compteur.
-                </p>
-                <h4>Exemples</h4>
-                <p>
-                    Sachant que <img src="/img/blocklyBlocks/getAllFlowers.svg" class="img-fluid"> renvoie toujours la même liste (<code>["Iris-setosa", "Iris-versicolor", "Iris-virginica"]</code>)<br>
-                    Avec <code>kNearestNeighboursClasses = ["Iris-setosa", "Iris-versicolor", "Iris-virginica", "Iris-setosa", "Iris-versicolor", "Iris-setosa"]</code>
-                    le compteur serait à la fin <code>[3, 2, 1]</code> (setosa apparait 3 fois, versicolor 2 fois et virginica 1 fois).
+                    Pour réaliser à bien ce projet il est important que tu comprenne bien comment utiliser les compteurs et à quoi ils vont nous servir.<br><br>
+                    L'idée générale est d'augmenter le compteur de chacune des K fleurs les plus proches pour ensuite déterminer celle qui est en majorité
                 </p>
 
-                <div class="mx-auto" align="center">
-                    <img src="/img/KNN/etape1Ex.jpg" class="img-fluid">
-                </div>
+                <p>
+                    Voilà différents exemple pour t'entrainer et voir si tes résultats sont correctes :
+                </p>
                 <small class="text-muted">
-                    Comme on test en utilisant le <a href="#testCode">bouton de test expérimental</a>, il ne faut pas oublier d'appeller la fonction (d'où le premier bloc).<br>
-                    On créé d'abord la liste avec les 6 noms de fleurs comme mis dans l'exemple.<br>
-                    On applique ensuite les modifications à la variable <code>counter</code> comme indiqué au dessus (caché ici par le rectangle noir).<br>
-                    On affiche le résultat qui apparait dans une boite de dialogue qui est bien celui attendu.<br>
+                    Le code principal de l'algorithme est ici caché ici dans la fonction <code>code...</code>, mait tu n'es bien-entendu pas obliger d'implémenter une fonction pour ça ;)<br>
+                    Tu peux recopier la partie du code avec <code>afficher...</code> si tu veux avoir le même affichage que moi (en supposant que tes compteurs se mettent correctement à jour)<br>
+                    Fais bien attention que les paramètres et les coordonnées de la fleur créé changent entre chacun des exemples !
                 </small>
 
-                <p>
-                    Voici des exemples supplémentiares pour tester que le comportement est correct:
-                </p>
-                <ul>
-                    <li><code>["Iris-versicolor"]</code> -> <code>[0, 1, 0]</code></li>
-                    <li><code>["Iris-versicolor", "Iris-versicolor", "Iris-setosa"] </code> -> <code>[1, 2, 0]</code></li>
-                </ul>
+                <div class="mx-auto" align="center">
+                    <img src="/img/KNN/stepMainEx1.PNG" class="img-fluid">
+                    <br>
+                    <img src="/img/KNN/stepMainEx2.PNG" class="img-fluid">
+                    <br>
+                    <img src="/img/KNN/stepMainEx3.PNG" class="img-fluid">
+                </div>
+
+                
+      <div class="card border-info mb-3">
+        <div class="card-header">
+            <button class="btn btn-link" type="button" onclick="toggleNext(this)">
+                Blocs recommandés
+            </button>
+        </div>
+        <div class="collapse hide">
+            <div class="card-body">
+      
+      <div class="container">
+      <div class="row">
+
+          <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
+              <div class="card">
+                 <img class="card-img-center img-fluid" src="/img/blocklyBlocks/countersGetMinMax.svg">
+                    </div>
+                </div>
+                
+          <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
+              <div class="card">
+                 <img class="card-img-center img-fluid" src="/img/blocklyBlocks/getK.svg">
+                    </div>
+                </div>
+                
+          <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
+              <div class="card">
+                 <img class="card-img-center img-fluid" src="/img/blocklyBlocks/countersReset.svg">
+                    </div>
+                </div>
+                
+          <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
+              <div class="card">
+                 <img class="card-img-center img-fluid" src="/img/blocklyBlocks/countersIncrease.svg">
+                    </div>
+                </div>
+                
+          <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
+              <div class="card">
+                 <img class="card-img-center img-fluid" src="/img/blocklyBlocks/forI.svg">
+                    </div>
+                </div>
+                
+      </div>
+      </div>
+      </div>
+        </div>
+      </div>
 
                 
       <div class="card border-warning mb-3">
@@ -367,13 +458,11 @@
         <div class="collapse hide">
             <div class="card-body">
               <p>
-                Cette étape est la compliqué à réaliser. Ne te décourage pas !<br>
-                On peut découper cette étape en sous-étape :<br>
-                On commence par initialiser le compteur à 0 pour tout les noms de fleurs<br>
-                On parcourt la liste des éléments de <code>kNearestNeighboursClasses</code> un par un. Pour chacun :<br>
+                    Une structure correcte du code est la suivante :
                 <ol>
-                    <li>On récupère son indice dans la liste des noms des fleurs</li>
-                    <li>On augmente de un à l’indice correspondant (on ne peut pas le faire directement avec Blobkly, du coup tu peux récupérer la valeur, lui ajouter un, puis remplacer la valeur précédente)</li>
+                    <li>Réinitialiser le compteur, chacune des trois fleurs à un compteur qui est mis à 0</li>
+                    <li>Pour chacune des K fleurs les plus proches, il faudra augmenter leur compteur individuel de 1</li>
+                    <li>Une fois les K fleurs parcouru, il suffit de choisir celle qui à la valeur de compteur la plus haute et mettre à jour le résultat renvoyé</li>
                 </ol>
                 
           </p>
@@ -382,237 +471,22 @@
       </div>
 
                 
-      <div class="card border-info mb-3">
-        <div class="card-header">
-            <button class="btn btn-link" type="button" onclick="toggleNext(this)">
-                Blocs recommandés
-            </button>
-        </div>
-        <div class="collapse hide">
-            <div class="card-body">
-      
-      <div class="container">
-      <div class="row">
-
-          <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
-              <div class="card">
-                 <img class="card-img-center img-fluid" src="/img/blocklyBlocks/plus.svg">
-                    </div>
-                </div>
-                
-          <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
-              <div class="card">
-                 <img class="card-img-center img-fluid" src="/img/blocklyBlocks/findFirtstOccurence.svg">
-                    </div>
-                </div>
-                
-          <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
-              <div class="card">
-                 <img class="card-img-center img-fluid" src="/img/blocklyBlocks/getAllFlowers.svg">
-                    </div>
-                </div>
-                
-          <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
-              <div class="card">
-                 <img class="card-img-center img-fluid" src="/img/blocklyBlocks/getList.svg">
-                    </div>
-                </div>
-                
-          <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
-              <div class="card">
-                 <img class="card-img-center img-fluid" src="/img/blocklyBlocks/createList.svg">
-                    </div>
-                </div>
-                
-          <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
-              <div class="card">
-                 <img class="card-img-center img-fluid" src="/img/blocklyBlocks/setList.svg">
-                    </div>
-                </div>
-                
-          <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
-              <div class="card">
-                 <img class="card-img-center img-fluid" src="/img/blocklyBlocks/forEach.svg">
-                    </div>
-                </div>
-                
-      </div>
-      </div>
-      </div>
-        </div>
-      </div>
-
-                
       <div class="card border-success mb-3 onlyTeacher">
         <div class="card-header">Correction</div>
         <div class="card-body text-success">
           <p class="card-text">
                 <div class="mx-auto" align="center">
-                    <img src="/img/KNN/step1Sol.svg" class="img-fluid">
+                    <img src="/img/KNN/solutionKNN.svg" class="img-fluid">
                 </div>
                 
           </p>
           </div>
         </div>
       
-
-                <h3>Etape 2 : Déterminer la majorité</h3>
-                <p>
-                    Maintenant qu’on à compté le nombre d’occurence de chaque fleur,
-                    il nous reste à trouver celle qui apparait le plus.
-                    Autrement dit, il faut trouver l’indice de la valeur maximum du compteur <code>counter</code>.<br>
-                    En cas d’ambiguïté, on prends le premier maximum rencontré<br>
-                    Pour cela on va d’abord créer une variable <code>maxIndexCourant</code>.
-                    Ensuite on va parcourir notre compteur,
-                    chaque fois qu’on rencontre une valeur plus grande que <code>maxIndexCourant</code> on va la mettre à jour.
-                </p>
-                <h4>Exemples</h4>
-                <p>
-                Avec <code>counter = [3, 2 , 1]</code> l’indice de la valeur maximum est <code>0</code>
-                (car à l’indice <code>0</code> on à le maximum de la liste (<code>3</code>)).
-                </p>
-                <div class="mx-auto" align="center">
-                    <img src="/img/KNN/etape2Ex.jpg" class="img-fluid">
-                </div>
-                <small class="text-muted">
-                    La fleur qu'on retrouve le plus dans la liste d'exemple est l'iris-setosa,
-                    son indice dans la liste <img src="/img/blocklyBlocks/getAllFlowers.svg" class="img-fluid"> est bien 0 (première fleur)
-                </small>
-
-                
-      <div class="card border-info mb-3">
-        <div class="card-header">
-            <button class="btn btn-link" type="button" onclick="toggleNext(this)">
-                Blocs recommandés
-            </button>
-        </div>
-        <div class="collapse hide">
-            <div class="card-body">
-      
-      <div class="container">
-      <div class="row">
-
-          <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
-              <div class="card">
-                 <img class="card-img-center img-fluid" src="/img/blocklyBlocks/forIInCounter.svg">
-                    </div>
-                </div>
-                
-          <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
-              <div class="card">
-                 <img class="card-img-center img-fluid" src="/img/blocklyBlocks/strictlyGreater.svg">
-                    </div>
-                </div>
-                
-          <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
-              <div class="card">
-                 <img class="card-img-center img-fluid" src="/img/blocklyBlocks/getList.svg">
-                    </div>
-                </div>
-                
-          <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
-              <div class="card">
-                 <img class="card-img-center img-fluid" src="/img/blocklyBlocks/if.svg">
-                    </div>
-                </div>
-                
-      </div>
-      </div>
-      </div>
-        </div>
-      </div>
-
-
-                
-      <div class="card border-success mb-3 onlyTeacher">
-        <div class="card-header">Correction</div>
-        <div class="card-body text-success">
-          <p class="card-text">
-                <div class="mx-auto" align="center">
-                    <img src="/img/KNN/step2Sol.svg" class="img-fluid">
-                </div>
-                Le code est très simple ici,
-                j’ai uniquement gardé en mémoire la valeur de l’indice puisqu’on peut déterminer la valeur à partir de là.
-                Mais on peut également créer une variable supplémentaire pour retenir la valeur courante maximum si ça leur permet de mieux comprendre.
-                
-          </p>
-          </div>
-        </div>
-      
-
-                <p>
-                    Voici des exemples supplémentaires pour tester que le comportement est correct:
-                </p>
-                <ul>
-                    <li><code>[0, 1, 0]</code> -> <code>1</code></li>
-                    <li><code>[1, 2, 0]</code> -> <code>1</code></li>
-                    <li><code>[3, 2, 5]</code> -> <code>2</code></li>
-                    <li><code>[9999, 2, 5]</code> -> <code>0</code></li>
-                    <li><code>[1, 2, 1]</code> -> <code>1</code> (en cas d’ambiguïté, on prends le premier maximum rencontré)</li>
-                </ul>
-
-                <h3>Etape 3 : Déterminer la fleur majoritaire correspondante</h3>
-                <p>
-                    Maintenant qu’on à l’information de l’indice du nom de fleur la plus proche,
-                    il nous suffit de renvoyer l’élément correspondant dans la liste de référence.
-                </p>
-                <h4>Exemples</h4>
-                <p>
-                    Avec <code>maxIndexCourant</code> à <code>0</code> on aura comme résultat <code>"Iris-setosa"</code>.
-                </p>
-                <div class="mx-auto" align="center">
-                    <img src="/img/KNN/etape3Ex.jpg" class="img-fluid">
-                </div>
-                <small class="text-muted">
-                    Iris-setosa est bien la fleur majoritaire de la liste des 6 fleurs donnée
-                </small>
-
-                
-      <div class="card border-warning mb-3">
-        <div class="card-header">
-            <button class="btn btn-link" type="button" onclick="toggleNext(this)">
-                Aide
-            </button>
-        </div>
-        <div class="collapse hide">
-            <div class="card-body">
-              <p>
-                Cette étape est très simple, tu n'aura pas besoin de plus de 2-3 blocs pour la résoudre
-                
-          </p>
-          </div>
-        </div>
-      </div>
-
-                
-      <div class="card border-success mb-3 onlyTeacher">
-        <div class="card-header">Correction</div>
-        <div class="card-body text-success">
-          <p class="card-text">
-                <div class="mx-auto" align="center">
-                    <img src="/img/KNN/step3Sol.svg" class="img-fluid">
-                </div>
-                
-          </p>
-          </div>
-        </div>
-      
-
-                <p>
-                    Voici des exemples supplémentaires pour tester que le comportement est correct:
-                </p>
-                <ul>
-                    <li><code>1</code> -> <code>"Iris-versicolor"</code></li>
-                    <li><code>2</code> -> <code>"Iris-virginica"</code></li>
-                </ul>
-
 
                 <h3>Etape finale : Obtenir 100%</h3>
                 <p>
-                    N’oublie pas de rétablir la variable <code>kNearestNeighboursClasses</code> comme elle l’était initialement.<br>
-                    Test ta méthode avec des fleurs que tu créé pour voir si ton prédicteur à l’air de renvoyer les bonnes valeurs.<br>
-                    <br>
-                    Après cela, il ne te reste plus qu’à faire un peu le tri dans ton code !
+                    Une fois que ton implémentation te parait correxte, il ne te reste plus qu’à faire un peu le tri dans ton code !
                     Enlève tout les <code>afficher ...</code> qui seront gênant quand tu évaluera ton prédicteur,
                     choisis bien tes paramètres (<a href="#parameterPanel">K, Axe x et Axe y</a>) et croise les doigts pour atteindre les 100% !
                 </p>
