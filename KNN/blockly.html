@@ -21,9 +21,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
-    <!-- Canva JS-->
-    <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
     <!-- Blockly imports -->
     <script src="blocklySrc/blockly_compressed.js"></script>
     <script src="blocklySrc/blocks_compressed.js"></script>
@@ -31,6 +28,13 @@
     <!-- My Scripts -->
     <script src="customJS/KNNFunctions.js"></script>
     <script src="customJS/GraphFunctions.js"></script>
+
+    <!-- Plotlyjs -->
+    <script type="text/javascript" src="/static/js/shared/plotlyjs-bundle.js"></script>
+    <script type="text/javascript" src="/static/js/shared/figure.js"></script>
+    <script type="text/javascript" src="/static/js/shared/plotInteraction.js"></script>
+    <script type="text/javascript" src="customJS/plotInteraction.js"></script>
+    <script src="https://cdn.plot.ly/plotly-locale-fr-latest.js"></script>
 </head>
 
 <body>
@@ -63,7 +67,7 @@
                 <div class="dropdown-menu showOnHover" aria-labelledby="navbarDropdown">
                     <!--<a class="dropdown-item" href="/KNN/ex-preparatoires">Exercices préparatoires</a>-->
                     <!--<a class="dropdown-item" href="/KNN/blockly-aide">Consignes et utilisation pour la phase pratique</a>-->
-                    <!--<a class="dropdown-item" href="/KNN/blockly">Phase pratique (Blockly)</a>-->
+                    <a class="dropdown-item" href="/arbre/arbre-interactif">Phase pratique (arbre intéractif)</a>
                 </div>
             </li>
         </ul>
@@ -164,7 +168,7 @@
         <div class="col-sm-4" >
 
             <div class="accordion" id="accordionControlPanel">
-                <!-- Graph -->
+                <!-- Graph panel -->
                 <div class="card">
                     <div class="card-header" style="padding: 0;" id="headingGraph">
                         <h5 class="mb-0">
@@ -175,7 +179,10 @@
 
                     <div id="collapseGraph" class="collapse show" aria-labelledby="headingGraph">
                         <div class="card-body">
-                            <div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+                            <!-- Graph -->
+                            <!--<div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>-->
+                            <div id="graphContainer" class="container plotly-graph-div" style="padding-left: 0px"></div>
+
                             <!-- Boutton pour afficher une fenêtre modal avec le tableau utilisé -->
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#irisDataModal">
                                 <i class="fas fa-table"></i> <span class="B_trainingSet"></span>
@@ -1984,5 +1991,6 @@
 
 <script src="customJS/languageCode.js"></script>
 <script src="customJS/BlocklyScripts.js"></script>
+<script src="/static/js/shared/plot.js"></script>
 </body>
 </html>

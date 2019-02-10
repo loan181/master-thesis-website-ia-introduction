@@ -1,7 +1,10 @@
 var figure = {
-    "frames": [], 
+
+    "frames": [],
+
     "layout": {
-        "autosize": true, 
+        "autosize": true,
+        "hovermode" : "closest",
         "yaxis": {
             "range": [
                 0.6047226798462384, 
@@ -9,9 +12,9 @@ var figure = {
             ], 
             "type": "linear", 
             "autorange": true, 
-            "title": "Length"
+            "title": "y"
         }, 
-        "height": 1006, 
+        "height": 500,
         "width": 1532, 
         "xaxis": {
             "range": [
@@ -20,23 +23,24 @@ var figure = {
             ], 
             "type": "linear", 
             "autorange": true, 
-            "title": "Width"
-        }, 
+            "title": "x"
+        },
         "legend": {
-            "y": 1.0157384987893463, 
+            "y": 1.1157384987893463,
             "x": 0.02228484386900228
         },
         "shapes" : []
-    }, 
+    },
+
     "data": [
         {
             "uid": "252198", 
             "ysrc": "chris:17556:81b2bc", 
             "xsrc": "chris:17556:eceb94", 
             "marker": {
-                "color": "#66c2a5", 
+                "color": "#4f81bc",
                 "line": {
-                    "color": "rgb(102, 102, 102)", 
+                    "color": "#365880",
                     "width": 0.5
                 }, 
                 "size": 12,
@@ -262,9 +266,9 @@ var figure = {
             ], 
             "type": "scatter", 
             "marker": {
-                "color": "#fc8d62", 
+                "color": "#c0504e",
                 "line": {
-                    "color": "rgb(102, 102, 102)", 
+                    "color": "#803634",
                     "width": 0.5
                 }, 
                 "size": 12,
@@ -277,9 +281,9 @@ var figure = {
             "ysrc": "chris:17556:8709b9", 
             "xsrc": "chris:17556:771b24", 
             "marker": {
-                "color": "#8da0cb", 
+                "color": "#9bbb58",
                 "line": {
-                    "color": "rgb(102, 102, 102)", 
+                    "color": "#6a803c",
                     "width": 0.5
                 }, 
                 "size": 12,
@@ -394,4 +398,4 @@ var figure = {
             "name": "Virginica"
         }
     ]
-}
+};

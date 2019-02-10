@@ -22,15 +22,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
-
-    <!-- Raphael -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"> </script>
-
-    <!-- Plotlyjs -->
-    <script type="text/javascript" src="customJS/plotlyjs-bundle.js"></script>
-    <script type="text/javascript" src="customJS/figure.js"></script>
-
-    <script type="text/javascript" src="customJS/plotInteraction.js"></script>
 </head>
 
 <body>
@@ -63,7 +54,7 @@
                 <div class="dropdown-menu showOnHover" aria-labelledby="navbarDropdown">
                     <!--<a class="dropdown-item" href="/KNN/ex-preparatoires">Exercices préparatoires</a>-->
                     <!--<a class="dropdown-item" href="/KNN/blockly-aide">Consignes et utilisation pour la phase pratique</a>-->
-                    <!--<a class="dropdown-item" href="/KNN/blockly">Phase pratique (Blockly)</a>-->
+                    <a class="dropdown-item" href="/arbre/arbre-interactif">Phase pratique (arbre intéractif)</a>
                 </div>
             </li>
         </ul>
@@ -85,104 +76,50 @@
         }
     }
 </script>
-<main role="main" class="container" style="max-width: 95%">
-    <h1>Arbre de décision intéractif</h1>
 
-    <div class="row mt-2 col-md-12">
-        <!-- Graphe, tableau dynamique, etc -->
-        <div class="col-sm-4">
-            <div id="graphContainer" class="container plotly-graph-div">
-            </div>
-        </div>
+<div class="jumbotron" style="
+    background: url('/static/img/ArbreDecision.svg');
+         /*position: fixed;*/
+    width: 100%;
+    height: 550px; /*same height as jumbotron */
+    top: 0;
+    left: 0;
+    z-index: -999;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-blend-mode: soft-light;
+    -webkit-background-blend-mode: soft-lightsoft-light;
+    ">
 
-        <!-- Visualisation graphique -->
-        <div id="treeContainer" class="col-sm-8">
-        </div>
+</div>
+
+<main role="main" class="container">
+    <h1>Arbre de décisions</h1>
+    <hr class="my-4">
+    <p class="lead">Méthode de classification</p>
+    <p>
+        Outil d'aide à la décision représentant un ensemble de choix sous la forme graphique d'un arbre. <br>
+        Les différentes décisions possibles sont situées aux extrémités des branches (les « feuilles » de l'arbre), et sont atteints en fonction de décisions prises à chaque étape.
+    </p>
+    <div align="center">
+        <a class="btn btn-primary" href="ex-preparatoires" role="button">Exercices préparatoires</a>
+        <!--<a class="btn btn-primary" href="blockly-aide" role="button">Consignes et utilisation pour la phase pratique</a>-->
+        <a class="btn btn-primary" href="arbre-interactif" role="button">Phase pratique (Arbre intéractif)</a>
     </div>
 </main>
 
-    <!-- Modal asking inputs for nodes -->
-    <div class="modal fade" id="askParameters" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalParametersTitle"></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="input-group">
-                        <select class="form-control" id="axisChoice">
-                            <option>petal length</option>
-                            <option>petal width</option>
-                        </select>
-                        <select class="form-control" id="operationChoice" >
-                            <option value=1>=</option>
-                            <option value=2>&ne;</option>
-                            <option value=3>&gt;</option>
-                            <option value=4>&ge;</option>
-                            <option value=5>&lt;</option>
-                            <option value=6>&le;</option>
-                        </select>
-                        <input type="number" id="valueChoice" class="form-control" value="0" step="0.1">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-warning" id="deleteButton" data-dismiss="modal" onclick="BT.deleteNode()">Supprimer</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="BT.parseAskParametersValues()">Sauver</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="customJS/Flower.js"></script>
-    <script src="customJS/BinaryTree.js"></script>
-    <script type="text/javascript">
-
-        window.PLOTLYENV={'BASE_URL': 'https://plot.ly'};
-
-
-        let treeContainer = document.getElementById("treeContainer");
-        let graphContainer = document.getElementById('graphContainer');
-
-        let resizeDebounce = null;
-
-        function resizeTreeCanva() {
-            let containerWidth = treeContainer.offsetWidth;
-            let containerHeight = treeContainer.offsetHeight;
-            canvaSizeChange(containerWidth, containerHeight);
+    <script>
+        var jumboHeight = $('.jumbotron').outerHeight();
+        function parallax(){
+            var scrolled = $(window).scrollTop();
+            $('.jumbotron-bg').css('height', (jumboHeight-scrolled) + 'px');
         }
-
-        function resizePlot() {
-            let bb = graphContainer.getBoundingClientRect();
-            Plotly.relayout(graphContainer, {
-                width: bb.width,
-                height: bb.height
-            });
-        }
-
-        $(window).ready(function () {
-            resizeTreeCanva();
-            resizePlot();
+        $(window).scroll(function(e){
+            parallax();
         });
-
-        $(window).resize(function() {
-            resizeTreeCanva();
-
-            if (resizeDebounce) {
-                window.clearTimeout(resizeDebounce);
-            }
-            resizeDebounce = window.setTimeout(resizePlot, 100);
-        });
-
-        Plotly.plot(graphContainer,  {
-            data: figure.data,
-            layout: figure.layout,
-            frames: figure.frames,
-            config: {"mapboxAccessToken": "pk.eyJ1IjoiY2hyaWRkeXAiLCJhIjoiY2lxMnVvdm5iMDA4dnhsbTQ5aHJzcGs0MyJ9.X9o_rzNLNesDxdra4neC_A", "linkText": "Export to plot.ly", "showLink": true}
-        });
-        resetPlotWithDefaultData();
     </script>
 </body>
+
 </html>
