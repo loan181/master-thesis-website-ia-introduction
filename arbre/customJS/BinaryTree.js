@@ -85,9 +85,15 @@ class Node {
             highlightAllMarkers();
             drawPointsIndex(this.associatedFlower);
         } else {
-            let axis = "y";
-            if (this.parameter === "petal width") {
+            let axis = null;
+            if (this.parameter === currentXCat) {
                 axis = "x";
+            }
+            else if (this.parameter === currentYCat) {
+                axis = "y";
+            }
+            else {
+                console.error("Unkwnon parameter as axis : " + this.parameter);
             }
             highlightCondition(axis, this.operator, this.valueToCompare);
             highlightMarkerCondition(this.left.associatedFlower, this.right.associatedFlower);
@@ -106,24 +112,29 @@ class Node {
         resetPlotWithDefaultData();
     }
 
-    displayProportionOfEachFlower() {
-        // Count the proportion of the flower of the leaf
-        let flowerProportions = {};
+    get flowerCounter() {
+        let flowerCounter = {};
         for (let i = 0; i < this.associatedFlower.length; i++) {
             let flowerInd = this.associatedFlower[i];
             let flowerIndName = trainingSet[flowerInd].get("name");
-            flowerProportions[flowerIndName] = (flowerProportions[flowerIndName] || 0) + 1;
+            flowerCounter[flowerIndName] = (flowerCounter[flowerIndName] || 0) + 1;
         }
+        return flowerCounter
+    }
+
+    displayProportionOfEachFlower() {
+        // Count the proportion of the flower of the leaf
+        let flowerProportions = this.flowerCounter;
+
+        // TODO : trouver le maximum (qui déterminera la fleur)
         for (var key in flowerProportions){
-            // TODO : corriger, on veut la proportion par rapport au training set
-            //  il y à 40 de chaque fleur
-            flowerProportions[key] /= 40; //this.associatedFlower.length;
+            flowerProportions[key] /= this.associatedFlower.length;
             flowerProportions[key] *= 100;
         }
-        console.log(flowerProportions);
+        // console.log(flowerProportions);
         var text = "";
         for (var key in flowerProportions){
-            text += key + " : " + flowerProportions[key] +"%\n"
+            text += key + " : " + flowerProportions[key].toFixed(2) +"%\n"
         }
         if (text === "") {
             text = "(vide)";
@@ -192,6 +203,25 @@ class Node {
         this.drawShape.translate(x-this.x, y-this.y);
     }
 
+    evaluate(parameter, operation, value) {
+        switch (operation) {
+            case operationType.EQUAL:
+                return parameter === value;
+            case operationType.NOT_EQUAL:
+                return parameter !== value;
+            case operationType.GRATER:
+                return parameter > value;
+            case operationType.GRATER_EQ:
+                return parameter >= value;
+            case operationType.LOWER:
+                return parameter < value;
+            case operationType.LOWER_EQ:
+                return parameter <= value;
+            default:
+                console.warn("Unknown operation selected : " + operation);
+        }
+    }
+
     updateChildCorrespondingFlower() {
         var trueFlowerIndex = [];
         var falseFlowerIndex = [];
@@ -200,33 +230,11 @@ class Node {
             let correspondingFlower = trainingSet[flowerInd];
             let correspondingFlowerValue = correspondingFlower.get(this.parameter);
             let value = this.valueToCompare;
-            switch (this.operator) {
-                case operationType.EQUAL:
-                    if (correspondingFlowerValue === value) {trueFlowerIndex.push(flowerInd);}
-                    else {falseFlowerIndex.push(flowerInd);}
-                    break;
-                case operationType.NOT_EQUAL:
-                    if (correspondingFlowerValue !== value) {trueFlowerIndex.push(flowerInd);}
-                    else {falseFlowerIndex.push(flowerInd);}
-                    break;
-                case operationType.GRATER:
-                    if (correspondingFlowerValue > value) {trueFlowerIndex.push(flowerInd);}
-                    else {falseFlowerIndex.push(flowerInd);}
-                    break;
-                case operationType.GRATER_EQ:
-                    if (correspondingFlowerValue >= value) {trueFlowerIndex.push(flowerInd);}
-                    else {falseFlowerIndex.push(flowerInd);}
-                    break;
-                case operationType.LOWER:
-                    if (correspondingFlowerValue < value) {trueFlowerIndex.push(flowerInd);}
-                    else {falseFlowerIndex.push(flowerInd);}
-                    break;
-                case operationType.LOWER_EQ:
-                    if (correspondingFlowerValue <= value) {trueFlowerIndex.push(flowerInd);}
-                    else {falseFlowerIndex.push(flowerInd);}
-                    break;
-                default:
-                    console.warn("Unknown operation selected");
+
+            if (this.evaluate(correspondingFlowerValue, this.operator, value)) {
+                trueFlowerIndex.push(flowerInd);
+            } else {
+                falseFlowerIndex.push(flowerInd);
             }
         }
         this.right.setFlowersIndex(trueFlowerIndex);
@@ -247,6 +255,21 @@ class Node {
             this.leftBranch.refreshDraw();
             this.rightBranch.refreshDraw();
         }
+    }
+
+    // TODO : peut être precompute
+    get majorityClass() {
+        let ret = null;
+        let countClassesDictionary = this.flowerCounter;
+
+        let curMaxValue = -1;
+        for (var className in countClassesDictionary) {
+            if (countClassesDictionary[className] > curMaxValue) {
+                ret = className;
+                curMaxValue = countClassesDictionary[className];
+            }
+        }
+        return ret;
     }
 
     /**
@@ -340,10 +363,18 @@ class Branch {
     }
 }
 
+
 class BinaryTree {
     constructor() {
+       this.reset();
+    }
+
+    reset() {
         this.totalDepth = 1;
-        this.root = new Node();
+        if (this.root !== undefined)
+            this.root.reset();
+        else
+            this.root = new Node();
         let allFlowersIndex = Array.apply(null, {length: trainingSet.length}).map(Number.call, Number);
         this.root.setFlowersIndex(allFlowersIndex);
         this.refreshTreeDraw();
@@ -426,6 +457,33 @@ class BinaryTree {
         this.refreshTotalDepth(); // We can't guess the new depth when a node was deleted
         this.refreshTreeDraw();
     }
+
+    classify(xValue, yValue) {
+        let currentNode = this.root;
+        while(!currentNode.isLeaf()) {
+            let myValue = yValue;
+            if (currentNode.parameter === currentXCat) {
+                myValue = xValue;
+            }
+            let correctBranch = currentNode.evaluate(myValue, currentNode.operator, currentNode.valueToCompare);
+            if (correctBranch) {
+                currentNode = currentNode.right;
+            } else {
+                currentNode = currentNode.left;
+            }
+        }
+        return currentNode.majorityClass;
+    }
+}
+
+function testClassify() {
+    let correctGuess = 0;
+    for (let i = 0; i < predictionSet.length; i++) {
+        let currentFlower = predictionSet[i];
+        if (BT.classify(currentFlower.get(currentXCat), currentFlower.get(currentYCat)) === currentFlower.get("name"))
+            correctGuess += 1;
+    }
+    return correctGuess / predictionSet.length;
 }
 
 function canvaSizeChange(newW, newH) {
@@ -438,6 +496,6 @@ let lastClickedLeaf = null;
 let paper = Raphael("treeContainer", 640, 480);
 // Big background (not need to resize it as it is huge)
 paper.rect(-1, -1, 5000, 5000).attr({
-    fill: 'gray'
+    fill: "#b4b4b4"
 }).toBack();
 let BT = new BinaryTree();

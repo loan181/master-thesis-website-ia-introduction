@@ -1,9 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<script src="https://www.gstatic.com/firebasejs/5.8.3/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyDbZnAznbgeP1_bxyn9XNGGL4C9z-ex46k",
+        authDomain: "site-memoire.firebaseapp.com",
+        databaseURL: "https://site-memoire.firebaseio.com",
+        projectId: "site-memoire",
+        storageBucket: "site-memoire.appspot.com",
+        messagingSenderId: "639582982387"
+    };
+    firebase.initializeApp(config);
+</script>
+
 <head>
     <meta charset="UTF-8">
     <title>TEST</title>
     
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-134452435-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-134452435-1');
+</script>
 
 <!-- Required meta tags -->
 <meta charset="utf-8">
@@ -26,60 +50,48 @@
 </head>
 
 <body>
-    <p><img src="/static/img/blocklyBlocks/kNearest.svg" class="img-fluid"></p>
-    <img src="/static/img/KNN/exKNNGraphiqueCorr.png" class="pop">
-    <script src="/static/js/enlargeImageModal.js"></script>
-<!-- Creates the bootstrap modal where the image will appear -->
-<div class="modal fade bd-example-modal-xl" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-                <a href="#" target="_blank" id="imagepreviewLink"> <i class="fas fa-external-link-alt"></i></a>
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            </div>
-            <div class="modal-body">
-                <div class="mx-auto" align="center">
-                    <img src="" class="imagepreview" data-dismiss="modal" style="max-width: 100%; height:auto">
-                </div>
-            </div>
+    <form>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Email address</label>
+            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
         </div>
-    </div>
-</div>
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Example select</label>
+            <select class="form-control" id="exampleFormControlSelect1">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlSelect2">Example multiple select</label>
+            <select multiple class="form-control" id="exampleFormControlSelect2">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Example textarea</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+    </form>
 
+<script>
+    var db = firebase.database();
 
-
-    <div id="raphaelContainer">
-    </div>
-
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"> </script>
-    <script>
-
-        class Node {
-            constructor(val) {
-                this.val = val;
-                this.drawShape = paper.circle(120 + this.val * 128, 240, 20).attr({
-                    fill: "#FFF",
-                    stroke: "#000",
-                    "stroke-width": 1
-                });
-                // Source : https://stackoverflow.com/a/36498180
-                this.drawShape.mouseup(
-                    (e) => {this.test(this.val, e)}
-                );
-            }
-
-            test(val1, val2) {
-                console.log("TEST " + val1 + " | " + val2);
-                console.log(this);
-            }
-        }
-
-        let paper = Raphael("raphaelContainer", 640, 480);
-        var background = paper.rect(-1, -1, 5000, 5000).attr({
-            fill: 'gray'
+    function addLog(text) {
+        let logRef = db.ref('logs');
+        logRef.push({
+            TS: firebase.database.ServerValue.TIMESTAMP,
+            info: text
         });
-        var node1 = new Node(1);
-        var node2 = new Node(2);
-    </script>
+    }
+
+</script>
 </body>
 </html>

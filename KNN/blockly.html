@@ -2,6 +2,15 @@
 <html lang="en">
 <head>
     
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-134452435-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-134452435-1');
+</script>
 
 <!-- Required meta tags -->
 <meta charset="utf-8">
@@ -26,8 +35,10 @@
     <script src="blocklySrc/blocks_compressed.js"></script>
     <script src="blocklySrc/javascript_compressed.js"></script>
     <!-- My Scripts -->
+    <script src="/static/js/shared/iris.js"></script>
     <script src="customJS/KNNFunctions.js"></script>
-    <script src="customJS/GraphFunctions.js"></script>
+    <script src="/static/js/shared/GraphFunctions.js"></script>
+
 
     <!-- Plotlyjs -->
     <script type="text/javascript" src="/static/js/shared/plotlyjs-bundle.js"></script>
@@ -40,9 +51,9 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <!--<a class="navbar-brand" href="#">Titre</a>-->
-    <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
-        <!--<span class="navbar-toggler-icon"></span>-->
-    <!--</button>-->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
@@ -55,6 +66,7 @@
                 </a>
                 <div class="dropdown-menu showOnHover" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="/KNN/ex-preparatoires">Exercices préparatoires</a>
+                    <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="/KNN/blockly-aide">Consignes et utilisation pour la phase pratique</a>
                     <a class="dropdown-item" href="/KNN/blockly">Phase pratique (Blockly)</a>
                 </div>
@@ -65,7 +77,8 @@
                     Arbre de décisions <i class="fas fa-caret-down"></i>
                 </a>
                 <div class="dropdown-menu showOnHover" aria-labelledby="navbarDropdown">
-                    <!--<a class="dropdown-item" href="/KNN/ex-preparatoires">Exercices préparatoires</a>-->
+                    <a class="dropdown-item" href="/arbre/ex-preparatoires">Exercices préparatoires</a>
+                    <div class="dropdown-divider"></div>
                     <!--<a class="dropdown-item" href="/KNN/blockly-aide">Consignes et utilisation pour la phase pratique</a>-->
                     <a class="dropdown-item" href="/arbre/arbre-interactif">Phase pratique (arbre intéractif)</a>
                 </div>
@@ -89,6 +102,7 @@
         }
     }
 </script>
+
 <main role="main" class="container" style="max-width: 95%">
     <!--<h1><a href="https://developers.google.com/blockly/">Blockly</a> &gt;-->
     <!--<a href="../index.html">Demos</a> &gt; Fixed Blockly</h1>-->
@@ -98,62 +112,14 @@
     <!--<p>&rarr; More info on <a href="https://developers.google.com/blockly/guides/configure-blockly/web/fixed-size">injecting fixed-sized Blockly</a>&hellip;</p>-->
     <h1><span class="B_title"> </span></h1>
 
+    <div id="toolBox"></div>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-
-            <!-- Utilities -->
-            <li class="nav-item button">
-                <button id="newCodeButton" type="button" class="btn btn-outline-secondary" onclick="LanguageCode.discard()" data-toggle="tooltip" data-tooltip="new"><i class="far fa-file"></i></button>
-            </li>
-            <li class="nav-item button">
-                <button id="dlCodeButton" type="button" class="btn btn-outline-secondary" onclick="downloadProject()" data-toggle="tooltip" data-tooltip="download"><i class="fas fa-save"></i></button>
-            </li>
-
-            <li class="nav-item button" data-toggle="tooltip" data-tooltip="upload">
-                <label for="upload_project" class="btn btn-outline-secondary" style="margin-bottom: 0px">
-                    <i class="fa fa-folder-open"></i>
-                </label>
-                <input id="upload_project" type="file" hidden>
-            </li>
-
-            <li class="nav-item dropdown" data-toggle="tooltip" data-tooltip="export">
-                <button class="btn btn-outline-secondary dropdown-toggle" id="navbarDropdown" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-file-export"></i>
-                </button>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
-                    <a class="dropdown-item" href="#" onclick="downloadSvg()"><i class="fas fa-shapes"></i> SVG</a>
-                    <a class="dropdown-item" href="#" onclick="convertSvgToPng()"><i class="fas fa-image"></i> PNG</a>
-                </div>
-            </li>
-
-
-            <!-- Testings button -->
-            <li class="nav-item button">
-                <button id="showCodeButton" type="button" class="btn btn-info" onclick="showCode()" data-toggle="tooltip" data-tooltip="showCode"><i class="far fa-eye"></i></button>
-            </li>
-            <li class="nav-item button">
-                <button id="runCodeButton" type="button" class="btn btn-primary" onclick="runBlocklyCode()" data-toggle="tooltip" data-tooltip="executeCode"><i class="fas fa-play"></i> <i class="fas fa-vial"></i></button>
-            </li>
-
-            <!-- Run prediction -->
-            <li class="nav-item button">
-                <button id="runPredictionCodeButton" type="button" class="btn btn-primary" onclick="runPredictionCode()" data-toggle="tooltip" data-tooltip="executeCode"><i class="fas fa-play"></i> <i class="fas fa-dice"></i></button>
-            </li>
-        </ul>
-
-        <!-- Help -->
-        <a target="_blank" href="blockly-aide.html" role="button" id="helpButton" class="btn btn-warning" data-toggle="tooltip" data-tooltip="help"><i class="fas fa-question-circle"></i></a>
-
-
-        <!-- Language -->
-        <form class="form-inline" >
-            <div class="form-group">
-                <label for="languageMenu" class="control-label" style="padding-right: 4px; padding-left: 14px;"><i class="fas fa-globe"></i>  </label>
-                <select class="form-control" id="languageMenu" data-toggle="tooltip" data-tooltip="langage"></select>
-            </div>
-        </form>
-    </nav>
+    <script src="/static/js/shared/ToolBox.js"></script>
+    <script>
+        let TB = new ToolBox("toolBox");
+        TB.setToolBarForExercice("KNN");
+        TB.draw();
+    </script>
 
     <!-- Progress bar of prediction -->
     <div class="mt-2 col-md-12">

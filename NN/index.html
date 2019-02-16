@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
-
+<html lang="en">
 <head>
     
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -31,7 +30,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
-    <title>K plus proches voisins Intro</title>
+
+    <!-- My Scripts -->
+    <script src="js/NN.js"></script>
+    <script src="../../NN/js/NN.js"></script> <!--TODO : to remove -->
 </head>
 
 <body>
@@ -88,53 +90,94 @@
         }
     }
 </script>
+<main role="main" class="container" style="max-width: 95%">
+    <h1>Réseau neuronnal</h1>
+    <div class="container" style="float:left;">
+        <div>
+            <canvas id="can" width="280" height="280" style="top:10%;left:10%;border:2px solid; cursor:crosshair"></canvas>
+        </div>
+        <div class="container">
+            <div style="padding-bottom:5px;"><input type="checkbox" id="preprocessing"><span style="margin-left:5px;">Display Preprocessing</span></div>
+            <div style="padding-bottom:5px;"><input type="checkbox" id="scaleStrokeWidth" checked="true"><span style="margin-left:5px;">Scale Stroke Width</span></div>
+            <div style="float:left;padding-right:10px;"><input type="button" value="clear" id="clr" size="23" onclick="erase()"></div>
+            <div style="float:left;"><input type="button" value="recognize" id="recognize" size="23" onclick="recognize()"></div>
+            <div id="nnInput"></div>
+        </div>
 
-<div class="jumbotron" style="
-    background: url(/static/img/KNN.svg);
-         /*position: fixed;*/
-    width: 100%;
-    height: 550px; /*same height as jumbotron */
-    top: 0;
-    left: 0;
-    z-index: -999;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    background-blend-mode: soft-light;
-    -webkit-background-blend-mode: soft-lightsoft-light;
-    ">
-</div>
+        <div class="container">
+        <p>
+        <br><br>
+        
+            <h5 style="float: left; margin-right: 1em;">0 :</h5>
+            <div class="progress">
+                <div id="percentBar0" class="progress-bar" role="progressbar" style="width: 0%"></div>
+            </div>
+            <br>
+        
+            <h5 style="float: left; margin-right: 1em;">1 :</h5>
+            <div class="progress">
+                <div id="percentBar1" class="progress-bar" role="progressbar" style="width: 0%"></div>
+            </div>
+            <br>
+        
+            <h5 style="float: left; margin-right: 1em;">2 :</h5>
+            <div class="progress">
+                <div id="percentBar2" class="progress-bar" role="progressbar" style="width: 0%"></div>
+            </div>
+            <br>
+        
+            <h5 style="float: left; margin-right: 1em;">3 :</h5>
+            <div class="progress">
+                <div id="percentBar3" class="progress-bar" role="progressbar" style="width: 0%"></div>
+            </div>
+            <br>
+        
+            <h5 style="float: left; margin-right: 1em;">4 :</h5>
+            <div class="progress">
+                <div id="percentBar4" class="progress-bar" role="progressbar" style="width: 0%"></div>
+            </div>
+            <br>
+        
+            <h5 style="float: left; margin-right: 1em;">5 :</h5>
+            <div class="progress">
+                <div id="percentBar5" class="progress-bar" role="progressbar" style="width: 0%"></div>
+            </div>
+            <br>
+        
+            <h5 style="float: left; margin-right: 1em;">6 :</h5>
+            <div class="progress">
+                <div id="percentBar6" class="progress-bar" role="progressbar" style="width: 0%"></div>
+            </div>
+            <br>
+        
+            <h5 style="float: left; margin-right: 1em;">7 :</h5>
+            <div class="progress">
+                <div id="percentBar7" class="progress-bar" role="progressbar" style="width: 0%"></div>
+            </div>
+            <br>
+        
+            <h5 style="float: left; margin-right: 1em;">8 :</h5>
+            <div class="progress">
+                <div id="percentBar8" class="progress-bar" role="progressbar" style="width: 0%"></div>
+            </div>
+            <br>
+        
+            <h5 style="float: left; margin-right: 1em;">9 :</h5>
+            <div class="progress">
+                <div id="percentBar9" class="progress-bar" role="progressbar" style="width: 0%"></div>
+            </div>
+            <br>
+        
+        </p>
 
-<main role="main" class="container">
-    <h1> Méthodes des K plus proches voisins</h1>
-    <hr class="my-4">
-    <p class="lead">Méthode de classification</p>
-    <p>
-        A partir d'une entrée <code>x</code> on déterminera sa classe à partir de ses <code>K</code> voisins les plus proches.<br> Après cela avec l'information de la classe réelle de l'entrée, nous serons en mesure d'évaluer l'exactitude de notre prédicateur.
-
-    </p>
-    <div align="center">
-        
-            <a class="btn btn-primary" href=ex-preparatoires role="button">Exercices préparatoires</a>
-        
-            <a class="btn btn-primary" href=blockly-aide role="button">Consignes et utilisation pour la phase pratique</a>
-        
-            <a class="btn btn-primary" href=blockly role="button">Phase pratique (Blockly)</a>
-        
+        <p class="lead">
+        Reconnu comme : <span id="nnOut"></span>
+        </p>
+        </div>
     </div>
+
+
 </main>
 
-    <script>
-        var jumboHeight = $('.jumbotron').outerHeight();
-        function parallax(){
-            var scrolled = $(window).scrollTop();
-            $('.jumbotron-bg').css('height', (jumboHeight-scrolled) + 'px');
-        }
-        $(window).scroll(function(e){
-            parallax();
-        });
-    </script>
 </body>
-
 </html>

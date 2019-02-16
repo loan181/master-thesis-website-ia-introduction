@@ -3,6 +3,15 @@
 
 <head>
     
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-134452435-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-134452435-1');
+</script>
 
 <!-- Required meta tags -->
 <meta charset="utf-8">
@@ -32,14 +41,18 @@
     <script type="text/javascript" src="/static/js/shared/plotInteraction.js"></script>
     <script type="text/javascript" src="customJS/plotInteraction.js"></script>
     <script src="https://cdn.plot.ly/plotly-locale-fr-latest.js"></script>
+
+    <!-- Custom -->
+    <script src="/static/js/shared/iris.js"></script>
+    <script src="/static/js/shared/GraphFunctions.js"></script>
 </head>
 
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <!--<a class="navbar-brand" href="#">Titre</a>-->
-    <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
-        <!--<span class="navbar-toggler-icon"></span>-->
-    <!--</button>-->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
@@ -52,6 +65,7 @@
                 </a>
                 <div class="dropdown-menu showOnHover" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="/KNN/ex-preparatoires">Exercices préparatoires</a>
+                    <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="/KNN/blockly-aide">Consignes et utilisation pour la phase pratique</a>
                     <a class="dropdown-item" href="/KNN/blockly">Phase pratique (Blockly)</a>
                 </div>
@@ -62,7 +76,8 @@
                     Arbre de décisions <i class="fas fa-caret-down"></i>
                 </a>
                 <div class="dropdown-menu showOnHover" aria-labelledby="navbarDropdown">
-                    <!--<a class="dropdown-item" href="/KNN/ex-preparatoires">Exercices préparatoires</a>-->
+                    <a class="dropdown-item" href="/arbre/ex-preparatoires">Exercices préparatoires</a>
+                    <div class="dropdown-divider"></div>
                     <!--<a class="dropdown-item" href="/KNN/blockly-aide">Consignes et utilisation pour la phase pratique</a>-->
                     <a class="dropdown-item" href="/arbre/arbre-interactif">Phase pratique (arbre intéractif)</a>
                 </div>
@@ -94,6 +109,25 @@
         <div class="col-sm-4">
             <div id="graphContainer" class="container plotly-graph-div">
             </div>
+            <div class="form-group row">
+            <label for="axisXChoice" class="col-sm-3 col-form-label">Axe x :</label>
+            <select class="form-control col-sm-9" id="axisXChoice">
+                <option selected="selected">sepal length</option>
+                <option>sepal width</option>
+                <option>petal length</option>
+                <option>petal width</option>
+            </select>
+        </div>
+
+        <div class="form-group row">
+            <label for="axisYChoice" class="col-sm-3 col-form-label">Axe y :</label>
+            <select class="form-control col-sm-9" id="axisYChoice">
+                <option>sepal length</option>
+                <option selected="selected">sepal width</option>
+                <option>petal length</option>
+                <option>petal width</option>
+            </select>
+        </div>
         </div>
 
         <!-- Visualisation graphique -->
@@ -115,8 +149,8 @@
             <div class="modal-body">
                 <div class="input-group">
                     <select class="form-control" id="axisChoice">
-                        <option>petal length</option>
-                        <option>petal width</option>
+                        <option id="axisXName">x</option>
+                        <option id="axisYName">y</option>
                     </select>
                     <select class="form-control" id="operationChoice" >
                         <option value=1>=</option>
@@ -137,7 +171,6 @@
         </div>
     </div>
 </div>
-<script src="customJS/Flower.js"></script>
 <script src="customJS/BinaryTree.js"></script>
 <script src="/static/js/shared/plot.js"></script>
 <script>
@@ -155,6 +188,19 @@
     $(window).resize(function() {
         resizeTreeCanva();
     });
+
+    // Update modal text
+    function afterXChange() {
+        $('#axisXName').text(currentXCat);
+        BT.reset();
+    }
+
+    function afterYChange() {
+        $('#axisYName').text(currentYCat);
+        BT.reset();
+    }
+    afterXChange();
+    afterYChange();
 </script>
 </body>
 </html>

@@ -3,6 +3,15 @@
 
 <head>
     
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-134452435-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-134452435-1');
+</script>
 
 <!-- Required meta tags -->
 <meta charset="utf-8">
@@ -32,9 +41,9 @@
 <body data-spy="scroll" data-target="#toc">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <!--<a class="navbar-brand" href="#">Titre</a>-->
-    <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
-        <!--<span class="navbar-toggler-icon"></span>-->
-    <!--</button>-->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
@@ -47,6 +56,7 @@
                 </a>
                 <div class="dropdown-menu showOnHover" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="/KNN/ex-preparatoires">Exercices préparatoires</a>
+                    <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="/KNN/blockly-aide">Consignes et utilisation pour la phase pratique</a>
                     <a class="dropdown-item" href="/KNN/blockly">Phase pratique (Blockly)</a>
                 </div>
@@ -57,7 +67,8 @@
                     Arbre de décisions <i class="fas fa-caret-down"></i>
                 </a>
                 <div class="dropdown-menu showOnHover" aria-labelledby="navbarDropdown">
-                    <!--<a class="dropdown-item" href="/KNN/ex-preparatoires">Exercices préparatoires</a>-->
+                    <a class="dropdown-item" href="/arbre/ex-preparatoires">Exercices préparatoires</a>
+                    <div class="dropdown-divider"></div>
                     <!--<a class="dropdown-item" href="/KNN/blockly-aide">Consignes et utilisation pour la phase pratique</a>-->
                     <a class="dropdown-item" href="/arbre/arbre-interactif">Phase pratique (arbre intéractif)</a>
                 </div>
@@ -432,13 +443,13 @@
                 
           <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
               <div class="card">
-                 <img class="card-img-center img-fluid" src="/static/img/blocklyBlocks/getK.svg">
+                 <img class="card-img-center img-fluid" src="/static/img/blocklyBlocks/countersGetMinMax.svg">
                     </div>
                 </div>
                 
           <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
               <div class="card">
-                 <img class="card-img-center img-fluid" src="/static/img/blocklyBlocks/countersGetMinMax.svg">
+                 <img class="card-img-center img-fluid" src="/static/img/blocklyBlocks/getK.svg">
                     </div>
                 </div>
                 
