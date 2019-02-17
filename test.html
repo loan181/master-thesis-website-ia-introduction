@@ -1,9 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TEST</title>
+    
 
-<script src="https://www.gstatic.com/firebasejs/5.8.3/firebase.js"></script>
+<!-- Database -->
+
+<!-- Firebase App is always required and must be first -->
+<script src="https://www.gstatic.com/firebasejs/5.8.3/firebase-app.js"></script>
+
+<!-- Add additional services that you want to use -->
+<!--<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-auth.js"></script>-->
+<script src="https://www.gstatic.com/firebasejs/5.8.3/firebase-database.js"></script>
+<!--<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-messaging.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-functions.js"></script>-->
+
+<!-- Comment out (or don't include) services that you don't want to use -->
+<!-- <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-storage.js"></script> -->
+
 <script>
-    // Initialize Firebase
     var config = {
         apiKey: "AIzaSyDbZnAznbgeP1_bxyn9XNGGL4C9z-ex46k",
         authDomain: "site-memoire.firebaseapp.com",
@@ -15,10 +32,8 @@
     firebase.initializeApp(config);
 </script>
 
-<head>
-    <meta charset="UTF-8">
-    <title>TEST</title>
-    
+<script src="/static/js/Database.js"></script>
+
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134452435-1"></script>
 <script>
@@ -81,17 +96,5 @@
         </div>
     </form>
 
-<script>
-    var db = firebase.database();
-
-    function addLog(text) {
-        let logRef = db.ref('logs');
-        logRef.push({
-            TS: firebase.database.ServerValue.TIMESTAMP,
-            info: text
-        });
-    }
-
-</script>
 </body>
 </html>

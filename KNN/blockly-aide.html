@@ -3,6 +3,36 @@
 
 <head>
     
+
+<!-- Database -->
+
+<!-- Firebase App is always required and must be first -->
+<script src="https://www.gstatic.com/firebasejs/5.8.3/firebase-app.js"></script>
+
+<!-- Add additional services that you want to use -->
+<!--<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-auth.js"></script>-->
+<script src="https://www.gstatic.com/firebasejs/5.8.3/firebase-database.js"></script>
+<!--<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-messaging.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-functions.js"></script>-->
+
+<!-- Comment out (or don't include) services that you don't want to use -->
+<!-- <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-storage.js"></script> -->
+
+<script>
+    var config = {
+        apiKey: "AIzaSyDbZnAznbgeP1_bxyn9XNGGL4C9z-ex46k",
+        authDomain: "site-memoire.firebaseapp.com",
+        databaseURL: "https://site-memoire.firebaseio.com",
+        projectId: "site-memoire",
+        storageBucket: "site-memoire.appspot.com",
+        messagingSenderId: "639582982387"
+    };
+    firebase.initializeApp(config);
+</script>
+
+<script src="/static/js/Database.js"></script>
+
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134452435-1"></script>
 <script>
@@ -233,7 +263,7 @@
                     </tr>
                     <tr>
                         <td><img src="/static/img/blocklyBlocks/countersIncrease.svg" class="img-fluid"></td>
-                        <td>Ajoute la valeur donné à la i-ème fleur la plus proche</td>
+                        <td>Ajoute la valeur donné à la classe de la i-ème fleur la plus proche.</td>
                         <td><i>Rien</i></td>
                     </tr>
                     <tr>
@@ -364,7 +394,7 @@
                     Libre à toi de faire autrement si tu le souhaites tant que la prédiction finale est bonne.
                 </p>
 
-                <h3>Etape 0 : Bien commencer !</h3>
+                <h3>Etape initiale : Bien commencer !</h3>
                 <p>
                     Dans la section <code>TODO</code> de la boite à outil de blockly tu trouvera une première implémentation de la fonction que tu dois faire.<br>
                     Commence par la prendre et test le résultat de ton prédicteur avec.
@@ -425,13 +455,19 @@
 
           <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
               <div class="card">
+                 <img class="card-img-center img-fluid" src="/static/img/blocklyBlocks/countersIncrease.svg">
+                    </div>
+                </div>
+                
+          <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
+              <div class="card">
                  <img class="card-img-center img-fluid" src="/static/img/blocklyBlocks/countersGetMinMax.svg">
                     </div>
                 </div>
                 
           <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
               <div class="card">
-                 <img class="card-img-center img-fluid" src="/static/img/blocklyBlocks/countersReset.svg">
+                 <img class="card-img-center img-fluid" src="/static/img/blocklyBlocks/forI.svg">
                     </div>
                 </div>
                 
@@ -443,13 +479,7 @@
                 
           <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
               <div class="card">
-                 <img class="card-img-center img-fluid" src="/static/img/blocklyBlocks/countersIncrease.svg">
-                    </div>
-                </div>
-                
-          <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
-              <div class="card">
-                 <img class="card-img-center img-fluid" src="/static/img/blocklyBlocks/forI.svg">
+                 <img class="card-img-center img-fluid" src="/static/img/blocklyBlocks/countersReset.svg">
                     </div>
                 </div>
                 

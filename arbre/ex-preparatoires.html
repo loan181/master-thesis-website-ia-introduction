@@ -1,8 +1,38 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
+    <title>Exercices préparatoires pour l'arbre de décisions</title>
     
+
+<!-- Database -->
+
+<!-- Firebase App is always required and must be first -->
+<script src="https://www.gstatic.com/firebasejs/5.8.3/firebase-app.js"></script>
+
+<!-- Add additional services that you want to use -->
+<!--<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-auth.js"></script>-->
+<script src="https://www.gstatic.com/firebasejs/5.8.3/firebase-database.js"></script>
+<!--<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-messaging.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-functions.js"></script>-->
+
+<!-- Comment out (or don't include) services that you don't want to use -->
+<!-- <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-storage.js"></script> -->
+
+<script>
+    var config = {
+        apiKey: "AIzaSyDbZnAznbgeP1_bxyn9XNGGL4C9z-ex46k",
+        authDomain: "site-memoire.firebaseapp.com",
+        databaseURL: "https://site-memoire.firebaseio.com",
+        projectId: "site-memoire",
+        storageBucket: "site-memoire.appspot.com",
+        messagingSenderId: "639582982387"
+    };
+    firebase.initializeApp(config);
+</script>
+
+<script src="/static/js/Database.js"></script>
+
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134452435-1"></script>
 <script>
@@ -36,7 +66,10 @@
 <!-- add after bootstrap.min.js -->
 <script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.js"></script>
     <script src="/static/js/contentForTeacher.js"></script>
+    <script src="/static/js/automaticCorrection.js"></script>
+
 </head>
+
 
 <body data-spy="scroll" data-target="#toc">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -92,6 +125,7 @@
         }
     }
 </script>
+
 <div class="container">
     <div class="row">
         <!-- sidebar, which will move to the top on a small screen -->
@@ -101,609 +135,1185 @@
         <!-- main content area -->
         <div class="col-sm-9">
             <main role="main" class="container">
-
-
                 <h1>Exercices préparatoires pour l'arbre de décisions</h1>
 
-                <h2>Définition</h2>
+                <h2>Introduction</h2>
                 <p>
-                    Un arbre de décision est un outil d'aide à la décision représentant un ensemble de choix sous la forme graphique d'un arbre.
-                    Les différentes décisions possibles sont situées aux extrémités des branches (les « feuilles » de l'arbre),
-                    et sont atteints en fonction de décisions prises à chaque étape.<br>
-                    On va simplifier ici sa représentation visuelle, chaque décision sera toujours répondu par « oui » ou « non ».
-                </p>
+    Un arbre de décision est un outil d'aide à la décision représentant un ensemble de choix sous la forme graphique d'un arbre.
+    Les différentes décisions possibles sont situées aux extrémités des branches (les « feuilles » de l'arbre),
+    et sont atteints en fonction de décisions prises à chaque étape.<br>
+    On va simplifier ici sa représentation visuelle, chaque décision sera toujours répondu par « oui » ou « non ».
+</p>
 
-                <h2>Exemple</h2>
+<h2>Exemple</h2>
 
-                <p>
-                    Prenons ce tableau avec ses quelques caractéristiques pour 4 fruits distincts :
-                </p>
-                <table class="table table-hover" id="tableExample">
-                    <thead>
-                    <tr>
-                        <th scope="col">Classe</th>
-                        <th scope="col">Forme</th>
-                        <th scope="col">Couleur</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td scope="row">Banane</td>
-                        <td>Courbé</td>
-                        <td>Jaune</td>
-                    </tr>
-                    <tr >
-                        <td scope="row">Pomme</td>
-                        <td>Ronde</td>
-                        <td>Rouge</td>
-                    </tr>
-                    <tr >
-                        <td scope="row">Orange</td>
-                        <td>Ronde</td>
-                        <td>Orange</td>
-                    </tr>
-                    <tr>
-                        <td scope="row">Citron</td>
-                        <td>Ronde</td>
-                        <td>Jaune</td>
-                    </tr>
-                    </tbody>
-                    <caption>Tableau 1 : Exemple de fruits avec différentes caractéristiques (forme et couleur)</caption>
-                </table>
+<p>
+    Prenons ce tableau avec ses quelques caractéristiques pour 4 fruits distincts :
+</p>
+<table class="table table-hover" id="tableExample">
+    <thead>
+    <tr>
+        <th scope="col">Classe</th>
+        <th scope="col">Forme</th>
+        <th scope="col">Couleur</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td scope="row">Banane</td>
+        <td>Courbé</td>
+        <td>Jaune</td>
+    </tr>
+    <tr >
+        <td scope="row">Pomme</td>
+        <td>Ronde</td>
+        <td>Rouge</td>
+    </tr>
+    <tr >
+        <td scope="row">Orange</td>
+        <td>Ronde</td>
+        <td>Orange</td>
+    </tr>
+    <tr>
+        <td scope="row">Citron</td>
+        <td>Ronde</td>
+        <td>Jaune</td>
+    </tr>
+    </tbody>
+    <caption>Tableau 1 : Exemple de fruits avec différentes caractéristiques (forme et couleur)</caption>
+</table>
 
-                <p>
-                    On peut à partir du tableau construire un arbre de décision comme celui-ci à partir des questions suivantes :
-                </p>
-                <ul>
-                    <li>Forme ronde ?</li>
-                    <ul>
-                        <li>Couleur rouge ? (pour la branche "oui")</li>
-                    </ul>
-                </ul>
-                <img src="/static/img/arbre/arbreExemple.PNG" class="img-fluid">
-                <small class="text-muted">
-                    La première question que je pose est de savoir si la forme est ronde ou pas.
-                    Si c’est le cas, on sait d’office que ça n'est pas une banane
-                    (car c’est le seul fruit qui n'est pas rond dans notre exemple).<br>
-                    Sachant qu’il n’est pas rond on aimerait savoir s’il est rouge,
-                    si c’est le cas on sait que c’est une pomme,
-                    mais si ça n’est pas le cas c’est soit une orange soit un citron.
-                </small>
-                <p>
-                    Pour le reste des exercices tu n'est pas obligé de le dessiner de manière aussi rigoureuse, respecte juste les conventions suivantes :
-                </p>
-                <ul>
-                    <li>L'arbre "évolue" vers le bas</li>
-                    <li>La branche de gauche représentera toujours la réponse « oui » et celle de droite la réponse « non »</li>
-                    <li>Les questions sont formulés dans des cadre rectangulaire</li>
-                    <li>Les feuilles de l'arbre sont dans des cadres ovale</li>
-                    <li>Indiquer entre parenthèse les % pour toute les feuilles</li>
-                </ul>
-                <p>Avec cette convention l'exemple précédent peut être redessiné comme cela également : </p>
-                <img src="/static/img/arbre/arbreExMain.png" class="img-fluid">
+<p>
+    On peut à partir du tableau construire un arbre de décision comme celui-ci à partir des questions suivantes :
+</p>
+<ul>
+    <li>Forme ronde ?</li>
+    <ul>
+        <li>Couleur rouge ? (pour la branche "oui")</li>
+    </ul>
+</ul>
+<img src="/static/img/arbre/arbreExemple.PNG" class="img-fluid">
+<small class="text-muted">
+    La première question que je pose est de savoir si la forme est ronde ou pas.
+    Si c’est le cas, on sait d’office que ça n'est pas une banane
+    (car c’est le seul fruit qui n'est pas rond dans notre exemple).<br>
+    Sachant qu’il n’est pas rond on aimerait savoir s’il est rouge,
+    si c’est le cas on sait que c’est une pomme,
+    mais si ça n’est pas le cas c’est soit une orange soit un citron.
+</small>
+<p>
+    Pour le reste des exercices tu n'est pas obligé de le dessiner de manière aussi rigoureuse, respecte juste les conventions suivantes :
+</p>
+<ul>
+    <li>L'arbre "évolue" vers le bas</li>
+    <li>La branche de gauche représentera toujours la réponse « oui » et celle de droite la réponse « non »</li>
+    <li>Les questions sont formulés dans des cadre rectangulaire</li>
+    <li>Les feuilles de l'arbre sont dans des cadres ovale</li>
+    <li>Indiquer entre parenthèse les % pour toute les feuilles</li>
+</ul>
+<p>Avec cette convention l'exemple précédent peut être redessiné comme cela également : </p>
+<img src="/static/img/arbre/arbreExMain.png" class="img-fluid">
 
                 <h2>Exercices</h2>
-                <h3>Exercice 1 : Construire un arbre de décision</h3>
-                <p>
-                    En utilisant le <a href="#tableExample">tableau précédent</a> construit l’arbre et donne les résultats de chaque feuille en partant de gauche à droite pour les questions suivantes :
-                </p>
-
-                <ul>
-                    <li>Couleur orange ?</li>
-                    <ul>
-                        <li>Forme Courbé ? (pour la branche "non")</li>
-                    </ul>
-                </ul>
-
                 
-      <div class="card border-primary mb-3">
-        <div class="card-header">Réponse</div>
-          <div class="card-body text-primary">
-                <table class="table table-hover" >
-                    <thead>
-                    <tr>
-                        <th scope="col">Feuille</th>
-                        <th scope="col">Banane</th>
-                        <th scope="col">Pomme</th>
-                        <th scope="col">Orange</th>
-                        <th scope="col">Citron</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                     <!-- Nombre de feuilles -->
-                    <tr>
-                        <th scope="row">1</th>
-                         <!-- 4 fruits -->
-                        <td>
-                            <div class="input-group">
-                                <input type="number" min="0" max="100" value="0" class="form-control">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">%</span>
-                                </div>
-                            </div>
-                        </td>
-                         <!-- 4 fruits -->
-                        <td>
-                            <div class="input-group">
-                                <input type="number" min="0" max="100" value="0" class="form-control">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">%</span>
-                                </div>
-                            </div>
-                        </td>
-                         <!-- 4 fruits -->
-                        <td>
-                            <div class="input-group">
-                                <input type="number" min="0" max="100" value="0" class="form-control">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">%</span>
-                                </div>
-                            </div>
-                        </td>
-                         <!-- 4 fruits -->
-                        <td>
-                            <div class="input-group">
-                                <input type="number" min="0" max="100" value="0" class="form-control">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">%</span>
-                                </div>
-                            </div>
-                        </td>
-                        
-                    </tr>
-                     <!-- Nombre de feuilles -->
-                    <tr>
-                        <th scope="row">2</th>
-                         <!-- 4 fruits -->
-                        <td>
-                            <div class="input-group">
-                                <input type="number" min="0" max="100" value="0" class="form-control">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">%</span>
-                                </div>
-                            </div>
-                        </td>
-                         <!-- 4 fruits -->
-                        <td>
-                            <div class="input-group">
-                                <input type="number" min="0" max="100" value="0" class="form-control">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">%</span>
-                                </div>
-                            </div>
-                        </td>
-                         <!-- 4 fruits -->
-                        <td>
-                            <div class="input-group">
-                                <input type="number" min="0" max="100" value="0" class="form-control">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">%</span>
-                                </div>
-                            </div>
-                        </td>
-                         <!-- 4 fruits -->
-                        <td>
-                            <div class="input-group">
-                                <input type="number" min="0" max="100" value="0" class="form-control">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">%</span>
-                                </div>
-                            </div>
-                        </td>
-                        
-                    </tr>
-                     <!-- Nombre de feuilles -->
-                    <tr>
-                        <th scope="row">3</th>
-                         <!-- 4 fruits -->
-                        <td>
-                            <div class="input-group">
-                                <input type="number" min="0" max="100" value="0" class="form-control">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">%</span>
-                                </div>
-                            </div>
-                        </td>
-                         <!-- 4 fruits -->
-                        <td>
-                            <div class="input-group">
-                                <input type="number" min="0" max="100" value="0" class="form-control">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">%</span>
-                                </div>
-                            </div>
-                        </td>
-                         <!-- 4 fruits -->
-                        <td>
-                            <div class="input-group">
-                                <input type="number" min="0" max="100" value="0" class="form-control">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">%</span>
-                                </div>
-                            </div>
-                        </td>
-                         <!-- 4 fruits -->
-                        <td>
-                            <div class="input-group">
-                                <input type="number" min="0" max="100" value="0" class="form-control">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">%</span>
-                                </div>
-                            </div>
-                        </td>
-                        
-                    </tr>
                     
-                    </tbody>
-                </table>
-                
-          </div>
-          <div class="card-footer">
-            <button type="button" class="btn btn-primary" onclick="checkAnswer(this)">Vérifier réponse</button>
-            <span class="exFeedback"></span>
-          </div>
-        </div>
-      
+<div data-ex="exercice">
+    
+        <h3 data-ex="title">Construire un arbre de décision</h3>
+    
 
-                
-      <div class="card border-success mb-3 onlyTeacher">
-        <div class="card-header">Correction</div>
-        <div class="card-body text-success">
-          <p class="card-text">
-                <img src="/static/img/arbre/ex1corr1.PNG" class="img-fluid">
-                
-          </p>
-          </div>
-        </div>
-      
+    
+        <div data-ex="intro"><p>
+    En utilisant le <a href="#tableExample">tableau précédent</a> construit l’arbre et donne les résultats de chaque feuille en partant de gauche à droite pour les questions suivantes :
+</p>
+</div>
+    
 
+    
+        <div data-ex="question"><ul>
+    <li>Couleur orange ?</li>
+    <ul>
+        <li>Forme Courbé ? (pour la branche "non")</li>
+    </ul>
+</ul>
+</div>
+    
 
-                <ul>
-                    <li>Couleur jaune ?</li>
-                    <ul>
-                        <li>Forme Courbé ? (pour la branche "oui")</li>
-                        <li>Couleur orange ? (pour la branche "non")</li>
-                    </ul>
-                </ul>
-
+    
+        <div class="card border-primary mb-3">
+            <div class="card-header">Réponse</div>
+            <div class="card-body text-primary">
                 
-      <div class="card border-primary mb-3">
-        <div class="card-header">Réponse</div>
-          <div class="card-body text-primary">
-                <table class="table table-hover" >
-                    <thead>
-                    <tr>
-                        <th scope="col">Feuille</th>
-                        <th scope="col">Banane</th>
-                        <th scope="col">Pomme</th>
-                        <th scope="col">Orange</th>
-                        <th scope="col">Citron</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                     <!-- Nombre de feuilles -->
-                    <tr>
-                        <th scope="row">1</th>
-                         <!-- 4 fruits -->
-                        <td>
-                            <div class="input-group">
-                                <input type="number" min="0" max="100" value="0" class="form-control">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">%</span>
-                                </div>
-                            </div>
-                        </td>
-                         <!-- 4 fruits -->
-                        <td>
-                            <div class="input-group">
-                                <input type="number" min="0" max="100" value="0" class="form-control">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">%</span>
-                                </div>
-                            </div>
-                        </td>
-                         <!-- 4 fruits -->
-                        <td>
-                            <div class="input-group">
-                                <input type="number" min="0" max="100" value="0" class="form-control">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">%</span>
-                                </div>
-                            </div>
-                        </td>
-                         <!-- 4 fruits -->
-                        <td>
-                            <div class="input-group">
-                                <input type="number" min="0" max="100" value="0" class="form-control">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">%</span>
-                                </div>
-                            </div>
-                        </td>
+                    <table class="table table-hover" >
+                        <thead>
+                        <tr>
+                            
+                                
+                                    <th scope="col">Feuille</th>
+                                
+                            
+                                
+                                    <th scope="col">Banane</th>
+                                
+                            
+                                
+                                    <th scope="col">Pomme</th>
+                                
+                            
+                                
+                                    <th scope="col">Orange</th>
+                                
+                            
+                                
+                                    <th scope="col">Citron</th>
+                                
+                            
+                                
+                                    <th scope="col"></th>
+                                
+                            
+                        </tr>
+                        </thead>
+                        <tbody>
                         
-                    </tr>
-                     <!-- Nombre de feuilles -->
-                    <tr>
-                        <th scope="row">2</th>
-                         <!-- 4 fruits -->
-                        <td>
-                            <div class="input-group">
-                                <input type="number" min="0" max="100" value="0" class="form-control">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">%</span>
-                                </div>
-                            </div>
-                        </td>
-                         <!-- 4 fruits -->
-                        <td>
-                            <div class="input-group">
-                                <input type="number" min="0" max="100" value="0" class="form-control">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">%</span>
-                                </div>
-                            </div>
-                        </td>
-                         <!-- 4 fruits -->
-                        <td>
-                            <div class="input-group">
-                                <input type="number" min="0" max="100" value="0" class="form-control">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">%</span>
-                                </div>
-                            </div>
-                        </td>
-                         <!-- 4 fruits -->
-                        <td>
-                            <div class="input-group">
-                                <input type="number" min="0" max="100" value="0" class="form-control">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">%</span>
-                                </div>
-                            </div>
-                        </td>
                         
-                    </tr>
-                     <!-- Nombre de feuilles -->
-                    <tr>
-                        <th scope="row">3</th>
-                         <!-- 4 fruits -->
-                        <td>
-                            <div class="input-group">
-                                <input type="number" min="0" max="100" value="0" class="form-control">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">%</span>
-                                </div>
-                            </div>
-                        </td>
-                         <!-- 4 fruits -->
-                        <td>
-                            <div class="input-group">
-                                <input type="number" min="0" max="100" value="0" class="form-control">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">%</span>
-                                </div>
-                            </div>
-                        </td>
-                         <!-- 4 fruits -->
-                        <td>
-                            <div class="input-group">
-                                <input type="number" min="0" max="100" value="0" class="form-control">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">%</span>
-                                </div>
-                            </div>
-                        </td>
-                         <!-- 4 fruits -->
-                        <td>
-                            <div class="input-group">
-                                <input type="number" min="0" max="100" value="0" class="form-control">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">%</span>
-                                </div>
-                            </div>
-                        </td>
+                         <!-- Nombre de feuilles -->
+                            <tr>
+                                <th scope="row">1</th>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=0>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=0>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=100>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=0>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                
+                            </tr>
+                         <!-- Nombre de feuilles -->
+                            <tr>
+                                <th scope="row">2</th>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=100>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=0>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=0>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=0>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                
+                            </tr>
+                         <!-- Nombre de feuilles -->
+                            <tr>
+                                <th scope="row">3</th>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=0>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=50>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=0>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=50>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                
+                            </tr>
                         
-                    </tr>
-                     <!-- Nombre de feuilles -->
-                    <tr>
-                        <th scope="row">4</th>
-                         <!-- 4 fruits -->
-                        <td>
-                            <div class="input-group">
-                                <input type="number" min="0" max="100" value="0" class="form-control">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">%</span>
-                                </div>
-                            </div>
-                        </td>
-                         <!-- 4 fruits -->
-                        <td>
-                            <div class="input-group">
-                                <input type="number" min="0" max="100" value="0" class="form-control">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">%</span>
-                                </div>
-                            </div>
-                        </td>
-                         <!-- 4 fruits -->
-                        <td>
-                            <div class="input-group">
-                                <input type="number" min="0" max="100" value="0" class="form-control">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">%</span>
-                                </div>
-                            </div>
-                        </td>
-                         <!-- 4 fruits -->
-                        <td>
-                            <div class="input-group">
-                                <input type="number" min="0" max="100" value="0" class="form-control">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">%</span>
-                                </div>
-                            </div>
-                        </td>
-                        
-                    </tr>
-                    
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
                 
-          </div>
-          <div class="card-footer">
-            <button type="button" class="btn btn-primary" onclick="checkAnswer(this)">Vérifier réponse</button>
-            <span class="exFeedback"></span>
-          </div>
+            </div>
+            <div class="card-footer">
+                <button type="button" class="btn btn-primary" onclick="checkAnswer(this)">Vérifier réponse</button>
+                <span class="exFeedback"></span>
+            </div>
         </div>
-      
-
-                
-      <div class="card border-success mb-3 onlyTeacher">
-        <div class="card-header">Correction</div>
-        <div class="card-body text-success">
-          <p class="card-text">
-                <img src="/static/img/arbre/ex1corr2.PNG" class="img-fluid">
-                
-          </p>
-          </div>
-        </div>
-      
+    
 
 
-                <ul>
-                    <li>Couleur rose ?</li>
-                    <ul>
-                        <li>Forme hélicoïdale ? (pour la branche "non")</li>
-                        <ul>
-                            <li>Couleur bleue ? (pour la branche "non")</li>
-                        </ul>
-                    </ul>
-                </ul>
+    
+        <div class="card border-success mb-3 onlyTeacher">
+            <div class="card-header">Correction</div>
+            <div class="card-body text-success">
+                <p class="card-text">
+                    <img src="/static/img/arbre/ex1corr1.PNG" class="img-fluid">
 
-                
-      <div class="card border-primary mb-3">
-        <div class="card-header">Réponse</div>
-          <div class="card-body text-primary">
-                <table class="table table-hover" >
-                    <thead>
-                    <tr>
-                        <th scope="col">Feuille</th>
-                        <th scope="col">Banane</th>
-                        <th scope="col">Pomme</th>
-                        <th scope="col">Orange</th>
-                        <th scope="col">Citron</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                     <!-- Nombre de feuilles -->
-                    <tr>
-                        <th scope="row">1</th>
-                         <!-- 4 fruits -->
-                        <td>
-                            <div class="input-group">
-                                <input type="number" min="0" max="100" value="0" class="form-control">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">%</span>
-                                </div>
-                            </div>
-                        </td>
-                         <!-- 4 fruits -->
-                        <td>
-                            <div class="input-group">
-                                <input type="number" min="0" max="100" value="0" class="form-control">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">%</span>
-                                </div>
-                            </div>
-                        </td>
-                         <!-- 4 fruits -->
-                        <td>
-                            <div class="input-group">
-                                <input type="number" min="0" max="100" value="0" class="form-control">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">%</span>
-                                </div>
-                            </div>
-                        </td>
-                         <!-- 4 fruits -->
-                        <td>
-                            <div class="input-group">
-                                <input type="number" min="0" max="100" value="0" class="form-control">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">%</span>
-                                </div>
-                            </div>
-                        </td>
-                        
-                    </tr>
-                    
-                    </tbody>
-                </table>
-                
-          </div>
-          <div class="card-footer">
-            <button type="button" class="btn btn-primary" onclick="checkAnswer(this)">Vérifier réponse</button>
-            <span class="exFeedback"></span>
-          </div>
-        </div>
-      
-
-                
-      <div class="card border-success mb-3 onlyTeacher">
-        <div class="card-header">Correction</div>
-        <div class="card-body text-success">
-          <p class="card-text">
-                <img src="/static/img/arbre/ex1corr3.PNG" class="img-fluid">
-                
-          </p>
-          </div>
-        </div>
-      
-
-
-                <p>
-                    D'après les différents arbres que tu as dessiné dans cet exercice, répond aux questions suivantes :
                 </p>
+            </div>
+        </div>
+    
 
-                <p>
-                    Quel arbre serai le plus adapté pour différencier une pomme d’un citron ? Justifie ton choix :
-                </p>
-
-                
-      <div class="card border-primary mb-3">
-        <div class="card-header">Réponse</div>
-          <div class="card-body text-primary">
-                <div class="form-group">
-                    <select class="form-control">
-                        <option>Arbre 1</option>
-                        <option>Arbre 2</option>
-                        <option>Arbre 3</option>
-                    </select>
-                    <label for="repEx1-1"></label>
-                    <textarea class="form-control" rows="4" id="repEx1-1"></textarea>
+    
+        <div class="card border-warning mb-3">
+            <div class="card-header">
+                <button class="btn btn-link" type="button" onclick="toggleNext(this)">
+                    Aide
+                </button>
+            </div>
+            <div class="collapse hide">
+                <div class="card-body">
+                    <p class="card-text">
+                        <img src="/static/img/arbre/ex1help1.png" class="img-fluid">
+                    </p>
                 </div>
-                
-          </div>
-          <div class="card-footer">
-            <button type="button" class="btn btn-primary" onclick="checkAnswer(this)">Vérifier réponse</button>
-            <span class="exFeedback"></span>
-          </div>
+            </div>
         </div>
-      
+    
+</div>
+                
+                    
+<div data-ex="exercice">
+    
+
+    
+
+    
+        <div data-ex="question"><ul>
+    <li>Couleur jaune ?</li>
+    <ul>
+        <li>Forme Courbé ? (pour la branche "oui")</li>
+        <li>Couleur orange ? (pour la branche "non")</li>
+    </ul>
+</ul>
+</div>
+    
+
+    
+        <div class="card border-primary mb-3">
+            <div class="card-header">Réponse</div>
+            <div class="card-body text-primary">
+                
+                    <table class="table table-hover" >
+                        <thead>
+                        <tr>
+                            
+                                
+                                    <th scope="col">Feuille</th>
+                                
+                            
+                                
+                                    <th scope="col">Banane</th>
+                                
+                            
+                                
+                                    <th scope="col">Pomme</th>
+                                
+                            
+                                
+                                    <th scope="col">Orange</th>
+                                
+                            
+                                
+                                    <th scope="col">Citron</th>
+                                
+                            
+                                
+                                    <th scope="col"></th>
+                                
+                            
+                        </tr>
+                        </thead>
+                        <tbody>
+                        
+                        
+                         <!-- Nombre de feuilles -->
+                            <tr>
+                                <th scope="row">1</th>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=100>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=0>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=0>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=0>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                
+                            </tr>
+                         <!-- Nombre de feuilles -->
+                            <tr>
+                                <th scope="row">2</th>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=0>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=0>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=0>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=100>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                
+                            </tr>
+                         <!-- Nombre de feuilles -->
+                            <tr>
+                                <th scope="row">3</th>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=0>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=0>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=100>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=0>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                
+                            </tr>
+                         <!-- Nombre de feuilles -->
+                            <tr>
+                                <th scope="row">4</th>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=0>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=100>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=0>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=0>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                
+                            </tr>
+                        
+                        </tbody>
+                    </table>
+                
+            </div>
+            <div class="card-footer">
+                <button type="button" class="btn btn-primary" onclick="checkAnswer(this)">Vérifier réponse</button>
+                <span class="exFeedback"></span>
+            </div>
+        </div>
+    
+
+
+    
+        <div class="card border-success mb-3 onlyTeacher">
+            <div class="card-header">Correction</div>
+            <div class="card-body text-success">
+                <p class="card-text">
+                    <img src="/static/img/arbre/ex1corr2.PNG" class="img-fluid">
+
+                </p>
+            </div>
+        </div>
+    
+
+    
+        <div class="card border-warning mb-3">
+            <div class="card-header">
+                <button class="btn btn-link" type="button" onclick="toggleNext(this)">
+                    Aide
+                </button>
+            </div>
+            <div class="collapse hide">
+                <div class="card-body">
+                    <p class="card-text">
+                        <img src="/static/img/arbre/ex1help2.png" class="img-fluid">
+                    </p>
+                </div>
+            </div>
+        </div>
+    
+</div>
+                
+                    
+<div data-ex="exercice">
+    
+
+    
+
+    
+        <div data-ex="question"><ul>
+    <li>Couleur rose ?</li>
+    <ul>
+        <li>Forme hélicoïdale ? (pour la branche "non")</li>
+        <ul>
+            <li>Couleur bleue ? (pour la branche "non")</li>
+        </ul>
+    </ul>
+</ul>
+</div>
+    
+
+    
+        <div class="card border-primary mb-3">
+            <div class="card-header">Réponse</div>
+            <div class="card-body text-primary">
+                
+                    <table class="table table-hover" >
+                        <thead>
+                        <tr>
+                            
+                                
+                                    <th scope="col">Feuille</th>
+                                
+                            
+                                
+                                    <th scope="col">Banane</th>
+                                
+                            
+                                
+                                    <th scope="col">Pomme</th>
+                                
+                            
+                                
+                                    <th scope="col">Orange</th>
+                                
+                            
+                                
+                                    <th scope="col">Citron</th>
+                                
+                            
+                                
+                                    <th scope="col"></th>
+                                
+                            
+                        </tr>
+                        </thead>
+                        <tbody>
+                        
+                        
+                         <!-- Nombre de feuilles -->
+                            <tr>
+                                <th scope="row">1</th>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=25>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=25>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=25>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=25>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                
+                            </tr>
+                        
+                        </tbody>
+                    </table>
+                
+            </div>
+            <div class="card-footer">
+                <button type="button" class="btn btn-primary" onclick="checkAnswer(this)">Vérifier réponse</button>
+                <span class="exFeedback"></span>
+            </div>
+        </div>
+    
+
+
+    
+        <div class="card border-success mb-3 onlyTeacher">
+            <div class="card-header">Correction</div>
+            <div class="card-body text-success">
+                <p class="card-text">
+                    <img src="/static/img/arbre/ex1corr3.PNG" class="img-fluid">
+
+                </p>
+            </div>
+        </div>
+    
+
+    
+        <div class="card border-warning mb-3">
+            <div class="card-header">
+                <button class="btn btn-link" type="button" onclick="toggleNext(this)">
+                    Aide
+                </button>
+            </div>
+            <div class="collapse hide">
+                <div class="card-body">
+                    <p class="card-text">
+                        <img src="/static/img/arbre/ex1help3.png" class="img-fluid">
+                    </p>
+                </div>
+            </div>
+        </div>
+    
+</div>
+                
+                    
+<div data-ex="exercice">
+    
+
+    
+
+    
+        <div data-ex="question"><p>
+    D'après les différents arbres de cet exercice, quel arbre serai le plus adapté pour différencier une pomme d’un citron ? Justifie ton choix :
+</p>
+</div>
+    
+
+    
+        <div class="card border-primary mb-3">
+            <div class="card-header">Réponse</div>
+            <div class="card-body text-primary">
+                
+                    <div class="form-group">
+    <select class="form-control" data-answer="Arbre 2">
+        <option>Arbre 1</option>
+        <option>Arbre 2</option>
+        <option>Arbre 3</option>
+    </select>
+    <label for="repEx1-1"></label>
+    <textarea class="form-control" rows="4" id="repEx1-1" data-answer="2,distinguer,différencie"></textarea>
+</div>
 
                 
-      <div class="card border-success mb-3 onlyTeacher">
-        <div class="card-header">Correction</div>
-        <div class="card-body text-success">
-          <p class="card-text">
-                Le 2eme arbre est plus adapté que les autres pour différencier une pomme d’un citron.<br>
-                Les questions/décisions du premier ne permettent pas de distinguer les 2 fruits (ils sont tout les 2 pas orange ni courbé).
-                Le dernier arbre est encore pire, on ne peut y distinguer aucun fruit !
-                
-          </p>
-          </div>
+            </div>
+            <div class="card-footer">
+                <button type="button" class="btn btn-primary" onclick="checkAnswer(this)">Vérifier réponse</button>
+                <span class="exFeedback"></span>
+            </div>
         </div>
-      
+    
+
+
+    
+        <div class="card border-success mb-3 onlyTeacher">
+            <div class="card-header">Correction</div>
+            <div class="card-body text-success">
+                <p class="card-text">
+                    Le 2eme arbre est plus adapté que les autres pour différencier une pomme d’un citron.<br> Les questions/décisions du premier ne permettent pas de distinguer les 2 fruits (ils sont tout les 2 pas orange ni courbé).<br> Le dernier arbre est encore pire, on ne peut y distinguer aucun fruit !
+
+                </p>
+            </div>
+        </div>
+    
+
+    
+</div>
+                
+                    
+<div data-ex="exercice">
+    
+        <h3 data-ex="title">Classifier quand il y à des classes identiques</h3>
+    
+
+    
+        <div data-ex="intro"><p>
+    Precedamment, nous avons considéré que chaque fruit était distinct, cepandant cela peut ne pas être le cas.<br>
+    Je peux par exemple avoir des pommes qui sont de couleurs jaunes en plus.<br>
+    Tu remarquera qu'avec ses nouvelles pommes, il nous est impossible de les distinguer des citrons maintenant !
+</p>
+<table class="table table-hover" id="tableExample2">
+    <thead>
+    <tr>
+        <th scope="col">Classe</th>
+        <th scope="col">Forme</th>
+        <th scope="col">Couleur</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td scope="row">Banane</td>
+        <td>Courbé</td>
+        <td>Jaune</td>
+    </tr>
+    <tr >
+        <td scope="row">Pomme</td>
+        <td>Ronde</td>
+        <td>Rouge</td>
+    </tr>
+    <tr >
+        <td scope="row">Orange</td>
+        <td>Ronde</td>
+        <td>Orange</td>
+    </tr>
+    <tr>
+        <td scope="row">Citron</td>
+        <td>Ronde</td>
+        <td>Jaune</td>
+    </tr>
+    <tr class="table-primary">
+        <td scope="row">Pomme</td>
+        <td>Ronde</td>
+        <td>Jaune</td>
+    </tr>
+    <tr class="table-primary">
+        <td scope="row">Pomme</td>
+        <td>Ronde</td>
+        <td>Jaune</td>
+    </tr>
+    <tr class="table-primary">
+        <td scope="row">Pomme</td>
+        <td>Ronde</td>
+        <td>Jaune</td>
+    </tr>
+    </tbody>
+    <caption>Tableau 2 : Comme le <a href="#tableExample">tableau précédent</a>, mais avec 3 pommes jaunes en plus</caption>
+</table>
+</div>
+    
+
+    
+        <div data-ex="question">A partir des données du <a href="#tableExample2">tableau précédent</a>, quel sont les probabilités que mon fruit soit un citron/pomme sachant qu'il est jaune et rond ?</div>
+    
+
+    
+        <div class="card border-primary mb-3">
+            <div class="card-header">Réponse</div>
+            <div class="card-body text-primary">
+                
+                    <div class="input-group">
+    <div class="input-group-prepend">
+        <span class="input-group-text">Citron</span>
+    </div>
+    <input type="number" min="0" max="100" value="0" class="form-control" data-answer="25">
+    <div class="input-group-append">
+        <span class="input-group-text">%</span>
+    </div>
+</div> <div class="input-group">
+    <div class="input-group-prepend">
+        <span class="input-group-text">Pomme</span>
+    </div>
+    <input type="number" min="0" max="100" value="0" class="form-control" data-answer="75">
+    <div class="input-group-append">
+        <span class="input-group-text">%</span>
+    </div>
+</div>
+
+                
+            </div>
+            <div class="card-footer">
+                <button type="button" class="btn btn-primary" onclick="checkAnswer(this)">Vérifier réponse</button>
+                <span class="exFeedback"></span>
+            </div>
+        </div>
+    
+
+
+    
+        <div class="card border-success mb-3 onlyTeacher">
+            <div class="card-header">Correction</div>
+            <div class="card-body text-success">
+                <p class="card-text">
+                    4 fruits sont jaune et rond. 3 sont des pommes et 1 est un citron. Cela nous fait donc 1/4 de chance soit 25% pour le citron et 3/4 soit 75% pour la pomme.
+
+                </p>
+            </div>
+        </div>
+    
+
+    
+</div>
+                
+                    
+<div data-ex="exercice">
+    
+
+    
+
+    
+        <div data-ex="question"><ul>
+    <li>Forme ronde ?</li>
+    <ul>
+        <li>Couleur jaune ? (pour la branche "oui")</li>
+    </ul>
+</ul>
+</div>
+    
+
+    
+        <div class="card border-primary mb-3">
+            <div class="card-header">Réponse</div>
+            <div class="card-body text-primary">
+                
+                    <table class="table table-hover" >
+                        <thead>
+                        <tr>
+                            
+                                
+                                    <th scope="col">Feuille</th>
+                                
+                            
+                                
+                                    <th scope="col">Banane</th>
+                                
+                            
+                                
+                                    <th scope="col">Pomme</th>
+                                
+                            
+                                
+                                    <th scope="col">Orange</th>
+                                
+                            
+                                
+                                    <th scope="col">Citron</th>
+                                
+                            
+                                
+                                    <th scope="col"></th>
+                                
+                            
+                        </tr>
+                        </thead>
+                        <tbody>
+                        
+                        
+                         <!-- Nombre de feuilles -->
+                            <tr>
+                                <th scope="row">1</th>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=0>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=75>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=0>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=25>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                
+                            </tr>
+                         <!-- Nombre de feuilles -->
+                            <tr>
+                                <th scope="row">2</th>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=0>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=50>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=50>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=0>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                
+                            </tr>
+                         <!-- Nombre de feuilles -->
+                            <tr>
+                                <th scope="row">3</th>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=100>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=0>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=0>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                 <!-- nombre de catégories/fruits -->
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="number" min="0" max="100" value="0" class="form-control" data-answer=0>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                
+                            </tr>
+                        
+                        </tbody>
+                    </table>
+                
+            </div>
+            <div class="card-footer">
+                <button type="button" class="btn btn-primary" onclick="checkAnswer(this)">Vérifier réponse</button>
+                <span class="exFeedback"></span>
+            </div>
+        </div>
+    
+
+
+    
+        <div class="card border-success mb-3 onlyTeacher">
+            <div class="card-header">Correction</div>
+            <div class="card-body text-success">
+                <p class="card-text">
+                    <img src="/static/img/arbre/ex2corr.PNG" class="img-fluid">
+
+                </p>
+            </div>
+        </div>
+    
+
+    
+        <div class="card border-warning mb-3">
+            <div class="card-header">
+                <button class="btn btn-link" type="button" onclick="toggleNext(this)">
+                    Aide
+                </button>
+            </div>
+            <div class="collapse hide">
+                <div class="card-body">
+                    <p class="card-text">
+                        <img src="/static/img/arbre/ex2help.PNG" class="img-fluid">
+                    </p>
+                </div>
+            </div>
+        </div>
+    
+</div>
+                
+                    
+<div data-ex="exercice">
+    
+        <h3 data-ex="title">Classe majoritaire</h3>
+    
+
+    
+        <div data-ex="intro"><p>
+    Afin de déterminer la classe d'un fruit inconnu, on choisi la classe majoritaire dans la feuille de l'arbre de décision.
+</p> <p>
+    Pour cet exercice sers toi de l'arbre de décision suivant :
+</p> <img src="/static/img/arbre/ex3Tree.png" class="img-fluid">
+</div>
+    
+
+    
+        <div data-ex="question">Quel est la classe majoritaire des fruits suivants ?
+</div>
+    
+
+    
+        <div class="card border-primary mb-3">
+            <div class="card-header">Réponse</div>
+            <div class="card-body text-primary">
+                
+                    Fruit rond et jaune :<br> <select class="form-control col-sm-9" data-answer="Citron">
+    <option>Citron</option>
+    <option>Pomme</option>
+    <option>Cerise</option>
+    <option>Orange</option>
+    <option>Poire</option>
+    <option>Banane</option>
+    <option>Melon</option>
+    <option>Noix de coco</option>
+</select>
+Fruit rond et rouge :<br> <select class="form-control col-sm-9" data-answer="Pomme">
+    <option>Citron</option>
+    <option>Pomme</option>
+    <option>Cerise</option>
+    <option>Orange</option>
+    <option>Poire</option>
+    <option>Banane</option>
+    <option>Melon</option>
+    <option>Noix de coco</option>
+</select>
+Fruit ovale :<br> <select class="form-control col-sm-9" data-answer="Melon">
+    <option>Citron</option>
+    <option>Pomme</option>
+    <option>Cerise</option>
+    <option>Orange</option>
+    <option>Poire</option>
+    <option>Banane</option>
+    <option>Melon</option>
+    <option>Noix de coco</option>
+</select>
+
+                
+            </div>
+            <div class="card-footer">
+                <button type="button" class="btn btn-primary" onclick="checkAnswer(this)">Vérifier réponse</button>
+                <span class="exFeedback"></span>
+            </div>
+        </div>
+    
+
+
+    
+        <div class="card border-success mb-3 onlyTeacher">
+            <div class="card-header">Correction</div>
+            <div class="card-body text-success">
+                <p class="card-text">
+                    <img src="/static/img/arbre/ex1corr1.PNG" class="img-fluid">
+
+                </p>
+            </div>
+        </div>
+    
+
+    
+</div>
+                
             </main>
         </div>
     </div>
@@ -728,6 +1338,6 @@
 </div>
 
 
+<script src="/static/js/enlargeImageModal.js"></script>
 </body>
-
 </html>
