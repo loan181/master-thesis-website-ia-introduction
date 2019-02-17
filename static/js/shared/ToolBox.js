@@ -39,12 +39,10 @@ class ToolBox{
     // Mais j'arrive pas à éxécuter de script depuis la toolbox pour l'instant
     createButtonUpload() {
         let elem = `
-        <li class="nav-item button" data-toggle="tooltip" data-tooltip="upload">
-            <label for="upload_project" class="btn btn-outline-secondary" style="margin-bottom: 0px">
+            <label for="upload_project" class="btn btn-outline-secondary" data-toggle="tooltip" data-tooltip="upload" style="margin-bottom: 0px">
                 <i class="fa fa-folder-open"></i>
             </label>
             <input id="upload_project" type="file" hidden>
-        </li>
         `;
 
         // document.getElementById("upload_project").addEventListener('change', handleFileSelect, false);
@@ -54,8 +52,8 @@ class ToolBox{
     }
 
     createButtonExport(matrixNameIconAction) {
-        let htmlElem = `<li class="nav-item dropdown" data-toggle="tooltip" data-tooltip="export">
-            <button class="btn btn-outline-secondary dropdown-toggle" id="buttonExport" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        let htmlElem = `
+            <button class="btn btn-outline-secondary dropdown-toggle" id="buttonExport" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-tooltip="export">
                 <i class="fas fa-file-export"></i>
             </button>
             <div class="dropdown-menu" aria-labelledby="buttonExport" >`;
@@ -63,8 +61,7 @@ class ToolBox{
             let curElem = matrixNameIconAction[i];
             htmlElem += `<a class="dropdown-item" href="#" onclick="${curElem[2]}"><i class="${curElem[1]}"></i> ${curElem[0]}</a>`;
         }
-        htmlElem +=`</div>
-        </li>`;
+        htmlElem +=`</div>`;
         return htmlElem;
     }
 
@@ -153,7 +150,45 @@ class ToolBox{
 
             this.addElementToRightBar(this.createButtonHelp("blockly-aide.html"));
             this.addElementToRightBar(this.createButtonLanguage());
+        } else if (exerciceName === "decision-tree") {
+            this.addElementToLeftBar(this.createButtonNew("BT.reset()"));
+            this.addElementToLeftBar(this.createButtonDownload()); // TODO
+            this.addElementToLeftBar(this.createButtonUpload()); // TODO
+            this.addElementToLeftBar(this.createButtonRun("testClassify()", "executeCode"));
         }
+    }
+
+    drawExplanation(exerciceName, id, explanations) {
+        this.setToolBarForExercice(exerciceName);
+
+        let html = "";
+        html += `
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Boutton</th>
+                <th scope="col">Explication</th>
+            </tr>
+            </thead>
+            <tbody>
+        `;
+
+        for (let i = 0; i < this.size; i++) {
+            html += `
+                <tr>
+                    <th style="pointer-events: none;">${this.getElement(i)}</th>
+                    <td>${explanations[i]}</td>
+                </tr>
+            `
+        }
+
+        html += `
+            </tbody>
+        </table>
+        `;
+
+        let toolbarElement = document.getElementById(id);
+        toolbarElement.innerHTML = html;
     }
 
     get size() {
