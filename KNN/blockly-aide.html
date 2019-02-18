@@ -84,7 +84,7 @@
                 <a class="nav-link" href="/KNN/" role="button" aria-haspopup="true" aria-expanded="false">
                     K plus proches voisins <i class="fas fa-caret-down"></i>
                 </a>
-                <div class="dropdown-menu showOnHover" aria-labelledby="navbarDropdown">
+                <div class="dropdown-menu showOnHover" aria-labelledby="navbarDropdown" style="z-index: 10001">
                     <a class="dropdown-item" href="/KNN/ex-preparatoires">Exercices préparatoires</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="/KNN/blockly-aide">Consignes et utilisation pour la phase pratique</a>
@@ -96,7 +96,7 @@
                 <a class="nav-link" href="/arbre/" role="button" aria-haspopup="true" aria-expanded="false">
                     Arbre de décisions <i class="fas fa-caret-down"></i>
                 </a>
-                <div class="dropdown-menu showOnHover" aria-labelledby="navbarDropdown">
+                <div class="dropdown-menu showOnHover" aria-labelledby="navbarDropdown" style="z-index: 10001">
                     <a class="dropdown-item" href="/arbre/ex-preparatoires">Exercices préparatoires</a>
                     <div class="dropdown-divider"></div>
                     <!--<a class="dropdown-item" href="/KNN/blockly-aide">Consignes et utilisation pour la phase pratique</a>-->
@@ -419,6 +419,12 @@
 
           <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
               <div class="card">
+                 <img class="card-img-center img-fluid" src="/static/img/blocklyBlocks/getK.svg">
+                    </div>
+                </div>
+                
+          <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
+              <div class="card">
                  <img class="card-img-center img-fluid" src="/static/img/blocklyBlocks/countersGetMinMax.svg">
                     </div>
                 </div>
@@ -432,12 +438,6 @@
           <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
               <div class="card">
                  <img class="card-img-center img-fluid" src="/static/img/blocklyBlocks/countersIncrease.svg">
-                    </div>
-                </div>
-                
-          <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
-              <div class="card">
-                 <img class="card-img-center img-fluid" src="/static/img/blocklyBlocks/getK.svg">
                     </div>
                 </div>
                 

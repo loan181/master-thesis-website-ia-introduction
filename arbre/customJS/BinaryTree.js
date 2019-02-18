@@ -23,33 +23,11 @@ class Node {
 
     reset() {
         if (this.drawShape != null) {
-            this.drawShape.remove();
-            this.drawText.remove();
+            this.draw.remove();
         }
 
-        this.drawShape = paper.circle(0, 0, 20).attr({
-            fill: "#FFF",
-            stroke: "#000",
-            "stroke-width": 1
-        });
-        this.drawText = paper.text(0, 0, "+");
-
-        this.draw.clear();
-        this.draw.push(
-            this.drawShape,
-            this.drawText
-        );
-
-        this.draw.hover(
-            this.hover,
-            this.unHover,
-            this,
-            this
-        );
-
-        this.draw.mouseup(
-            (e) =>{this.leafClicked();}
-        );
+        this.proportionOfEachFlower = this.refreshProportionOfEachFlower();
+        this.refreshLeafDraw();
 
         // Leaf have no left and right child
         if (this.left != null) {
@@ -67,8 +45,54 @@ class Node {
         this.rightBranch = null;
 
         this.parameter = null;
+        this.parameterAxis = null;
         this.operator = operationType.NONE;
         this.valueToCompare = null;
+    }
+
+    refreshLeafDraw() {
+        if (this.drawShape != null) {
+            this.draw.remove();
+        }
+
+        let pieCcolors = ["#4f81bc", "#c0504e", "#9bbb58"];
+        let circleR = 20;
+
+        this.draw.clear();
+        paper.setStart();
+
+        this.drawShape = paper.circle(0, 0, circleR).attr({
+            fill: "#FFF",
+            stroke: "#000",
+            "stroke-width": 1
+        });
+
+        let accumulatedAngle = 0;
+        let counter = 0;
+        for (let flower in this.proportionOfEachFlower) {
+            let currentProportion = this.proportionOfEachFlower[flower];
+            let angleEnd = accumulatedAngle + (360*currentProportion/100);
+
+            sector(0, 0, circleR, accumulatedAngle, angleEnd,{"fill": pieCcolors[counter], "fill-opacity":0.4, "stroke-opacity":0.2});
+
+            accumulatedAngle = angleEnd;
+            counter++;
+        }
+
+        this.drawText = paper.text(0, 0, "+");
+
+        this.draw = paper.setFinish();
+
+        this.draw.hover(
+            this.hover,
+            this.unHover,
+            this,
+            this
+        );
+
+        this.draw.mouseup(
+            (e) =>{this.leafClicked();}
+        );
     }
 
     isLeaf() {
@@ -77,6 +101,7 @@ class Node {
 
     setFlowersIndex(flowersIndexList) {
         this.associatedFlower = flowersIndexList;
+        this.proportionOfEachFlower = this.refreshProportionOfEachFlower();
     }
 
     hover() {
@@ -85,17 +110,7 @@ class Node {
             highlightAllMarkers();
             drawPointsIndex(this.associatedFlower);
         } else {
-            let axis = null;
-            if (this.parameter === currentXCat) {
-                axis = "x";
-            }
-            else if (this.parameter === currentYCat) {
-                axis = "y";
-            }
-            else {
-                console.error("Unkwnon parameter as axis : " + this.parameter);
-            }
-            highlightCondition(axis, this.operator, this.valueToCompare);
+            highlightCondition(this.parameterAxis, this.operator, this.valueToCompare);
             highlightMarkerCondition(this.left.associatedFlower, this.right.associatedFlower);
         }
 
@@ -122,15 +137,23 @@ class Node {
         return flowerCounter
     }
 
-    displayProportionOfEachFlower() {
+    refreshProportionOfEachFlower() {
         // Count the proportion of the flower of the leaf
         let flowerProportions = this.flowerCounter;
 
-        // TODO : trouver le maximum (qui déterminera la fleur)
         for (var key in flowerProportions){
             flowerProportions[key] /= this.associatedFlower.length;
             flowerProportions[key] *= 100;
         }
+        this.proportionOfEachFlower = flowerProportions;
+        this.refreshLeafDraw();
+        return flowerProportions;
+    }
+
+    displayProportionOfEachFlower() {
+        // Count the proportion of the flower of the leaf
+        let flowerProportions = this.proportionOfEachFlower;
+        // TODO : trouver le maximum (qui déterminera la fleur)
         // console.log(flowerProportions);
         var text = "";
         for (var key in flowerProportions){
@@ -170,8 +193,7 @@ class Node {
 
     delete() {
         if (this.drawShape != null) {
-            this.drawShape.remove();
-            this.drawText.remove();
+            this.draw.remove();
         }
 
         // Recursively delete all downward child
@@ -199,8 +221,9 @@ class Node {
     }
 
     move(x, y) {
-        this.drawText.translate(x-this.x, y-this.y);
-        this.drawShape.translate(x-this.x, y-this.y);
+        this.draw.translate(x-this.x, y-this.y);
+        //this.drawText.translate(x-this.x, y-this.y);
+        //this.drawShape.translate(x-this.x, y-this.y);
     }
 
     evaluate(parameter, operation, value) {
@@ -282,6 +305,15 @@ class Node {
      */
     modify(axis, operation, value) {
         this.parameter = axis;
+        if (this.parameter === currentXCat) {
+            this.parameterAxis = "x";
+        }
+        else if (this.parameter === currentYCat) {
+            this.parameterAxis = "y";
+        }
+        else {
+            console.error("Unkwnon parameter as axis : " + this.parameter);
+        }
         this.operator = parseInt(operation);
         this.valueToCompare = value;
 
@@ -299,8 +331,7 @@ class Node {
         }
         this.updateChildCorrespondingFlower();
 
-        this.drawShape.remove();
-        this.drawText.remove();
+        this.draw.remove();
         this.drawShape = paper.rect(-100, -20, 200, 40, 2).attr({
             fill: "#FFF",
             stroke: "#000",
@@ -474,6 +505,59 @@ class BinaryTree {
         }
         return currentNode.majorityClass;
     }
+
+    getTreeJson() {
+        let ret = {};
+        this.extendTree(this.root, ret);
+        return ret;
+    }
+
+    extendTree(currentNode, dictionary) {
+        if (!currentNode.isLeaf() && currentNode !== null) {
+            dictionary["parameter"] = currentNode.parameterAxis;
+            dictionary["operator"] = currentNode.operator;
+            dictionary["value"] = currentNode.valueToCompare;
+
+            dictionary["child"] = [];
+            if (currentNode.left != null) {
+                let leftDict = {};
+                this.extendTree(currentNode.left, leftDict);
+                dictionary["child"][0] = leftDict;
+            }
+            if (currentNode.right != null) {
+                let rightDict = {};
+                this.extendTree(currentNode.right, rightDict);
+                dictionary["child"][1] = rightDict;
+            }
+        }
+    }
+
+    loadTree(jsonTree) {
+        this.reset();
+        console.log("JSON tree : ", jsonTree);
+
+        this.refreshNode(this.root, jsonTree);
+
+    }
+
+    refreshNode(node, dict) {
+        if (Object.keys(dict).length !== 0) { // Empty dictionary = leaf -> no computation needed
+            let axis = currentXCat;
+            if (dict["parameter"] === "x") {
+                axis = currentXCat;
+            }
+            else if (dict["parameter"] === "y") {
+                axis = currentYCat;
+            }
+            else {
+                console.warn("Unknown axis given while parsing json for tree : ", dict["parameter"]);
+            }
+            node.modify(axis, dict["operator"], dict["value"]);
+            let child = dict["child"];
+            this.refreshNode(node.left, child[0]);
+            this.refreshNode(node.right, child[1]);
+        }
+    }
 }
 
 function testClassify() {
@@ -488,9 +572,56 @@ function testClassify() {
     return ratio;
 }
 
+// Source : https://stackoverflow.com/a/7711684
+// Allow to draw pie chart into nodes circle
+function sector(cx, cy, r, startAngle, endAngle, params) {
+    let rad = Math.PI / 180;
+    let x1 = cx + r * Math.cos(-startAngle * rad),
+        x2 = cx + r * Math.cos(-endAngle * rad),
+        y1 = cy + r * Math.sin(-startAngle * rad),
+        y2 = cy + r * Math.sin(-endAngle * rad);
+    return paper.path(["M", cx, cy, "L", x1, y1, "A", r, r, 0, +(endAngle - startAngle > 180), 0, x2, y2, "z"]).attr(params);
+}
+
 function canvaSizeChange(newW, newH) {
     paper.setSize(newW, newH);
 
+    BT.refreshTreeDraw();
+}
+
+function getCurrentDatasetName() {
+    return "Iris";
+}
+
+function downloadExerciceFile() {
+    let dictData = {};
+    dictData["dataset"] = getCurrentDatasetName();
+    dictData["x_axis"] = currentXCat;
+    dictData["y_axis"] = currentYCat;
+    dictData["tree"] = BT.getTreeJson();
+
+    let filename = "DecisionTree";
+    let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(dictData));
+    let downloadAnchorNode = document.createElement('a');
+    downloadAnchorNode.setAttribute("href",     dataStr);
+    downloadAnchorNode.setAttribute("download", filename + ".json");
+    document.body.appendChild(downloadAnchorNode); // required for firefox
+    downloadAnchorNode.click();
+    downloadAnchorNode.remove();
+}
+
+function uploadExerciceFile(fileContent) {
+    let dictData = JSON.parse(fileContent);
+
+    // dataset saved value have no impact by now
+    // TODO : check si les valeurs sont dans le select avant de les asigner (si c'est pas le cas, le fichier de sauvegarde est corrompu ou incompatible)
+    currentXCat = dictData["x_axis"];
+    currentYCat = dictData["y_axis"];
+    document.getElementById('axisXChoice').value = currentXCat;
+    document.getElementById('axisYChoice').value = currentYCat;
+    BT.loadTree(dictData["tree"]);
+    BT.refreshTotalDepth();
+    redrawPlot();
     BT.refreshTreeDraw();
 }
 
@@ -501,3 +632,28 @@ paper.rect(-1, -1, 5000, 5000).attr({
     fill: "#b4b4b4"
 }).toBack();
 let BT = new BinaryTree();
+
+function handleFileSelect(evt) {
+    var files = evt.target.files; // FileList object
+
+    // use the 1st file from the list
+    var f = files[0];
+
+    var reader = new FileReader();
+
+    // Closure to capture the file information.
+    reader.onload = (function(theFile) {
+        return function(e) {
+            try {
+                uploadExerciceFile(e.target.result);
+            }
+            catch (err) {
+                alert("Une erreur innatendu est survenue au chargement du projet :\n" + err.message);
+            }
+        };
+    })(f);
+
+    // Read in the file as a data URL.
+    reader.readAsText(f);
+}
+document.getElementById("upload_project").addEventListener('change', handleFileSelect, false);
