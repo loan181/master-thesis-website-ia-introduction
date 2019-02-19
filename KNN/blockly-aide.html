@@ -159,7 +159,7 @@
                         "Exporte le projet (blocs) sous forme d’images (SVG (vectoriel) ou PNG ).<br>Attention que si tu exportes en image tu ne peux pas l’ouvrir comme projet",
                         "Voir le code JavaScript généré par Blockly dans une fenêtre pop-up",
                         "Tester le code. Se contentera d’exécutera le code du projet tel quel.",
-                        "Tester le prédicateur. Lance le programme en évaluant si les prédictions sont correctes.<br>Cela te permettra de réussir ton objectif !",
+                        "Tester le classifieur. Lance le programme en évaluant si les prédictions sont correctes.<br>Cela te permettra de réussir ton objectif !",
                         "Renvoie vers la page d'aide (celle-çi)",
                         "Te permet de choisir la langue.<br>Seulement le français et l’anglais sont pleinement compatible. Les autres changeront uniquement le texte des blocs de Blockly."
                     ]);
@@ -334,8 +334,8 @@
                     <img src="/static/img/KNN/classifyFunction.svg" class="img-fluid">
                 </div>
                 <p>
-                    La qualité de ton prédicateur est représentée par la barre de progression bleu en dessous de la barre d'outil.<br>
-                    Cette barre se met à jour à chaque fois que tu <a href="#testPredicateur">teste ton prédicateur</a> en testant ta fonction de classification <code>classify</code>.<br>
+                    La qualité de ton classifieur est représentée par la barre de progression bleu en dessous de la barre d'outil.<br>
+                    Cette barre se met à jour à chaque fois que tu <a href="#testPredicateur">teste ton classifieur</a> en testant ta fonction de classification <code>classify</code>.<br>
                     Ton objectif final est d'atteindre la meilleure prédiction possible (100%)
                 </p>
                 <div class="mt-2 col-md-12">
@@ -405,89 +405,90 @@
                 </div>
 
                 
-      <div class="card border-info mb-3">
-        <div class="card-header">
-            <button class="btn btn-link" type="button" onclick="toggleNext(this)">
-                Blocs recommandés
-            </button>
-        </div>
-        <div class="collapse hide">
-            <div class="card-body">
-      
-      <div class="container">
-      <div class="row">
+<div class="card border-info mb-3">
+    <div class="card-header">
+        <button class="btn btn-link" type="button" onclick="toggleNext(this)">
+            Blocs recommandés
+        </button>
+    </div>
+    <div class="hide collapse show" style="">
+        <div class="card-body">
 
-          <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
-              <div class="card">
-                 <img class="card-img-center img-fluid" src="/static/img/blocklyBlocks/getK.svg">
-                    </div>
+            <div class="container">
+                <div class="row">
+                    
+                    
+                    
+                    
+                        <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
+                            <div class="card">
+                                <img src="/static/img/blocklyBlocks/countersGetMinMax.svg" class="img-fluid">
+                            </div>
+                        </div>
+                    
+                        <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
+                            <div class="card">
+                                <img src="/static/img/blocklyBlocks/countersReset.svg" class="img-fluid">
+                            </div>
+                        </div>
+                    
+                        <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
+                            <div class="card">
+                                <img src="/static/img/blocklyBlocks/getK.svg" class="img-fluid">
+                            </div>
+                        </div>
+                    
+                        <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
+                            <div class="card">
+                                <img src="/static/img/blocklyBlocks/forI.svg" class="img-fluid">
+                            </div>
+                        </div>
+                    
+                        <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
+                            <div class="card">
+                                <img src="/static/img/blocklyBlocks/countersIncrease.svg" class="img-fluid">
+                            </div>
+                        </div>
+                    
                 </div>
-                
-          <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
-              <div class="card">
-                 <img class="card-img-center img-fluid" src="/static/img/blocklyBlocks/countersGetMinMax.svg">
-                    </div>
-                </div>
-                
-          <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
-              <div class="card">
-                 <img class="card-img-center img-fluid" src="/static/img/blocklyBlocks/forI.svg">
-                    </div>
-                </div>
-                
-          <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
-              <div class="card">
-                 <img class="card-img-center img-fluid" src="/static/img/blocklyBlocks/countersIncrease.svg">
-                    </div>
-                </div>
-                
-          <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
-              <div class="card">
-                 <img class="card-img-center img-fluid" src="/static/img/blocklyBlocks/countersReset.svg">
-                    </div>
-                </div>
-                
-      </div>
-      </div>
-      </div>
+            </div>
         </div>
-      </div>
+    </div>
+</div>
 
+                <div class="card border-warning mb-3">
+    <div class="card-header">
+        <button class="btn btn-link" type="button" onclick="toggleNext(this)">
+            Aide
+        </button>
+    </div>
+    <div class="collapse hide">
+        <div class="card-body">
+            <p class="card-text">
                 
-      <div class="card border-warning mb-3">
-        <div class="card-header">
-            <button class="btn btn-link" type="button" onclick="toggleNext(this)">
-                Aide
-            </button>
-        </div>
-        <div class="collapse hide">
-            <div class="card-body">
-              <p>
-                    Une structure correcte du code est la suivante :
-                <ol>
-                    <li>Réinitialiser le compteur, chacune des trois fleurs à un compteur qui est mis à 0</li>
-                    <li>Pour chacune des K fleurs les plus proches, il faudra augmenter leur compteur individuel de 1</li>
-                    <li>Une fois les K fleurs parcouru, il suffit de choisir celle qui à la valeur de compteur la plus haute et mettre à jour le résultat renvoyé</li>
-                </ol>
+                        Une structure correcte du code est la suivante :
+                            <ol>
+                                <li>Réinitialiser le compteur, chacune des trois fleurs à un compteur qui est mis à 0</li>
+                                <li>Pour chacune des K fleurs les plus proches, il faudra augmenter leur compteur individuel de 1</li>
+                                <li>Une fois les K fleurs parcouru, il suffit de choisir celle qui à la valeur de compteur la plus haute et mettre à jour le résultat renvoyé</li>
+                            </ol>
                 
-          </p>
-          </div>
+            </p>
         </div>
-      </div>
+    </div>
+</div>
 
-                
-      <div class="card border-success mb-3 onlyTeacher">
-        <div class="card-header">Correction</div>
-        <div class="card-body text-success">
-          <p class="card-text">
-                <div class="mx-auto" align="center">
-                    <img src="/static/img/KNN/solutionKNN.svg" class="img-fluid">
-                </div>
-                
-          </p>
-          </div>
-        </div>
-      
+                <div class="card border-success mb-3 onlyTeacher">
+    <div class="card-header">Correction</div>
+    <div class="card-body text-success">
+        <p class="card-text">
+            
+                    <div class="mx-auto" align="center">
+                        <img src="/static/img/KNN/solutionKNN.svg" class="img-fluid">
+                    </div>
+        </p>
+    </div>
+</div>
 
                 <h3>Etape finale : Obtenir 100%</h3>
                 <p>
@@ -496,23 +497,21 @@
                     choisis bien tes paramètres (<a href="#parameterPanel">K, Axe x et Axe y</a>) et croise les doigts pour atteindre les 100% !
                 </p>
 
-                
-      <div class="card border-success mb-3 onlyTeacher">
-        <div class="card-header">Correction</div>
-        <div class="card-body text-success">
-          <p class="card-text">
-                <div class="mx-auto" align="center">
-                    <img src="/static/img/KNN/solutionKNN.svg" class="img-fluid">
-                </div>
-                Avec par exemple comme paramètres :
-                <div class="mx-auto" align="center">
-                    <img src="/static/img/KNN/solParametersKNN.png" class="img-fluid">
-                </div>
-                
-          </p>
-          </div>
-        </div>
-      
+                <div class="card border-success mb-3 onlyTeacher">
+    <div class="card-header">Correction</div>
+    <div class="card-body text-success">
+        <p class="card-text">
+            
+                    <div class="mx-auto" align="center">
+                        <img src="/static/img/KNN/solutionKNN.svg" class="img-fluid">
+                    </div>
+                    Avec par exemple comme paramètres :
+                    <div class="mx-auto" align="center">
+                        <img src="/static/img/KNN/solParametersKNN.png" class="img-fluid">
+                    </div>
+        </p>
+    </div>
+</div>
             </main>
         </div>
     </div>

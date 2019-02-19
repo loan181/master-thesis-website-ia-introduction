@@ -73,15 +73,27 @@ class Node {
             let currentProportion = this.proportionOfEachFlower[flower];
             let angleEnd = accumulatedAngle + (360*currentProportion/100);
 
+            if (flower === this.maxProportionKey) {
+                this.drawShape.attr({
+                    stroke: pieCcolors[counter],
+                    "stroke-width": 3,
+                    "stroke-opacity":1
+                });
+            }
+
             sector(0, 0, circleR, accumulatedAngle, angleEnd,{"fill": pieCcolors[counter], "fill-opacity":0.4, "stroke-opacity":0.2});
 
             accumulatedAngle = angleEnd;
             counter++;
         }
 
-        this.drawText = paper.text(0, 0, "+");
+        this.drawText = paper.text(0, 0, "+").attr({"font-weight": "bold", "font-size":24});
 
         this.draw = paper.setFinish();
+
+        this.draw.attr({
+            cursor:"pointer"
+        });
 
         this.draw.hover(
             this.hover,
@@ -109,9 +121,11 @@ class Node {
             this.displayProportionOfEachFlower();
             highlightAllMarkers();
             drawPointsIndex(this.associatedFlower);
+            redrawPlot();
         } else {
             highlightCondition(this.parameterAxis, this.operator, this.valueToCompare);
             highlightMarkerCondition(this.left.associatedFlower, this.right.associatedFlower);
+            redrawPlot();
         }
 
     }
@@ -125,6 +139,7 @@ class Node {
         }
         unHighlightAllMarkers(); // Yellow if leaf, and red/green if node
         resetPlotWithDefaultData();
+        redrawPlot();
     }
 
     get flowerCounter() {
@@ -139,9 +154,16 @@ class Node {
 
     refreshProportionOfEachFlower() {
         // Count the proportion of the flower of the leaf
-        let flowerProportions = this.flowerCounter;
+        let flowerCounter = this.flowerCounter
+        let flowerProportions = {};
 
-        for (var key in flowerProportions){
+        // Compute the maximum at the same time
+        this.maxProportionKey = null;
+        for (var key in flowerCounter){
+            if (this.maxProportionKey === null || flowerCounter[key] > flowerCounter[this.maxProportionKey]) {
+                this.maxProportionKey = key;
+            }
+            flowerProportions[key] = flowerCounter[key];
             flowerProportions[key] /= this.associatedFlower.length;
             flowerProportions[key] *= 100;
         }
@@ -153,16 +175,27 @@ class Node {
     displayProportionOfEachFlower() {
         // Count the proportion of the flower of the leaf
         let flowerProportions = this.proportionOfEachFlower;
-        // TODO : trouver le maximum (qui déterminera la fleur)
-        // console.log(flowerProportions);
+
         var text = "";
+        var hightlightText = "";
         for (var key in flowerProportions){
-            text += key + " : " + flowerProportions[key].toFixed(2) +"%\n"
+            if (key === this.maxProportionKey) {
+                hightlightText += key + " : " + flowerProportions[key].toFixed(2) +"%\n";
+            }
+            else {
+                text += key + " : " + flowerProportions[key].toFixed(2) + "%\n"
+            }
         }
-        if (text === "") {
-            text = "(vide)";
+
+        if (hightlightText === "") {
+            hightlightText = "(vide)";
         }
-        this.infoText = paper.text(this.x, this.y+45, text);
+        this.infoText = paper.set();
+        this.infoText.push(
+            paper.text(this.x, this.y+30, hightlightText).attr({"font-weight": "bold"}),
+            paper.text(this.x, this.y+34, "\n"+text)
+        );
+        this.infoText.attr({"font-size":12})
     }
 
     /**
@@ -246,8 +279,8 @@ class Node {
     }
 
     updateChildCorrespondingFlower() {
-        var trueFlowerIndex = [];
-        var falseFlowerIndex = [];
+        let trueFlowerIndex = [];
+        let falseFlowerIndex = [];
         for (let i = 0; i < this.associatedFlower.length; i++) {
             let flowerInd = this.associatedFlower[i];
             let correspondingFlower = trainingSet[flowerInd];
@@ -280,19 +313,8 @@ class Node {
         }
     }
 
-    // TODO : peut être precompute
     get majorityClass() {
-        let ret = null;
-        let countClassesDictionary = this.flowerCounter;
-
-        let curMaxValue = -1;
-        for (var className in countClassesDictionary) {
-            if (countClassesDictionary[className] > curMaxValue) {
-                ret = className;
-                curMaxValue = countClassesDictionary[className];
-            }
-        }
-        return ret;
+        return this.maxProportionKey;
     }
 
     /**
@@ -304,15 +326,15 @@ class Node {
      * @param value
      */
     modify(axis, operation, value) {
-        this.parameter = axis;
-        if (this.parameter === currentXCat) {
-            this.parameterAxis = "x";
+        this.parameterAxis = axis;
+        if (this.parameterAxis === "x") {
+            this.parameter = currentXCat;
         }
-        else if (this.parameter === currentYCat) {
-            this.parameterAxis = "y";
+        else if (this.parameterAxis === "y") {
+            this.parameter = currentYCat;
         }
         else {
-            console.error("Unkwnon parameter as axis : " + this.parameter);
+            console.error("Unkwnon parameter as axis : " + this.parameterAxis);
         }
         this.operator = parseInt(operation);
         this.valueToCompare = value;
@@ -337,7 +359,7 @@ class Node {
             stroke: "#000",
             "stroke-width": 1
         });
-        this.drawText = paper.text(0, 0, axis + " " + operationChar[operation] + " " + value).attr({
+        this.drawText = paper.text(0, 0, frenchTranslationCat(this.parameter )+ " " + operationChar[this.operator] + " " + this.valueToCompare).attr({
             "font-size": 14
         });
 
@@ -346,6 +368,11 @@ class Node {
             this.drawShape,
             this.drawText
         );
+
+        this.draw.attr({
+            cursor:"pointer"
+        });
+
         this.draw.hover(
             this.hover,
             this.unHover,
@@ -375,13 +402,19 @@ class Branch {
         let node2X = this.nodeChild.x;
         let node2Y = this.nodeChild.y;
 
+        let yesBranch = node1X < node2X;
+        let branchColor = "#ff0400";
+        if (yesBranch) {
+            branchColor = "#25ff58"
+        }
+
         // See : http://dmitrybaranovskiy.github.io/raphael/reference.html#Paper.path
         let pathString = "M" + node1X + "," + node1Y + "L" + node2X + "," + node2Y;
 
         if (this.draw != null) {
             this.draw.remove();
         }
-        this.draw = paper.path(pathString);
+        this.draw = paper.path(pathString).attr({"stroke":branchColor});
     }
 
     delete() {
