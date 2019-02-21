@@ -2,6 +2,7 @@
 <html lang="fr">
 
 <head>
+    <title>Création intéractive d'un arbre de décision</title>
     
 
 <!-- Database -->
@@ -61,10 +62,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
-    <title>K plus proches voisins Intro</title>
+    <!-- add after bootstrap.min.css -->
+<link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.css">
+<!-- add after bootstrap.min.js -->
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.js"></script>
+    <script src="/static/js/contentForTeacher.js"></script>
 </head>
 
-<body>
+<body data-spy="scroll" data-target="#toc">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <!--<a class="navbar-brand" href="#">Titre</a>-->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -131,53 +136,114 @@
         }
     }
 </script>
+<main role="main" class="container" style="max-width: 95%">
+    <div class="row">
+        <!-- sidebar, which will move to the top on a small screen -->
+        <div class="col-sm-3">
+            <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+        </div>
+        <!-- main content area -->
+        <div class="col-sm-9">
+            <h1>Création intéractive d'un arbre de décision</h1>
 
-<div class="jumbotron" style="
-    background: url(/static/img/KNN.svg);
-         /*position: fixed;*/
-    width: 100%;
-    height: 550px; /*same height as jumbotron */
-    top: 0;
-    left: 0;
-    z-index: -999;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    background-blend-mode: soft-light;
-    -webkit-background-blend-mode: soft-lightsoft-light;
-    ">
-</div>
+            <p>
+    Maintenant que vous avons une bonne idée du fonctionnement d'un arbre de décision, nous allons en créer de manière dynamique !
+</p>
 
-<main role="main" class="container">
-    <h1> Méthodes des K plus proches voisins</h1>
-    <hr class="my-4">
-    <p class="lead">Méthode de classification</p>
-    <p>
-        A partir d'une entrée <code>x</code> on déterminera sa classe à partir de ses <code>K</code> voisins les plus proches.<br> Après cela avec l'information de la classe réelle de l'entrée, nous serons en mesure d'évaluer l'exactitude de notre prédicateur.
+            
+                <img src="/static/img/arbre/pagePreview.PNG" class="img-fluid center">
+            
 
-    </p>
-    <div align="center">
-        
-            <a class="btn btn-primary" href=ex-preparatoires role="button">Exercices préparatoires</a>
-        
-            <a class="btn btn-primary" href=blockly-aide role="button">Consignes et utilisation pour la phase pratique</a>
-        
-            <a class="btn btn-primary" href=blockly role="button">Phase pratique (Blockly)</a>
-        
+            <h2>Structure de la page</h2>
+            
+                <h3>Barre d'outil</h3>
+                <p>
+                    Dans la partie supérieure de l’écran tu as différents boutons te permettant de réaliser certaines actions que nous allons détailler ici.
+                </p>
+                <div id="toolboxExplanation"></div>
+                <script src="/static/js/shared/ToolBox.js"></script>
+                <script>
+                    let TB = new ToolBox();
+                    let explanations = [];
+                    
+                        explanations.push("Réinitialiser l'arbre à zéro en effacant tout les noeuds existant.");
+                    
+                        explanations.push("Sauvegarder/télécharger ton projet sur ton ordinateur");
+                    
+                        explanations.push("Ouvrir un projet précédemment sauvegardé.<br>L'arbre ainsi que tes pramètres d'axes seront rétablis");
+                    
+                        explanations.push("Tester le classifieur sur l'arbre de décision courant.<br>Cela te permettra de réussir ton objectif !");
+                    
+                    TB.drawExplanation("decision-tree", "toolboxExplanation", explanations);
+                </script>
+            
+
+            
+                <h3>Données et Paramètres</h3>
+                La partie de gauche te permet d'observer les données ainsi que de modifier les paramètres de l'arbre.
+
+                    <ul class="list-unstyled">
+                        
+                        <li class="media">
+                            <img src="/static/img/arbre/graph.PNG" class="mr-3 img-fluid" >
+                            <div class="media-body">
+                                <h4 class="mt-0 mb-1">Panneau Graphe et Données</h4>
+                                Te permet de consulter et visualiser les données du training set. Chaque point du graphe correspond à une fleur du training set. Sa forme et couleur définit sa classe comme légendé en dessous du graphe.<br> Tu peux survoler avec ta souris un point pour obtenir des informations le concernant.<br> Tu pourra également ajouter des fleurs "artificielle" dans le graphe via Blockly. Pour effacer ses derniers tu pourra utiliser le bouton jaune avec la gomme<br>
+
+                            </div>
+                        </li>
+                        
+                        <li class="media">
+                            <img src="/static/img/arbre/axisParameters.PNG" class="mr-3 img-fluid" >
+                            <div class="media-body">
+                                <h4 class="mt-0 mb-1">Panneau paramètres</h4>
+                                Te permet de modifier le choix des axes <code>x</code> et <code>y</code> parmi les différentes métriques.
+
+                            </div>
+                        </li>
+                        
+                    </ul>
+            
+
+            
+                <h3>Arbre intéractif</h3>
+                <p>
+                    La partie de droite est l'emplacement ou tu pourra créer et modifier ton arbre de décision.
+                </p>
+
+                
+                    TODO
+
+                
+            
+
+            
+
+            
+
+        </div>
     </div>
 </main>
 
-    <script>
-        var jumboHeight = $('.jumbotron').outerHeight();
-        function parallax(){
-            var scrolled = $(window).scrollTop();
-            $('.jumbotron-bg').css('height', (jumboHeight-scrolled) + 'px');
-        }
-        $(window).scroll(function(e){
-            parallax();
-        });
-    </script>
-</body>
+<script src="/static/js/enlargeImageModal.js"></script>
+<!-- Creates the bootstrap modal where the image will appear -->
+<div class="modal fade bd-example-modal-xl" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" target="_blank" id="imagepreviewLink"> <i class="fas fa-external-link-alt"></i></a>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="mx-auto" align="center">
+                    <img src="" class="imagepreview" data-dismiss="modal" style="max-width: 100%; height:auto">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
+
+
+</body>
 </html>
