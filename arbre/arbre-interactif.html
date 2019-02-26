@@ -2,6 +2,8 @@
 <html lang="fr">
 
 <head>
+    <meta charset="UTF-8">
+    <title>Arbre de Décision intéractif</title>
     
 
 <!-- Database -->
@@ -62,19 +64,31 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
 
-    <!-- Raphael -->
+    
+        <!-- Plotlyjs -->
+        <script type="text/javascript" src="/static/js/shared/plotlyjs-bundle.js"></script>
+        <script type="text/javascript" src="/static/js/shared/figure.js"></script>
+        <script type="text/javascript" src="/static/js/shared/plotInteraction.js"></script>
+        <script type="text/javascript" src="customJS/plotInteraction.js"></script>
+        <script src="https://cdn.plot.ly/plotly-locale-fr-latest.js"></script>
+    
+
+    
+        <!-- Raphael -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"> </script>
+    
 
-    <!-- Plotlyjs -->
-    <script type="text/javascript" src="/static/js/shared/plotlyjs-bundle.js"></script>
-    <script type="text/javascript" src="/static/js/shared/figure.js"></script>
-    <script type="text/javascript" src="/static/js/shared/plotInteraction.js"></script>
-    <script type="text/javascript" src="customJS/plotInteraction.js"></script>
-    <script src="https://cdn.plot.ly/plotly-locale-fr-latest.js"></script>
+    <!-- Custom Extra scripts -->
+    
+        <script type="text/javascript" src="/static/js/shared/iris.js"></script>
+    
+        <script type="text/javascript" src="/static/js/shared/GraphFunctions.js"></script>
+    
 
-    <!-- Custom -->
-    <script src="/static/js/shared/iris.js"></script>
-    <script src="/static/js/shared/GraphFunctions.js"></script>
+    <!-- Success Message -->
+    <link rel="stylesheet" href="/static/css/animationSuccess.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.1/TweenMax.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
 </head>
 
 <body>
@@ -145,8 +159,9 @@
     }
 </script>
 <main role="main" class="container" style="max-width: 95%">
-    <h1>Arbre de décision intéractif</h1>
+    <h1>Arbre de Décision intéractif</h1>
 
+    <!-- Toolbox -->
     <div id="toolBox"></div>
     <script src="/static/js/shared/ToolBox.js"></script>
     <script>
@@ -163,52 +178,57 @@
     <script src="/static/js/successBar.js"></script>
     <script>
         let pb = new ProgressBar("progressBar");
+        function exerciceSuccess() {
+            $('#exerciceSuccess').modal('toggle');
+            fancyPopIn();
+        }
     </script>
 
+    <!-- Main content of the activity -->
     <div class="row mt-2 col-md-12">
-        <!-- Graphe, tableau dynamique, etc -->
-        <div class="col-sm-4">
-            <div id="graphContainer" class="container plotly-graph-div">
-            </div>
-            <div class="form-group row">
-                <label for="axisXChoice" class="col-sm-3 col-form-label">Axe x :</label>
-                <select class="form-control col-sm-9" id="axisXChoice">
-                    <script>
-                        for (let i = 0; i < categories.length; i++) {
-                            var newOpt = document.createElement("option");
-                            if (i === 0) {
-                                newOpt.selected="selected";
-                            }
-                            newOpt.value = categories[i];
-                            newOpt.innerHTML = categoriesFR[i];
-                            $('#axisXChoice').append(newOpt); // TODO : refactor
+    <!-- Graphe, tableau dynamique, etc -->
+    <div class="col-sm-4">
+        <div id="graphContainer" class="container plotly-graph-div">
+        </div>
+        <div class="form-group row">
+            <label for="axisXChoice" class="col-sm-3 col-form-label">Axe x :</label>
+            <select class="form-control col-sm-9" id="axisXChoice">
+                <script>
+                    for (let i = 0; i < categories.length; i++) {
+                        var newOpt = document.createElement("option");
+                        if (i === 0) {
+                            newOpt.selected="selected";
                         }
-                    </script>
-                </select>
-            </div>
-
-            <div class="form-group row">
-                <label for="axisYChoice" class="col-sm-3 col-form-label">Axe y :</label>
-                <select class="form-control col-sm-9" id="axisYChoice">
-                    <script>
-                        for (let i = 0; i < categories.length; i++) {
-                            var newOpt = document.createElement("option");
-                            if (i === 1) {
-                                newOpt.selected="selected";
-                            }
-                            newOpt.value = categories[i];
-                            newOpt.innerHTML = categoriesFR[i];
-                            $('#axisYChoice').append(newOpt); // TODO : refactor
-                        }
-                    </script>
-                </select>
-            </div>
+                        newOpt.value = categories[i];
+                        newOpt.innerHTML = categoriesFR[i];
+                        $('#axisXChoice').append(newOpt); // TODO : refactor
+                    }
+                </script>
+            </select>
         </div>
 
-        <!-- Visualisation graphique -->
-        <div id="treeContainer" class="col-sm-8">
+        <div class="form-group row">
+            <label for="axisYChoice" class="col-sm-3 col-form-label">Axe y :</label>
+            <select class="form-control col-sm-9" id="axisYChoice">
+                <script>
+                    for (let i = 0; i < categories.length; i++) {
+                        var newOpt = document.createElement("option");
+                        if (i === 1) {
+                            newOpt.selected="selected";
+                        }
+                        newOpt.value = categories[i];
+                        newOpt.innerHTML = categoriesFR[i];
+                        $('#axisYChoice').append(newOpt); // TODO : refactor
+                    }
+                </script>
+            </select>
         </div>
     </div>
+
+    <!-- Visualisation graphique -->
+    <div id="treeContainer" class="col-sm-8">
+    </div>
+</div>
 </main>
 
 <!-- Modal asking inputs for nodes -->
@@ -246,6 +266,9 @@
         </div>
     </div>
 </div>
+
+
+
 <script src="customJS/BinaryTree.js"></script>
 <script src="/static/js/shared/plot.js"></script>
 <script>
@@ -277,5 +300,17 @@
     afterXChange();
     afterYChange();
 </script>
+</main>
+
+<!-- Success Animation when activity is succeded -->
+<div class="modal" id="exerciceSuccess" tabindex="-1" role="dialog" aria-labelledby="exerciceSuccessLabel" aria-hidden="true" style="background-color: rgba(0,250,255,0.5);">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div id="congrats">
+            <h1 id="sucessMessage">Bravo !</h1>
+        </div>
+    </div>
+</div>
+<script src="/static/js/animationSuccess.js"></script>
+
 </body>
 </html>
