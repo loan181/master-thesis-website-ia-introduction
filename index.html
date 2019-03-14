@@ -2,6 +2,7 @@
 <html lang="fr">
 
 <head>
+  <title>Introduction au Machine Learning - Accueil</title>
   
 
 <!-- Database -->
@@ -61,134 +62,94 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
+  <style>
+    canvas {
+      display: block;
+      vertical-align: bottom;
+    }
+    #particles-js{
+      position:absolute;
+      width: 100%;
+      height: 100%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: 50% 50%;
+    }
+  </style>
 </head>
 
-<body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <!--<a class="navbar-brand" href="#">Titre</a>-->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+<body style="background-color: #477beb; margin:0">
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="/"><i class="fas fa-home"></i></a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link" href="/KNN/" role="button" aria-haspopup="true" aria-expanded="false">
-                    K plus proches voisins <i class="fas fa-caret-down"></i>
-                </a>
-                <div class="dropdown-menu showOnHover" aria-labelledby="navbarDropdown" style="z-index: 10001">
-                    <a class="dropdown-item" href="/KNN/ex-preparatoires">Exercices préparatoires</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/KNN/blockly-aide">Consignes et utilisation pour la phase pratique</a>
-                    <a class="dropdown-item" href="/KNN/blockly">Phase pratique (Blockly)</a>
-                </div>
-            </li>
+  <div id="particles-js">
+    <div class="container" style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);">
+      <h1 class="display-4" style="color: white">Introduction au Machine Learning</h1>
+      <!--<p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>-->
 
-            <li class="nav-item dropdown">
-                <a class="nav-link" href="/arbre/" role="button" aria-haspopup="true" aria-expanded="false">
-                    Arbre de décisions <i class="fas fa-caret-down"></i>
-                </a>
-                <div class="dropdown-menu showOnHover" aria-labelledby="navbarDropdown" style="z-index: 10001">
-                    <a class="dropdown-item" href="/arbre/ex-preparatoires">Exercices préparatoires</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/arbre/arbre-aide">Consignes et utilisation pour la phase pratique</a>
-                    <a class="dropdown-item" href="/arbre/arbre-interactif">Phase pratique (arbre intéractif)</a>
-                </div>
-            </li>
+      <div style="padding-bottom: 20px">
+        <iframe style="display: block;margin: 0 auto;" width="560" height="315" src="https://www.youtube.com/embed/C_GENXH6tGQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
 
-            <li class="nav-item dropdown">
-                <a class="nav-link" href="/NN/" role="button" aria-haspopup="true" aria-expanded="false">
-                    Réseau de neurones <i class="fas fa-caret-down"></i>
-                </a>
-                <div class="dropdown-menu showOnHover" aria-labelledby="navbarDropdown" style="z-index: 10001">
-                    <!--
-                    <a class="dropdown-item" href="/arbre/ex-preparatoires">Exercices préparatoires</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/arbre/arbre-aide">Consignes et utilisation pour la phase pratique</a>-->
-                    <a class="dropdown-item" href="/NN">Phase pratique (réseau intéractif)</a>
-                </div>
-            </li>
-        </ul>
-        <!--<form class="form-inline my-2 my-lg-0">-->
-            <!--<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
-            <!--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
-        <!--</form>-->
+      <div class="card-deck">
+        
+
+          
+          
+
+          <a href= "KNN" class= "card custom-card text-white bg-primary border-light mb-3">
+            <div class="card-header"><h5 class="card-title">K voisins les plus proches</h5></div>
+            <img class="card-img-top" style="height:220px; padding: 8px" src=static/img/KNN.svg >
+            <div class="card-body">
+              <p class="card-text">
+                Cette mission consiste à déterminer le type d'une certaine fleur en comptant la majorité parmis les K fleurs les plus proches.
+              </p>
+            </div>
+            <div class="card-footer">
+              <p class="text-muted"><small style="color: aliceblue">v 1.0</small></p>
+            </div>
+          </a>
+        
+
+          
+          
+
+          <a href= "arbre" class= "card custom-card text-white bg-primary border-light mb-3">
+            <div class="card-header"><h5 class="card-title">Arbre de décisions</h5></div>
+            <img class="card-img-top" style="height:220px; padding: 8px" src=static/img/ArbreDecision.svg >
+            <div class="card-body">
+              <p class="card-text">
+                Cette mission intéractive consiste à déterminer un certain objet en créant manuellement un arbre de décision pertinent.
+              </p>
+            </div>
+            <div class="card-footer">
+              <p class="text-muted"><small style="color: aliceblue">v 0.1 (prototype)</small></p>
+            </div>
+          </a>
+        
+
+          
+          
+
+          <a href= "NN" class= "card custom-card text-white bg-primary border-light mb-3">
+            <div class="card-header"><h5 class="card-title">Réseau neuronal</h5></div>
+            <img class="card-img-top" style="height:220px; padding: 8px" src=static/img/NN.svg >
+            <div class="card-body">
+              <p class="card-text">
+                Cette mission consiste à utiliser un réseau de neuronne existant afin de reconnaitre un certain chiffre.
+              </p>
+            </div>
+            <div class="card-footer">
+              <p class="text-muted"><small style="color: aliceblue">v 0.1 (prototype)</small></p>
+            </div>
+          </a>
+        
+      </div>
     </div>
-</nav>
+  </div>
+  <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> <!-- stats.js lib -->
+  <script>
+    particlesJS.load('particles-js', '/static/other/particlesjs-config.json');
+  </script>
 
-<script>
-    // Automatically highlight in the dropdown if the link match
-    var allLinks = document.getElementsByTagName("a");
-    for(var i = 0; i < allLinks.length; i++){
-        var curLink = allLinks[i];
-        if (curLink.href === window.location.href) {
-            curLink.className += " active";
-            break;
-        }
-    }
-</script>
-  <main role="main" class="container">
-    <h1>Exercices intéractif de Machine Learning</h1>
-
-<div class="card-deck">
-    
-
-        
-        
-
-        <a href= "KNN" class= "card custom-card">
-            <img class="card-img-top" src=static/img/KNN.svg style="height:220px; padding: 8px" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">K voisins les plus proches</h5>
-                <p class="card-text">
-                    Cette mission consiste à déterminer le type d'une certaine fleur en comptant la majorité parmis les K fleurs les plus proches.
-                </p>
-            </div>
-            <div class="card-footer">
-                <p class="text-muted"><small class="text-muted">v 1.0</small></p>
-            </div>
-        </a>
-    
-
-        
-        
-
-        <a href= "arbre" class= "card custom-card">
-            <img class="card-img-top" src=static/img/ArbreDecision.svg style="height:220px; padding: 8px" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">Arbre de décisions</h5>
-                <p class="card-text">
-                    Cette mission intéractive consiste à déterminer un certain objet en créant manuellement un arbre de décision pertinent.
-                </p>
-            </div>
-            <div class="card-footer">
-                <p class="text-muted"><small class="text-muted">v 0.1 (prototype)</small></p>
-            </div>
-        </a>
-    
-
-        
-        
-
-        <a href= "NN" class= "card custom-card">
-            <img class="card-img-top" src=static/img/NN.svg style="height:220px; padding: 8px" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">Réseau neuronal</h5>
-                <p class="card-text">
-                    Cette mission consiste à utiliser un réseau de neuronne existant afin de reconnaitre un certain chiffre.
-                </p>
-            </div>
-            <div class="card-footer">
-                <p class="text-muted"><small class="text-muted">v 0.1 (prototype)</small></p>
-            </div>
-        </a>
-    
-</div>
-
-  </main>
 </body>
 
 </html>
