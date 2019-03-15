@@ -54,7 +54,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 
 <!-- Custom css -->
-<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/static/css/style.css">
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -70,7 +70,7 @@
 </head>
 
 <body data-spy="scroll" data-target="#toc">
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <!--<a class="navbar-brand" href="#">Titre</a>-->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -81,32 +81,32 @@
             <li class="nav-item active">
                 <a class="nav-link" href="/"><i class="fas fa-home"></i></a>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link" href="/KNN/" role="button" aria-haspopup="true" aria-expanded="false">
+            <li class="nav-item dropdown bg-primary">
+                <a class="nav-link" href="/algo/KNN/" role="button" aria-haspopup="true" aria-expanded="false">
                     K plus proches voisins <i class="fas fa-caret-down"></i>
                 </a>
                 <div class="dropdown-menu showOnHover" aria-labelledby="navbarDropdown" style="z-index: 10001">
-                    <a class="dropdown-item" href="/KNN/ex-preparatoires">Exercices préparatoires</a>
+                    <a class="dropdown-item" href="/algo/KNN/ex-preparatoires">Exercices préparatoires</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/KNN/blockly-aide">Consignes et utilisation pour la phase pratique</a>
-                    <a class="dropdown-item" href="/KNN/blockly">Phase pratique (Blockly)</a>
+                    <a class="dropdown-item" href="/algo/KNN/blockly-aide">Consignes et utilisation pour la phase pratique</a>
+                    <a class="dropdown-item" href="/algo/KNN/blockly">Phase pratique (Blockly)</a>
                 </div>
             </li>
 
             <li class="nav-item dropdown">
-                <a class="nav-link" href="/arbre/" role="button" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link" href="/algo/arbre/" role="button" aria-haspopup="true" aria-expanded="false">
                     Arbre de décisions <i class="fas fa-caret-down"></i>
                 </a>
                 <div class="dropdown-menu showOnHover" aria-labelledby="navbarDropdown" style="z-index: 10001">
-                    <a class="dropdown-item" href="/arbre/ex-preparatoires">Exercices préparatoires</a>
+                    <a class="dropdown-item" href="/algo/arbre/ex-preparatoires">Exercices préparatoires</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/arbre/arbre-aide">Consignes et utilisation pour la phase pratique</a>
-                    <a class="dropdown-item" href="/arbre/arbre-interactif">Phase pratique (arbre intéractif)</a>
+                    <a class="dropdown-item" href="/algo/arbre/arbre-aide">Consignes et utilisation pour la phase pratique</a>
+                    <a class="dropdown-item" href="/algo/arbre/arbre-interactif">Phase pratique (arbre intéractif)</a>
                 </div>
             </li>
 
             <li class="nav-item dropdown">
-                <a class="nav-link" href="/NN/" role="button" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link" href="/algo/NN/" role="button" aria-haspopup="true" aria-expanded="false">
                     Réseau de neurones <i class="fas fa-caret-down"></i>
                 </a>
                 <div class="dropdown-menu showOnHover" aria-labelledby="navbarDropdown" style="z-index: 10001">
@@ -114,7 +114,7 @@
                     <a class="dropdown-item" href="/arbre/ex-preparatoires">Exercices préparatoires</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="/arbre/arbre-aide">Consignes et utilisation pour la phase pratique</a>-->
-                    <a class="dropdown-item" href="/NN">Phase pratique (réseau intéractif)</a>
+                    <a class="dropdown-item" href="/algo/NN">Phase pratique (réseau intéractif)</a>
                 </div>
             </li>
         </ul>
@@ -212,7 +212,15 @@
                 </p>
 
                 
-                    L'ensemble des fonctionnalités disponibles se feront majoritairement à l'aide de cette interface. Ainsi tu sera capable de faire diverses actions tels qu'ajouter, modifier les noeuds de ton arbre, consulter l'arbre et modifier la visualisation du graphique.<br> Le schéma représente l'arbre de décision correspondant au données d'un modèle d'entrainement d'Iris.<br> <br> Les cercles représente les <b>feuilles</b> de l'arbre de décision. La coloration symbolise le pourcentage de chaque classe du modèle, c'est comme un diagramme en camembert. Tu peux survoler de ta souris la feuille pour qu'une version textuelle t'indique la même information La couleur du contour détermine la classe majoritaire de cette feuille (texte mis en gras lors du survol de la souris)    <br> Les rectangles arrondis représente les <b>noeuds interne</b> de l'arbre de décision. Ce sont l'ensemble des décisions qui crééront dynamiquement les feuilles de notre arbre de décision. Chaque décision est composé de 3 paramètres : un axe, l'opérateur et la valeur (par exemple <code>x = 12</code> ou <code>y > 42</code>). Pour chaque donnée du modèle d'entrainement, si l'évaluation avec cet axe, opérateur et valeur est vrai, alors cette donnée sera dans la branche de droite, sinon elle sera dans cette de gauche. 
+                    <div class="text-center">
+    <img src="/static/img/arbre/exempleInteractifSchema.png" class="img-fluid rounded">
+    <img src="/static/img/arbre/arbreInreactifEx.png" class="img-fluid rounded">
+    <small class="text-muted"><br>
+        Deux représentation du même arbre de décision.
+        A gauche la version utilisée dans les exercices préparatoires.
+        A droite celle utilisée dans l'outil intéractif.
+    </small>
+</div> <br> L'ensemble des fonctionnalités disponibles se feront majoritairement à l'aide de cette interface. Ainsi tu sera capable de faire diverses actions tels qu'ajouter, modifier les noeuds de ton arbre, consulter l'arbre et modifier la visualisation du graphique.<br> Le schéma représente l'arbre de décision correspondant au données d'un modèle d'entrainement d'Iris.<br> <br> Les cercles représente les <b>feuilles</b> de l'arbre de décision. La coloration symbolise le pourcentage de chaque classe du modèle, c'est comme un diagramme en camembert. Tu peux survoler de ta souris la feuille pour qu'une version textuelle t'indique la même information La couleur du contour détermine la classe majoritaire de cette feuille (texte mis en gras lors du survol de la souris)    <br> Les rectangles arrondis représente les <b>noeuds interne</b> de l'arbre de décision. Ce sont l'ensemble des décisions qui crééront dynamiquement les feuilles de notre arbre de décision. Chaque décision est composé de 3 paramètres : un axe, l'opérateur et la valeur (par exemple <code>x = 12</code> ou <code>y > 42</code>). Pour chaque donnée du modèle d'entrainement, si l'évaluation avec cet axe, opérateur et valeur est vrai, alors cette donnée sera dans la branche de droite, sinon elle sera dans cette de gauche.  <br> <img class="img-fluid mx-auto d-block" src="/static/img/arbre/arbreInteractifLegende.png">
 
                 
             
@@ -227,14 +235,14 @@
     Une fois cliquée, une boite de dialogue vous demandera de choisir une métrique (l'axe <code>x</code> ou l'axe <code>y</code>), un opérateur et la valeur avec laquelle comparé.
     Après confirmation la feuille deviendra un noeud interne et triera automatiquement les données du modèle d'entrainement selon l'axe, opérateur et valeur choisie.
     Ainsi, deux branches seront créés, celle de gauche contenant l'ensemble des données du modèle d'entrainement répondant à l'évaluation, et celle de droite n'y répondant pas.
-</p>
+</p> <img class="img-fluid mx-auto d-block" src="/static/img/arbre/animCreation.gif">
 
                 
                     <h3>Modifier un noeud interne</h3>
                     <p>
-    Pour cela in suffit de cliquer sur un noeud interne existant.
+    Pour cela il te suffit de cliquer sur un noeud interne existant.
     Une boite de dialogue identique à celle d'ajout de noeud apparaitra permettant de modifier les données
-</p>
+</p> <img class="img-fluid mx-auto d-block" src="/static/img/arbre/animModification.gif">
 
                 
                     <h3>Supprimer un noeud interne / Transformer un noeud interne en feuille</h3>
@@ -242,7 +250,7 @@
     Pour cela in suffit de cliquer sur un noeud interne existant.
     Dans la boite de dialogue apparaissant un boutton te permet de supprimer le noeud.<br>
     La supression du noeud interne crééra automatiquement une feuille et détruira tout les enfants du noeud.
-</p>
+</p> <img class="img-fluid mx-auto d-block" src="/static/img/arbre/animSupression.gif">
 
                 
             
