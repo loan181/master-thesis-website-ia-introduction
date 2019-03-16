@@ -26,6 +26,8 @@ function checkAnswer(elem) {
                 let correctKeyWords = curElementAnswer.split(',');
                 let answerReply = curElement.value;
                 answers.push(answerReply);
+                answerReply = answerReply.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+                answerReply = answerReply.toLowerCase();
                 for (let j = 0; j < correctKeyWords.length; j++) {
                     if (answerReply.includes(correctKeyWords[i])) {
                         feedbacks[i] = "correct";
@@ -81,7 +83,9 @@ function checkAnswer(elem) {
         let potentialCorrection = elem.parentNode.parentNode.nextElementSibling;
         if (potentialCorrection.className.includes("onlyTeacher")) {
             potentialCorrection.style.display = "block";
-            // TODO : ajouter une transitions
+            $(potentialCorrection).collapse({
+                toggle: true
+            })
         }
     }
 
