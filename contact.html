@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
-
-
-
 <head>
+    <meta charset="UTF-8">
+    <title>Formulaire de contact</title>
     
 
 <!-- Database -->
@@ -63,11 +62,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
-    <title>Réseau neuronal</title>
 </head>
-
 <body>
-<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary" style="z-index: 1025">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary" style="z-index: 1025">
     <!--<a class="navbar-brand" href="#">Titre</a>-->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -191,72 +188,13 @@
     highlightCorrectNavItem();
 
 </script>
-<div class="jumbotron jumbotron-fluid" style="
-    background: url(/static/img/NN.svg);
-         /*position: fixed;*/
-    width: 100%;
-    height: 550px; /*same height as jumbotron */
-    top: 0;
-    left: 0;
-    z-index: -999;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    background-blend-mode: soft-light;
-    -webkit-background-blend-mode: soft-lightsoft-light;
-    ">
-    
-</div>
-
-<main role="main" class="container">
-    <h1> Réseau neuronal</h1>
-    <hr class="my-4">
-    <p class="lead">Méthode de classification</p>
-    <p>
-        TODO
-
-    </p>
-    <div align="center" >
-        <!--
-        #}-->
-        <div id="algoSelectionCards" class="card-deck">
-
+    <main role="main" class="container">
+        <h1>Formulaire de contact</h1>
+        <p>
+            Si t'as un message à me transmettre c'est par ici que ça se passe :)
+        </p>
+        <div class="embed-responsive embed-responsive-1by1">
+            <iframe class="embed-responsive-item" src="https://docs.google.com/forms/d/e/1FAIpQLSe4Klt5M8DFI3aAgWWHFbYhwzE-Z5VcO6bQDAiNcQsw--WIAw/viewform?embedded=true" width="1000" height="1050" frameborder="0" marginheight="0" marginwidth="0">Chargement en cours...</iframe>
         </div>
-    </div>
-</main>
-
-    <script>
-        var jumboHeight = $('.jumbotron').outerHeight();
-        function parallax(){
-            var scrolled = $(window).scrollTop();
-            $('.jumbotron-bg').css('height', (jumboHeight-scrolled) + 'px');
-        }
-        $(window).scroll(function(e){
-            parallax();
-        });
-
-        let algoIndex = 2;
-        function populateAlgoSelectionCards() {
-            let links = getAllHrefForAlgo(algoIndex);
-            let target = $("#algoSelectionCards");
-            for (let i = 0; i < links.length; i++) {
-                let card = links[i].addClass("card custom-card text-white bg-primary border-light mb-3");
-                let saveText = card.html();
-                card.html(""); // Clear the text
-
-                let cardBody = $("<div>").addClass("card-body");
-                let cardBodyTitle = $("<h5>").addClass("card-title").html(saveText);
-                let cardBodyText = $("<p>").addClass("card-text").html(algoActivityDesc[i]);
-
-                cardBody.append(cardBodyTitle);
-                cardBody.append(cardBodyText);
-                card.append(cardBody);
-                target.append(card);
-            }
-        }
-        populateAlgoSelectionCards();
-    </script>
+    </main>
 </body>
-
-</html>
