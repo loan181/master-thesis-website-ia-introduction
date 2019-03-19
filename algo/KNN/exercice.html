@@ -197,22 +197,11 @@
 
 </script>
 
-<div class="container">
+<main role="main" class="container" style="max-width: 95%">
     <div class="row">
         <!-- sidebar, which will move to the top on a small screen -->
         <div class="col-sm-3" >
-            <nav id="toc" data-toggle="toc" class="sticky-top" style="padding-top:20px">
-
-            </nav>
-            <nav class="d-flex flex-column mt-auto">
-                <ul id="paginationButtons" class="list-group">
-                </ul>
-            </nav>
-
-
-
-
-
+            <nav id="toc" data-toggle="toc" class="sticky-top" style="padding-top:20px"></nav>
         </div>
         <!-- main content area -->
         <div class="col-sm-9">
@@ -411,6 +400,59 @@
     </tbody>
     <caption>Tableau 1 : Différentes mesures (en cm) pour quatre fleurs de chaque variété</caption>
 </table>
+
+                
+                    <h3>Cas pratique</h3>
+                    <div class="card-deck">
+                        
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Simplement faire des prédiction en général.</h5>
+                                    <p class="card-text">Il suffit d'avoir un ensemble de donnée avec certaines caractéristiques pour appliquer l'algorithme. Ainsi on peut l'utiliser dans divers domaines de prédiction
+</p>
+                                    <p class="text-muted">Examples : météo, médecine, évolution économique, pari sportif, ...</p>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Système de recommandation (concept informatique)</h5>
+                                    <p class="card-text">Si on connait les objets qu'aime bien un utilisateur, on peut lui en conseiller d'autre en se basant sur les plus similaires
+</p>
+                                    <p class="text-muted">Examples : Recommandation de produits, vidéos conseillé, publicités ciblé, ...</p>
+                                    
+                                        <a href="https://fr.wikipedia.org/wiki/Syst%C3%A8me_de_recommandation" class="btn btn-info" target="_blank"><i class="fas fa-link"></i></a>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Recherche de concept (concept informatique)</h5>
+                                    <p class="card-text">Si tu recherche des documents qui sont similaires sémantiquement
+</p>
+                                    <p class="text-muted">Examples : différents documents qui contiennent des sujets similaire, trouver des mails sur un certain thème, ...</p>
+                                    
+                                        <a href="https://en.wikipedia.org/wiki/Concept_search" class="btn btn-info" target="_blank"><i class="fas fa-link"></i></a>
+                                    
+                                </div>
+                            </div>
+                        
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Vision par ordinateur (concept informatique)</h5>
+                                    <p class="card-text">Le but est de permettre à une machine d'analyser, traiter et comprendre une ou plusieurs images.
+</p>
+                                    <p class="text-muted">Examples : reconnaissance de visages, ...</p>
+                                    
+                                        <a href="https://fr.wikipedia.org/wiki/Vision_par_ordinateur" class="btn btn-info" target="_blank"><i class="fas fa-link"></i></a>
+                                    
+                                </div>
+                            </div>
+                        
+                    </div>
+                
 
                 <h2>Exercices</h2>
                 
@@ -1209,12 +1251,17 @@
         target.append(paginationButton);
     }
 </script>
+
+                <h2>Bilan</h2>
+                    TODO
+                <h2>Pour aller plus loin</h2>
+                    TODO
             </main>
         </div>
     </div>
 
 
-</div>
+</main>
 
 <script src="/static/js/enlargeImageModal.js"></script>
 <!-- Creates the bootstrap modal where the image will appear -->
