@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="fr">
 <head>
     <title>Exercices Réseau neuronnal</title>
@@ -100,11 +99,13 @@
 <script>
     let algoPrefix = "/algo/";
     let algoActivityDesc = [
-        "Série de petits exercices de préparation pour t'introduire l'idée derrière l'algorithme<br>Leurs corrections est automatisée et te sera proposé si tu te trompe troup souvent sur un même exercice.",
+        "Introduction au concept général de l'algorithme",
+        "Série de petits exercices de préparation pour t'introduire l'idée derrière l'algorithme<br>Leurs corrections est automatisée.",
         "Phase expliquant le fonctionement et objectifs de l'activité.<br>Cette phase est nécessaire pour comprendre la suivante",
         "Activité intéractive de l'algorithme. Les activités dépendent des algorithmes eux-mêmes."
     ];
     let algoActivityIcon = [
+        "<i class=\"far fa-lightbulb\"></i>",
         "<i class=\"fas fa-dumbbell\"></i>",
         "<i class=\"far fa-question-circle\"></i>",
         "<i class=\"fas fa-flag-checkered\"></i>"
@@ -131,7 +132,7 @@
 
             let sections = getAllHrefForAlgo(i);
             for (let j = 0; j < sections.length; j++) {
-                if (j === 1) {
+                if (j === 2) {
                     dropdown.append($('<div>').addClass("dropdown-divider"));
                 }
                 sections[j].addClass("dropdown-item");
@@ -162,15 +163,15 @@
 
     function getAllHrefForAlgo(algoConfingIndex) {
         let ret = [];
-        let pagesDefaultName = ["Exercices préparatoires", "Consignes et utilisation pour l'activité", "Activité"];
-        let pagesDefaultHref = ["exercice", "activite-aide", "activite"];
+        let pagesDefaultName = ["Introduction", "Exercices préparatoires", "Consignes et utilisation pour l'activité", "Activité"];
+        let pagesDefaultHref = ["intro", "exercice", "activite-aide", "activite"];
 
         for (let i = 0; i < pagesDefaultName.length; i++) {
             let link = $('<a>');
             link.attr('href', algoPrefix + algoHRef[algoConfingIndex] + "/" + pagesDefaultHref[i]);
 
             let linkText = pagesDefaultName[i];
-            if (i === 2) {
+            if (i === 3) {
                 linkText += ` (${algoActivityName[algoConfingIndex]})`;
             }
             link.html(algoActivityIcon[i] + " " + linkText);
@@ -200,39 +201,18 @@
 <main role="main" class="container" style="max-width: 95%">
     <div class="row">
         <!-- sidebar, which will move to the top on a small screen -->
-        <div class="col-sm-3" >
-            <nav id="toc" data-toggle="toc" class="sticky-top" style="padding-top:20px"></nav>
+        <div class="col-sm-3">
+            <div class="sticky-top" style="padding-top:64px">
+                <nav id="toc" data-toggle="toc" ></nav>
+            </div>
         </div>
+
         <!-- main content area -->
         <div class="col-sm-9">
             <main role="main" class="container">
                 <h1>Exercices Réseau neuronnal</h1>
 
-                <h2>Introduction</h2>
-                <p>
-Un réseau neuronal est un système inspiré par le fonctionnement des neurones biologiques.
-</p>
-<p>
-    Un tel réseau est capable d'apprendre par l'expérience. Ils sont donc ainsi capable de faire de la classification et de la généralisation.
-</p>
-<p>
-    Il existe de nombreux modèles de réseau neuronal, l'idée générale est : une sucession de couche composés de <b>neurones</b> dont chacune prends ses entrées sur les sorties de la précédente.<br>
-    On appellera <b>poids</b> ces connections entre chaque couche.<br>
-    La première couche est appellée la <i>couche d'entrée</i> et la dernière la <i>couche de sortie</i>, les autres sont des <i>couches cachées</i>.
-    <img class="img-fluid mx-auto d-block" src="https://www.researchgate.net/profile/Larbi_Houichi/publication/262451664/figure/fig2/AS:296678314790914@1447745030713/Diagramme-schematique-du-reseau-de-neurone-MLP.png">
-</p>
-<p>
-    Un réseau neuronal est aussi un modèle mathématique/statistique, chaque neuronne et poids ont une certaine valeur.<br>
-    Dans notre cas, la valeur des poids est toujours connue et te sera donnée.
-    Celle des neurones devra être calculée en fonction des neuronnes et poids de la couche précédentes, excepté celles en entrées qui te seront donnés.<br>
-    La valeur obtenu par les neurones de la couche de sortie nous permettront de tirer des conclusions de notre entrée.
-</p>
-<p>
-    Par exemple : en entrée on reçoit une image de chien, cette image sera décomposé pour être traité par le neuronne, les calculs des neuronnes se font couche après couche pour enfin terminer dans la sortie.
-    A partir de la valeur de sortie on peut en tirer des conclusions.
-</p>
-<img class="img-fluid mx-auto d-block" src="https://cdn-images-1.medium.com/max/2560/1*36MELEhgZsPFuzlZvObnxA.gif">
-<hr class="my-4">
+<h2>Contexte</h2>
 <p>
     Tout au long des exercices qui vont suivre, on va utiliser le même réseau neuronal.<br>
     Ce réseau a été entrainé pour reconnaitre une ligne verticale d'une ligne horizontale dans une image en noir et blanc de 3x3 pixels.
@@ -256,11 +236,9 @@ Un réseau neuronal est un système inspiré par le fonctionnement des neurones 
 </p>
 
 
-                
+<h2>Exercices</h2>
 
-                <h2>Exercices</h2>
-                
-                    
+    
 <div data-ex="exercice">
     
         <h3 data-ex="title">Valeur des neurones de la première couche</h3>
@@ -377,8 +355,8 @@ Un réseau neuronal est un système inspiré par le fonctionnement des neurones 
 </div>
     
 </div>
-                
-                    
+
+    
 <div data-ex="exercice">
     
         <h3 data-ex="title">Produit matriciel</h3>
@@ -462,8 +440,8 @@ Un réseau neuronal est un système inspiré par le fonctionnement des neurones 
 </div>
     
 </div>
-                
-                    
+
+    
 <div data-ex="exercice">
     
         <h3 data-ex="title">Calcul de la valeur d'un neurone d'une couche autre que la première</h3>
@@ -536,8 +514,8 @@ Un réseau neuronal est un système inspiré par le fonctionnement des neurones 
 </div>
     
 </div>
-                
-                    
+
+    
 <div data-ex="exercice">
     
 
@@ -669,8 +647,8 @@ Un réseau neuronal est un système inspiré par le fonctionnement des neurones 
 </div>
     
 </div>
-                
-                    
+
+    
 <div data-ex="exercice">
     
 
@@ -762,8 +740,8 @@ Un réseau neuronal est un système inspiré par le fonctionnement des neurones 
 </div>
     
 </div>
-                
-                    
+
+    
 <div data-ex="exercice">
     
         <h3 data-ex="title">Tirer des conclusions de nos résultats</h3>
@@ -826,8 +804,8 @@ Un réseau neuronal est un système inspiré par le fonctionnement des neurones 
 
     
 </div>
-                
-                    
+
+    
 <div data-ex="exercice">
     
 
@@ -876,8 +854,8 @@ Un réseau neuronal est un système inspiré par le fonctionnement des neurones 
 
     
 </div>
-                
-                    
+
+    
 <div data-ex="exercice">
     
 
@@ -926,8 +904,8 @@ Un réseau neuronal est un système inspiré par le fonctionnement des neurones 
 
     
 </div>
-                
-                    
+
+    
 <div data-ex="exercice">
     
         <h3 data-ex="title">Transformer nos données avec une fonction d'activation</h3>
@@ -1011,8 +989,8 @@ Un réseau neuronal est un système inspiré par le fonctionnement des neurones 
 
     
 </div>
-                
-                    
+
+    
 <div data-ex="exercice">
     
 
@@ -1073,8 +1051,8 @@ Un réseau neuronal est un système inspiré par le fonctionnement des neurones 
 
     
 </div>
-                
-                    
+
+    
 <div data-ex="exercice">
     
 
@@ -1124,41 +1102,41 @@ Un réseau neuronal est un système inspiré par le fonctionnement des neurones 
 
     
 </div>
-                
 
-                <nav>
-    <ul id="buttonsPagination" class="pagination justify-content-center">
+
+<h2>Bilan</h2>
+    TODO
+
+            </main>
+            <nav>
+    <ul id="buttonsPagination" class="pagination justify-content-center" style="padding: 16px">
     </ul>
 </nav>
 <script>
     let splitedPathName = window.location.pathname.split("/");
     let hrefs = getAllHrefForAlgo(algoHRef.indexOf(splitedPathName[splitedPathName.length-2]));
     let target = $('#buttonsPagination');
+    let nextShouldBeHighlight = false;
     for (let i = 0; i < hrefs.length; i++) {
         let paginationButton = $("<li>").addClass("page-item");
         let link = hrefs[i];
         link.addClass("page-link");
 
         if (link.attr('href') === window.location.pathname) {
+            nextShouldBeHighlight = true;
+            paginationButton.addClass("disabled");
+        } else if (nextShouldBeHighlight) {
+            nextShouldBeHighlight = false;
             paginationButton.addClass("active");
-            link.addClass("isDisabled");
-            link.css("opacity", 1);
         }
 
         paginationButton.append(link);
         target.append(paginationButton);
     }
 </script>
-
-                <h2>Bilan</h2>
-                    TODO
-                <h2>Pour aller plus loin</h2>
-                    TODO
-            </main>
         </div>
+
     </div>
-
-
 </main>
 
 <script src="/static/js/enlargeImageModal.js"></script>

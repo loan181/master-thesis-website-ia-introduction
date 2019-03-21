@@ -1,8 +1,6 @@
-<!DOCTYPE html>
 <html lang="fr">
-
 <head>
-    <title>Création intéractive d'un arbre de décision</title>
+    
     
 
 <!-- Database -->
@@ -67,7 +65,10 @@
 <!-- add after bootstrap.min.js -->
 <script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.js"></script>
     <script src="/static/js/contentForTeacher.js"></script>
+    <script src="/static/js/automaticCorrection.js"></script>
+
 </head>
+
 
 <body data-spy="scroll" data-target="#toc">
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary" style="z-index: 1025">
@@ -196,155 +197,76 @@
     highlightCorrectNavItem();
 
 </script>
+
 <main role="main" class="container" style="max-width: 95%">
     <div class="row">
         <!-- sidebar, which will move to the top on a small screen -->
         <div class="col-sm-3">
-            <nav id="toc" data-toggle="toc" class="sticky-top" style="padding-top:20px"></nav>
+            <div class="sticky-top" style="padding-top:64px">
+                <nav id="toc" data-toggle="toc" ></nav>
+            </div>
         </div>
+
         <!-- main content area -->
         <div class="col-sm-9">
-            <h1>Création intéractive d'un arbre de décision</h1>
+            <main role="main" class="container">
+                <h1>Introduction</h1>
 
-            
+    <h2>Catégorie d'algorithme</h2>
+        <p>
+            <b>Classification : </b><span id="kindExplanation"></span><br>
+        </p>
 
-            <p>
-    Maintenant que vous avons une bonne idée du fonctionnement d'un arbre de décision, nous allons en créer de manière dynamique !
-</p>
 
-            
-                <img src="/static/img/arbre/pagePreview.PNG" class="img-fluid center">
-            
-
-            <h2>Structure de la page</h2>
-            
-                <h3>Barre d'outil</h3>
-                <p>
-                    Dans la partie supérieure de l’écran tu as différents boutons te permettant de réaliser certaines actions que nous allons détailler ici.
-                </p>
-                <div id="toolboxExplanation"></div>
-                <script src="/static/js/shared/ToolBox.js"></script>
-                <script>
-                    let TB = new ToolBox();
-                    let explanations = [];
-                    
-                        explanations.push("Réinitialiser l'arbre à zéro en effacant tout les noeuds existant.");
-                    
-                        explanations.push("Sauvegarder/télécharger ton projet sur ton ordinateur");
-                    
-                        explanations.push("Ouvrir un projet précédemment sauvegardé.<br>L'arbre ainsi que tes pramètres d'axes seront rétablis");
-                    
-                        explanations.push("Tester le classifieur sur l'arbre de décision courant.<br>Cela te permettra de réussir ton objectif !");
-                    
-                    TB.drawExplanation("decision-tree", "toolboxExplanation", explanations);
-                </script>
-            
-
-            
-                <h3>Données et Paramètres</h3>
-                La partie de gauche te permet d'observer les données ainsi que de modifier les paramètres de l'arbre.
-
-                    <ul class="list-unstyled">
-                        
-                        <li class="media">
-                            <img src="/static/img/arbre/graph.PNG" class="mr-3 img-fluid" >
-                            <div class="media-body">
-                                <h4 class="mt-0 mb-1">Panneau Graphe et Données</h4>
-                                Te permet de consulter et visualiser les données du training set. Chaque point du graphe correspond à une fleur du training set. Sa forme et couleur définit sa classe comme légendé en dessous du graphe.<br> Tu peux survoler avec ta souris un point pour obtenir des informations le concernant.<br> Les informations montrer peuvent varier en fonction des actions que tu effectus avec l'arbre intéractif.<br>
-
-                            </div>
-                        </li>
-                        
-                        <li class="media">
-                            <img src="/static/img/arbre/axisParameters.PNG" class="mr-3 img-fluid" >
-                            <div class="media-body">
-                                <h4 class="mt-0 mb-1">Panneau paramètres</h4>
-                                Te permet de modifier le choix des axes <code>x</code> et <code>y</code> parmi les différentes métriques.
-
-                            </div>
-                        </li>
-                        
-                    </ul>
-            
-
-            
-                <h3>Arbre intéractif</h3>
-                <p>
-                    La partie de droite est l'emplacement ou tu pourra créer et modifier ton arbre de décision.
-                </p>
-
-                
-                    <div class="text-center">
-    <img src="/static/img/arbre/exempleInteractifSchema.png" class="img-fluid rounded">
-    <img src="/static/img/arbre/arbreInreactifEx.png" class="img-fluid rounded">
-    <small class="text-muted"><br>
-        Deux représentation du même arbre de décision.
-        A gauche la version utilisée dans les exercices préparatoires.
-        A droite celle utilisée dans l'outil intéractif.
-    </small>
-</div> <br> L'ensemble des fonctionnalités disponibles se feront majoritairement à l'aide de cette interface. Ainsi tu sera capable de faire diverses actions tels qu'ajouter, modifier les noeuds de ton arbre, consulter l'arbre et modifier la visualisation du graphique.<br> Le schéma représente l'arbre de décision correspondant au données d'un modèle d'entrainement d'Iris.<br> <br> Les cercles représente les <b>feuilles</b> de l'arbre de décision. La coloration symbolise le pourcentage de chaque classe du modèle, c'est comme un diagramme en camembert. Tu peux survoler de ta souris la feuille pour qu'une version textuelle t'indique la même information La couleur du contour détermine la classe majoritaire de cette feuille (texte mis en gras lors du survol de la souris)    <br> Les rectangles arrondis représente les <b>noeuds interne</b> de l'arbre de décision. Ce sont l'ensemble des décisions qui crééront dynamiquement les feuilles de notre arbre de décision. Chaque décision est composé de 3 paramètres : un axe, l'opérateur et la valeur (par exemple <code>x = 12</code> ou <code>y > 42</code>). Pour chaque donnée du modèle d'entrainement, si l'évaluation avec cet axe, opérateur et valeur est vrai, alors cette donnée sera dans la branche de droite, sinon elle sera dans cette de gauche.  <br> <img class="img-fluid mx-auto d-block" src="/static/img/arbre/arbreInteractifLegende.png">
-
-                
-            
-
-            
-            <h2>Exemples</h2>
-                
-                    <h3>Ajouter un nouveau noeud interne / Créer deux nouvelles feuilles</h3>
-                    <p>
-    Pour ajouter un nouveau noeud interne à l'arbre, il suffit de cliquer sur une des feuilles existantes de l'arbre.
-    Elles sont indiquées par un cercle avec un "+" noir à l'intérieur.<br>
-    Une fois cliquée, une boite de dialogue vous demandera de choisir une métrique (l'axe <code>x</code> ou l'axe <code>y</code>), un opérateur et la valeur avec laquelle comparé.
-    Après confirmation la feuille deviendra un noeud interne et triera automatiquement les données du modèle d'entrainement selon l'axe, opérateur et valeur choisie.
-    Ainsi, deux branches seront créés, celle de gauche contenant l'ensemble des données du modèle d'entrainement répondant à l'évaluation, et celle de droite n'y répondant pas.
-</p> <img class="img-fluid mx-auto d-block" src="/static/img/arbre/animCreation.gif">
-
-                
-                    <h3>Modifier un noeud interne</h3>
-                    <p>
-    Pour cela il te suffit de cliquer sur un noeud interne existant.
-    Une boite de dialogue identique à celle d'ajout de noeud apparaitra permettant de modifier les données
-</p> <img class="img-fluid mx-auto d-block" src="/static/img/arbre/animModification.gif">
-
-                
-                    <h3>Supprimer un noeud interne / Transformer un noeud interne en feuille</h3>
-                    <p>
-    Pour cela in suffit de cliquer sur un noeud interne existant.
-    Dans la boite de dialogue apparaissant un boutton te permet de supprimer le noeud.<br>
-    La supression du noeud interne crééra automatiquement une feuille et détruira tout les enfants du noeud.
-</p> <img class="img-fluid mx-auto d-block" src="/static/img/arbre/animSupression.gif">
-
-                
-                    <h3>Visualiser les données</h3>
-                    <p>
-    Afin d'éviter de surcharger l'interface, les données n'apparaissent que lorsque tu survole de la souris des éléments spécifiques.
-</p> <p>
-    Lors du survol d'une feuille, un texte apparait en dessous avec les proportions de chaque classe ainsi que la classe majoritaire indiquée en gras.<br>
-    <img class="img-fluid mx-auto d-block" src="/static/img/arbre/exampleHoverLeaf.PNG">
-    Si la feuille ne contient aucune fleur, le texte <i>(vide)</i> sera indiqué.<br>
-    <img class="img-fluid mx-auto d-block" src="/static/img/arbre/exampleHoverLeafEmpty.PNG">
-
-    Tu remarquera que le graphique se met également à jour en focalisant en jaune les fleurs concernées.<br>
+    <h2>Principe</h2>
+        <p>
+    Un réseau neuronal est un système inspiré par le fonctionnement des neurones biologiques.
 </p>
 <p>
-    Les noeuds internes modifies également le graphique lors du survol de la souris, indiquant les fleurs concernées par l'évaluation du noeud.<br>
-    Toutes les fleurs qui sont sur fond rouge sont les fleurs qui ne répondent pas à l'évaluation, au contraire, celles sur fond vert sont celles qui y répondent.
-    Il y aura également une ligne qui sera déssiné qui délimite la frontière avec la valeur du noeud, le code couleur est le même que celui des zones.
+    Un tel réseau est capable d'apprendre par l'expérience. Ils sont donc ainsi capable de faire de la classification et de la généralisation.
 </p>
-<div>
-    Voici le graphique pour l'évaluation du noeud interne <code>largeur sépale &ge; 6</code>
-    <img class="img-fluid mx-auto d-block" src="/static/img/arbre/exampleHoverEvaluation.PNG">
-    <small class="text-muted"><br>
-        Toutes les fleurs qui ont une largeur se sépale <code> < 6 </code>(ne répondant pas à l'évaluation) sont dans la zone rouge à gauche de la ligne.<br>
-        Les fleurs répondant à l'évaluation (donc qui ont une <code>largeur sépale &ge; 6 </code>) sont bien dans la zone verte à droite de la ligne.<br>
-        Comme l'opération est inclusif (&ge; et non >) la ligne est verte)
-    </small>
-</div>
+<p>
+    Il existe de nombreux modèles de réseau neuronal, l'idée générale est : une sucession de couche composés de <b>neurones</b> dont chacune prends ses entrées sur les sorties de la précédente.<br>
+    On appellera <b>poids</b> ces connections entre chaque couche.<br>
+    La première couche est appellée la <i>couche d'entrée</i> et la dernière la <i>couche de sortie</i>, les autres sont des <i>couches cachées</i>.
+    <img class="img-fluid mx-auto d-block" src="https://www.researchgate.net/profile/Larbi_Houichi/publication/262451664/figure/fig2/AS:296678314790914@1447745030713/Diagramme-schematique-du-reseau-de-neurone-MLP.png">
+</p>
+<p>
+    Un réseau neuronal est aussi un modèle mathématique/statistique, chaque neuronne et poids ont une certaine valeur.<br>
+    Dans notre cas, la valeur des poids est toujours connue et te sera donnée.
+    Celle des neurones devra être calculée en fonction des neuronnes et poids de la couche précédentes, excepté celles en entrées qui te seront donnés.<br>
+    La valeur obtenu par les neurones de la couche de sortie nous permettront de tirer des conclusions de notre entrée.
+</p>
+<p>
+    Par exemple : en entrée on reçoit une image de chien, cette image sera décomposé pour être traité par le neuronne, les calculs des neuronnes se font couche après couche pour enfin terminer dans la sortie.
+    A partir de la valeur de sortie on peut en tirer des conclusions.
+</p>
+<img class="img-fluid mx-auto d-block" src="https://cdn-images-1.medium.com/max/2560/1*36MELEhgZsPFuzlZvObnxA.gif">
 
-                
-            
+    
 
-            
+<script>
+    let categoryKind = "Classification";
+    let defaultText = "(Aucune information concernant cette catégorie)";
+    let categoryText = defaultText;
+    switch (categoryKind) {
+        case "Classification":
+            categoryText = "Consiste à identifier dans quelle classe/catégorie une donnée appartient.";
+            // RecurrentCards
+            $("#useCases").prepend(`
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Simplement faire des prédiction en général</h5>
+                        <p class="card-text">Il suffit d'avoir un ensemble de donnée avec certaines caractéristiques pour appliquer l'algorithme. Ainsi on peut l'utiliser dans divers domaines de prédiction</p>
+                        <p class="text-muted">Exemples : météo, médecine, évolution économique, pari sportif, ...</p>
+                    </div>
+                </div>
+            `);
+            break;
+    }
+    $("#kindExplanation").text(categoryText);
+</script>
+            </main>
             <nav>
     <ul id="buttonsPagination" class="pagination justify-content-center" style="padding: 16px">
     </ul>
@@ -372,6 +294,7 @@
     }
 </script>
         </div>
+
     </div>
 </main>
 
@@ -394,6 +317,6 @@
 </div>
 
 
-
+<script src="/static/js/enlargeImageModal.js"></script>
 </body>
 </html>

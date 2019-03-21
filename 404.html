@@ -1,9 +1,6 @@
-<!DOCTYPE html>
 <html lang="fr">
-
 <head>
-    <meta charset="UTF-8">
-    <title>Arbre de Décision intéractif</title>
+    
     
 
 <!-- Database -->
@@ -63,33 +60,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
-
-    
-        <!-- Plotlyjs -->
-        <script type="text/javascript" src="/static/js/shared/plotlyjs-bundle.js"></script>
-        <script type="text/javascript" src="/static/js/shared/figure.js"></script>
-        <script type="text/javascript" src="/static/js/shared/plotInteraction.js"></script>
-        <script type="text/javascript" src="customJS/plotInteraction.js"></script>
-        <script src="https://cdn.plot.ly/plotly-locale-fr-latest.js"></script>
-    
-
-    
-        <!-- Raphael -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"> </script>
-    
-
-    <!-- Custom Extra scripts -->
-    
-        <script type="text/javascript" src="/static/js/shared/iris.js"></script>
-    
-        <script type="text/javascript" src="/static/js/shared/GraphFunctions.js"></script>
-    
-
-    <!-- Success Message -->
-    <link rel="stylesheet" href="/static/css/animationSuccess.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.1/TweenMax.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
 </head>
+
 
 <body>
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary" style="z-index: 1025">
@@ -218,159 +190,40 @@
     highlightCorrectNavItem();
 
 </script>
+
 <main role="main" class="container" style="max-width: 95%">
-    <h1>Arbre de Décision intéractif</h1>
+    <div style="text-align: center">
+    <h1 class="lead" style="font-size: 120"> Oopsie Woopsie !</h1>
+    <h1 class="lead" style="font-size: 80"> Erreur 404<br>Page introuvable </h1>
+    <i class="far fa-frown" style="font-size: 80; padding: 32;color: orange"></i><br>
 
-    <!-- Toolbox -->
-    <div id="toolBox"></div>
-    <script src="/static/js/shared/ToolBox.js"></script>
-    <script>
-        let TB = new ToolBox("toolBox");
-        TB.setToolBarForExercice("decision-tree");
-        TB.draw();
-    </script>
-
-    <!-- Progress bar of prediction -->
-    <div class="mt-2 col-md-12" >
-        <h6 style="float: left; margin-right: 1em;"> Précision actuelle : </h6>
-        <div id="progressBar"></div>
-    </div>
-    <script src="/static/js/successBar.js"></script>
-    <script>
-        let pb = new ProgressBar("progressBar");
-        function exerciceSuccess() {
-            $('#exerciceSuccess').modal('toggle');
-            fancyPopIn();
-        }
-    </script>
-
-    <!-- Main content of the activity -->
-    <div class="row mt-2 col-md-12">
-    <!-- Graphe, tableau dynamique, etc -->
-    <div class="col-sm-4">
-        <div id="graphContainer" class="container plotly-graph-div">
-        </div>
-        <div class="form-group row">
-            <label for="axisXChoice" class="col-sm-3 col-form-label">Axe x :</label>
-            <select class="form-control col-sm-9" id="axisXChoice">
-                <script>
-                    for (let i = 0; i < categories.length; i++) {
-                        var newOpt = document.createElement("option");
-                        if (i === 0) {
-                            newOpt.selected="selected";
-                        }
-                        newOpt.value = categories[i];
-                        newOpt.innerHTML = categoriesFR[i];
-                        $('#axisXChoice').append(newOpt); // TODO : refactor
-                    }
-                </script>
-            </select>
-        </div>
-
-        <div class="form-group row">
-            <label for="axisYChoice" class="col-sm-3 col-form-label">Axe y :</label>
-            <select class="form-control col-sm-9" id="axisYChoice">
-                <script>
-                    for (let i = 0; i < categories.length; i++) {
-                        var newOpt = document.createElement("option");
-                        if (i === 1) {
-                            newOpt.selected="selected";
-                        }
-                        newOpt.value = categories[i];
-                        newOpt.innerHTML = categoriesFR[i];
-                        $('#axisYChoice').append(newOpt); // TODO : refactor
-                    }
-                </script>
-            </select>
-        </div>
-    </div>
-
-    <!-- Visualisation graphique -->
-    <div id="treeContainer" class="col-sm-8">
-    </div>
-</div>
-</main>
-
-<!-- Modal asking inputs for nodes -->
-<div class="modal fade" id="askParameters" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalParametersTitle"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="input-group">
-                    <select class="form-control" id="axisChoice">
-                        <option id="axisXName" value="x">x</option>
-                        <option id="axisYName" value="y">y</option>
-                    </select>
-                    <select class="form-control" id="operationChoice" >
-                        <option value=1>=</option>
-                        <option value=2>&ne;</option>
-                        <option value=3>&gt;</option>
-                        <option value=4>&ge;</option>
-                        <option value=5>&lt;</option>
-                        <option value=6>&le;</option>
-                    </select>
-                    <input type="number" id="valueChoice" class="form-control" value="0" step="0.2">
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-warning" id="deleteButton" data-dismiss="modal" onclick="BT.deleteNode()">Supprimer</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="BT.parseAskParametersValues()">Sauver</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-            </div>
-        </div>
-    </div>
+    <a role="button" class="btn btn-primary btn-lg" href="/">Retour à l'accueil</a>
 </div>
 
-
-
-<script src="customJS/BinaryTree.js"></script>
-<script src="/static/js/shared/plot.js"></script>
 <script>
-    let treeContainer = document.getElementById("treeContainer");
-
-    function resizeTreeCanva() {
-        let containerWidth = treeContainer.offsetWidth;
-        let containerHeight = treeContainer.offsetHeight;
-        canvaSizeChange(containerWidth, containerHeight);
-    }
-
-    $(window).ready(function () {
-        resizeTreeCanva();
-    });
-    $(window).resize(function() {
-        resizeTreeCanva();
-    });
-
-    // Update modal text
-    function afterXChange() {
-        $('#axisXName').text(frenchTranslationCat(currentXCat));
-        BT.reset();
-    }
-
-    function afterYChange() {
-        $('#axisYName').text(frenchTranslationCat(currentYCat));
-        BT.reset();
-    }
-    afterXChange();
-    afterYChange();
+    $("body").css("background-color", "gray");
 </script>
 </main>
 
-<!-- Success Animation when activity is succeded -->
-<div class="modal" id="exerciceSuccess" tabindex="-1" role="dialog" aria-labelledby="exerciceSuccessLabel" aria-hidden="true" style="background-color: rgba(0,250,255,0.5);">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div id="congrats">
-            <h1 id="sucessMessage">Bravo !</h1>
+<script src="/static/js/enlargeImageModal.js"></script>
+<!-- Creates the bootstrap modal where the image will appear -->
+<div class="modal fade bd-example-modal-xl" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" target="_blank" id="imagepreviewLink"> <i class="fas fa-external-link-alt"></i></a>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="mx-auto" align="center">
+                    <img src="" class="imagepreview" data-dismiss="modal" style="max-width: 100%; height:auto">
+                </div>
+            </div>
         </div>
     </div>
 </div>
-<script src="/static/js/animationSuccess.js"></script>
 
+
+<script src="/static/js/enlargeImageModal.js"></script>
 </body>
 </html>
