@@ -203,7 +203,14 @@
         <!-- sidebar, which will move to the top on a small screen -->
         <div class="col-sm-3">
             <div class="sticky-top" style="padding-top:64px">
-                <nav id="toc" data-toggle="toc" ></nav>
+                <nav id="toc" data-toggle="toc" style="padding-bottom: 32px" ></nav>
+                <div id="pinnableArea" class="card" style="overflow: auto;max-height: 400px">
+                    <div class="text-muted" style="text-align: center">
+                        Utilise le bouton avec l'icone <br>
+                        <i style="font-size: 24px" class="fas fa-thumbtack"></i> <br>
+                        pour épingler des éléments ici
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -318,5 +325,45 @@
 
 
 <script src="/static/js/enlargeImageModal.js"></script>
+<script>
+
+    function pinElementTransformation(elem) {
+        elem.find("table").addClass("table-sm"); // Reduce table size
+        elem.each(function () {
+            this.removeAttribute('id');
+        })
+    }
+
+    function pin(elem) {
+        let target = $('#pinnableArea');
+        target.empty();
+
+        let elementToCopy;
+        elementToCopy = $(elem).clone(); // Convert to jQueryobject
+        pinElementTransformation(elementToCopy);
+        target.html(elementToCopy);
+    }
+
+    // Pinable area check
+    let pinnableElements = $(".pinnable");
+    if (pinnableElements.length === 0) { // If there is nothing to pin, delete the area
+        $("#pinnableArea").remove();
+    }
+    else {
+        /*
+        <div class="float-right">
+            <button type="button" onclick="pin(this.parentElement.nextElementSibling)" class="btn btn-info"><i class="fas fa-thumbtack"></i></button>
+        </div>
+        */
+        pinnableElements.each(function() {
+            let pinDiv = $("<div>").addClass("float-right");
+            let pinButton = $("<button><i class='fas fa-thumbtack'></i></button>")
+                .addClass("btn btn-info");
+            pinDiv.append(pinButton);
+            pinButton.click(() => {pin(this)}); // Pin the object itself, not the pin button
+            pinDiv.insertBefore(this);
+        });
+    }
+</script>
 </body>
 </html>

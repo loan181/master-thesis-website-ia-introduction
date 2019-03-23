@@ -203,7 +203,14 @@
         <!-- sidebar, which will move to the top on a small screen -->
         <div class="col-sm-3">
             <div class="sticky-top" style="padding-top:64px">
-                <nav id="toc" data-toggle="toc" ></nav>
+                <nav id="toc" data-toggle="toc" style="padding-bottom: 32px" ></nav>
+                <div id="pinnableArea" class="card" style="overflow: auto;max-height: 400px">
+                    <div class="text-muted" style="text-align: center">
+                        Utilise le bouton avec l'icone <br>
+                        <i style="font-size: 24px" class="fas fa-thumbtack"></i> <br>
+                        pour épingler des éléments ici
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -255,155 +262,157 @@
     <br>Après avoir prélevé et analysé les échantillons au labo voici les résultats obtenus :
 </p>
 
-<table class="table table-hover" id="table1">
-    <thead>
-    <tr>
-        <th scope="col">Iris</th>
-        <th scope="col">Classe</th>
-        <th scope="col">Longueur Sépale</th>
-        <th scope="col">Largeur Sépale</th>
-        <th scope="col">Longueur Pétale</th>
-        <th scope="col">Largeur Pétale</th>
-    </tr>
-    </thead>
-    <tbody>
-    
-    
-
-        
-        <tr class="table-primary">
-            <th scope="row"> 1</th>
-            <td>Iris-setosa</td>
-            <td>4.6</td>
-            <td>3.6</td>
-            <td>1.0</td>
-            <td>0.2</td>
+<div id="table1" style="overflow: auto" class="pinnable">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Iris</th>
+            <th scope="col">Classe</th>
+            <th scope="col">Longueur Sépale</th>
+            <th scope="col">Largeur Sépale</th>
+            <th scope="col">Longueur Pétale</th>
+            <th scope="col">Largeur Pétale</th>
         </tr>
-    
-
+        </thead>
+        <tbody>
         
-        <tr class="table-primary">
-            <th scope="row"> 2</th>
-            <td>Iris-setosa</td>
-            <td>4.3</td>
-            <td>3.0</td>
-            <td>1.1</td>
-            <td>0.1</td>
-        </tr>
-    
-
         
-        <tr class="table-primary">
-            <th scope="row"> 3</th>
-            <td>Iris-setosa</td>
-            <td>5.0</td>
-            <td>3.2</td>
-            <td>1.2</td>
-            <td>0.2</td>
-        </tr>
-    
 
+            
+            <tr class="table-primary">
+                <th scope="row"> 1</th>
+                <td>Iris-setosa</td>
+                <td>4.6</td>
+                <td>3.6</td>
+                <td>1.0</td>
+                <td>0.2</td>
+            </tr>
         
-        <tr class="table-primary">
-            <th scope="row"> 4</th>
-            <td>Iris-setosa</td>
-            <td>5.8</td>
-            <td>4.0</td>
-            <td>1.2</td>
-            <td>0.2</td>
-        </tr>
-    
 
+            
+            <tr class="table-primary">
+                <th scope="row"> 2</th>
+                <td>Iris-setosa</td>
+                <td>4.3</td>
+                <td>3.0</td>
+                <td>1.1</td>
+                <td>0.1</td>
+            </tr>
         
-        <tr class="table-danger">
-            <th scope="row"> 5</th>
-            <td>Iris-versicolor</td>
-            <td>5.1</td>
-            <td>2.5</td>
-            <td>3.0</td>
-            <td>1.1</td>
-        </tr>
-    
 
+            
+            <tr class="table-primary">
+                <th scope="row"> 3</th>
+                <td>Iris-setosa</td>
+                <td>5.0</td>
+                <td>3.2</td>
+                <td>1.2</td>
+                <td>0.2</td>
+            </tr>
         
-        <tr class="table-danger">
-            <th scope="row"> 6</th>
-            <td>Iris-versicolor</td>
-            <td>5.0</td>
-            <td>2.3</td>
-            <td>3.3</td>
-            <td>1.0</td>
-        </tr>
-    
 
+            
+            <tr class="table-primary">
+                <th scope="row"> 4</th>
+                <td>Iris-setosa</td>
+                <td>5.8</td>
+                <td>4.0</td>
+                <td>1.2</td>
+                <td>0.2</td>
+            </tr>
         
-        <tr class="table-danger">
-            <th scope="row"> 7</th>
-            <td>Iris-versicolor</td>
-            <td>4.9</td>
-            <td>2.4</td>
-            <td>3.3</td>
-            <td>1.0</td>
-        </tr>
-    
 
+            
+            <tr class="table-danger">
+                <th scope="row"> 5</th>
+                <td>Iris-versicolor</td>
+                <td>5.1</td>
+                <td>2.5</td>
+                <td>3.0</td>
+                <td>1.1</td>
+            </tr>
         
-        <tr class="table-danger">
-            <th scope="row"> 8</th>
-            <td>Iris-versicolor</td>
-            <td>5.0</td>
-            <td>2.0</td>
-            <td>3.5</td>
-            <td>1.0</td>
-        </tr>
-    
 
+            
+            <tr class="table-danger">
+                <th scope="row"> 6</th>
+                <td>Iris-versicolor</td>
+                <td>5.0</td>
+                <td>2.3</td>
+                <td>3.3</td>
+                <td>1.0</td>
+            </tr>
         
-        <tr class="table-success">
-            <th scope="row"> 9</th>
-            <td>Iris-virginica</td>
-            <td>4.9</td>
-            <td>2.5</td>
-            <td>4.5</td>
-            <td>1.7</td>
-        </tr>
-    
 
+            
+            <tr class="table-danger">
+                <th scope="row"> 7</th>
+                <td>Iris-versicolor</td>
+                <td>4.9</td>
+                <td>2.4</td>
+                <td>3.3</td>
+                <td>1.0</td>
+            </tr>
         
-        <tr class="table-success">
-            <th scope="row"> 10</th>
-            <td>Iris-virginica</td>
-            <td>6.2</td>
-            <td>2.8</td>
-            <td>4.8</td>
-            <td>1.8</td>
-        </tr>
-    
 
+            
+            <tr class="table-danger">
+                <th scope="row"> 8</th>
+                <td>Iris-versicolor</td>
+                <td>5.0</td>
+                <td>2.0</td>
+                <td>3.5</td>
+                <td>1.0</td>
+            </tr>
         
-        <tr class="table-success">
-            <th scope="row"> 11</th>
-            <td>Iris-virginica</td>
-            <td>6.0</td>
-            <td>3.0</td>
-            <td>4.8</td>
-            <td>1.8</td>
-        </tr>
-    
 
+            
+            <tr class="table-success">
+                <th scope="row"> 9</th>
+                <td>Iris-virginica</td>
+                <td>4.9</td>
+                <td>2.5</td>
+                <td>4.5</td>
+                <td>1.7</td>
+            </tr>
         
-        <tr class="table-success">
-            <th scope="row"> 12</th>
-            <td>Iris-virginica</td>
-            <td>6.3</td>
-            <td>2.7</td>
-            <td>4.9</td>
-            <td>1.8</td>
-        </tr>
-    
-    </tbody>
-    <caption>Tableau 1 : Différentes mesures (en cm) pour quatre fleurs de chaque variété</caption>
-</table>
+
+            
+            <tr class="table-success">
+                <th scope="row"> 10</th>
+                <td>Iris-virginica</td>
+                <td>6.2</td>
+                <td>2.8</td>
+                <td>4.8</td>
+                <td>1.8</td>
+            </tr>
+        
+
+            
+            <tr class="table-success">
+                <th scope="row"> 11</th>
+                <td>Iris-virginica</td>
+                <td>6.0</td>
+                <td>3.0</td>
+                <td>4.8</td>
+                <td>1.8</td>
+            </tr>
+        
+
+            
+            <tr class="table-success">
+                <th scope="row"> 12</th>
+                <td>Iris-virginica</td>
+                <td>6.3</td>
+                <td>2.7</td>
+                <td>4.9</td>
+                <td>1.8</td>
+            </tr>
+        
+        </tbody>
+        <caption>Tableau 1 : Différentes mesures (en cm) pour quatre fleurs de chaque variété</caption>
+    </table>
+</div>
 
 <h2>Exercices</h2>
 
@@ -1182,6 +1191,19 @@
 <h2>Bilan</h2>
     TODO
 
+<script>
+    window.onbeforeunload = function (e) {
+        var e = e || window.event;
+
+        // For IE and Firefox
+        if (e) {
+            e.returnValue = 'Any string';
+        }
+
+        // For Safari
+        return 'Any string';
+    };
+</script>
             </main>
             <nav>
     <ul id="buttonsPagination" class="pagination justify-content-center" style="padding: 16px">
@@ -1234,5 +1256,45 @@
 
 
 <script src="/static/js/enlargeImageModal.js"></script>
+<script>
+
+    function pinElementTransformation(elem) {
+        elem.find("table").addClass("table-sm"); // Reduce table size
+        elem.each(function () {
+            this.removeAttribute('id');
+        })
+    }
+
+    function pin(elem) {
+        let target = $('#pinnableArea');
+        target.empty();
+
+        let elementToCopy;
+        elementToCopy = $(elem).clone(); // Convert to jQueryobject
+        pinElementTransformation(elementToCopy);
+        target.html(elementToCopy);
+    }
+
+    // Pinable area check
+    let pinnableElements = $(".pinnable");
+    if (pinnableElements.length === 0) { // If there is nothing to pin, delete the area
+        $("#pinnableArea").remove();
+    }
+    else {
+        /*
+        <div class="float-right">
+            <button type="button" onclick="pin(this.parentElement.nextElementSibling)" class="btn btn-info"><i class="fas fa-thumbtack"></i></button>
+        </div>
+        */
+        pinnableElements.each(function() {
+            let pinDiv = $("<div>").addClass("float-right");
+            let pinButton = $("<button><i class='fas fa-thumbtack'></i></button>")
+                .addClass("btn btn-info");
+            pinDiv.append(pinButton);
+            pinButton.click(() => {pin(this)}); // Pin the object itself, not the pin button
+            pinDiv.insertBefore(this);
+        });
+    }
+</script>
 </body>
 </html>
