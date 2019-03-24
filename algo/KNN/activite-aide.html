@@ -99,8 +99,8 @@
     let algoPrefix = "/algo/";
     let algoActivityDesc = [
         "Introduction au concept général de l'algorithme",
-        "Série de petits exercices de préparation pour t'introduire l'idée derrière l'algorithme<br>Leurs corrections est automatisée.",
-        "Phase expliquant le fonctionement et objectifs de l'activité.<br>Cette phase est nécessaire pour comprendre la suivante",
+        "Série de petits exercices de préparation pour introduire l'idée derrière l'algorithme<br>Leur correction est automatisée.",
+        "Phase expliquant le fonctionement et objectif de l'activité.<br>Cette phase est nécessaire pour comprendre la suivante",
         "Activité intéractive de l'algorithme. Les activités dépendent des algorithmes eux-mêmes."
     ];
     let algoActivityIcon = [
@@ -222,6 +222,31 @@
                 <img src="/static/img/KNN/activityPreview.png" class="img-fluid center">
             
 
+            
+            <h2>Objectif</h2>
+                <p>
+    Ton but sera de définir la fonction <code>classify(newIris)</code>.
+    Cette fonction prend une fleur en argument <code>newIris</code> et renvoie le nom prédit de cette fleur.
+</p> <div class="mx-auto" align="center">
+    <img src="/static/img/KNN/classifyFunction.svg" class="img-fluid">
+</div> <p>
+    La qualité de ton classifieur est représentée par la barre de progression bleu en dessous de la barre d'outil.<br>
+    Cette barre se met à jour à chaque fois que tu teste ton classifieur en testant ta fonction de classification <code>classify</code>.<br>
+    Ton objectif final est d'atteindre la meilleure prédiction possible (100%)
+</p> <div class="mt-2 col-md-12">
+    <h6 style="float: left; margin-right: 1em;"> Prédiction courante : </h6>
+    <div class="progress" style="height: 32px;">
+        <div id="predictionProgressBar" class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%;">100.00%</div>
+    </div>
+</div>
+<p>
+    Pour cela, il faut que tu modifies cette fonction de manière qu’elle implémente le concept vu de l’algorithme des K plus proches voisins.
+    En plus de cela tu as différent paramètres que tu peux faire varier,
+    tu devras trouver la combinaison qui te donnera la meilleure prédiction.
+</p>
+
+            
+
             <h2>Structure de la page</h2>
             
                 <h3>Barre d'outil</h3>
@@ -234,21 +259,21 @@
                     let TB = new ToolBox();
                     let explanations = [];
                     
-                        explanations.push("Commencer un nouveau projet, cela effacera tous les blocs.");
+                        explanations.push("Commencer un nouveau projet. Cela effacera tous les blocs.");
                     
                         explanations.push("Sauvegarder/télécharger ton projet sur ton ordinateur (uniquement les blocs de Blockly).<br>Les paramètres ne sont pas enregistrés");
                     
                         explanations.push("Ouvrir un projet précédemment sauvegardé.<br>Uniquement les blocs Blockly sont chargés");
                     
-                        explanations.push("Exporte le projet (blocs) sous forme d’images (SVG (vectoriel) ou PNG ).<br>Attention que si tu exportes en image tu ne peux pas l’ouvrir comme projet");
+                        explanations.push("Exporte le projet (blocs) sous forme d’image (SVG (vectoriel) ou PNG ).<br>Attention que si tu exportes en image tu ne peux pas l’ouvrir comme projet");
                     
                         explanations.push("Voir le code JavaScript généré par Blockly dans une fenêtre pop-up");
                     
-                        explanations.push("Tester le code. Se contentera d’exécutera le code du projet tel quel.");
+                        explanations.push("Tester le code. Se contentera d’exécuter le code du projet tel quel.");
                     
-                        explanations.push("Tester le classifieur. Lance le programme en évaluant si les prédictions sont correctes.<br>Cela te permettra de réussir ton objectif !");
+                        explanations.push("<b>Tester le classifieur</b>. Lance le programme en évaluant si les prédictions sont correctes.<br>Cela te permettra de réussir ton objectif !");
                     
-                        explanations.push("Renvoie vers la page d'aide (celle-çi)");
+                        explanations.push("Renvoie vers la page d'aide (celle-ci)");
                     
                         explanations.push("Te permet de choisir la langue.<br>Seulement le français et l’anglais sont pleinement compatible. Les autres changeront uniquement le texte des blocs de Blockly.");
                     
@@ -266,7 +291,7 @@
                             <img src="/static/img/KNN/site-graphAndDatas.png" class="mr-3 img-fluid" >
                             <div class="media-body">
                                 <h4 class="mt-0 mb-1">Panneau Graphe et Données</h4>
-                                Te permet de consulter et visualiser les données du training set. Chaque point du graphe correspond à une fleur du training set. Sa forme et couleur définit sa classe comme légendé en dessous du graphe.<br> Tu peux survoler avec ta souris un point pour obtenir des informations le concernant.<br> Tu pourra également ajouter des fleurs "artificielle" dans le graphe via Blockly. Pour effacer ses derniers tu pourra utiliser le bouton jaune avec la gomme<br>
+                                Te permet de consulter et visualiser les données du modèle d'entrainement. Chaque point du graphe correspond à une fleur du modèle d'entrainement. Sa forme et couleur définit sa classe comme légendé en dessous du graphe.<br> Tu peux survoler avec ta souris un point pour obtenir des informations le concernant.<br> Tu pourras également ajouter des fleurs "artificielle" dans le graphe via Blockly. Pour effacer ces derniers tu pourras utiliser le bouton jaune avec la gomme<br>
 
                             </div>
                         </li>
@@ -275,7 +300,7 @@
                             <img src="/static/img/KNN/site-parameters.png" class="mr-3 img-fluid" >
                             <div class="media-body">
                                 <h4 class="mt-0 mb-1">Panneau paramètres</h4>
-                                Te permet de modifier le comportement de l'algorithme des K plus proches voisins.<br> La modification des axes mettra également à jour le graphe du training set selon le choix.
+                                Te permet de modifier certains paramètres de l'algorithme des K plus proches voisins.<br> La modification des axes mettra également à jour le graphe du modèle d'entrainement selon le choix.
 
                             </div>
                         </li>
@@ -286,7 +311,7 @@
             
                 <h3>Blockly</h3>
                 <p>
-                    La partie de droite est l'emplacement ou tu pourra modifier le code de l'algorithme afin de réussir l'objectif.
+                    La partie de droite est l'emplacement où tu pourras modifier le code de l'algorithme afin de réussir l'objectif.
                 </p>
 
                 
@@ -312,7 +337,7 @@
                             
                             <tr>
                                 <td><img src="/static/img/blocklyBlocks/countersReset.svg" class="img-fluid"></td>
-                                <td>Permet de réinitialiser le compteur de chaque fleur à zéro</td>
+                                <td>Permet de mettre le compteur de chaque fleur à zéro</td>
                                 
                                     <td><i>Rien</i></td>
                                 
@@ -344,7 +369,7 @@
                             
                             <tr>
                                 <td><img src="/static/img/blocklyBlocks/createFlower.svg" class="img-fluid"></td>
-                                <td>Permet de créer une fleur artificielle qui aura les valeurs données en <code>x</code> et <code>y</code> (dépend de ce que tu as fixer comme paramètres).<br>Voir exemples ci-dessous</td>
+                                <td>Permet de créer une fleur artificielle qui aura les valeurs données en <code>x</code> et <code>y</code> (dépend de ce que tu as fixé comme paramètres).<br>Voir exemples ci-dessous</td>
                                 
                                     <td>Fleur</td>
                                 
@@ -424,34 +449,12 @@
             
 
             
-                <h2>Objectif</h2>
+                <h2>Aide pour l'objectif</h2>
                 <p>
-    Ton but sera de définir la fonction <code>classify(newIris)</code>.
-    Cette fonction prend une fleur en argument <code>newIris</code> et renvoie le nom prédit de cette fleur.
-</p> <div class="mx-auto" align="center">
-    <img src="/static/img/KNN/classifyFunction.svg" class="img-fluid">
-</div> <p>
-    La qualité de ton classifieur est représentée par la barre de progression bleu en dessous de la barre d'outil.<br>
-    Cette barre se met à jour à chaque fois que tu teste ton classifieur en testant ta fonction de classification <code>classify</code>.<br>
-    Ton objectif final est d'atteindre la meilleure prédiction possible (100%)
-</p> <div class="mt-2 col-md-12">
-    <h6 style="float: left; margin-right: 1em;"> Prédiction courante : </h6>
-    <div class="progress" style="height: 32px;">
-        <div id="predictionProgressBar" class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%;">100.00%</div>
-    </div>
-</div>
-<p>
-    Pour cela, il faut que tu modifies cette fonction de manière qu’elle implémente le concept vu de l’algorithme des K plus proches voisins.
-    En plus de cela tu as différent paramètres que tu peux faire varier,
-    tu devras trouver la combinaison qui te donnera la meilleure prédiction.
-</p>
-<h3>Implémentation</h3> <p>
-    L’algorithme peut être séparé en plusieurs étapes distinctes qui, petit à petit, te rapprocheront de la solution.
-    Je vais t’aider dans cette partie à atteindre la bonne solution en te donnant les intuitions.<br>
-    Libre à toi de faire autrement si tu le souhaites tant que la prédiction finale est bonne.
-</p>
-
-
+                    L’algorithme peut être séparé en plusieurs étapes distinctes qui, petit à petit, te rapprocheront de la solution.
+                    Je vais t’aider dans cette partie à atteindre la bonne solution en te donnant les intuitions.<br>
+                    Libre à toi de faire autrement si tu le souhaites tant que la prédiction finale est bonne.
+                </p>
                 
                     <h3>Etape 1 : Bien commencer !</h3>
                     <p>
@@ -516,7 +519,7 @@
                     
                         <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
                             <div class="card">
-                                <img src="/static/img/blocklyBlocks/countersGetMinMax.svg" class="img-fluid">
+                                <img src="/static/img/blocklyBlocks/getK.svg" class="img-fluid">
                             </div>
                         </div>
                     
@@ -540,7 +543,7 @@
                     
                         <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
                             <div class="card">
-                                <img src="/static/img/blocklyBlocks/getK.svg" class="img-fluid">
+                                <img src="/static/img/blocklyBlocks/countersGetMinMax.svg" class="img-fluid">
                             </div>
                         </div>
                     
@@ -612,29 +615,41 @@
                 
             
             <nav>
-    <ul id="buttonsPagination" class="pagination justify-content-center" style="padding: 16px">
-    </ul>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm" id="paginationDivPrevious"></div>
+            <div class="col-sm" style="text-align: right" id="paginationDivNext"></div>
+        </div>
+    </div>
+
 </nav>
 <script>
     let splitedPathName = window.location.pathname.split("/");
     let hrefs = getAllHrefForAlgo(algoHRef.indexOf(splitedPathName[splitedPathName.length-2]));
-    let target = $('#buttonsPagination');
-    let nextShouldBeHighlight = false;
+    let targetLast = $('#paginationDivPrevious');
+    let targetNext = $('#paginationDivNext');
+    let lastSave = null;
+    let isNext = false;
     for (let i = 0; i < hrefs.length; i++) {
-        let paginationButton = $("<li>").addClass("page-item");
+        let paginationButton = $("<a>").addClass("btn btn-link btn-lg").html("<<");
         let link = hrefs[i];
-        link.addClass("page-link");
+        paginationButton.attr("href", link.attr("href"));
+        paginationButton.html(link.html());
 
         if (link.attr('href') === window.location.pathname) {
-            nextShouldBeHighlight = true;
-            paginationButton.addClass("disabled");
-        } else if (nextShouldBeHighlight) {
-            nextShouldBeHighlight = false;
-            paginationButton.addClass("active");
+            if (lastSave !== null) {
+                lastSave.append("  <<");
+                targetLast.append(lastSave);
+            }
+            isNext = true;
+        } else if (isNext) {
+            isNext = false;
+            paginationButton.prepend(">>  ");
+            targetNext.append(paginationButton);
         }
 
-        paginationButton.append(link);
-        target.append(paginationButton);
+
+        lastSave = paginationButton.clone();
     }
 </script>
         </div>
@@ -658,7 +673,6 @@
         </div>
     </div>
 </div>
-
 
 
 </body>

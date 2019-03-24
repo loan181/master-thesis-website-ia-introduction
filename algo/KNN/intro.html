@@ -100,8 +100,8 @@
     let algoPrefix = "/algo/";
     let algoActivityDesc = [
         "Introduction au concept général de l'algorithme",
-        "Série de petits exercices de préparation pour t'introduire l'idée derrière l'algorithme<br>Leurs corrections est automatisée.",
-        "Phase expliquant le fonctionement et objectifs de l'activité.<br>Cette phase est nécessaire pour comprendre la suivante",
+        "Série de petits exercices de préparation pour introduire l'idée derrière l'algorithme<br>Leur correction est automatisée.",
+        "Phase expliquant le fonctionement et objectif de l'activité.<br>Cette phase est nécessaire pour comprendre la suivante",
         "Activité intéractive de l'algorithme. Les activités dépendent des algorithmes eux-mêmes."
     ];
     let algoActivityIcon = [
@@ -233,9 +233,9 @@
 <div class="text-center">
     <img class="img-fluid" src="https://upload.wikimedia.org/wikipedia/commons/e/e7/KnnClassification.svg"><br>
     <small class="text-muted">
-        La donné de classe inconnu (cercle vert) pourrait être classé soit dans la première classe de carré bleu ou la seconde classe de triangles rouges.<br>
+        La donnée de classe inconnue (cercle vert) pourrait être classée soit dans la première classe de carré bleu ou la seconde classe de triangles rouges.<br>
         Si K = 3 (cercle en ligne pleine) il est affecté à la seconde classe car il y a deux triangles et seulement un carré dans le cercle considéré.<br>
-        Si K = 5 (cercle en ligne pointillée) il est assigné à la première classe (3 carrés face à deux triangles dans le cercle externe).</small>
+        Si K = 5 (cercle en ligne pointillée) il est assigné à la première classe (3 carrés face à 2 triangles dans le cercle externe).</small>
 </div>
 
     
@@ -257,7 +257,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Recherche de concept (concept informatique)</h5>
-                        <p class="card-text">Si tu recherche des documents qui sont similaires sémantiquement
+                        <p class="card-text">Permet de rechercher des documents qui sont similaires sémantiquement
 </p>
                         <p class="text-muted">Exemples : différents documents qui contiennent des sujets similaire, trouver des mails sur un certain thème, ...</p>
                         
@@ -304,29 +304,41 @@
 </script>
             </main>
             <nav>
-    <ul id="buttonsPagination" class="pagination justify-content-center" style="padding: 16px">
-    </ul>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm" id="paginationDivPrevious"></div>
+            <div class="col-sm" style="text-align: right" id="paginationDivNext"></div>
+        </div>
+    </div>
+
 </nav>
 <script>
     let splitedPathName = window.location.pathname.split("/");
     let hrefs = getAllHrefForAlgo(algoHRef.indexOf(splitedPathName[splitedPathName.length-2]));
-    let target = $('#buttonsPagination');
-    let nextShouldBeHighlight = false;
+    let targetLast = $('#paginationDivPrevious');
+    let targetNext = $('#paginationDivNext');
+    let lastSave = null;
+    let isNext = false;
     for (let i = 0; i < hrefs.length; i++) {
-        let paginationButton = $("<li>").addClass("page-item");
+        let paginationButton = $("<a>").addClass("btn btn-link btn-lg").html("<<");
         let link = hrefs[i];
-        link.addClass("page-link");
+        paginationButton.attr("href", link.attr("href"));
+        paginationButton.html(link.html());
 
         if (link.attr('href') === window.location.pathname) {
-            nextShouldBeHighlight = true;
-            paginationButton.addClass("disabled");
-        } else if (nextShouldBeHighlight) {
-            nextShouldBeHighlight = false;
-            paginationButton.addClass("active");
+            if (lastSave !== null) {
+                lastSave.append("  <<");
+                targetLast.append(lastSave);
+            }
+            isNext = true;
+        } else if (isNext) {
+            isNext = false;
+            paginationButton.prepend(">>  ");
+            targetNext.append(paginationButton);
         }
 
-        paginationButton.append(link);
-        target.append(paginationButton);
+
+        lastSave = paginationButton.clone();
     }
 </script>
         </div>
@@ -352,12 +364,24 @@
     </div>
 </div>
 
+<script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
 
-<script src="/static/js/enlargeImageModal.js"></script>
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
 <script>
 
     function pinElementTransformation(elem) {
-        elem.find("table").addClass("table-sm"); // Reduce table size
+        elem.find("table").addBack('table').addClass("table-sm"); // Reduce table size
+        elem.find("img").addBack('img')
+            .click(imgOnClick) // Possible to enlarge the picture
+            .css("height", "100%"); // Scale the image (keeping aspect ratio)
         elem.each(function () {
             this.removeAttribute('id');
         })

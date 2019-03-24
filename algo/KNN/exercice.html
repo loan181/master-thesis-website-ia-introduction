@@ -100,8 +100,8 @@
     let algoPrefix = "/algo/";
     let algoActivityDesc = [
         "Introduction au concept général de l'algorithme",
-        "Série de petits exercices de préparation pour t'introduire l'idée derrière l'algorithme<br>Leurs corrections est automatisée.",
-        "Phase expliquant le fonctionement et objectifs de l'activité.<br>Cette phase est nécessaire pour comprendre la suivante",
+        "Série de petits exercices de préparation pour introduire l'idée derrière l'algorithme<br>Leur correction est automatisée.",
+        "Phase expliquant le fonctionement et objectif de l'activité.<br>Cette phase est nécessaire pour comprendre la suivante",
         "Activité intéractive de l'algorithme. Les activités dépendent des algorithmes eux-mêmes."
     ];
     let algoActivityIcon = [
@@ -222,7 +222,7 @@
 <h2>Contexte</h2>
 <p>
     Il existe plusieurs variations de la fleur d’Iris,
-    parmi celles-ci trois sont particulièrement difficile à identifier et demande des tests biologiques
+    parmi celles-ci trois sont particulièrement difficiles à identifier et demandent des tests biologiques
     très couteux et qui prennent longtemps afin d’affirmer avec certitude l’origine de la fleur.
     Ces trois fleurs sont l’Iris-setosa, l’Iris-versicolor et l’Iris-viginica
 </p>
@@ -430,7 +430,7 @@
     
 
     
-        <div data-ex="question">Choisi parmi les quatre mesures (longueur sépale, largeur sépale, longueur pétale et largeur pétale) <strong>deux</strong> mesures qui, te permettent de discerner au mieux les fleurs.
+        <div data-ex="question">Choisi parmi les quatre mesures (longueur sépale, largeur sépale, longueur pétale et largeur pétale) <strong>deux</strong> mesures qui te permettent de discerner au mieux les classes de fleurs (setosa, versicolor et virginica).
 </div>
     
 
@@ -466,7 +466,7 @@
     <div class="card-header">Correction</div>
     <div class="card-body text-success">
         <p class="card-text">
-            Les 2 meilleurs critères à choisir ici sont les 2 derniers (longueur pétale et largeur pétale).<br> Les mesures en utilisant les pétales peuvent trop facilement permettre de confondre les 3 fleurs.<br> Le graphique correspondant est le suivant :<br> <img src="/static/img/KNN/GrilleKNNCorr.png" class="img-fluid">
+            Les 2 meilleurs critères à choisir ici sont les 2 derniers (longueur pétale et largeur pétale).<br> Les mesures en utilisant les sépales peuvent trop facilement permettre de confondre les 3 fleurs.<br> Le graphique correspondant est le suivant :<br> <img src="/static/img/KNN/GrilleKNNCorr.png" class="img-fluid">
 
         </p>
     </div>
@@ -484,8 +484,8 @@
 
     
         <div data-ex="intro"><p>
-    En te fiant au <a href="#table1">Tableau 1</a> et la nouvelle fleur suivante :
-</p> <table class="table table-hover" id="unknownIrisPar">
+    En te fiant au <a href="#table1">Tableau 1</a> et à la nouvelle fleur suivante :
+</p> <table class="table table-hover pinnable" id="unknownIrisPar">
     <thead>
     <tr>
         <th scope="col">Longueur Sépale</th>
@@ -507,7 +507,7 @@
     
 
     
-        <div data-ex="question">Quelle est la fleur, qui correspond à ses mesures ?
+        <div data-ex="question">Quelle est la fleurs, qui correspond à ses mesures ?
 </div>
     
 
@@ -538,7 +538,7 @@
     <div class="card-header">Correction</div>
     <div class="card-body text-success">
         <p class="card-text">
-            C'est (probalement) une <i>Iris-virginica</i>.<br> La longueur et la largeur de la sépale ne nous permettent pas de pouvoir donner des informations fiables sur la fleur.<br> Cepandant la longueur et la largeur de la sépale sont très proche des <i>Iris-virginica</i> existantes.
+            C'est (probalement) une <i>Iris-virginica</i>.<br> La longueur et la largeur de la sépale ne nous permettent pas de donner des informations fiables sur la fleur.<br> Cepandant la longueur et la largeur de la pétale sont très proche des <i>Iris-virginica</i> existantes.
 
         </p>
     </div>
@@ -610,7 +610,7 @@
         <div data-ex="intro"><p>
     Voici le graphique correspondant aux données du <a href="#table1">Tableau 1</a> en utilisant la sépale comme mesure pour les axes :
     <img src="/static/img/KNN/GrilleKNNCorr.png" class="img-fluid"><br>
-    Visualise les coordonnées où cette nouvelle fleur dans le graphique serait.
+    Visualise où serait la <a href="#unknownIrisPar">nouvelle fleur</a> dans le graphique.
 </p>
 </div>
     
@@ -646,7 +646,7 @@
     <div class="card-header">Correction</div>
     <div class="card-body text-success">
         <p class="card-text">
-            La fleur ajouté se trouve dans le "regroupement" formé par toutes les autres <i>Iris-virginica</i>
+            La fleur ajoutée se trouve dans le "regroupement" formé par toutes les autres <i>Iris-virginica</i>
 
         </p>
     </div>
@@ -665,12 +665,12 @@
     
         <div data-ex="intro"><p>
     Sur le graphique suivant, visualise un marqueur au coordonnée (5.1, 2.6)
-</p> <img src="/static/img/KNN/exKNNGraphique.png">
+</p> <img src="/static/img/KNN/exKNNGraphique.png" class="img-fluid pinnable">
 </div>
     
 
     
-        <div data-ex="question">Quelle est la couleur du point le plus proche ?
+        <div data-ex="question">Quelle est la couleur du point le plus proche de celui ajouté ?
 </div>
     
 
@@ -770,7 +770,7 @@
     
 
     
-        <div data-ex="question">Quelle est la couleur majoritaire parmi les trois plus proches ?
+        <div data-ex="question">Quelle est la couleur majoritaire parmi les trois points les plus proches ?
 </div>
     
 
@@ -817,7 +817,7 @@
     
 
     
-        <div data-ex="question">Quelle aurai-était la couleur majoritaire si on avait pris seulement les deux plus proches ?
+        <div data-ex="question">Quelle serait la couleur majoritaire si on avait pris seulement les deux points les plus proches ?
 </div>
     
 
@@ -865,11 +865,11 @@
     
 
     
-        <div data-ex="intro">Supposons maintenant que les points jaunes représente des <i>Iris-versicolor</i> et les verts des <i>Iris-virginica</i>.</div>
+        <div data-ex="intro">Supposons maintenant que les points jaunes représentent des <i>Iris-versicolor</i> et les verts des <i>Iris-virginica</i>.</div>
     
 
     
-        <div data-ex="question">Quel serait, la ca classe de la fleur qu’on vient d’ajouter ? Pourquoi ?
+        <div data-ex="question">Quel serait la classe de la fleur qu’on vient d’ajouter ? Pourquoi ?
 </div>
     
 
@@ -899,7 +899,7 @@
     <div class="card-header">Correction</div>
     <div class="card-body text-success">
         <p class="card-text">
-            Si on se fie uniquement à la fleur la plus proche on peut penser que c’est une versicolor. Mais si l’on regarde les fleurs plus éloigné, il est plus probable que ça soit une iris-virginica.<br> Cette exercice n’a pas de réponse absolue, l’important c’est que tu comprenne la notion de majorité et que selon les paramètres qu’on pose (ici le nombre de voisins) la réponse peut changer.
+            Si on se fie uniquement à la fleur la plus proche on peut penser que c’est une versicolor. Mais si l’on regarde les fleurs plus éloigné, il est plus probable que ça soit une iris-virginica.<br> Cette exercice n’a pas de réponse absolue, l’important c’est que tu comprennes la notion de majorité et que selon les paramètres qu’on pose (ici le nombre de voisins) la réponse peut changer.
 
         </p>
     </div>
@@ -917,9 +917,9 @@
 
     
         <div data-ex="intro"><p>
-    Voici trois nouvelles iris dont la variété est connue (mais pas donné) :
+    Voici trois nouvelles iris dont la variété est connue (mais pas donnée) :
 </p>
-<table class="table table-hover" id="table2">
+<table class="table table-hover pinnable" id="table2">
     <thead>
     <tr>
         <th scope="col">Iris</th>
@@ -955,9 +955,7 @@
     <caption>Tableau 2 : Iris inconnus</caption>
 </table>
 <p>
-    Notre but dans cette partie va être de <b>prédire</b> les fleurs à partir des données et <b>ensuite</b> on va vérifier si nos prédictions sont exactes.<br>
-    Nous ne pouvons pas prédire sans modèle d’entrainement ("training set" en anglais) ni métrique,
-    pour cela on va utiliser le <a href="#table1">Tableau 1</a> comme modèle et on va prédire selon deux modèles de métrique différente.
+    Notre but dans cette partie va être de <b>prédire</b> les fleurs à partir des données et <b>ensuite</b> on va vérifier si nos prédictions sont exactes.
 </p>
 </div>
     
@@ -975,15 +973,15 @@
     
 <div data-ex="exercice">
     
-        <h3 data-ex="title">Prédiction pour différente métriques</h3>
+        <h3 data-ex="title">Prédiction pour différentes métriques</h3>
     
 
     
         <div data-ex="intro"><p>
-    Soit les trois fleurs données dans <a href="#table2">Tableau 2</a>, avec le <a href="#table1">Tableau 1</a>
-    comme modèle d’entrainement en regardant la majorité parmi les trois voisins les plus proches (avec une distance euclidienne).<br>
+    Soit les trois fleurs données dans le <a href="#table2">Tableau 2</a>, avec le <a href="#table1">Tableau 1</a>
+    comme modèle d’entrainement.
+    Tu déterminera la classe de la fleur en regardant la majorité parmi <b>les trois voisins les plus proches</b>.<br>
     Pour cela tu peux t'aider des graphiques que je te donne : <br>
-
 </p> <div style="text-align: center">
     <img src="/static/img/KNN/exKNNGraphiqueMetriqueSepale.png" class="img-fluid" style="padding-right: 32px">
     <img src="/static/img/KNN/exKNNGraphiqueMetriquePetale.png" class="img-fluid">
@@ -992,7 +990,7 @@
     
 
     
-        <div data-ex="question">Détermine les fleurs avec les métriques suivantes.
+        <div data-ex="question">Détermine les fleurs avec les métriques suivantes:
 </div>
     
 
@@ -1043,7 +1041,7 @@
     <div class="card-header">Correction</div>
     <div class="card-body text-success">
         <p class="card-text">
-            Les données sont choisis de sortes qu’il n’y ait pas d’ambiguïtés dans les votes pour la majorité.<br> Normalement, les résultats devraient êtres les suivants.<br> Classifieur 1 : 1:Virginica 2:Setosa 3: Versicolor <br> Classifieur 2 : 1:Setosa 2:Versicolor 3: Virginica <br>
+            Les données sont choisies de sorte qu’il n’y ait pas d’ambiguïtés pour déterminer la majorité.<br> Normalement, les résultats devraient êtres les suivants.<br> Classifieur 1 : Virginica, Setosa et Versicolor <br> Classifieur 2 : Setosa, Versicolor et Virginica <br>
 
         </p>
     </div>
@@ -1065,7 +1063,7 @@
 </p> <p>
     Pendant que nous étions occupés avec nos passionnantes prédictions,
     les fleurs ont été envoyées au labo et elles ont été annoncées comme étant :
-</p> <table class="table table-hover" id="table3">
+</p> <table class="table table-hover pinnable" id="table3">
     <thead>
     <tr>
         <th scope="col">Iris</th>
@@ -1094,7 +1092,7 @@
     
 
     
-        <div data-ex="question">Sur les trois fleurs devinées, combien d’entre elles s’avère être correctes ?
+        <div data-ex="question">Sur les trois classes de fleurs devinées, combien d’entre elles s’avèrent exactes ?
 </div>
     
 
@@ -1132,7 +1130,7 @@
     <div class="card-header">Correction</div>
     <div class="card-body text-success">
         <p class="card-text">
-            0/3 pour le premier et 2/3 pour le second.
+            0/3 pour le premier et 2/3 pour le second.<br> Le premier classifieur n'a rien trouvé de correct, alors que le second c'est seulement trompé sur la dernière fleur prédite (Virginica au lieu de Setosa).
 
         </p>
     </div>
@@ -1149,7 +1147,7 @@
     
 
     
-        <div data-ex="question">A partir de tes résultats, quel classifieur utiliserai tu pour deviner une fleur d'iris ? Pourquoi ?
+        <div data-ex="question">A partir de tes résultats, quel classifieur utiliserais-tu pour deviner une fleur d'iris ? Pourquoi ?
 </div>
     
 
@@ -1179,7 +1177,7 @@
     <div class="card-header">Correction</div>
     <div class="card-body text-success">
         <p class="card-text">
-            Le second est du coup plus intéressant puisqu’il prédit mieux. Autrement dit, on peut deviner avec plus de certitudes une Iris en mesurant ses pétales plutôt que sa sépale.<br> Intéressant de noter ici que notre prédicteur n’est pas parfait non plus (il n’a pas un score de  3/3), tout ça ne sont que des prédiction on ne peut pas utiliser un prédicteur et affirmer des informations avec certitude.<br> Important de noter également que nos données sont très petites pour pouvoir affirmer avec conviction que le second est toujours meilleur que le premier.
+            Le second est du coup plus intéressant puisqu’il prédit mieux. Autrement dit, on peut deviner avec plus de certitudes une Iris en mesurant sa pétale plutôt que sa sépale.<br> Intéressant de noter ici que notre classifieur n’est pas parfait non plus (il n’a pas un score de  3/3).<br> A noter également que nos données sont très petites pour pouvoir affirmer avec conviction que le second est toujours meilleur que le premier.
 
         </p>
     </div>
@@ -1190,8 +1188,23 @@
 </div>
 
 
+
+
 <h2>Bilan</h2>
-    TODO
+    <ul>
+        
+        <li>L'algorithme des K plus proches voisins repose sur un principe assez simple.</li>
+        
+        <li>On se base sur des données connues (modèle d'entrainement) pour déduire la catégorie (classe) d'un nouvel élément en y trouvant celle qui est la plus présente parmis les données avec les valeurs les plus proches.</li>
+        
+        <li>On peut choisir le nombre de données les plus proches (K). Généralement on choisit 3.</li>
+        
+        <li>Le choix des mesures (métriques) pour lesquels on décide si l'élément est proche est important. On essaiera de trouver au mieux de choisir celles qui discerne le mieux les différentes classes.</li>
+        
+        <li>Les réultats ne sont pas toujours fiables ! Il ne faut pas croire à 100% ce que nous dit le classifieur, même s'il est bien fait</li>
+        
+    </ul>
+
 
 <script>
     window.onbeforeunload = function (e) {
@@ -1208,29 +1221,41 @@
 </script>
             </main>
             <nav>
-    <ul id="buttonsPagination" class="pagination justify-content-center" style="padding: 16px">
-    </ul>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm" id="paginationDivPrevious"></div>
+            <div class="col-sm" style="text-align: right" id="paginationDivNext"></div>
+        </div>
+    </div>
+
 </nav>
 <script>
     let splitedPathName = window.location.pathname.split("/");
     let hrefs = getAllHrefForAlgo(algoHRef.indexOf(splitedPathName[splitedPathName.length-2]));
-    let target = $('#buttonsPagination');
-    let nextShouldBeHighlight = false;
+    let targetLast = $('#paginationDivPrevious');
+    let targetNext = $('#paginationDivNext');
+    let lastSave = null;
+    let isNext = false;
     for (let i = 0; i < hrefs.length; i++) {
-        let paginationButton = $("<li>").addClass("page-item");
+        let paginationButton = $("<a>").addClass("btn btn-link btn-lg").html("<<");
         let link = hrefs[i];
-        link.addClass("page-link");
+        paginationButton.attr("href", link.attr("href"));
+        paginationButton.html(link.html());
 
         if (link.attr('href') === window.location.pathname) {
-            nextShouldBeHighlight = true;
-            paginationButton.addClass("disabled");
-        } else if (nextShouldBeHighlight) {
-            nextShouldBeHighlight = false;
-            paginationButton.addClass("active");
+            if (lastSave !== null) {
+                lastSave.append("  <<");
+                targetLast.append(lastSave);
+            }
+            isNext = true;
+        } else if (isNext) {
+            isNext = false;
+            paginationButton.prepend(">>  ");
+            targetNext.append(paginationButton);
         }
 
-        paginationButton.append(link);
-        target.append(paginationButton);
+
+        lastSave = paginationButton.clone();
     }
 </script>
         </div>
@@ -1256,12 +1281,24 @@
     </div>
 </div>
 
+<script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
 
-<script src="/static/js/enlargeImageModal.js"></script>
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
 <script>
 
     function pinElementTransformation(elem) {
-        elem.find("table").addClass("table-sm"); // Reduce table size
+        elem.find("table").addBack('table').addClass("table-sm"); // Reduce table size
+        elem.find("img").addBack('img')
+            .click(imgOnClick) // Possible to enlarge the picture
+            .css("height", "100%"); // Scale the image (keeping aspect ratio)
         elem.each(function () {
             this.removeAttribute('id');
         })
