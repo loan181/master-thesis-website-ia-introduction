@@ -60,6 +60,17 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+
     <!-- add after bootstrap.min.css -->
 <link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.css">
 <!-- add after bootstrap.min.js -->
@@ -101,8 +112,8 @@
     let algoActivityDesc = [
         "Introduction au concept général de l'algorithme",
         "Série de petits exercices de préparation pour introduire l'idée derrière l'algorithme<br>Leur correction est automatisée.",
-        "Phase expliquant le fonctionement et objectif de l'activité.<br>Cette phase est nécessaire pour comprendre la suivante",
-        "Activité intéractive de l'algorithme. Les activités dépendent des algorithmes eux-mêmes."
+        "Explication de l'objectif et du fonctionnement de l'activité.<br>Nécessaire pour la réalisation de l'étape suivante !",
+        "Activité interactive de l'algorithme considéré.<br>Ca sera l'étape finale pour prouver ta compréhension et dévcouvrir le secret caché de cet algorithme !"
     ];
     let algoActivityIcon = [
         "<i class=\"far fa-lightbulb\"></i>",
@@ -113,7 +124,7 @@
     // We can't use javascript variable into jekyll, so we precompute the values here
     let algoName = [ "Méthodes des K plus proches voisins",  "Arbre de décisions",  "Réseau neuronal", ];
     let algoHRef = [ "KNN",  "arbre",  "NN", ];
-    let algoActivityName = [ "Blockly",  "Arbre intéractif",  "Réseau de neurone intéractif", ];
+    let algoActivityName = [ "Blockly",  "Arbre interactif",  "Réseau de neurone interactif", ];
     let algoIcon = [ '<i class="far fa-dot-circle"></i>',  '<i class="fas fa-tree"></i>',  '<svg class="icon icon-cart" role="img" xmlns="http://www.w3.org/2000/svg" style="height:21px" viewBox="0 0 640 512" class="svg-inline--fa fa-chart-network fa-w-20"><path fill="currentColor" d="M568 368c-19.1 0-36.3 7.6-49.2 19.7L440.6 343c4.5-12.2 7.4-25.2 7.4-39 0-61.9-50.1-112-112-112-8.4 0-16.6 1.1-24.4 2.9l-32.2-69c15-13.2 24.6-32.3 24.6-53.8 0-39.8-32.2-72-72-72s-72 32.2-72 72 32.2 72 72 72c.9 0 1.8-.2 2.7-.3l33.5 71.7C241.5 235.9 224 267.8 224 304c0 61.9 50.1 112 112 112 30.7 0 58.6-12.4 78.8-32.5l82.2 47c-.4 3.1-1 6.3-1 9.5 0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72zM232 96c-13.2 0-24-10.8-24-24s10.8-24 24-24 24 10.8 24 24-10.8 24-24 24zm104 272c-35.3 0-64-28.7-64-64s28.7-64 64-64 64 28.7 64 64-28.7 64-64 64zm232 96c-13.2 0-24-10.8-24-24s10.8-24 24-24 24 10.8 24 24-10.8 24-24 24zm-54.4-261.2l-19.2-25.6-48 36 19.2 25.6 48-36zM576 192c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64zM152 320h48v-32h-48v32zm-88-80c-35.3 0-64 28.7-64 64s28.7 64 64 64 64-28.7 64-64-28.7-64-64-64z" class="" data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path></svg>', ];
 
     function populateNavBar() {
@@ -163,7 +174,7 @@
 
     function getAllHrefForAlgo(algoConfingIndex) {
         let ret = [];
-        let pagesDefaultName = ["Introduction", "Exercices préparatoires", "Consignes et utilisation pour l'activité", "Activité"];
+        let pagesDefaultName = ["Introduction", "Exercices préparatoires", "Consignes pour l'activité", "Activité"];
         let pagesDefaultHref = ["intro", "exercice", "activite-aide", "activite"];
 
         for (let i = 0; i < pagesDefaultName.length; i++) {
@@ -221,10 +232,10 @@
 
 <h2>Contexte</h2>
 <p>
-    Il existe plusieurs variations de la fleur d’Iris,
-    parmi celles-ci trois sont particulièrement difficiles à identifier et demandent des tests biologiques
-    très couteux et qui prennent longtemps afin d’affirmer avec certitude l’origine de la fleur.
-    Ces trois fleurs sont l’Iris-setosa, l’Iris-versicolor et l’Iris-viginica
+    Il existe plusieurs variations de la fleur d’Iris.
+    Parmi celles-ci trois sont particulièrement difficiles à différencier et demandent des tests biologiques
+    longs et couteux afin d’identifier l'espèce avec certitude.
+    Ces trois fleurs sont l’<i>Iris setosa</i>, l’<i>Iris versicolor</i> et l’<i>Iris viginica</i>
 </p>
 
 <div class="card-deck">
@@ -233,15 +244,15 @@
 
             <img class="rounded center-thumb" src="https://www.plant-world-seeds.com/images/item_images/000/007/023/large_square/iris_baby_blue.jpg">
             <div class="card-body">
-                <h5 class="card-title">Iris-setosa</h5>
+                <h5 class="card-title">Iris setosa</h5>
             </div>
         </div>
     
         <div class="card">
 
-            <img class="rounded center-thumb" src="https://www.promessedefleurs.com/media/catalog/product/cache/1/image/615x/9df78eab33525d08d6e5fb8d27136e95/I/r/Iris-versicolor-9345-2.jpg">
+            <img class="rounded center-thumb" src="https://www.promessedefleurs.com/media/catalog/product/cache/1/image/615x/9df78eab33525d08d6e5fb8d27136e95/I/r/Iris versicolor-9345-2.jpg">
             <div class="card-body">
-                <h5 class="card-title">Iris-versicolor</h5>
+                <h5 class="card-title">Iris versicolor</h5>
             </div>
         </div>
     
@@ -249,7 +260,7 @@
 
             <img class="rounded center-thumb" src="https://www.fs.fed.us/wildflowers/beauty/iris/Blue_Flag/images/iris_virginica_virginica_lg.jpg">
             <div class="card-body">
-                <h5 class="card-title">Iris-virginica</h5>
+                <h5 class="card-title">Iris virginica</h5>
             </div>
         </div>
     
@@ -281,7 +292,7 @@
             
             <tr class="table-primary">
                 <th scope="row"> 1</th>
-                <td>Iris-setosa</td>
+                <td><i>Iris setosa</i></td>
                 <td>4.6</td>
                 <td>3.6</td>
                 <td>1.0</td>
@@ -292,7 +303,7 @@
             
             <tr class="table-primary">
                 <th scope="row"> 2</th>
-                <td>Iris-setosa</td>
+                <td><i>Iris setosa</i></td>
                 <td>4.3</td>
                 <td>3.0</td>
                 <td>1.1</td>
@@ -303,7 +314,7 @@
             
             <tr class="table-primary">
                 <th scope="row"> 3</th>
-                <td>Iris-setosa</td>
+                <td><i>Iris setosa</i></td>
                 <td>5.0</td>
                 <td>3.2</td>
                 <td>1.2</td>
@@ -314,7 +325,7 @@
             
             <tr class="table-primary">
                 <th scope="row"> 4</th>
-                <td>Iris-setosa</td>
+                <td><i>Iris setosa</i></td>
                 <td>5.8</td>
                 <td>4.0</td>
                 <td>1.2</td>
@@ -325,7 +336,7 @@
             
             <tr class="table-danger">
                 <th scope="row"> 5</th>
-                <td>Iris-versicolor</td>
+                <td><i>Iris versicolor</i></td>
                 <td>5.1</td>
                 <td>2.5</td>
                 <td>3.0</td>
@@ -336,7 +347,7 @@
             
             <tr class="table-danger">
                 <th scope="row"> 6</th>
-                <td>Iris-versicolor</td>
+                <td><i>Iris versicolor</i></td>
                 <td>5.0</td>
                 <td>2.3</td>
                 <td>3.3</td>
@@ -347,7 +358,7 @@
             
             <tr class="table-danger">
                 <th scope="row"> 7</th>
-                <td>Iris-versicolor</td>
+                <td><i>Iris versicolor</i></td>
                 <td>4.9</td>
                 <td>2.4</td>
                 <td>3.3</td>
@@ -358,7 +369,7 @@
             
             <tr class="table-danger">
                 <th scope="row"> 8</th>
-                <td>Iris-versicolor</td>
+                <td><i>Iris versicolor</i></td>
                 <td>5.0</td>
                 <td>2.0</td>
                 <td>3.5</td>
@@ -369,7 +380,7 @@
             
             <tr class="table-success">
                 <th scope="row"> 9</th>
-                <td>Iris-virginica</td>
+                <td><i>Iris virginica</i></td>
                 <td>4.9</td>
                 <td>2.5</td>
                 <td>4.5</td>
@@ -380,7 +391,7 @@
             
             <tr class="table-success">
                 <th scope="row"> 10</th>
-                <td>Iris-virginica</td>
+                <td><i>Iris virginica</i></td>
                 <td>6.2</td>
                 <td>2.8</td>
                 <td>4.8</td>
@@ -391,7 +402,7 @@
             
             <tr class="table-success">
                 <th scope="row"> 11</th>
-                <td>Iris-virginica</td>
+                <td><i>Iris virginica</i></td>
                 <td>6.0</td>
                 <td>3.0</td>
                 <td>4.8</td>
@@ -402,7 +413,7 @@
             
             <tr class="table-success">
                 <th scope="row"> 12</th>
-                <td>Iris-virginica</td>
+                <td><i>Iris virginica</i></td>
                 <td>6.3</td>
                 <td>2.7</td>
                 <td>4.9</td>
@@ -430,7 +441,7 @@
     
 
     
-        <div data-ex="question">Choisi parmi les quatre mesures (longueur sépale, largeur sépale, longueur pétale et largeur pétale) <strong>deux</strong> mesures qui te permettent de discerner au mieux les classes de fleurs (setosa, versicolor et virginica).
+        <div data-ex="question">Choisis parmi les quatre mesures (longueur sépale, largeur sépale, longueur pétale et largeur pétale) <strong>deux</strong> mesures qui te permettent de discerner au mieux les classes de fleurs (setosa, versicolor et virginica).
 </div>
     
 
@@ -439,17 +450,49 @@
             <div class="card-header">Réponse</div>
             <div class="card-body text-primary">
                 
-                    <select class="form-control" data-answer="largeur pétale & longueur pétale">
-    <option>largeur sépale & longueur sépale</option>
-    <option>largeur sépale & largeur pétale</option>
-    <option>largeur sépale & longueur pétale</option>
+                    
+                            <label>
+                                <select 
+                                            id="metricChooseGraphSelect"
+                                        
+                                        class="form-control" data-answer="longueur pétale & largeur pétale">
+                                    <option>---</option>
+                                    
+                                        <option>longueur sépale & largeur sépale</option>
+                                    
+                                        <option>longueur sépale & longueur pétale</option>
+                                    
+                                        <option>longueur sépale & largeur pétale</option>
+                                    
+                                        <option>largeur sépale & longueur pétale</option>
+                                    
+                                        <option>largeur sépale & largeur pétale</option>
+                                    
+                                        <option>longueur sépale & largeur pétale</option>
+                                    
+                                </select>
+                            </label>
+                        
 
-    <option>longueur sépale & largeur pétale</option>
-    <option>longueur sépale & longueur pétale</option>
+                    
+                        <img id="previewMetricGraph" class="img-fluid" src="" style="display: none;"> <script>
+    let picturePath = "/static/img/KNN/graphs/";
+    let correspondingPicture = ["SWSH", "SWPW", "SWPH", "SHPW", "SHPH", "PWPH"];
+    let target = $("#previewMetricGraph");
+    $("#metricChooseGraphSelect").change(function () {
+            let selectedIndex = $(this).prop('selectedIndex');
+            if (selectedIndex === 0) {
+                $(target).hide();
+            } else {
+                $(target).show();
+                target.attr("src",picturePath+correspondingPicture[selectedIndex-1]+".jpg")
+            }
 
-    <option>largeur pétale & longueur pétale</option>
-</select>
+        }
+    );
+</script>
 
+                    
                 
             </div>
             <div class="card-footer">
@@ -466,7 +509,7 @@
     <div class="card-header">Correction</div>
     <div class="card-body text-success">
         <p class="card-text">
-            Les 2 meilleurs critères à choisir ici sont les 2 derniers (longueur pétale et largeur pétale).<br> Les mesures en utilisant les sépales peuvent trop facilement permettre de confondre les 3 fleurs.<br> Le graphique correspondant est le suivant :<br> <img src="/static/img/KNN/GrilleKNNCorr.png" class="img-fluid">
+            Les 2 meilleurs critères à choisir ici sont les 2 derniers (longueur pétale et largeur pétale).<br> Les mesures en utilisant les sépales peuvent trop facilement permettre de confondre les 3 fleurs.<br> Le graphique correspondant est le suivant :<br> <img src="/static/img/KNN/graphs/PWPH.jpg" class="img-fluid">
 
         </p>
     </div>
@@ -509,7 +552,7 @@
     
 
     
-        <div data-ex="question">Quelle est la fleurs, qui correspond à ses mesures ?
+        <div data-ex="question">Quelle est la fleur qui correspond à ces mesures ?
 </div>
     
 
@@ -518,12 +561,23 @@
             <div class="card-header">Réponse</div>
             <div class="card-body text-primary">
                 
-                    <select class="form-control" data-answer="Iris-virginica">
-    <option>Iris-setosa</option>
-    <option>Iris-versicolor</option>
-    <option>Iris-virginica</option>
-</select>
+                    
+                            <label>
+                                <select 
+                                        class="form-control" data-answer="Iris viriginica">
+                                    <option>---</option>
+                                    
+                                        <option>Iris setosa</option>
+                                    
+                                        <option>Iris versicolor</option>
+                                    
+                                        <option>Iris viriginica</option>
+                                    
+                                </select>
+                            </label>
+                        
 
+                    
                 
             </div>
             <div class="card-footer">
@@ -540,7 +594,7 @@
     <div class="card-header">Correction</div>
     <div class="card-body text-success">
         <p class="card-text">
-            C'est (probalement) une <i>Iris-virginica</i>.<br> La longueur et la largeur de la sépale ne nous permettent pas de donner des informations fiables sur la fleur.<br> Cepandant la longueur et la largeur de la pétale sont très proche des <i>Iris-virginica</i> existantes.
+            C'est (probalement) un <i>Iris virginica</i>.<br> La longueur et la largeur du sépale ne nous permettent pas de donner des informations fiables sur la fleur.<br> Cependant la longueur et la largeur du pétale sont très proches des <i>Iris virginica</i>déjà présents.
 
         </p>
     </div>
@@ -575,11 +629,15 @@
             <div class="card-header">Réponse</div>
             <div class="card-body text-primary">
                 
-                    <div class="form-group">
+                      
+                            <div class="form-group">
     <label for="repEx2-2"></label>
     <textarea class="form-control" rows="2" id="repEx2-2" data-answer="proche,groupe,vert,virginica"></textarea>
 </div>
 
+                    
+
+                    
                 
             </div>
             <div class="card-footer">
@@ -596,7 +654,7 @@
     <div class="card-header">Correction</div>
     <div class="card-body text-success">
         <p class="card-text">
-            La fleur ajoutée se trouve dans le "regroupement" formé par toutes les autres <i>Iris-virginica</i>
+            La fleur ajoutée se trouve proche du groupe formé par toutes les autres <i>Iris virginica</i>
 
         </p>
     </div>
@@ -609,7 +667,7 @@
     
 <div data-ex="exercice">
     
-        <h3 data-ex="title">K-plus proche voisins</h3>
+        <h3 data-ex="title">K-plus proches voisins</h3>
     
 
     
@@ -629,11 +687,15 @@
             <div class="card-header">Réponse</div>
             <div class="card-body text-primary">
                 
-                    <select class="form-control" data-answer="Jaune">
+                      
+                            <select class="form-control" data-answer="Jaune">
     <option>Jaune</option>
     <option>Vert</option>
 </select>
 
+                    
+
+                    
                 
             </div>
             <div class="card-footer">
@@ -676,7 +738,8 @@
             <div class="card-header">Réponse</div>
             <div class="card-body text-primary">
                 
-                    <label for="repEx3-Nearest" class="col-form-label">Plus proche:</label> <select class="form-control col-sm-9" id="repEx3-Nearest" data-answer="Jaune">
+                      
+                            <label for="repEx3-Nearest" class="col-form-label">Plus proche:</label> <select class="form-control col-sm-9" id="repEx3-Nearest" data-answer="Jaune">
     <option>Jaune</option>
     <option>Vert</option>
 </select> <label for="repEx3-Nearest2" class="col-form-label">2eme plus proche:</label> <select class="form-control col-sm-9" id="repEx3-Nearest2" data-answer="Vert">
@@ -687,6 +750,9 @@
     <option>Vert</option>
 </select>
 
+                    
+
+                    
                 
             </div>
             <div class="card-footer">
@@ -729,11 +795,15 @@
             <div class="card-header">Réponse</div>
             <div class="card-body text-primary">
                 
-                    <select class="form-control" data-answer="Verte">
+                      
+                            <select class="form-control" data-answer="Verte">
     <option>Jaune</option>
     <option>Verte</option>
 </select>
 
+                    
+
+                    
                 
             </div>
             <div class="card-footer">
@@ -776,7 +846,8 @@
             <div class="card-header">Réponse</div>
             <div class="card-body text-primary">
                 
-                    <select class="form-control">
+                      
+                            <select class="form-control">
     <option>Jaune</option>
     <option>Verte</option>
 </select> <div class="form-group">
@@ -784,6 +855,9 @@
     <textarea class="form-control" rows="2" id="repEx3-Majority" data-answer="égalité,pas,égale"></textarea>
 </div>
 
+                    
+
+                    
                 
             </div>
             <div class="card-footer">
@@ -800,7 +874,7 @@
     <div class="card-header">Correction</div>
     <div class="card-body text-success">
         <p class="card-text">
-            Pas de majorité car on à une égalité (1 jaune et 1 vert)
+            Pas de majorité car on a une égalité (1 jaune et 1 vert)
 
         </p>
     </div>
@@ -815,7 +889,7 @@
     
 
     
-        <div data-ex="intro">Supposons maintenant que les points jaunes représentent des <i>Iris-versicolor</i> et les verts des <i>Iris-virginica</i>.</div>
+        <div data-ex="intro">Supposons maintenant que les points jaunes représentent des <i>Iris versicolor</i> et les verts des <i>Iris virginica</i>.</div>
     
 
     
@@ -828,11 +902,15 @@
             <div class="card-header">Réponse</div>
             <div class="card-body text-primary">
                 
-                    <div class="form-group">
+                      
+                            <div class="form-group">
     <label for="repEx3-justification"></label>
     <textarea class="form-control" rows="3" id="repEx3-justification" data-answer="proche,versicolor,éloigné,viriginica,nombre"></textarea>
 </div>
 
+                    
+
+                    
                 
             </div>
             <div class="card-footer">
@@ -849,7 +927,7 @@
     <div class="card-header">Correction</div>
     <div class="card-body text-success">
         <p class="card-text">
-            Si on se fie uniquement à la fleur la plus proche on peut penser que c’est une versicolor. Mais si l’on regarde les fleurs plus éloigné, il est plus probable que ça soit une iris-virginica.<br> Cette exercice n’a pas de réponse absolue, l’important c’est que tu comprennes la notion de majorité et que selon les paramètres qu’on pose (ici le nombre de voisins) la réponse peut changer.
+            Si on se fie uniquement à la fleur la plus proche on peut penser que c’est une versicolor. Mais si l’on regarde les fleurs plus éloigné, il est plus probable que ça soit une Iris virginica.<br> Cette exercice n’a pas de réponse absolue, l’important c’est que tu comprennes la notion de majorité et que selon les paramètres qu’on pose (ici le nombre de voisins) la réponse peut changer.
 
         </p>
     </div>
@@ -868,7 +946,7 @@
     
         <div data-ex="intro"><p>
     Dans l'activité qui va suivre, on utilise la notion de <b>compteur</b>.<br>
-    Un compteur est associé à chaque classe de fleur, dans notre cas on à un compteur pour l'iris setosa, un pour l'iris versicolor et un pour l'iris virginica.<br>
+    Un compteur est associé à chaque classe de fleur, dans notre cas on a un compteur pour l'<i>Iris setosa</i>, un pour l'<i>Iris versicolor</i> et un pour l'<i>Iris virginica</i>.<br>
     Chaque compteur <b>commence à 0 et augmente de 1</b> chaque fois qu'un voisin de la classe du compteur est rencontré.<br>
 </p> <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -880,45 +958,45 @@
     <div class="carousel-inner">
         <div class="carousel-item active">
             <img class="d-block w-100" src="/static/img/KNN/animCompteurK0.jpg" alt="First slide">
-            <div class="carousel-caption d-none d-md-block">
+            <div class="carousel-caption d-none d-md-block" style="background-color: rgba(0,0,0,0.2)">
                 <h5>K = 0</h5>
                 <p>On n'a pas encore rencontré de voisins, les compteurs sont tous à 0</p>
             </div>
         </div>
         <div class="carousel-item">
             <img class="d-block w-100" src="/static/img/KNN/animCompteurK1.jpg" alt="Second slide">
-            <div class="carousel-caption d-none d-md-block">
+            <div class="carousel-caption d-none d-md-block" style="background-color: rgba(0,0,0,0.2)">
                 <h5>K = 1</h5>
                 <p>Le voisin le plus proche est un triangle orange, son compteur augmente  de 1 (passe de 0 à 1)</p>
             </div>
         </div>
         <div class="carousel-item">
             <img class="d-block w-100" src="/static/img/KNN/animCompteurK2.jpg" alt="Third slide">
-            <div class="carousel-caption d-none d-md-block">
+            <div class="carousel-caption d-none d-md-block" style="background-color: rgba(0,0,0,0.2)">
                 <h5>K = 2</h5>
                 <p>Le 2ème voisin le plus proche est un carré bleu, son compteur augmente  de 1 (passe de 0 à 1)</p>
             </div>
         </div>
         <div class="carousel-item">
             <img class="d-block w-100" src="/static/img/KNN/animCompteurK3.jpg" alt="Fourth slide">
-            <div class="carousel-caption d-none d-md-block">
+            <div class="carousel-caption d-none d-md-block" style="background-color: rgba(0,0,0,0.2)">
                 <h5>K = 3</h5>
                 <p>Le 3ème voisin le plus proche est un carré bleu, son compteur augmente de 1 (passe de 1 à 2)</p>
             </div>
         </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.2)"></span>
         <span class="sr-only">Previous</span>
     </a>
     <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="carousel-control-next-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.2)"></span>
         <span class="sr-only">Next</span>
     </a>
 </div> <p>
     Réutilisons le graphique précédent dans cet exercice.<br>
-    Pour rappel, les points jaunes représentent des <i>Iris-versicolor</i> et les verts des <i>Iris-virginica</i>.
-    Le marqueur gris en forme de croix est une iris inconnue.
+    Pour rappel, les points jaunes représentent des <i>Iris versicolor</i> et les verts des <i>Iris virginica</i>.
+    Le marqueur gris en forme de croix est un iris inconnu.
 </p> <img src="/static/img/KNN/exKNNGraphiqueCorr.png" class="img-fluid pinnable">
 </div>
     
@@ -933,18 +1011,22 @@
             <div class="card-header">Réponse</div>
             <div class="card-body text-primary">
                 
-                    <div class="form-group row">
-    <label for="staticEmail" class="col-sm-4 col-form-label">Compteur d'iris-versicolor</label>
+                      
+                            <div class="form-group row">
+    <label for="staticEmail" class="col-sm-4 col-form-label">Compteur d'<i>Iris versicolor</i></label>
     <div class="col-sm-8">
       <input type="number" class="form-control" id="staticEmail" value="0" min="0" max="4" data-answer="1">
     </div>
 </div> <div class="form-group row">
-    <label for="staticEmail" class="col-sm-4 col-form-label">Compteur d'iris-virginica</label>
+    <label for="staticEmail" class="col-sm-4 col-form-label">Compteur d'<i>Iris virginica</i></label>
     <div class="col-sm-8">
         <input type="number" class="form-control" id="staticEmail" value="0" min="0" max="4" data-answer="3">
     </div>
 </div>
 
+                    
+
+                    
                 
             </div>
             <div class="card-footer">
@@ -962,9 +1044,9 @@
     <div class="card-body text-success">
         <p class="card-text">
             <p>
-    La plus proche est une iris-versicolor, son compteur passe à 1.<br>
-    Les 3 plus proches suivantes sont 3 iris-virginica, leur compteur passe donc à 3.<br>
-    On se retrouve donc au final avec un compteur de 1 pour les iris-versicolor et de un pour les iris-viriginica.
+    La plus proche est un <i>Iris versicolor</i>, son compteur passe à 1.<br>
+    Les 3 plus proches suivantes sont 3 <i>Iris virginica</i>, leur compteur passe donc à 3.<br>
+    On se retrouve donc au final avec un compteur de 1 pour les <i>Iris versicolor</i> et de un pour les <i>Iris virginica</i>.
 </p>
 
         </p>
@@ -991,11 +1073,15 @@
             <div class="card-header">Réponse</div>
             <div class="card-body text-primary">
                 
-                    <select class="form-control" data-answer="Iris-virginica">
-    <option>Iris-versicolor</option>
-    <option>Iris-virginica</option>
+                      
+                            <select class="form-control" data-answer="Iris virginica">
+    <option>Iris versicolor</option>
+    <option>Iris virginica</option>
 </select> Justification : <br> <textarea class="form-control" rows="3" data-answer="oui,maximum,grand,grande"></textarea>
 
+                    
+
+                    
                 
             </div>
             <div class="card-footer">
@@ -1016,7 +1102,7 @@
     Oui, la valeur des compteurs nous donne beaucoup d'information sur les voisins les plus proches.<br>
     Pour déduire la fleur prédite par l'algorithme, il suffit de prendre la fleur associée au compteur qui a la valeur <b>maximale</b>
     (exactement comme les votes de l'exercice précédent).<br>
-    Dans notre cas, l'iris-viriginica a le compteur de valeur maximum (3 vs 1 pour l'iris-versicolor )
+    Dans notre cas, l'Iris viriginica a le compteur de valeur maximum (3 vs 1 pour l'Iris versicolor )
 </p>
 
         </p>
@@ -1035,7 +1121,7 @@
 
     
         <div data-ex="intro"><p>
-    Voici trois nouvelles iris dont la variété est connue (mais pas donnée) :
+    Voici trois nouveaux iris dont la variété est connue (mais pas donnée) :
 </p> <div class="pinnable" style="overflow: auto">
     <table class="table table-hover " id="table2">
         <thead>
@@ -1074,7 +1160,7 @@
     </table>
 </div>
 <p>
-    Notre but dans cette partie va être de <b>prédire</b> les fleurs à partir des données et <b>ensuite</b> on va vérifier si nos prédictions sont exactes.
+    Notre but dans cette partie va être de <b>prédire</b> la variété des fleurs à partir des données et <b>ensuite</b> on va vérifier si nos prédictions sont exactes.
 </p>
 </div>
     
@@ -1099,7 +1185,7 @@
         <div data-ex="intro"><p>
     Soit les trois fleurs données dans le <a href="#table2">Tableau 2</a>, avec le <a href="#table1">Tableau 1</a>
     comme modèle d’entrainement.
-    Tu déterminera la classe de la fleur en regardant la majorité parmi <b>les trois voisins les plus proches</b>.<br>
+    Tu détermineras la classe de la fleur en regardant la majorité parmi <b>les trois voisins les plus proches</b>.<br>
     Pour cela tu peux t'aider des graphiques que je te donne : <br>
 </p> <div style="text-align: center">
     <img src="/static/img/KNN/exKNNGraphiqueMetriqueSepale.png" class="img-fluid pinnable" style="padding-right: 16px">
@@ -1118,32 +1204,36 @@
             <div class="card-header">Réponse</div>
             <div class="card-body text-primary">
                 
-                    Classifieur 1 ; Métrique sépale (longueur et largeur) :<br> <label for="repEx4.1-P1F1" class="col-sm-2 col-form-label">Iris 1</label> <select class="form-control col-sm-9" id="repEx4.1-P1F1" data-answer="Iris-virginica">
-    <option>Iris-setosa</option>
-    <option>Iris-versicolor</option>
-    <option>Iris-virginica</option>
-</select> <label for="repEx4.1-P1F2" class="col-sm-2 col-form-label">Iris 2</label> <select class="form-control col-sm-9" id="repEx4.1-P1F2" data-answer="Iris-setosa">
-    <option>Iris-setosa</option>
-    <option>Iris-versicolor</option>
-    <option>Iris-virginica</option>
-</select> <label for="repEx4.1-P1F3" class="col-sm-2 col-form-label">Iris 3</label> <select class="form-control col-sm-9" id="repEx4.1-P1F3" data-answer="Iris-versicolor">
-    <option>Iris-setosa</option>
-    <option>Iris-versicolor</option>
-    <option>Iris-virginica</option>
-</select> <br> Classifieur 2 ; Métrique pétale (longueur et largeur) :<br> <label for="repEx4.1-P2F1" class="col-sm-2 col-form-label">Iris 1</label> <select class="form-control col-sm-9" id="repEx4.1-P2F1" data-answer="Iris-setosa">
-    <option>Iris-setosa</option>
-    <option>Iris-versicolor</option>
-    <option>Iris-virginica</option>
-</select> <label for="repEx4.1-P2F2" class="col-sm-2 col-form-label">Iris 2</label> <select class="form-control col-sm-9" id="repEx4.1-P2F2" data-answer="Iris-versicolor">
-    <option>Iris-setosa</option>
-    <option>Iris-versicolor</option>
-    <option>Iris-virginica</option>
-</select> <label for="repEx4.1-P2F3" class="col-sm-2 col-form-label">Iris 3</label> <select class="form-control col-sm-9" id="repEx4.1-P2F3" data-answer="Iris-virginica">
-    <option>Iris-setosa</option>
-    <option>Iris-versicolor</option>
-    <option>Iris-virginica</option>
+                      
+                            Classifieur 1 ; Métrique sépale (longueur et largeur) :<br> <label for="repEx4.1-P1F1" class="col-sm-2 col-form-label">Iris 1</label> <select class="form-control col-sm-9" id="repEx4.1-P1F1" data-answer="Iris virginica">
+    <option>Iris setosa</option>
+    <option>Iris versicolor</option>
+    <option>Iris virginica</option>
+</select> <label for="repEx4.1-P1F2" class="col-sm-2 col-form-label">Iris 2</label> <select class="form-control col-sm-9" id="repEx4.1-P1F2" data-answer="Iris setosa">
+    <option>Iris setosa</option>
+    <option>Iris versicolor</option>
+    <option>Iris virginica</option>
+</select> <label for="repEx4.1-P1F3" class="col-sm-2 col-form-label">Iris 3</label> <select class="form-control col-sm-9" id="repEx4.1-P1F3" data-answer="Iris versicolor">
+    <option>Iris setosa</option>
+    <option>Iris versicolor</option>
+    <option>Iris virginica</option>
+</select> <br> Classifieur 2 ; Métrique pétale (longueur et largeur) :<br> <label for="repEx4.1-P2F1" class="col-sm-2 col-form-label">Iris 1</label> <select class="form-control col-sm-9" id="repEx4.1-P2F1" data-answer="Iris setosa">
+    <option>Iris setosa</option>
+    <option>Iris versicolor</option>
+    <option>Iris virginica</option>
+</select> <label for="repEx4.1-P2F2" class="col-sm-2 col-form-label">Iris 2</label> <select class="form-control col-sm-9" id="repEx4.1-P2F2" data-answer="Iris versicolor">
+    <option>Iris setosa</option>
+    <option>Iris versicolor</option>
+    <option>Iris virginica</option>
+</select> <label for="repEx4.1-P2F3" class="col-sm-2 col-form-label">Iris 3</label> <select class="form-control col-sm-9" id="repEx4.1-P2F3" data-answer="Iris virginica">
+    <option>Iris setosa</option>
+    <option>Iris versicolor</option>
+    <option>Iris virginica</option>
 </select>
 
+                    
+
+                    
                 
             </div>
             <div class="card-footer">
@@ -1160,7 +1250,7 @@
     <div class="card-header">Correction</div>
     <div class="card-body text-success">
         <p class="card-text">
-            Les données sont choisies de sorte qu’il n’y ait pas d’ambiguïtés pour déterminer la majorité.<br> Normalement, les résultats devraient êtres les suivants.<br> Classifieur 1 : Virginica, Setosa et Versicolor <br> Classifieur 2 : Setosa, Versicolor et Virginica <br>
+            Les données sont choisies de sorte qu’il n’y ait pas d’ambiguïtés pour déterminer la majorité.<br> Classifieur 1 : Virginica, Setosa et Versicolor <br> Classifieur 2 : Setosa, Versicolor et Virginica <br>
 
         </p>
     </div>
@@ -1192,15 +1282,15 @@
     <tbody>
     <tr class="table-secondary">
         <th scope="row">1</th>
-        <td>Iris-setosa</td>
+        <td>Iris setosa</td>
     </tr>
     <tr class="table-secondary">
         <th scope="row">2</th>
-        <td>Iris-versicolor</td>
+        <td>Iris versicolor</td>
     </tr>
     <tr class="table-secondary">
         <th scope="row">3</th>
-        <td>Iris-setosa</td>
+        <td>Iris setosa</td>
     </tr>
     </tbody>
     <caption>Tableau 3 : Variété des iris du <a href="#table2">Tableau 2</a></caption>
@@ -1220,7 +1310,8 @@
             <div class="card-header">Réponse</div>
             <div class="card-body text-primary">
                 
-                    Classifieur 1 ; Métrique sépale (longueur et largeur) :<br> <select class="form-control col-sm-9" data-answer="0 (aucune)">
+                      
+                            Classifieur 1 ; Métrique sépale (longueur et largeur) :<br> <select class="form-control col-sm-9" data-answer="0 (aucune)">
     <option>0 (aucune)</option>
     <option>1</option>
     <option>2</option>
@@ -1233,6 +1324,9 @@
     <option>3 (toute)</option>
 </select>
 
+                    
+
+                    
                 
             </div>
             <div class="card-footer">
@@ -1275,11 +1369,15 @@
             <div class="card-header">Réponse</div>
             <div class="card-body text-primary">
                 
-                    <div class="form-group">
+                      
+                            <div class="form-group">
     <label for="repEx4-2-justification"></label>
     <textarea class="form-control" rows="6" id="repEx4-2-justification" data-answer="2,second"></textarea>
 </div>
 
+                    
+
+                    
                 
             </div>
             <div class="card-footer">
@@ -1296,7 +1394,7 @@
     <div class="card-header">Correction</div>
     <div class="card-body text-success">
         <p class="card-text">
-            Le second est du coup plus intéressant puisqu’il prédit mieux. Autrement dit, on peut deviner avec plus de certitudes une Iris en mesurant sa pétale plutôt que sa sépale.<br> Intéressant de noter ici que notre classifieur n’est pas parfait non plus (il n’a pas un score de  3/3).<br> A noter également que nos données sont très petites pour pouvoir affirmer avec conviction que le second est toujours meilleur que le premier.
+            Le second est du coup plus intéressant puisqu’il prédit mieux. Autrement dit, on peut deviner avec plus de certitude un Iris en mesurant son pétale plutôt que son sépale.<br> Intéressant de noter ici que notre classifieur n’est pas parfait non plus (il n’a pas un score de  3/3).<br> A noter également que le nombre de données est trop petit pour pouvoir affirmer avec conviction que le second est toujours meilleur que le premier.
 
         </p>
     </div>
@@ -1314,17 +1412,17 @@
         
         <li>L'algorithme des K plus proches voisins repose sur un principe assez simple.</li>
         
-        <li>On se base sur des données connues (modèle d'entrainement) pour déduire la catégorie (classe) d'un nouvel élément en y trouvant celle qui est la plus présente parmis les données avec les valeurs les plus proches.</li>
+        <li>On se base sur des données connues (modèle d'entrainement) pour déduire la catégorie (classe) d'un nouvel élément en y trouvant celle qui est la plus présente parmi les données avec les valeurs les plus proches.</li>
         
         <li>On peut choisir le nombre de données les plus proches (K). Généralement on choisit 3.</li>
         
         <li>Chaque classe a un compteur qui lui est associé. Il commence à 0 et augmente de 1 chaque fois qu'un voisin de sa classe est rencontré. <br>Après avoir fait cette opération K fois, la classe associé au compteur de classe maximal est celle prédite par le classifieur.</li>
         
-        <li>Le choix des mesures (métriques) pour lesquels on décide si l'élément est proche est important. On essaiera de trouver au mieux de choisir celles qui discerne le mieux les différentes classes.</li>
+        <li>Le choix des mesures (métriques) pour lesquels on décide si l'élément est proche est important. On essaiera de choisir au mieux celles qui permettent de différencier les classes (critère discriminant).</li>
         
-        <li>Les résultats ne sont pas toujours fiables ! Il ne faut pas croire à 100% ce que nous dit le classifieur, même s'il est bien fait</li>
+        <li>Les résultats ne sont pas toujours fiables ! Il ne faut pas croire à 100% ce que nous dit le classifieur, même s'il est bien fait.</li>
         
-        <li>Un classifieur ne reconnait que ce pour quoi il a été entrainé pour. Ici si on lui donne une autre fleur, une marguerite par exemple, il va nous déduire l'iris qui s'en rapproche le plus.</li>
+        <li>Un classifieur ne reconnait que ce pour quoi il a été entrainé. Ici si on lui donne une autre fleur, une marguerite par exemple, il va nous déduire l'iris qui s'en rapproche le plus.</li>
         
     </ul>
 

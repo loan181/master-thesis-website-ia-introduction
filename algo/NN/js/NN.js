@@ -3,8 +3,8 @@
 
 // some of the code below was taken from a stackoverflow flag I cannot find anymore, and adapted to my needs.
 // Thanks a ton to the original author!
-var canvas;
-var ctx;
+var canvasDraw;
+var canvasDrawCtx;
 
 var prevX = 0;
 var currX = 0;
@@ -17,6 +17,7 @@ var lineWidth = 20;
 
 var clearBeforeDraw = false; // controls whether canvas will be cleared on next mousedown event. Set to true after digit recognition
 
+var nnInput;
 var w12;
 var w23;
 var data;
@@ -155,7 +156,7 @@ function recognize() {
     var t1 = new Date();
 
     // convert RGBA image to a grayscale array, then compute bounding rectangle and center of mass
-    var imgData = ctx.getImageData(0, 0, 280, 280);
+    var imgData = canvasDrawCtx.getImageData(0, 0, 280, 280);
     grayscaleImg = imageDataToGrayscale(imgData);
     var boundingRectangle = getBoundingRectangle(grayscaleImg, 0.01);
     var trans = centerImage(grayscaleImg); // [dX, dY] to center of mass
@@ -171,9 +172,9 @@ function recognize() {
     var brH = boundingRectangle.maxY+1-boundingRectangle.minY;
     var scaling = 190 / (brW>brH?brW:brH);
     // scale
-    copyCtx.translate(canvas.width/2, canvas.height/2);
+    copyCtx.translate(canvasDraw.width/2, canvasDraw.height/2);
     copyCtx.scale(scaling, scaling);
-    copyCtx.translate(-canvas.width/2, -canvas.height/2);
+    copyCtx.translate(-canvasDraw.width/2, -canvasDraw.height/2);
     // translate to center of mass
     copyCtx.translate(trans.transX, trans.transY);
 
@@ -193,34 +194,37 @@ function recognize() {
         }
     } else {
         // default take image from original canvas
-        copyCtx.drawImage(ctx.canvas, 0, 0);
+        copyCtx.drawImage(canvasDrawCtx.canvas, 0, 0);
     }
 
 
     // now bin image into 10x10 blocks (giving a 28x28 image)
-    imgData = copyCtx.getImageData(0, 0, 280, 280);
-    grayscaleImg = imageDataToGrayscale(imgData);
-    var nnInput = new Array(784);
-    for (var y = 0; y < 28; y++) {
-        for (var x = 0; x < 28; x++) {
-            var mean = 0;
-            for (var v = 0; v < 10; v++) {
-                for (var h = 0; h < 10; h++) {
-                    mean += grayscaleImg[y*10 + v][x*10 + h];
-                }
-            }
-            mean = (1 - mean / 100); // average and invert
-            nnInput[x*28+y] = (mean - .5) / .5;
-        }
-    }
+
+    nnInput = processPicture(copyCtx).flat();
+    // imgData = copyCtx.getImageData(0, 0, 280, 280);
+    // grayscaleImg = imageDataToGrayscale(imgData);
+    // var nnInput = new Array(784);
+    // for (var y = 0; y < 28; y++) {
+    //     for (var x = 0; x < 28; x++) {
+    //         var mean = 0;
+    //         for (var v = 0; v < 10; v++) {
+    //             for (var h = 0; h < 10; h++) {
+    //                 mean += grayscaleImg[y*10 + v][x*10 + h];
+    //             }
+    //         }
+    //         mean = (1 - mean / 100); // average and invert
+    //         nnInput[x*28+y] = (mean - .5) / .5;
+    //     }
+    // }
+    // console.log(nnInput2)
 
     // for visualization/debugging: paint the input to the neural net.
     if (document.getElementById('preprocessing').checked == true) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(copyCtx.canvas, 0, 0);
+        canvasDrawCtx.clearRect(0, 0, canvasDraw.width, canvasDraw.height);
+        canvasDrawCtx.drawImage(copyCtx.canvas, 0, 0);
         for (var y = 0; y < 28; y++) {
             for (var x = 0; x < 28; x++) {
-                var block = ctx.getImageData(x * 10, y * 10, 10, 10);
+                var block = canvasDrawCtx.getImageData(x * 10, y * 10, 10, 10);
                 var newVal = 255 * (0.5 - nnInput[x*28+y]/2);
                 for (var i = 0; i < 4 * 10 * 10; i+=4) {
                     block.data[i] = newVal;
@@ -228,7 +232,7 @@ function recognize() {
                     block.data[i+2] = newVal;
                     block.data[i+3] = 255;
                 }
-                ctx.putImageData(block, x * 10, y * 10);
+                canvasDrawCtx.putImageData(block, x * 10, y * 10);
             }
         }
     }
@@ -246,7 +250,7 @@ function recognize() {
         let curBar = document.getElementById("percentBar"+i);
         let estimation = nnOutput[i]*100;
         let val = estimation.toFixed(2)+"%";
-        curBar.style.width = val;
+        curBar.style.height = val;
         curBar.textContent = val;
         if (i === maxIndex) {
             curBar.className = "progress-bar progress-bar-striped progress-bar-animated bg-success";
@@ -261,20 +265,42 @@ function recognize() {
     console.log('recognize time: '+dt+'ms');
 }
 
-function init() {
-    canvas = document.getElementById('can');
-    ctx = canvas.getContext("2d");
+function processPicture(imgcontext) {
+    let imgData = imgcontext.getImageData(0, 0, 280, 280);
+    let grayscaleImg = imageDataToGrayscale(imgData);
+    let imgArray = new Array(28); // 2D array of 28*28
+    for (let y = 0; y < 28; y++) {
+        imgArray[y] = new Array(28);
+    }
+    for (let y = 0; y < 28; y++) {
+        for (let x = 0; x < 28; x++) {
+            let mean = 0;
+            for (let v = 0; v < 10; v++) {
+                for (let h = 0; h < 10; h++) {
+                    mean += grayscaleImg[y*10 + v][x*10 + h];
+                }
+            }
+            mean = (1 - mean / 100); // average and invert
+            imgArray[x][y] = (mean - .5) / .5;
+        }
+    }
+    return imgArray;
+}
 
-    canvas.addEventListener("mousemove", function (e) {
+function initCanvaDraw() {
+    canvasDraw = document.getElementById('can');
+    canvasDrawCtx = canvasDraw.getContext("2d");
+
+    canvasDraw.addEventListener("mousemove", function (e) {
         findxy('move', e)
     }, false);
-    canvas.addEventListener("mousedown", function (e) {
+    canvasDraw.addEventListener("mousedown", function (e) {
         findxy('down', e)
     }, false);
-    canvas.addEventListener("mouseup", function (e) {
+    canvasDraw.addEventListener("mouseup", function (e) {
         findxy('up', e)
     }, false);
-    canvas.addEventListener("mouseout", function (e) {
+    canvasDraw.addEventListener("mouseout", function (e) {
         findxy('out', e)
     }, false);
 }
@@ -293,7 +319,7 @@ function draw(ctx, color, lineWidth, x1, y1, x2, y2) {
 }
 
 function erase() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    canvasDrawCtx.clearRect(0, 0, canvasDraw.width, canvasDraw.height);
     document.getElementById('nnOut').innerHTML = '';
 }
 
@@ -308,24 +334,24 @@ function getMousePos(canvas, evt) {
 function findxy(res, e) {
     if (res == 'down') {
         if (clearBeforeDraw == true) {
-            ctx.clearRect(0,0,canvas.width,canvas.height);
+            canvasDrawCtx.clearRect(0,0,canvasDraw.width,canvasDraw.height);
             document.getElementById('nnInput').innerHTML='';
             document.getElementById('nnOut').innerHTML='';
             paths = [];
             clearBeforeDraw = false;
         }
 
-        let xyPos = getMousePos(canvas, e);
+        let xyPos = getMousePos(canvasDraw, e);
         currX = xyPos["x"];
         currY = xyPos["y"];
 
         //draw a circle
-        ctx.beginPath();
-        ctx.lineWidth = 1;
-        ctx.arc(currX,currY,lineWidth/2,0,2*Math.PI);
-        ctx.stroke();
-        ctx.closePath();
-        ctx.fill();
+        canvasDrawCtx.beginPath();
+        canvasDrawCtx.lineWidth = 1;
+        canvasDrawCtx.arc(currX,currY,lineWidth/2,0,2*Math.PI);
+        canvasDrawCtx.stroke();
+        canvasDrawCtx.closePath();
+        canvasDrawCtx.fill();
 
         paths.push([[currX], [currY]]);
         paintFlag = true;
@@ -340,18 +366,18 @@ function findxy(res, e) {
             // draw a line to previous point
             prevX = currX;
             prevY = currY;
-            let xyPos = getMousePos(canvas, e);
+            let xyPos = getMousePos(canvasDraw, e);
             currX = xyPos["x"];
             currY = xyPos["y"];
             currPath = paths[paths.length-1];
             currPath[0].push(currX);
             currPath[1].push(currY);
             paths[paths.length-1] = currPath;
-            draw(ctx, color, lineWidth, prevX, prevY, currX, currY);
+            draw(canvasDrawCtx, color, lineWidth, prevX, prevY, currX, currY);
         }
     }
 }
 
 document.addEventListener("DOMContentLoaded", function(event) {
-    init();
+    initCanvaDraw();
 });

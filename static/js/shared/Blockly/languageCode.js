@@ -356,19 +356,21 @@ LanguageCode.init = function() {
                     length: 3,
                     colour: '#ccc',
                     snap: true},
-            media: 'blocklySrc/media/',
+            media: '/static/js/shared/Blockly/src/media/',
             oneBasedIndex: false, // Indice commence à 0 (pas à 1)
             rtl: rtl,
             toolbox: toolboxXml,
             zoom:
-                {controls: true,
-                    wheel: true}
+                {controls: true}
         });
 
 
     // Add to reserved word list: Local variables in execution environment (runJS)
     // and the infinite loop detection function.
     Blockly.JavaScript.addReservedWords('code,timeouts,checkTimeout');
+
+    Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),
+        LanguageCode.workspace);
 
     LanguageCode.loadBlocks('');
 
@@ -556,9 +558,9 @@ LanguageCode.discard = function() {
 };
 
 // Load the Code demo's language strings.
-document.write('<script src="msg/0DEF.js"></script>\n');
-document.write('<script src="msg/' + LanguageCode.LANG + '.js"></script>\n');
+document.write('<script src="/static/js/shared/Blockly/msg/0DEF.js"></script>\n');
+document.write('<script src="/static/js/shared/Blockly/msg/' + LanguageCode.LANG + '.js"></script>\n');
 // Load Blockly's language strings.
-document.write('<script src="blocklySrc/msg/js/' + LanguageCode.LANG + '.js"></script>\n');
+document.write('<script src="/static/js/shared/Blockly/src/js/' + LanguageCode.LANG + '.js"></script>\n');
 
 window.addEventListener('load', LanguageCode.init);

@@ -1,6 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+
 <head>
+    <meta charset="UTF-8">
+    <title>Réseau neuronnal</title>
     
 
 <!-- Database -->
@@ -60,20 +63,45 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
-    <!-- Raphael -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"> </script>
-    <!-- MDBootstrap Datatables  -->
-    <link href="js/MDB/datatables.min.css" rel="stylesheet">
-    <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.4/js/mdb.min.js"></script>
-    <!-- MDBootstrap Datatables  -->
-    <script type="text/javascript" src="js/MDB/datatables.min.js"></script>
+<!-- MathJax -->
 
-    <!-- My Scripts -->
-    <script src="js/NNDatas.js"></script>
-    <script src="js/NN.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.1/bootstrap-slider.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.1/css/bootstrap-slider.min.css">
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+
+    
+
+    
+        <!-- Raphael -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"> </script>
+    
+
+    <!-- Custom Extra scripts -->
+    
+        <script type="text/javascript" src="/static/js/shared/Blockly/src/blockly_compressed.js"></script>
+    
+        <script type="text/javascript" src="/static/js/shared/Blockly/src/blocks_compressed.js"></script>
+    
+        <script type="text/javascript" src="/static/js/shared/Blockly/src/javascript_compressed.js"></script>
+    
+
+    
+        <!-- Arbitrary additions -->
+        <!-- MDBootstrap Datatables  --> <link href="js/MDB/datatables.min.css" rel="stylesheet"> <!-- MDB core JavaScript --> <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.4/js/mdb.min.js"></script> <!-- MDBootstrap Datatables  --> <script type="text/javascript" src="js/MDB/datatables.min.js"></script>
+<!-- My Scripts --> <script src="js/NNDatas.js"></script> <script src="js/NN.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.1/bootstrap-slider.min.js"></script> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.1/css/bootstrap-slider.min.css">
+
+    
+
+    <!-- Success Message -->
+    <link rel="stylesheet" href="/static/css/animationSuccess.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.1/TweenMax.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
 </head>
 
 <body>
@@ -107,8 +135,8 @@
     let algoActivityDesc = [
         "Introduction au concept général de l'algorithme",
         "Série de petits exercices de préparation pour introduire l'idée derrière l'algorithme<br>Leur correction est automatisée.",
-        "Phase expliquant le fonctionement et objectif de l'activité.<br>Cette phase est nécessaire pour comprendre la suivante",
-        "Activité intéractive de l'algorithme. Les activités dépendent des algorithmes eux-mêmes."
+        "Explication de l'objectif et du fonctionnement de l'activité.<br>Nécessaire pour la réalisation de l'étape suivante !",
+        "Activité interactive de l'algorithme considéré.<br>Ca sera l'étape finale pour prouver ta compréhension et dévcouvrir le secret caché de cet algorithme !"
     ];
     let algoActivityIcon = [
         "<i class=\"far fa-lightbulb\"></i>",
@@ -119,7 +147,7 @@
     // We can't use javascript variable into jekyll, so we precompute the values here
     let algoName = [ "Méthodes des K plus proches voisins",  "Arbre de décisions",  "Réseau neuronal", ];
     let algoHRef = [ "KNN",  "arbre",  "NN", ];
-    let algoActivityName = [ "Blockly",  "Arbre intéractif",  "Réseau de neurone intéractif", ];
+    let algoActivityName = [ "Blockly",  "Arbre interactif",  "Réseau de neurone interactif", ];
     let algoIcon = [ '<i class="far fa-dot-circle"></i>',  '<i class="fas fa-tree"></i>',  '<svg class="icon icon-cart" role="img" xmlns="http://www.w3.org/2000/svg" style="height:21px" viewBox="0 0 640 512" class="svg-inline--fa fa-chart-network fa-w-20"><path fill="currentColor" d="M568 368c-19.1 0-36.3 7.6-49.2 19.7L440.6 343c4.5-12.2 7.4-25.2 7.4-39 0-61.9-50.1-112-112-112-8.4 0-16.6 1.1-24.4 2.9l-32.2-69c15-13.2 24.6-32.3 24.6-53.8 0-39.8-32.2-72-72-72s-72 32.2-72 72 32.2 72 72 72c.9 0 1.8-.2 2.7-.3l33.5 71.7C241.5 235.9 224 267.8 224 304c0 61.9 50.1 112 112 112 30.7 0 58.6-12.4 78.8-32.5l82.2 47c-.4 3.1-1 6.3-1 9.5 0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72zM232 96c-13.2 0-24-10.8-24-24s10.8-24 24-24 24 10.8 24 24-10.8 24-24 24zm104 272c-35.3 0-64-28.7-64-64s28.7-64 64-64 64 28.7 64 64-28.7 64-64 64zm232 96c-13.2 0-24-10.8-24-24s10.8-24 24-24 24 10.8 24 24-10.8 24-24 24zm-54.4-261.2l-19.2-25.6-48 36 19.2 25.6 48-36zM576 192c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64zM152 320h48v-32h-48v32zm-88-80c-35.3 0-64 28.7-64 64s28.7 64 64 64 64-28.7 64-64-28.7-64-64-64z" class="" data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path></svg>', ];
 
     function populateNavBar() {
@@ -169,7 +197,7 @@
 
     function getAllHrefForAlgo(algoConfingIndex) {
         let ret = [];
-        let pagesDefaultName = ["Introduction", "Exercices préparatoires", "Consignes et utilisation pour l'activité", "Activité"];
+        let pagesDefaultName = ["Introduction", "Exercices préparatoires", "Consignes pour l'activité", "Activité"];
         let pagesDefaultHref = ["intro", "exercice", "activite-aide", "activite"];
 
         for (let i = 0; i < pagesDefaultName.length; i++) {
@@ -204,545 +232,814 @@
 
 </script>
 <main role="main" class="container" style="max-width: 95%">
-
     <h1>Réseau neuronnal</h1>
 
-    <div class="row mt-2 col-md-12">
-        <div class="col-sm-4">
-            <div>
-                <canvas id="can" width="280" height="280" style="top:10%;left:10%;border:2px solid; cursor:crosshair"></canvas>
-            </div>
+    <!-- Toolbox -->
+    <div id="toolBox"></div>
+    <script src="/static/js/shared/ToolBox.js"></script>
+    <script>
+        let TB = new ToolBox("toolBox");
+        TB.setToolBarForExercice("KNN");
+        TB.draw();
+    </script>
 
-            <div class="container">
-                <input type="checkbox" style="transform: scale(1.5);" class="form-check-input" id="preprocessing">
-                <label class="form-check-label form-label-lg" for="preprocessing"><i class="fas fa-magic"></i> Afficher l'image transformée</label>
-                <div style="visibility: hidden"><input type="checkbox" id="scaleStrokeWidth" checked="true"><span style="margin-left:5px;">Scale Stroke Width</span></div>
-                <div style="text-align: center">
+    <!-- Progress bar of prediction -->
+    <div class="mt-2 col-md-12" >
+        <h6 style="float: left; margin-right: 1em;"> Précision actuelle : </h6>
+        <div id="progressBar"></div>
+    </div>
+    <script src="/static/js/successBar.js"></script>
+    <script>
+        let pb = new ProgressBar("progressBar");
+        function exerciceSuccess() {
+            $('#exerciceSuccess').modal('toggle');
+            fancyPopIn();
+        }
+    </script>
+
+    <!-- Main content of the activity -->
+    <div class="row mt-2 col-md-12">
+    <div class="col-sm-4">
+        <div>
+            <canvas id="can" width="280" height="280" style="top:10%;left:10%;border:2px solid; cursor:crosshair"></canvas>
+        </div>
+
+        <div class="container">
+            <input type="checkbox" style="transform: scale(1.5);" class="form-check-input" id="preprocessing">
+            <label class="form-check-label form-label-lg" for="preprocessing"><i class="fas fa-magic"></i> Afficher l'image transformée</label>
+            <div style="visibility: hidden"><input type="checkbox" id="scaleStrokeWidth" checked="true"><span style="margin-left:5px;">Scale Stroke Width</span></div>
+            <div style="text-align: center">
                 <button type="button" class="btn btn-primary btn-lg" id="recognize" onclick="recognize()"><i class="fas fa-search"></i> Reconnaitre</button><br><br>
                 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modifyWeights"><i class="fas fa-edit"></i> Modifier le réseau</button>
                 <button type="button" class="btn btn-warning" onclick="erase()"><i class="fas fa-eraser"></i> Effacer</button>
-                </div>
-                <div id="nnInput"></div>
             </div>
+            <div id="nnInput"></div>
+        </div>
 
-            <!-- Choose arc modal -->
-            <div class="modal fade" id="modifyWeights" tabindex="-1" role="dialog">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Modifier le réseau de neuronne</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col" align="center">
-                                    Couche 1<br>
-                                    <div class="btn-group" role="group">
-                                        <button type="button" class="btn btn-outline-secondary" onclick="buttonNeuronLevelPressed(1, $(layer1spinner).val(), 'neuron')"><i class="far fa-circle"></i></button>
-                                        <button type="button" class="btn btn-outline-secondary" onclick="buttonNeuronLevelPressed(1, $(layer1spinner).val(), 'wOut')"><i class="fas fa-sign-out-alt"></i></button>
-                                    </div>
-                                    <div>
-                                        <div style="padding-top: 20px; padding-bottom: 15px">
-                                            <input id="layer1slider" type="text" data-slider-min="0" data-slider-max="783" data-slider-step="1" data-slider-value="0">
-                                        </div>
-                                        <div class="input-group">
-                                            <input id="layer1spinner" type="number" class="form-control" value="0" min="0" max="783" step="1">
-                                            <div class="input-group-append">
-                                                <span class="input-group-text">/783</span>
-                                            </div>
-                                        </div>
-                                        <script>
-                                            $("#layer1slider").slider({
-                                                orientation: 'vertical'
-                                            });
-
-                                            // Synchronize the value of the spinner and the one of the slider
-                                            $("#layer1slider").on("slide", function(slideEvt) {
-                                                $("#layer1spinner").val(slideEvt.value);
-                                            });
-
-                                            $("#layer1spinner").on("input", function(spinEvent) {
-                                                $("#layer1slider").slider('setValue', $("#layer1spinner").val());
-                                            });
-                                        </script>
-                                    </div>
+        <!-- Choose arc modal -->
+        <div class="modal fade" id="modifyWeights" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modifier le réseau de neuronne</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col" align="center">
+                                Couche 1<br>
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-outline-secondary" onclick="buttonNeuronLevelPressed(1, $(layer1spinner).val(), 'neuron')"><i class="far fa-circle"></i></button>
+                                    <button type="button" class="btn btn-outline-secondary" onclick="buttonNeuronLevelPressed(1, $(layer1spinner).val(), 'wOut')"><i class="fas fa-sign-out-alt"></i></button>
                                 </div>
-                                <div class="col" align="center">
-                                    <br>
-                                    <button type="button" class="btn btn-outline-secondary" onclick="buttonWeightLevelPressed(1,  $(layer1spinner).val(), $(layer1spinner2).val())"><i class="fas fa-arrows-alt-h"></i></button>
+                                <div>
+                                    <div style="padding-top: 20px; padding-bottom: 15px">
+                                        <input id="layer1slider" type="text" data-slider-min="0" data-slider-max="783" data-slider-step="1" data-slider-value="0">
+                                    </div>
+                                    <div class="input-group">
+                                        <input id="layer1spinner" type="number" class="form-control" value="0" min="0" max="783" step="1">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">/783</span>
+                                        </div>
+                                    </div>
+                                    <script>
+                                        $("#layer1slider").slider({
+                                            orientation: 'vertical'
+                                        });
+
+                                        // Synchronize the value of the spinner and the one of the slider
+                                        $("#layer1slider").on("slide", function(slideEvt) {
+                                            $("#layer1spinner").val(slideEvt.value);
+                                        });
+
+                                        $("#layer1spinner").on("input", function(spinEvent) {
+                                            $("#layer1slider").slider('setValue', $("#layer1spinner").val());
+                                        });
+                                    </script>
                                 </div>
-                                <div class="col" align="center">
-                                    Couche 2<br>
-                                    <div class="btn-group" role="group">
-                                        <button type="button" class="btn btn-outline-secondary" onclick="buttonNeuronLevelPressed(2, $(layer1spinner2).val(), 'wIn')"><i class="fas fa-sign-in-alt"></i></button>
-                                        <button type="button" class="btn btn-outline-secondary" onclick="buttonNeuronLevelPressed(2, $(layer1spinner2).val(), 'neuron')"><i class="far fa-circle"></i></button>
-                                        <button type="button" class="btn btn-outline-secondary" onclick="buttonNeuronLevelPressed(2, $(layer1spinner2).val(), 'wOut')"><i class="fas fa-sign-out-alt"></i></button>
-                                    </div>
-                                    <div>
-                                        <div style="padding-top: 20px; padding-bottom: 15px">
-                                            <input id="layer1slider2" type="text" data-slider-min="0" data-slider-max="199" data-slider-step="1" data-slider-value="0">
-                                        </div>
-                                        <div class="input-group">
-                                            <input id="layer1spinner2" type="number" class="form-control" value="0" min="0" max="199" step="1">
-                                            <div class="input-group-append">
-                                                <span class="input-group-text">/199</span>
-                                            </div>
-                                        </div>
-                                        <script>
-                                            $("#layer1slider2").slider({
-                                                orientation: 'vertical'
-                                            });
-
-                                            // Synchronize the value of the spinner and the one of the slider
-                                            $("#layer1slider2").on("slide", function(slideEvt) {
-                                                $("#layer1spinner2").val(slideEvt.value);
-                                            });
-
-                                            $("#layer1spinner2").on("input", function(spinEvent) {
-                                                $("#layer1slider2").slider('setValue', $("#layer1spinner").val());
-                                            });
-                                        </script>
-                                    </div>
+                            </div>
+                            <div class="col" align="center">
+                                <br>
+                                <button type="button" class="btn btn-outline-secondary" onclick="buttonWeightLevelPressed(1,  $(layer1spinner).val(), $(layer1spinner2).val())"><i class="fas fa-arrows-alt-h"></i></button>
+                            </div>
+                            <div class="col" align="center">
+                                Couche 2<br>
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-outline-secondary" onclick="buttonNeuronLevelPressed(2, $(layer1spinner2).val(), 'wIn')"><i class="fas fa-sign-in-alt"></i></button>
+                                    <button type="button" class="btn btn-outline-secondary" onclick="buttonNeuronLevelPressed(2, $(layer1spinner2).val(), 'neuron')"><i class="far fa-circle"></i></button>
+                                    <button type="button" class="btn btn-outline-secondary" onclick="buttonNeuronLevelPressed(2, $(layer1spinner2).val(), 'wOut')"><i class="fas fa-sign-out-alt"></i></button>
                                 </div>
-                                <div class="col" align="center">
-                                    <br>
-                                    <button type="button" class="btn btn-outline-secondary" onclick="buttonWeightLevelPressed(2,  $(layer1spinner2).val(), $(layer1spinner3).val())"><i class="fas fa-arrows-alt-h"></i></button>
+                                <div>
+                                    <div style="padding-top: 20px; padding-bottom: 15px">
+                                        <input id="layer1slider2" type="text" data-slider-min="0" data-slider-max="199" data-slider-step="1" data-slider-value="0">
+                                    </div>
+                                    <div class="input-group">
+                                        <input id="layer1spinner2" type="number" class="form-control" value="0" min="0" max="199" step="1">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">/199</span>
+                                        </div>
+                                    </div>
+                                    <script>
+                                        $("#layer1slider2").slider({
+                                            orientation: 'vertical'
+                                        });
+
+                                        // Synchronize the value of the spinner and the one of the slider
+                                        $("#layer1slider2").on("slide", function(slideEvt) {
+                                            $("#layer1spinner2").val(slideEvt.value);
+                                        });
+
+                                        $("#layer1spinner2").on("input", function(spinEvent) {
+                                            $("#layer1slider2").slider('setValue', $("#layer1spinner").val());
+                                        });
+                                    </script>
                                 </div>
-                                <div class="col" align="center">
-                                    Couche 3<br>
-                                    <div class="btn-group" role="group">
-                                        <button type="button" class="btn btn-outline-secondary" onclick="buttonNeuronLevelPressed(3, $(layer1spinner3).val(), 'wIn')"><i class="fas fa-sign-in-alt"></i></button>
-                                        <button type="button" class="btn btn-outline-secondary" onclick="buttonNeuronLevelPressed(3, $(layer1spinner3).val(), 'neuron')"><i class="far fa-circle"></i></button>
+                            </div>
+                            <div class="col" align="center">
+                                <br>
+                                <button type="button" class="btn btn-outline-secondary" onclick="buttonWeightLevelPressed(2,  $(layer1spinner2).val(), $(layer1spinner3).val())"><i class="fas fa-arrows-alt-h"></i></button>
+                            </div>
+                            <div class="col" align="center">
+                                Couche 3<br>
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-outline-secondary" onclick="buttonNeuronLevelPressed(3, $(layer1spinner3).val(), 'wIn')"><i class="fas fa-sign-in-alt"></i></button>
+                                    <button type="button" class="btn btn-outline-secondary" onclick="buttonNeuronLevelPressed(3, $(layer1spinner3).val(), 'neuron')"><i class="far fa-circle"></i></button>
+                                </div>
+                                <div>
+                                    <div style="padding-top: 20px; padding-bottom: 15px">
+                                        <input id="layer1slider3" type="text" data-slider-min="0" data-slider-max="9" data-slider-step="1" data-slider-value="0">
                                     </div>
-                                    <div>
-                                        <div style="padding-top: 20px; padding-bottom: 15px">
-                                            <input id="layer1slider3" type="text" data-slider-min="0" data-slider-max="9" data-slider-step="1" data-slider-value="0">
+                                    <div class="input-group">
+                                        <input id="layer1spinner3" type="number" class="form-control" value="0" min="0" max="9" step="1">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">/9</span>
                                         </div>
-                                        <div class="input-group">
-                                            <input id="layer1spinner3" type="number" class="form-control" value="0" min="0" max="9" step="1">
-                                            <div class="input-group-append">
-                                                <span class="input-group-text">/9</span>
-                                            </div>
-                                        </div>
-                                        <script>
-                                            $("#layer1slider3").slider({
-                                                orientation: 'vertical'
-                                            });
-
-                                            // Synchronize the value of the spinner and the one of the slider
-                                            $("#layer1slider3").on("slide", function(slideEvt) {
-                                                $("#layer1spinner3").val(slideEvt.value);
-                                            });
-
-                                            $("#layer1spinner3").on("input", function(spinEvent) {
-                                                $("#layer1slider3").slider('setValue', $("#layer1spinner").val());
-                                            });
-                                        </script>
                                     </div>
+                                    <script>
+                                        $("#layer1slider3").slider({
+                                            orientation: 'vertical'
+                                        });
+
+                                        // Synchronize the value of the spinner and the one of the slider
+                                        $("#layer1slider3").on("slide", function(slideEvt) {
+                                            $("#layer1spinner3").val(slideEvt.value);
+                                        });
+
+                                        $("#layer1spinner3").on("input", function(spinEvent) {
+                                            $("#layer1slider3").slider('setValue', $("#layer1spinner").val());
+                                        });
+                                    </script>
                                 </div>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                     </div>
                 </div>
-            </div>
-
-
-            <!-- Outgoing/Ingoing neurons weights modal -->
-            <div class="modal fade" id="outWeightModal" tabindex="-1" role="dialog">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Poids <span class="inOrOut">de sorties</span> du neurone n°<span class="currentNeuronNumber"></span></h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div id="weightsTable">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Neuron information modal -->
-            <div class="modal fade" id="neuronModal" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Neurone n°<span class="currentNeuronNumber"></span></h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Couche : <span class="neuronLayerInfo"></span></p>
-                            <div id="neuronModalInformationForSpecificLayers"></div>
-                            Valeur : <span id="neuronValueInfo"></span>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Weight information modal -->
-            <div class="modal fade" id="weightModal" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Poids reliant le neuronne <span class="weightN1"></span> et <span class="weightN2"></span></h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Couche : <span id="weightLayer"></span></p>
-                            <p>Valeur Originale : <span id="weightOrigValue"></span></p>
-                            <p>Valeur :
-                            <div class="input-group mb-3">
-                                <input id="weightValue" type="number" step="0.1" class="form-control">
-                                <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary" type="button" onclick="$('#weightValue').val(selectedWeight.weight)"><i class="fas fa-undo"></i> Valeur actuelle</button>
-                                    <button class="btn btn-outline-secondary" type="button" onclick="$('#weightValue').val(selectedWeight.defaultWeight)"><i class="fas fa-redo-alt"></i> Restaurer</button>
-                                </div>
-                            </div>
-                            </p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="selectedWeight.weight = Number($('#weightValue').val());"><i class="fas fa-save"></i> Appliquer</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i> Fermer</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <br><br>
-            <!--
-            <div>
-                <canvas id="network" width="784" height="30" style="top:10%;left:10%;border:2px solid;"></canvas>
-            </div>
-            -->
-
-            <script>
-                /*
-                var canvas = document.getElementById("network");
-                var ctxNetwork = canvas.getContext("2d");
-
-                var w = 784;
-
-                // TODO : refactor ! (seulement la hauteur et la facon de calculer la lightness change)
-                function drawFirstLayer(data) {
-                    let size = 1;
-                    for (let i = 0; i < data.length; i++) {
-                        let curData = data[i];
-                        // [-1, 1] = [blanc, noir]
-                        let lightVal = 100 - 50*(curData +1);
-                        ctxNetwork.fillStyle = "hsl(0,0%," + lightVal + "%)";
-                        ctxNetwork.fillRect(i,0,size,10);
-                    }
-                }
-
-                function drawSecondLayer(data) {
-                    let size = w/data.length;
-                    for (let i = 0; i < data.length; i++) {
-                        let curData = data[i];
-                        // [0, 1] = [blanc, noir]
-                        let lightVal = 100 - 100*(curData);
-                        ctxNetwork.fillStyle = "hsl(0,0%," + lightVal + "%)";
-                        ctxNetwork.fillRect(i*size,10,size,10);
-                    }
-                }
-
-
-                function drawOutput(data) {
-                    let size = w/data.length;
-                    for (let i = 0; i < data.length; i++) {
-                        let curData = data[i];
-                        // [0, 1] = [blanc, noir]
-                        let lightVal = 100 - 100*(curData);
-                        ctxNetwork.fillStyle = "hsl(0,0%," + lightVal + "%)";
-                        ctxNetwork.fillRect(i*size,20,size,10);
-                    }
-                }
-                */
-            </script>
-
-            <div class="container">
-                <p>
-                    <br><br>
-                    
-                <h5 style="float: left; margin-right: 1em;">0 :</h5>
-                <div class="progress">
-                    <div id="percentBar0" class="progress-bar" role="progressbar" style="width: 0%"></div>
-                </div>
-                <br>
-                
-                <h5 style="float: left; margin-right: 1em;">1 :</h5>
-                <div class="progress">
-                    <div id="percentBar1" class="progress-bar" role="progressbar" style="width: 0%"></div>
-                </div>
-                <br>
-                
-                <h5 style="float: left; margin-right: 1em;">2 :</h5>
-                <div class="progress">
-                    <div id="percentBar2" class="progress-bar" role="progressbar" style="width: 0%"></div>
-                </div>
-                <br>
-                
-                <h5 style="float: left; margin-right: 1em;">3 :</h5>
-                <div class="progress">
-                    <div id="percentBar3" class="progress-bar" role="progressbar" style="width: 0%"></div>
-                </div>
-                <br>
-                
-                <h5 style="float: left; margin-right: 1em;">4 :</h5>
-                <div class="progress">
-                    <div id="percentBar4" class="progress-bar" role="progressbar" style="width: 0%"></div>
-                </div>
-                <br>
-                
-                <h5 style="float: left; margin-right: 1em;">5 :</h5>
-                <div class="progress">
-                    <div id="percentBar5" class="progress-bar" role="progressbar" style="width: 0%"></div>
-                </div>
-                <br>
-                
-                <h5 style="float: left; margin-right: 1em;">6 :</h5>
-                <div class="progress">
-                    <div id="percentBar6" class="progress-bar" role="progressbar" style="width: 0%"></div>
-                </div>
-                <br>
-                
-                <h5 style="float: left; margin-right: 1em;">7 :</h5>
-                <div class="progress">
-                    <div id="percentBar7" class="progress-bar" role="progressbar" style="width: 0%"></div>
-                </div>
-                <br>
-                
-                <h5 style="float: left; margin-right: 1em;">8 :</h5>
-                <div class="progress">
-                    <div id="percentBar8" class="progress-bar" role="progressbar" style="width: 0%"></div>
-                </div>
-                <br>
-                
-                <h5 style="float: left; margin-right: 1em;">9 :</h5>
-                <div class="progress">
-                    <div id="percentBar9" class="progress-bar" role="progressbar" style="width: 0%"></div>
-                </div>
-                <br>
-                
-                </p>
-
-                <p class="lead">
-                    Reconnu comme : <span id="nnOut"></span>
-                </p>
             </div>
         </div>
 
 
-        <div class="col-sm-8">
-
-            <div id="neuralNetworkContainer">
+        <!-- Outgoing/Ingoing neurons weights modal -->
+        <div class="modal fade" id="outWeightModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Poids <span class="inOrOut">de sorties</span> du neurone n°<span class="currentNeuronNumber"></span></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="weightsTable">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    </div>
+                </div>
             </div>
+        </div>
 
-            <script src="js/NN_representation.js"></script>
+        <!-- Neuron information modal -->
+        <div class="modal fade" id="neuronModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Neurone n°<span class="currentNeuronNumber"></span></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Couche : <span class="neuronLayerInfo"></span></p>
+                        <div id="neuronModalInformationForSpecificLayers"></div>
+                        Valeur : <span id="neuronValueInfo"></span>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Weight information modal -->
+        <div class="modal fade" id="weightModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Poids reliant le neuronne <span class="weightN1"></span> et <span class="weightN2"></span></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Couche : <span id="weightLayer"></span></p>
+                        <p>Valeur Originale : <span id="weightOrigValue"></span></p>
+                        <p>Valeur :
+                        <div class="input-group mb-3">
+                            <input id="weightValue" type="number" step="0.1" class="form-control">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" onclick="$('#weightValue').val(selectedWeight.weight)"><i class="fas fa-undo"></i> Valeur actuelle</button>
+                                <button class="btn btn-outline-secondary" type="button" onclick="$('#weightValue').val(selectedWeight.defaultWeight)"><i class="fas fa-redo-alt"></i> Restaurer</button>
+                            </div>
+                        </div>
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="selectedWeight.weight = Number($('#weightValue').val());"><i class="fas fa-save"></i> Appliquer</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i> Fermer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <br><br>
+
+        <!--  -->
+        <div class="container">
+            <div class="row no-gutters">
+                
+                    <div class="col">
+                        <h5 style="padding-left: 5px;">0</h5>
+                        <div class="progress progress-bar-vertical">
+                            <div id="percentBar0" class="progress-bar" role="progressbar" style="height: 0%;"></div>
+                        </div>
+                    </div>
+                
+                    <div class="col">
+                        <h5 style="padding-left: 5px;">1</h5>
+                        <div class="progress progress-bar-vertical">
+                            <div id="percentBar1" class="progress-bar" role="progressbar" style="height: 0%;"></div>
+                        </div>
+                    </div>
+                
+                    <div class="col">
+                        <h5 style="padding-left: 5px;">2</h5>
+                        <div class="progress progress-bar-vertical">
+                            <div id="percentBar2" class="progress-bar" role="progressbar" style="height: 0%;"></div>
+                        </div>
+                    </div>
+                
+                    <div class="col">
+                        <h5 style="padding-left: 5px;">3</h5>
+                        <div class="progress progress-bar-vertical">
+                            <div id="percentBar3" class="progress-bar" role="progressbar" style="height: 0%;"></div>
+                        </div>
+                    </div>
+                
+                    <div class="col">
+                        <h5 style="padding-left: 5px;">4</h5>
+                        <div class="progress progress-bar-vertical">
+                            <div id="percentBar4" class="progress-bar" role="progressbar" style="height: 0%;"></div>
+                        </div>
+                    </div>
+                
+                    <div class="col">
+                        <h5 style="padding-left: 5px;">5</h5>
+                        <div class="progress progress-bar-vertical">
+                            <div id="percentBar5" class="progress-bar" role="progressbar" style="height: 0%;"></div>
+                        </div>
+                    </div>
+                
+                    <div class="col">
+                        <h5 style="padding-left: 5px;">6</h5>
+                        <div class="progress progress-bar-vertical">
+                            <div id="percentBar6" class="progress-bar" role="progressbar" style="height: 0%;"></div>
+                        </div>
+                    </div>
+                
+                    <div class="col">
+                        <h5 style="padding-left: 5px;">7</h5>
+                        <div class="progress progress-bar-vertical">
+                            <div id="percentBar7" class="progress-bar" role="progressbar" style="height: 0%;"></div>
+                        </div>
+                    </div>
+                
+                    <div class="col">
+                        <h5 style="padding-left: 5px;">8</h5>
+                        <div class="progress progress-bar-vertical">
+                            <div id="percentBar8" class="progress-bar" role="progressbar" style="height: 0%;"></div>
+                        </div>
+                    </div>
+                
+                    <div class="col">
+                        <h5 style="padding-left: 5px;">9</h5>
+                        <div class="progress progress-bar-vertical">
+                            <div id="percentBar9" class="progress-bar" role="progressbar" style="height: 0%;"></div>
+                        </div>
+                    </div>
+                
+            </div>
+        </div>
+        <p class="lead">
+            Reconnu comme : <span id="nnOut"></span>
+        </p>
+    </div>
+
+
+    <div class="col-sm-8">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#tabBlockly" role="tab" aria-controls="home" aria-selected="true"><i class="fas fa-code"></i> Blockly</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#tabNetworkRepr" role="tab" aria-controls="profile" aria-selected="false"><svg class="icon icon-cart" role="img" xmlns="http://www.w3.org/2000/svg" style="height:21px" viewBox="0 0 640 512" class="svg-inline--fa fa-chart-network fa-w-20"><path fill="currentColor" d="M568 368c-19.1 0-36.3 7.6-49.2 19.7L440.6 343c4.5-12.2 7.4-25.2 7.4-39 0-61.9-50.1-112-112-112-8.4 0-16.6 1.1-24.4 2.9l-32.2-69c15-13.2 24.6-32.3 24.6-53.8 0-39.8-32.2-72-72-72s-72 32.2-72 72 32.2 72 72 72c.9 0 1.8-.2 2.7-.3l33.5 71.7C241.5 235.9 224 267.8 224 304c0 61.9 50.1 112 112 112 30.7 0 58.6-12.4 78.8-32.5l82.2 47c-.4 3.1-1 6.3-1 9.5 0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72zM232 96c-13.2 0-24-10.8-24-24s10.8-24 24-24 24 10.8 24 24-10.8 24-24 24zm104 272c-35.3 0-64-28.7-64-64s28.7-64 64-64 64 28.7 64 64-28.7 64-64 64zm232 96c-13.2 0-24-10.8-24-24s10.8-24 24-24 24 10.8 24 24-10.8 24-24 24zm-54.4-261.2l-19.2-25.6-48 36 19.2 25.6 48-36zM576 192c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64zM152 320h48v-32h-48v32zm-88-80c-35.3 0-64 28.7-64 64s28.7 64 64 64 64-28.7 64-64-28.7-64-64-64z" class="" data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path></svg> Réseau</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent" style="height: 100%">
+            <!-- Blockly content here -->
+            <div class="tab-pane fade show active" id="tabBlockly" role="tabpanel" aria-labelledby="blockly-tab" style="height: 100%">
+                <div id="blocklyArea" style="height: 100%">
+                    <div id="blocklyDiv" style="position: static">
+                    </div>
+                </div>
+            </div>
+            <!-- Network representation here -->
+            <div class="tab-pane fade" id="tabNetworkRepr" role="tabpanel" aria-labelledby="network-tab">
+                <div id="neuralNetworkContainer">
+                </div>
+                <script src="js/NN_representation.js"></script>
+            </div>
         </div>
 
     </div>
 
-    <script>
-        // Store current information for modals
-        let selectedNeuron = new Neuron();
-        let selectedWeight = new Weight();
+</div>
 
-        function setSelectedNeuronInfos(neuronNumber, layer) {
-            selectedNeuron.number = neuronNumber;
-            selectedNeuron.layer = layer;
-        }
-
-        function setSelectedWeightInfos(neuronNumber1, neuronNumber2, layer) {
-            let n1 = new Neuron(neuronNumber1, layer);
-            let n2 = new Neuron(neuronNumber2, layer+1);
-            selectedWeight.n1 = n1;
-            selectedWeight.n2 = n2;
-            selectedWeight.layer = layer;
-        }
-
-        function buttonNeuronLevelPressed(layer, neuronNumber, action) {
-            setSelectedNeuronInfos(neuronNumber, layer);
-            $('.currentNeuronNumber').text(selectedNeuron.number);
-
-            if (action === "neuron") {
-                refreshNeuronWindowInfo();
-                $('#neuronModal').modal('toggle');
-            }
-            else if (action === "wOut" || action === "wIn") {
-                refreshWeightOutWindowInfo(action);
-                $('#outWeightModal').modal('toggle');
-            }
-        }
-
-
-        function buttonWeightLevelPressed(originLayer, neuron1, neuron2) {
-            setSelectedWeightInfos(neuron1, neuron2, originLayer);
-
-            refreshWeightWindowInfo();
-            $('#weightModal').modal('toggle');
-        }
-
-        function refreshWeightWindowInfo() {
-            $('.weightN1').text(selectedWeight.n1.number);
-            $('.weightN2').text(selectedWeight.n2.number);
-            $('#weightLayer').text(selectedWeight.layer);
-            $('#weightOrigValue').text(selectedWeight.defaultWeight);
-            $('#weightValue').val(selectedWeight.weight);
-        }
-
-        function refreshNeuronWindowInfo() {
-            $('.neuronLayerInfo').text(selectedNeuron.layer);
-
-            let neuronValue = selectedNeuron.value;
-            let valueInfoStr = "vide";
-            if (neuronValue !== null) {
-                valueInfoStr = neuronValue;
-            }
-            $('#neuronValueInfo').text(valueInfoStr);
-            let informationForSpecialNeuron = $('#neuronModalInformationForSpecificLayers');
-            informationForSpecialNeuron.text("");
-            if (selectedNeuron.layer === 1) {
-                let correspondingPixelX = Math.floor((selectedNeuron.number-1)/28);
-                let correspondingPixelY = (selectedNeuron.number-1)%28;
-                informationForSpecialNeuron.text(`Pixel de l'image de coordonnée : (${correspondingPixelX}, ${correspondingPixelY})`);
-            }
-            else if (selectedNeuron.layer === 3) {
-                informationForSpecialNeuron.text(`Probabilité du chiffre ${selectedNeuron.number} : ${selectedNeuron.value*100} %`);
-            }
-        }
-
-        function refreshWeightOutWindowInfo(inOrOut) {
-
-            let modalDiv = $('#weightsTable');
-            let tableId = "tableOutWeight";
-            modalDiv.empty(); // Free up what was inside
-
-            if (inOrOut === "wIn") {
-                $('.inOrOut').text("d'entrée");
-            } else if (inOrOut === "wOut") {
-                $('.inOrOut').text("de sortie");
-            }
-
-            let otherNeuron;
-            let currentWeight;
-            let currentLayer = selectedNeuron.layer;
-            if (inOrOut === "wOut") {
-                otherNeuron = new Neuron(0, currentLayer+1);
-                currentWeight = new Weight(selectedNeuron, otherNeuron, currentLayer);
-            } else if (inOrOut === "wIn") {
-                otherNeuron = new Neuron(0, currentLayer-1);
-                currentWeight = new Weight(otherNeuron, selectedNeuron, currentLayer-1);
-            }
-
-            // Fill up the table
-            let table = $('<table>').addClass('table table-striped table-hover');
-            table.attr("id", tableId);
-
-            let head = $('<thead>');
-            let headTr= $('<tr>');
-            let headNames = ["Poids n°", "Valeur actuelle", "Valeur par défaut", "Différence"];
-            for (let i = 0; i < headNames.length; i++) {
-                headTr.append($('<th>').html(headNames[i]));
-            }
-            head.append(headTr);
-            table.append(head);
-
-            let tableBody = $('<tbody>');
-            for(let i=0; i < otherNeuron.layerSize; i++) {
-                otherNeuron.number = i;
-
-                let curValue = currentWeight.weight;
-                let defaultValue = currentWeight.defaultWeight;
-                let row = $('<tr>');
-
-                for (let j = 0; j < headNames.length; j++) {
-                    let rowCol = $('<td style="cursor:pointer;">');
-                    if (j === 0) {
-                        rowCol.html(`${i+1}`)
-                    } else if (j === 1) {
-                        // We hide a span with the value because the sorting won't happen on the input directly
-                        // There is no need to change the span text with the inut one as the sorting does not refresh when resorting
-                        rowCol.addClass("weightValue");
-                        rowCol.html(`${curValue}`);
-                    } else if (j === 2) {
-                        rowCol.html(`${defaultValue}`);
-                    } else if (j === 3) {
-                        rowCol.html(`${defaultValue - curValue}`);
-                    }
-                    row.append(rowCol);
-                }
-                row.click(function () {
-                    otherNeuron.number = i;
-                    selectedWeight = currentWeight;
-                    refreshWeightWindowInfo();
-
-                    let weightModal = $('#weightModal');
-                    weightModal.modal('toggle');
-                    weightModal.one('hide.bs.modal', function() { // Use one to avoid bugs
-                        // $(row).find(".weightValue").html(selectedWeight.weight); // No need, next line to it automatically
-                        dataTable.cell(i, 1).data(selectedWeight.weight);
-                        dataTable.cell(i, 3).data(selectedWeight.defaultWeight - selectedWeight.weight);
-                        dataTable.draw();
-                    })
-                });
-                tableBody.append(row);
-            }
-            table.append(tableBody);
-            modalDiv.append(table);
-
-            let dataTable = $(`#${tableId}`).DataTable(
-                {
-                    "language": {
-                        "decimal":        ".", // Important to use . else sorting does not work properly
-                        "emptyTable":     "Aucune entrée dans la table",//"No data available in table",
-                        "info":           "Montrer _START_ jusqu'à _END_ de _TOTAL_ entrés",//"Showing _START_ to _END_ of _TOTAL_ entries",
-                        "infoEmpty":      "Montrer 0 jusqu'à 0 de 0 entrés",//"Showing 0 to 0 of 0 entries",
-                        "infoFiltered":   "(filtré de _MAX_ entrés totales)",//"(filtered from _MAX_ total entries)",
-                        "infoPostFix":    "",
-                        "thousands":      ".",
-                        "lengthMenu":     "Montrer _MENU_ entrés",//"Show _MENU_ entries",
-                        "loadingRecords": "Chargement...",//"Loading...",
-                        "processing":     "Traitement...",//"Processing...",
-                        "search":         "Chercher :",
-                        "zeroRecords":    "Aucun enregistrements correspondants trouvés", //"No matching records found",
-                        "paginate": {
-                            "first":      "Premier",
-                            "last":       "Dernier",
-                            "next":       "Prochain",
-                            "previous":   "Précédent"
-                        },
-                        "aria": {
-                            "sortAscending":  ": activer pour trier la colonne par ordre croissant",//": activate to sort column ascending",
-                            "sortDescending": ": activer pour trier la colonne par ordre décroissant"
-                        }
-                    }
-                }
-            );
-            $('.dataTables_length').addClass('bs-select');
-        }
-
-    </script>
+<script src="js/modalHandler.js"></script>
 
 </main>
+
+<xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
+    <category name="NN Entrée" colour="#a55b5b">
+  <block type="flattenpicture"></block>
+  <block type="variables_set">
+    <field name="VAR" id="MXvcOAlxfrtjHmcEITU2" variabletype="">imageAplatie</field>
+  </block>
+  <block type="nn_picture_w"></block>
+  <block type="nn_entry_neuron_value"></block>
+  <block type="nn_get_value_of_picture"></block>
+</category>
+<category name="NN Sortie" colour="#5b93a5">
+<block type="nn_choose_value">
+  <field name="NAME">min</field>
+</block>
+</category>
+<category name="TODO" colour="#a5a55b">
+<block type="procedures_defnoreturn">
+  <mutation>
+    <arg name="image" varid="*6p?S_wD}keQZ,fzP8uZ"></arg>
+  </mutation>
+  <field name="NAME">gérer la couche d'entrée</field>
+  <comment pinned="false" h="80" w="160">Describe this function...</comment>
+  <statement name="STACK">
+    <block type="controls_for">
+      <field name="VAR" id="Eg4`9@Hrn91U4iCj+#m%" variabletype="">i</field>
+      <value name="FROM">
+        <block type="math_number">
+          <field name="NUM">1</field>
+        </block>
+      </value>
+      <value name="TO">
+        <shadow type="math_number">
+          <field name="NUM">10</field>
+        </shadow>
+      </value>
+      <value name="BY">
+        <block type="math_number">
+          <field name="NUM">1</field>
+        </block>
+      </value>
+      <statement name="DO">
+        <block type="nn_entry_neuron_value">
+          <value name="neuron_ind">
+            <block type="variables_get">
+              <field name="VAR" id="Eg4`9@Hrn91U4iCj+#m%" variabletype="">i</field>
+            </block>
+          </value>
+          <value name="picture_pixel">
+            <shadow type="math_random_float"></shadow>
+          </value>
+        </block>
+      </statement>
+    </block>
+  </statement>
+</block>
+<block type="procedures_defreturn">
+  <mutation>
+    <arg name="valeur des neurones de la couche de sortie" varid="VJchVf59Wm99f:PfLv_M"></arg>
+  </mutation>
+  <field name="NAME">prédire valeur</field>
+  <comment pinned="false" h="80" w="160">Describe this function...</comment>
+  <statement name="STACK">
+    <block type="variables_set">
+      <field name="VAR" id="Z,b1ch;11Tk4y[4YA7bt" variabletype="">chiffrePrédit</field>
+      <value name="VALUE">
+        <block type="nn_choose_value">
+          <field name="NAME">min</field>
+          <value name="NAME">
+            <block type="variables_get">
+              <field name="VAR" id="VJchVf59Wm99f:PfLv_M" variabletype="">valeur des neurones de la couche de sortie</field>
+            </block>
+          </value>
+        </block>
+      </value>
+    </block>
+  </statement>
+  <value name="RETURN">
+    <block type="variables_get">
+      <field name="VAR" id="Z,b1ch;11Tk4y[4YA7bt" variabletype="">chiffrePrédit</field>
+    </block>
+  </value>
+</block>
+</category>
+<sep></sep>
+<category name="Logic" colour="#5C81A6">
+<block type="controls_if"></block>
+<block type="logic_compare">
+  <field name="OP">EQ</field>
+</block>
+<block type="logic_operation">
+  <field name="OP">AND</field>
+</block>
+<block type="logic_negate"></block>
+<block type="logic_boolean">
+  <field name="BOOL">TRUE</field>
+</block>
+<block type="logic_null"></block>
+<block type="logic_ternary"></block>
+</category>
+<category name="Loops" colour="#5CA65C">
+<block type="controls_repeat_ext">
+  <value name="TIMES">
+    <shadow type="math_number">
+      <field name="NUM">10</field>
+    </shadow>
+  </value>
+</block>
+<block type="controls_whileUntil">
+  <field name="MODE">WHILE</field>
+</block>
+<block type="controls_for">
+  <field name="VAR" id="THS4^TfI)l2UiS6X_u!w" variabletype="">i</field>
+  <value name="FROM">
+    <shadow type="math_number">
+      <field name="NUM">1</field>
+    </shadow>
+  </value>
+  <value name="TO">
+    <shadow type="math_number">
+      <field name="NUM">10</field>
+    </shadow>
+  </value>
+  <value name="BY">
+    <shadow type="math_number">
+      <field name="NUM">1</field>
+    </shadow>
+  </value>
+</block>
+<block type="controls_forEach">
+  <field name="VAR" id="|}Ao%A[OM*3|CdQiDQ|[" variabletype="">j</field>
+</block>
+<block type="controls_flow_statements">
+  <field name="FLOW">BREAK</field>
+</block>
+</category>
+<category name="Math" colour="#5C68A6">
+<block type="math_number">
+  <field name="NUM">0</field>
+</block>
+<block type="math_arithmetic">
+  <field name="OP">ADD</field>
+  <value name="A">
+    <shadow type="math_number">
+      <field name="NUM">1</field>
+    </shadow>
+  </value>
+  <value name="B">
+    <shadow type="math_number">
+      <field name="NUM">1</field>
+    </shadow>
+  </value>
+</block>
+<block type="math_single">
+  <field name="OP">ROOT</field>
+  <value name="NUM">
+    <shadow type="math_number">
+      <field name="NUM">9</field>
+    </shadow>
+  </value>
+</block>
+<block type="math_trig">
+  <field name="OP">SIN</field>
+  <value name="NUM">
+    <shadow type="math_number">
+      <field name="NUM">45</field>
+    </shadow>
+  </value>
+</block>
+<block type="math_constant">
+  <field name="CONSTANT">PI</field>
+</block>
+<block type="math_number_property">
+  <mutation divisor_input="false"></mutation>
+  <field name="PROPERTY">EVEN</field>
+  <value name="NUMBER_TO_CHECK">
+    <shadow type="math_number">
+      <field name="NUM">0</field>
+    </shadow>
+  </value>
+</block>
+<block type="math_round">
+  <field name="OP">ROUND</field>
+  <value name="NUM">
+    <shadow type="math_number">
+      <field name="NUM">3.1</field>
+    </shadow>
+  </value>
+</block>
+<block type="math_on_list">
+  <mutation op="SUM"></mutation>
+  <field name="OP">SUM</field>
+</block>
+<block type="math_modulo">
+  <value name="DIVIDEND">
+    <shadow type="math_number">
+      <field name="NUM">64</field>
+    </shadow>
+  </value>
+  <value name="DIVISOR">
+    <shadow type="math_number">
+      <field name="NUM">10</field>
+    </shadow>
+  </value>
+</block>
+<block type="math_constrain">
+  <value name="VALUE">
+    <shadow type="math_number">
+      <field name="NUM">50</field>
+    </shadow>
+  </value>
+  <value name="LOW">
+    <shadow type="math_number">
+      <field name="NUM">1</field>
+    </shadow>
+  </value>
+  <value name="HIGH">
+    <shadow type="math_number">
+      <field name="NUM">100</field>
+    </shadow>
+  </value>
+</block>
+<block type="math_random_int">
+  <value name="FROM">
+    <shadow type="math_number">
+      <field name="NUM">1</field>
+    </shadow>
+  </value>
+  <value name="TO">
+    <shadow type="math_number">
+      <field name="NUM">100</field>
+    </shadow>
+  </value>
+</block>
+<block type="math_random_float"></block>
+</category>
+<category name="Text" colour="#5CA68D">
+<block type="text">
+  <field name="TEXT"></field>
+</block>
+<block type="text_join">
+  <mutation items="2"></mutation>
+</block>
+<block type="text_append">
+  <field name="VAR" id="K^%p~GCz*:4+1]oGPJ*o" variabletype="">item</field>
+  <value name="TEXT">
+    <shadow type="text">
+      <field name="TEXT"></field>
+    </shadow>
+  </value>
+</block>
+<block type="text_length">
+  <value name="VALUE">
+    <shadow type="text">
+      <field name="TEXT">abc</field>
+    </shadow>
+  </value>
+</block>
+<block type="text_isEmpty">
+  <value name="VALUE">
+    <shadow type="text">
+      <field name="TEXT"></field>
+    </shadow>
+  </value>
+</block>
+<block type="text_indexOf">
+  <field name="END">FIRST</field>
+  <value name="VALUE">
+    <block type="variables_get">
+      <field name="VAR" id="42NTo)+~TBFjl.=p2$/q" variabletype="">text</field>
+    </block>
+  </value>
+  <value name="FIND">
+    <shadow type="text">
+      <field name="TEXT">abc</field>
+    </shadow>
+  </value>
+</block>
+<block type="text_charAt">
+  <mutation at="true"></mutation>
+  <field name="WHERE">FROM_START</field>
+  <value name="VALUE">
+    <block type="variables_get">
+      <field name="VAR" id="42NTo)+~TBFjl.=p2$/q" variabletype="">text</field>
+    </block>
+  </value>
+</block>
+<block type="text_getSubstring">
+  <mutation at1="true" at2="true"></mutation>
+  <field name="WHERE1">FROM_START</field>
+  <field name="WHERE2">FROM_START</field>
+  <value name="STRING">
+    <block type="variables_get">
+      <field name="VAR" id="42NTo)+~TBFjl.=p2$/q" variabletype="">text</field>
+    </block>
+  </value>
+</block>
+<block type="text_changeCase">
+  <field name="CASE">UPPERCASE</field>
+  <value name="TEXT">
+    <shadow type="text">
+      <field name="TEXT">abc</field>
+    </shadow>
+  </value>
+</block>
+<block type="text_trim">
+  <field name="MODE">BOTH</field>
+  <value name="TEXT">
+    <shadow type="text">
+      <field name="TEXT">abc</field>
+    </shadow>
+  </value>
+</block>
+<block type="text_print">
+  <value name="TEXT">
+    <shadow type="text">
+      <field name="TEXT">abc</field>
+    </shadow>
+  </value>
+</block>
+<block type="text_prompt_ext">
+  <mutation type="TEXT"></mutation>
+  <field name="TYPE">TEXT</field>
+  <value name="TEXT">
+    <shadow type="text">
+      <field name="TEXT">abc</field>
+    </shadow>
+  </value>
+</block>
+</category>
+<category name="Lists" colour="#745CA6">
+<block type="lists_create_with">
+  <mutation items="0"></mutation>
+</block>
+<block type="lists_create_with">
+  <mutation items="3"></mutation>
+</block>
+<block type="lists_repeat">
+  <value name="NUM">
+    <shadow type="math_number">
+      <field name="NUM">5</field>
+    </shadow>
+  </value>
+</block>
+<block type="lists_length"></block>
+<block type="lists_isEmpty"></block>
+<block type="lists_indexOf">
+  <field name="END">FIRST</field>
+  <value name="VALUE">
+    <block type="variables_get">
+      <field name="VAR" id="}k`))q2-y$gHiBpoC}o_" variabletype="">list</field>
+    </block>
+  </value>
+</block>
+<block type="lists_getIndex">
+  <mutation statement="false" at="true"></mutation>
+  <field name="MODE">GET</field>
+  <field name="WHERE">FROM_START</field>
+  <value name="VALUE">
+    <block type="variables_get">
+      <field name="VAR" id="}k`))q2-y$gHiBpoC}o_" variabletype="">list</field>
+    </block>
+  </value>
+</block>
+<block type="lists_setIndex">
+  <mutation at="true"></mutation>
+  <field name="MODE">SET</field>
+  <field name="WHERE">FROM_START</field>
+  <value name="LIST">
+    <block type="variables_get">
+      <field name="VAR" id="}k`))q2-y$gHiBpoC}o_" variabletype="">list</field>
+    </block>
+  </value>
+</block>
+<block type="lists_getSublist">
+  <mutation at1="true" at2="true"></mutation>
+  <field name="WHERE1">FROM_START</field>
+  <field name="WHERE2">FROM_START</field>
+  <value name="LIST">
+    <block type="variables_get">
+      <field name="VAR" id="}k`))q2-y$gHiBpoC}o_" variabletype="">list</field>
+    </block>
+  </value>
+</block>
+<block type="lists_split">
+  <mutation mode="SPLIT"></mutation>
+  <field name="MODE">SPLIT</field>
+  <value name="DELIM">
+    <shadow type="text">
+      <field name="TEXT">,</field>
+    </shadow>
+  </value>
+</block>
+<block type="lists_sort">
+  <field name="TYPE">NUMERIC</field>
+  <field name="DIRECTION">1</field>
+</block>
+</category>
+<sep></sep>
+<category name="Variables" colour="#A65C81" custom="VARIABLE"></category>
+<category name="Functions" colour="#9A5CA6" custom="PROCEDURE"></category>
+</xml>
+
+<xml xmlns="http://www.w3.org/1999/xhtml" id="startBlocks" style="display: none;">
+    <!--
+    <block type="procedures_defreturn">
+  <mutation>
+    <arg name="newIris" varid="xV,hWe[vth$ls//uA#nX"></arg>
+  </mutation>
+  <field name="NAME">classify</field>
+  <comment pinned="false" h="80" w="160">Describe this function...</comment>
+  <statement name="STACK">
+    <block type="variables_set">
+      <field name="VAR" id="tngGlX6ovf-o#M{QZvOB" variabletype="">fleurPredite</field>
+      <value name="VALUE">
+        <shadow type="randomflowername"></shadow>
+      </value>
+    </block>
+  </statement>
+  <value name="RETURN">
+    <block type="variables_get">
+      <field name="VAR" id="tngGlX6ovf-o#M{QZvOB" variabletype="">fleurPredite</field>
+    </block>
+  </value>
+</block>
+    -->
+</xml>
+
+<script src="/static/js/shared/Blockly/src/blockly_compressed.js"></script>
+<script src="/static/js/shared/Blockly/src/blocks_compressed.js"></script>
+<script src="/static/js/shared/Blockly/src/javascript_compressed.js"></script>
+
+<script src="/static/js/shared/Blockly/languageCode.js"></script>
+<script src="/static/js/shared/Blockly/BlocklyScripts.js"></script>
+<script src="js/NNBlocklyFunctions.js"></script>
+</main>
+
+<!-- Success Animation when activity is succeded -->
+<div class="modal" id="exerciceSuccess" tabindex="-1" role="dialog" aria-labelledby="exerciceSuccessLabel" aria-hidden="true" style="background-color: rgba(0,250,255,0.5);">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div id="congrats">
+            <h1 id="sucessMessage">Bravo !</h1>
+        </div>
+    </div>
+</div>
+<script src="/static/js/animationSuccess.js"></script>
 
 </body>
 </html>

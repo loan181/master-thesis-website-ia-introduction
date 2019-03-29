@@ -1,8 +1,6 @@
-<!DOCTYPE html>
 <html lang="fr">
-
 <head>
-    <title>Création interactive d'un arbre de décision</title>
+    <title>Exercices Produit Matriciel</title>
     
 
 <!-- Database -->
@@ -78,7 +76,10 @@ MathJax.Hub.Config({
 <!-- add after bootstrap.min.js -->
 <script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.0/dist/bootstrap-toc.min.js"></script>
     <script src="/static/js/contentForTeacher.js"></script>
+    <script src="/static/js/automaticCorrection.js"></script>
+
 </head>
+
 
 <body data-spy="scroll" data-target="#toc">
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary" style="z-index: 1025">
@@ -207,180 +208,303 @@ MathJax.Hub.Config({
     highlightCorrectNavItem();
 
 </script>
+
 <main role="main" class="container" style="max-width: 95%">
     <div class="row">
         <!-- sidebar, which will move to the top on a small screen -->
         <div class="col-sm-3">
-            <nav id="toc" data-toggle="toc" class="sticky-top" style="padding-top:20px"></nav>
+            <div class="sticky-top" style="padding-top:64px">
+                <nav id="toc" data-toggle="toc" style="padding-bottom: 32px" ></nav>
+                <div id="pinnableArea" class="card d-none d-sm-block" style="overflow: auto;max-height: 400px">
+                    <div class="text-muted" style="text-align: center">
+                        Utilise le bouton avec l'icone <br>
+                        <i style="font-size: 24px" class="fas fa-thumbtack"></i> <br>
+                        pour épingler des éléments ici
+                    </div>
+                </div>
+            </div>
         </div>
+
         <!-- main content area -->
         <div class="col-sm-9">
-            <h1>Création interactive d'un arbre de décision</h1>
+            <main role="main" class="container">
+                <h1>Exercices Produit Matriciel</h1>
 
-            
-
-            <p>
-    Maintenant que vous avons une bonne idée du fonctionnement d'un arbre de décision, nous allons en créer de manière dynamique !
-</p>
-
-            
-                <img src="/static/img/arbre/pagePreview.PNG" class="img-fluid center">
-            
-
-            
-            <h2>Objectif</h2>
-                <p>
-    Ton but dans cette mission est de créer un arbre de décision qui classifiera correctement les données de prédictions (cachés).<br>
-    Autrement dit, j'ai des fleurs de classes connues que je vais les introduire dans ton arbre de décision, je vais ensuite vérifier si la classe prédite par ton arbre (classe majoritaire de la feuille) est bien celle de la fleur.
-</p> <p>
-    La qualité de ton classifieur est représentée par la barre de progression bleu en dessous de la barre d'outil.<br>
-    Cette barre se met à jour à chaque fois que tu teste ton classifieur en testant ton arbre de décision.<br>
-    Ton objectif final est d'atteindre la meilleure prédiction possible (100%)
-</p> <div class="mt-2 col-md-12">
-    <h6 style="float: left; margin-right: 1em;"> Prédiction courante : </h6>
-    <div class="progress" style="height: 32px;">
-        <div id="predictionProgressBar" class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%;">100.00%</div>
-    </div>
-</div> <p>
-    Pour cela tu peut intéragir avec l'arbre de décision qui se trouve dans la partie de droite de divers façon détaillées dans <a href="#exemples"></a>.<br>
-</p> <p>
-    Garde bien à l'esprit qu'il existe plusieurs arbre de décisions pour résoudre cette exercice. Ton but n'est <b>PAS</b> de faire un arbre dont chaque feuille est à 100% d'une fleur.<br>
-    Personellement j'ai réussis l'activité en créant 2 décisions (noeuds internes), réfléchis donc bien à tes différents choix de décisions.
-</p>
-
-            
-
-            <h2>Structure de la page</h2>
-            
-                <h3>Barre d'outil</h3>
-                <p>
-                    Dans la partie supérieure de l’écran tu as différents boutons te permettant de réaliser certaines actions que nous allons détailler ici.
-                </p>
-                <div id="toolboxExplanation"></div>
-                <script src="/static/js/shared/ToolBox.js"></script>
-                <script>
-                    let TB = new ToolBox();
-                    let explanations = [];
-                    
-                        explanations.push("Réinitialiser l'arbre à zéro en effacant tout les noeuds existant.");
-                    
-                        explanations.push("Sauvegarder/télécharger ton projet sur ton ordinateur");
-                    
-                        explanations.push("Ouvrir un projet précédemment sauvegardé.<br>L'arbre ainsi que tes pramètres d'axes seront rétablis");
-                    
-                        explanations.push("Tester le classifieur sur l'arbre de décision courant.<br>Cela te permettra de réussir ton objectif !");
-                    
-                        explanations.push("Renvoie vers la page d'aide (celle-ci)");
-                    
-                    TB.drawExplanation("decision-tree", "toolboxExplanation", explanations);
-                </script>
-            
-
-            
-                <h3>Données et Paramètres</h3>
-                La partie de gauche te permet d'observer les données ainsi que de modifier les paramètres de l'arbre.
-
-                    <ul class="list-unstyled">
-                        
-                        <li class="media">
-                            <img src="/static/img/arbre/graph.PNG" class="mr-3 img-fluid" >
-                            <div class="media-body">
-                                <h4 class="mt-0 mb-1">Panneau Graphe et Données</h4>
-                                Te permet de consulter et visualiser les données du training set. Chaque point du graphe correspond à une fleur du training set. Sa forme et couleur définit sa classe comme légendé en dessous du graphe.<br> Tu peux survoler avec ta souris un point pour obtenir des informations le concernant.<br> Les informations montrer peuvent varier en fonction des actions que tu effectus avec l'arbre interactif.<br>
-
-                            </div>
-                        </li>
-                        
-                        <li class="media">
-                            <img src="/static/img/arbre/axisParameters.PNG" class="mr-3 img-fluid" >
-                            <div class="media-body">
-                                <h4 class="mt-0 mb-1">Panneau paramètres</h4>
-                                Te permet de modifier le choix des axes <code>x</code> et <code>y</code> parmi les différentes métriques.
-
-                            </div>
-                        </li>
-                        
-                    </ul>
-            
-
-            
-                <h3>Arbre interactif</h3>
-                <p>
-                    La partie de droite est l'emplacement ou tu pourra créer et modifier ton arbre de décision.
-                </p>
-
-                
-                    <div class="text-center">
-    <img src="/static/img/arbre/exempleInteractifSchema.png" class="img-fluid rounded">
-    <img src="/static/img/arbre/arbreInreactifEx.png" class="img-fluid rounded">
-    <small class="text-muted"><br>
-        Deux représentation du même arbre de décision.
-        A gauche la version utilisée dans les exercices préparatoires.
-        A droite celle utilisée dans l'outil interactif.
-    </small>
-</div> <br> L'ensemble des fonctionnalités disponibles se feront majoritairement à l'aide de cette interface. Ainsi tu sera capable de faire diverses actions tels qu'ajouter, modifier les noeuds de ton arbre, consulter l'arbre et modifier la visualisation du graphique.<br> Le schéma représente l'arbre de décision correspondant au données d'un modèle d'entrainement d'Iris.<br> <br> Les cercles représente les <b>feuilles</b> de l'arbre de décision. La coloration symbolise le pourcentage de chaque classe du modèle, c'est comme un diagramme en camembert. Tu peux survoler de ta souris la feuille pour qu'une version textuelle t'indique la même information La couleur du contour détermine la classe majoritaire de cette feuille (texte mis en gras lors du survol de la souris)    <br> Les rectangles arrondis représente les <b>noeuds interne</b> de l'arbre de décision. Ce sont l'ensemble des décisions qui crééront dynamiquement les feuilles de notre arbre de décision. Chaque décision est composé de 3 paramètres : un axe, l'opérateur et la valeur (par exemple <code>x = 12</code> ou <code>y > 42</code>). Pour chaque donnée du modèle d'entrainement, si l'évaluation avec cet axe, opérateur et valeur est vrai, alors cette donnée sera dans la branche de droite, sinon elle sera dans cette de gauche.  <br> <img class="img-fluid mx-auto d-block" src="/static/img/arbre/arbreInteractifLegende.png">
-
-                
-            
-
-            
-            <h2>Exemples</h2>
-                
-                    <h3>Ajouter un nouveau noeud interne / Créer deux nouvelles feuilles</h3>
-                    <p>
-    Pour ajouter un nouveau noeud interne à l'arbre, il suffit de cliquer sur une des feuilles existantes de l'arbre.
-    Elles sont indiquées par un cercle avec un "+" noir à l'intérieur.<br>
-    Une fois cliquée, une boite de dialogue vous demandera de choisir une métrique (l'axe <code>x</code> ou l'axe <code>y</code>), un opérateur et la valeur avec laquelle comparé.
-    Après confirmation la feuille deviendra un noeud interne et triera automatiquement les données du modèle d'entrainement selon l'axe, opérateur et valeur choisie.
-    Ainsi, deux branches seront créés, celle de gauche contenant l'ensemble des données du modèle d'entrainement répondant à l'évaluation, et celle de droite n'y répondant pas.
-</p> <img class="img-fluid mx-auto d-block" src="/static/img/arbre/animCreation.gif">
-
-                
-                    <h3>Modifier un noeud interne</h3>
-                    <p>
-    Pour cela il te suffit de cliquer sur un noeud interne existant.
-    Une boite de dialogue identique à celle d'ajout de noeud apparaitra permettant de modifier les données
-</p> <img class="img-fluid mx-auto d-block" src="/static/img/arbre/animModification.gif">
-
-                
-                    <h3>Supprimer un noeud interne / Transformer un noeud interne en feuille</h3>
-                    <p>
-    Pour cela in suffit de cliquer sur un noeud interne existant.
-    Dans la boite de dialogue apparaissant un boutton te permet de supprimer le noeud.<br>
-    La supression du noeud interne crééra automatiquement une feuille et détruira tout les enfants du noeud.
-</p> <img class="img-fluid mx-auto d-block" src="/static/img/arbre/animSupression.gif">
-
-                
-                    <h3>Visualiser les données</h3>
-                    <p>
-    Afin d'éviter de surcharger l'interface, les données n'apparaissent que lorsque tu survole de la souris des éléments spécifiques.
-</p> <p>
-    Lors du survol d'une feuille, un texte apparait en dessous avec les proportions de chaque classe ainsi que la classe majoritaire indiquée en gras.<br>
-    <img class="img-fluid mx-auto d-block" src="/static/img/arbre/exampleHoverLeaf.PNG">
-    Si la feuille ne contient aucune fleur, le texte <i>(vide)</i> sera indiqué.<br>
-    <img class="img-fluid mx-auto d-block" src="/static/img/arbre/exampleHoverLeafEmpty.PNG">
-
-    Tu remarquera que le graphique se met également à jour en focalisant en jaune les fleurs concernées.<br>
+<h2>Contexte</h2>
+<p>
+    Le produit matriciel désigne la mulitplication de matrices.<br>
+    Si tu n'as jamais entendu parler de matrices, dit toi que c'est juste un tableau remplie de nombre (comme dans excel).<br>
+    Il en existe de plusieurs formes, ici nous aurons juste besoin de la plus simple.
 </p>
 <p>
-    Les noeuds internes modifies également le graphique lors du survol de la souris, indiquant les fleurs concernées par l'évaluation du noeud.<br>
-    Toutes les fleurs qui sont sur fond rouge sont les fleurs qui ne répondent pas à l'évaluation, au contraire, celles sur fond vert sont celles qui y répondent.
-    Il y aura également une ligne qui sera déssiné qui délimite la frontière avec la valeur du noeud, le code couleur est le même que celui des zones.
+    Soit :
+    <ul>
+        <li>Une matrice <code>A = (a<sub>i,j</sub>)</code> de taille <code>(m, n)</code></li>
+        <li>Une matrice <code>B = (b<sub>i,j</sub>)</code> de taille <code>(n, p)</code></li>
+    </ul>
+    Alors leur produit matriciel, noté <code>AB = (c<sub>i,j</sub>)</code> est une matrice de taille <code>(m, p)</code> donnée par :<br>
+    <img class="img-fluid" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/840716c2745c63bd10c38a0b5ecac966faf0b1ff">
 </p>
-<div>
-    Voici le graphique pour l'évaluation du noeud interne <code>largeur sépale &ge; 6</code>
-    <img class="img-fluid mx-auto d-block" src="/static/img/arbre/exampleHoverEvaluation.PNG">
-    <small class="text-muted"><br>
-        Toutes les fleurs qui ont une largeur se sépale <code> < 6 </code>(ne répondant pas à l'évaluation) sont dans la zone rouge à gauche de la ligne.<br>
-        Les fleurs répondant à l'évaluation (donc qui ont une <code>largeur sépale &ge; 6 </code>) sont bien dans la zone verte à droite de la ligne.<br>
-        Comme l'opération est inclusif (&ge; et non >) la ligne est verte)
-    </small>
+<p>
+    C'est pas très facile à comprendre comme ça, mais tu verra que même si la formule et la notation est complèxe, en pratique c'est simple à faire.<br>
+    Il te suffit juste de faire de multuplier et additionner les bons éléments ensemble ;)
+</p>
+
+<h2>Exemple</h2>
+<p>
+    Prenons <code>A =</code>$\begin{pmatrix}a_{1,1} & a_{1,2}\\a_{2,1} & a_{2,2}\\a_{3,1} & a_{3,2}\\a_{4,1} & a_{4,2}\end{pmatrix}$ et <code>B =</code>$\begin{pmatrix}b_{1,1} & b_{1,2} & b_{1,3}\\b_{2,1} & b_{2,2} & b_{2,3}\end{pmatrix}$, on peut calculer le produit matriciel <code>AB</code> de la façon suivante :
+    <img class="img-fluid" src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Matrix_multiplication_diagram_2.svg"><br>
+    La valeur du cercle jaune à bordure rouge se calcul comme étant : $c_{1,2} = a_{1,1} \times b{1,2} + a_{1,2} \times b_{2,2}$<br>
+    La valeur du cercle vert à bordure bleue se calcul comme étant : $c_{3,3} = a_{3,1} \times b{1,3} + a_{3,2} \times b_{2,3}$<br>
+    Et ainsi de suite pour chaque autre case de la matrice...
+</p>
+<p>
+    Prenons <code>A =</code>$\begin{pmatrix}1 & 0\\2 & -1\end{pmatrix}$ et <code>B =</code>$\begin{pmatrix}3 & 4\\-2 & -3\end{pmatrix}$. <code>AB</code> est alors : <br>
+</p>
+<img class="img-fluid" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/61465d1f92b38023b8652ca8d428fd305a763e90">
+<img class="img-fluid" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/f20f1ff340301145d1812d388fb748e802b02831">
+
+<p>
+    Je suis conscient que c'est pas facile au début, mais après quelques exercices tu devrais pouvoir y parvenir sans problèmes ;)
+</p>
+
+<h2>Exercices</h2>
+
+    
+<div data-ex="exercice">
+    
+
+    
+
+    
+        <div data-ex="question"><p>
+    Calcul le produit matriciel <code>AB</code> avec
+    <code>A=</code>$\begin{pmatrix}1 & 0\\2 & -1\end{pmatrix}$
+    <code>B=</code>$\begin{pmatrix}2 & -1\\0 & 1\end{pmatrix}$
+</p>
+</div>
+    
+
+    
+        <div class="card border-primary mb-3">
+            <div class="card-header">Réponse</div>
+            <div class="card-body text-primary">
+                
+                      
+                            <code>AB = </code>( <table style="display:inline-table">
+    <tbody>
+    <tr>
+        <td><input type="number" value="0" class="form-control" data-answer="2"></td>
+        <td><input type="number" value="0" class="form-control" data-answer="-1"></td>
+    </tr>
+    <tr>
+        <td><input type="number" value="0" class="form-control" data-answer="4"></td>
+        <td><input type="number" value="0" class="form-control" data-answer="-3"></td>
+    </tr>
+    </tbody>
+</table> )
+
+                    
+
+                    
+                
+            </div>
+            <div class="card-footer">
+                <button type="button" class="btn btn-primary" onclick="checkAnswer(this)" data-attempts="0"><i class="fas fa-play"></i> Vérifier réponse</button>
+                <span class="exFeedback"></span>
+                <button type="button" class="btn btn-success correctionButton collapse" onclick="showCorrection(this)"><i class="fas fa-puzzle-piece"></i> Afficher la correction</button>
+            </div>
+        </div>
+    
+
+
+    
+
+    
 </div>
 
-                
-            
+    
+<div data-ex="exercice">
+    
 
-            
+    
+
+    
+        <div data-ex="question"><p>
+    Calcul le produit matriciel <code>AB</code> avec
+    <code>A=</code>$\begin{pmatrix}1 & 2\\3 & 4\end{pmatrix}$
+    <code>B=</code>$\begin{pmatrix}2 & -1\\0 & 1\end{pmatrix}$
+</p>
+</div>
+    
+
+    
+        <div class="card border-primary mb-3">
+            <div class="card-header">Réponse</div>
+            <div class="card-body text-primary">
+                
+                      
+                            <code>AB = </code>( <table style="display:inline-table">
+    <tbody>
+    <tr>
+        <td><input type="number" value="0" class="form-control" data-answer="2"></td>
+        <td><input type="number" value="0" class="form-control" data-answer="1"></td>
+    </tr>
+    <tr>
+        <td><input type="number" value="0" class="form-control" data-answer="6"></td>
+        <td><input type="number" value="0" class="form-control" data-answer="1"></td>
+    </tr>
+    </tbody>
+</table> )
+
+                    
+
+                    
+                
+            </div>
+            <div class="card-footer">
+                <button type="button" class="btn btn-primary" onclick="checkAnswer(this)" data-attempts="0"><i class="fas fa-play"></i> Vérifier réponse</button>
+                <span class="exFeedback"></span>
+                <button type="button" class="btn btn-success correctionButton collapse" onclick="showCorrection(this)"><i class="fas fa-puzzle-piece"></i> Afficher la correction</button>
+            </div>
+        </div>
+    
+
+
+    
+
+    
+</div>
+
+    
+<div data-ex="exercice">
+    
+
+    
+
+    
+        <div data-ex="question"><p>
+    Un plus simple, mais qui te sera utile dans les calculs de réseau neuronnal.<br>
+    Calcul le produit matriciel <code>AB</code> avec
+    <code>A=</code>$\begin{pmatrix}1 & 2 & 3 & 4\end{pmatrix}$
+    <code>B=</code>$\begin{pmatrix}1 \\ 0 \\ -1\\2 \end{pmatrix}$
+</p>
+</div>
+    
+
+    
+        <div class="card border-primary mb-3">
+            <div class="card-header">Réponse</div>
+            <div class="card-body text-primary">
+                
+                      
+                            <code>AB = </code> ( <label>
+    <input class="form-control" type="number" value="0" data-answer="6">
+</label> )
+
+                    
+
+                    
+                
+            </div>
+            <div class="card-footer">
+                <button type="button" class="btn btn-primary" onclick="checkAnswer(this)" data-attempts="0"><i class="fas fa-play"></i> Vérifier réponse</button>
+                <span class="exFeedback"></span>
+                <button type="button" class="btn btn-success correctionButton collapse" onclick="showCorrection(this)"><i class="fas fa-puzzle-piece"></i> Afficher la correction</button>
+            </div>
+        </div>
+    
+
+
+    
+
+    
+</div>
+
+    
+<div data-ex="exercice">
+    
+
+    
+
+    
+        <div data-ex="question"><p>
+    Un peu plus compliqué, l'ultime challenge de cette page !<br>
+    Calcul le produit matriciel <code>AB</code> avec
+    <code>A=</code>$\begin{pmatrix}1 & 2\\3 & 4\\1 & 2\\3 & 4\end{pmatrix}$
+    <code>B=</code>$\begin{pmatrix}1 & 0 & -1\\2 & -1 & 0\end{pmatrix}$
+</p>
+</div>
+    
+
+    
+        <div class="card border-primary mb-3">
+            <div class="card-header">Réponse</div>
+            <div class="card-body text-primary">
+                
+                      
+                            <code>AB = </code>( <table style="display:inline-table">
+    <tbody>
+    <tr>
+        <td><input type="number" value="0" class="form-control" data-answer="5"></td>
+        <td><input type="number" value="0" class="form-control" data-answer="-2"></td>
+        <td><input type="number" value="0" class="form-control" data-answer="-1"></td>
+    </tr>
+    <tr>
+        <td><input type="number" value="0" class="form-control" data-answer="11"></td>
+        <td><input type="number" value="0" class="form-control" data-answer="-4"></td>
+        <td><input type="number" value="0" class="form-control" data-answer="-3"></td>
+    </tr>
+    <tr>
+        <td><input type="number" value="0" class="form-control" data-answer="5"></td>
+        <td><input type="number" value="0" class="form-control" data-answer="-2"></td>
+        <td><input type="number" value="0" class="form-control" data-answer="-1"></td>
+    </tr>
+    <tr>
+        <td><input type="number" value="0" class="form-control" data-answer="11"></td>
+        <td><input type="number" value="0" class="form-control" data-answer="-4"></td>
+        <td><input type="number" value="0" class="form-control" data-answer="-3"></td>
+    </tr>
+    </tbody>
+</table> )
+
+                    
+
+                    
+                
+            </div>
+            <div class="card-footer">
+                <button type="button" class="btn btn-primary" onclick="checkAnswer(this)" data-attempts="0"><i class="fas fa-play"></i> Vérifier réponse</button>
+                <span class="exFeedback"></span>
+                <button type="button" class="btn btn-success correctionButton collapse" onclick="showCorrection(this)"><i class="fas fa-puzzle-piece"></i> Afficher la correction</button>
+            </div>
+        </div>
+    
+
+
+    
+
+    
+</div>
+
+
+
+
+
+<script>
+    window.onbeforeunload = function (e) {
+        var e = e || window.event;
+
+        // For IE and Firefox
+        if (e) {
+            e.returnValue = 'Any string';
+        }
+
+        // For Safari
+        return 'Any string';
+    };
+</script>
+            </main>
             <nav>
     <div class="container">
         <div class="row">
@@ -420,6 +544,7 @@ MathJax.Hub.Config({
     }
 </script>
         </div>
+
     </div>
 </main>
 
@@ -441,6 +566,59 @@ MathJax.Hub.Config({
     </div>
 </div>
 
+<script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
 
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
+<script>
+
+    function pinElementTransformation(elem) {
+        elem.find("table").addBack('table').addClass("table-sm"); // Reduce table size
+        elem.find("img").addBack('img')
+            .click(imgOnClick) // Possible to enlarge the picture
+            .css("height", "100%"); // Scale the image (keeping aspect ratio)
+        elem.each(function () {
+            this.removeAttribute('id');
+        })
+    }
+
+    function pin(elem) {
+        let target = $('#pinnableArea');
+        target.empty();
+
+        let elementToCopy;
+        elementToCopy = $(elem).clone(); // Convert to jQueryobject
+        pinElementTransformation(elementToCopy);
+        target.html(elementToCopy);
+    }
+
+    // Pinable area check
+    let pinnableElements = $(".pinnable");
+    if (pinnableElements.length === 0) { // If there is nothing to pin, delete the area
+        $("#pinnableArea").remove();
+    }
+    else {
+        /*
+        <div class="float-right">
+            <button type="button" onclick="pin(this.parentElement.nextElementSibling)" class="btn btn-info"><i class="fas fa-thumbtack"></i></button>
+        </div>
+        */
+        pinnableElements.each(function() {
+            let pinDiv = $("<div>").addClass("float-right d-none d-sm-block");
+            let pinButton = $("<button><i class='fas fa-thumbtack'></i></button>")
+                .addClass("btn btn-info");
+            pinDiv.append(pinButton);
+            pinButton.click(() => {pin(this)}); // Pin the object itself, not the pin button
+            pinDiv.insertBefore(this);
+        });
+    }
+</script>
 </body>
 </html>
