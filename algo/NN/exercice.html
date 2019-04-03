@@ -112,13 +112,11 @@ MathJax.Hub.Config({
     let algoActivityDesc = [
         "Introduction au concept général de l'algorithme",
         "Série de petits exercices de préparation pour introduire l'idée derrière l'algorithme<br>Leur correction est automatisée.",
-        "Explication de l'objectif et du fonctionnement de l'activité.<br>Nécessaire pour la réalisation de l'étape suivante !",
         "Activité interactive de l'algorithme considéré.<br>Ca sera l'étape finale pour prouver ta compréhension et dévcouvrir le secret caché de cet algorithme !"
     ];
     let algoActivityIcon = [
         "<i class=\"far fa-lightbulb\"></i>",
         "<i class=\"fas fa-dumbbell\"></i>",
-        "<i class=\"far fa-question-circle\"></i>",
         "<i class=\"fas fa-flag-checkered\"></i>"
     ];
     // We can't use javascript variable into jekyll, so we precompute the values here
@@ -174,15 +172,15 @@ MathJax.Hub.Config({
 
     function getAllHrefForAlgo(algoConfingIndex) {
         let ret = [];
-        let pagesDefaultName = ["Introduction", "Exercices préparatoires", "Consignes pour l'activité", "Activité"];
-        let pagesDefaultHref = ["intro", "exercice", "activite-aide", "activite"];
+        let pagesDefaultName = ["Introduction", "Exercices préparatoires", "Activité"];
+        let pagesDefaultHref = ["intro", "exercice", "activite"];
 
         for (let i = 0; i < pagesDefaultName.length; i++) {
             let link = $('<a>');
             link.attr('href', algoPrefix + algoHRef[algoConfingIndex] + "/" + pagesDefaultHref[i]);
 
             let linkText = pagesDefaultName[i];
-            if (i === 3) {
+            if (i === 2) {
                 linkText += ` (${algoActivityName[algoConfingIndex]})`;
             }
             link.html(algoActivityIcon[i] + " " + linkText);
@@ -336,6 +334,7 @@ MathJax.Hub.Config({
 
                         
                         
+                        <br>
                     
 
 
@@ -467,6 +466,7 @@ MathJax.Hub.Config({
 
                         
                         
+                        <br>
                     
 
 
@@ -548,6 +548,7 @@ MathJax.Hub.Config({
 
                         
                         
+                        <br>
                     
 
 
@@ -639,6 +640,7 @@ MathJax.Hub.Config({
 
                         
                         
+                        <br>
                     
 
 
@@ -727,6 +729,7 @@ MathJax.Hub.Config({
 
                         
                         
+                        <br>
                     
 
 
@@ -814,6 +817,7 @@ MathJax.Hub.Config({
 
                         
                         
+                        <br>
                     
 
 
@@ -871,6 +875,7 @@ MathJax.Hub.Config({
 
                         
                         
+                        <br>
                     
 
 
@@ -928,6 +933,7 @@ MathJax.Hub.Config({
 
                         
                         
+                        <br>
                     
 
 
@@ -1020,6 +1026,7 @@ MathJax.Hub.Config({
 
                         
                         
+                        <br>
                     
 
 
@@ -1089,6 +1096,7 @@ MathJax.Hub.Config({
 
                         
                         
+                        <br>
                     
 
 
@@ -1147,6 +1155,7 @@ MathJax.Hub.Config({
 
                         
                         
+                        <br>
                     
 
 

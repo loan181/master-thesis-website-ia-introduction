@@ -98,6 +98,8 @@ MathJax.Hub.Config({
 
     
 
+    <script src="/static/js/contentForTeacher.js"></script>
+
     <!-- Success Message -->
     <link rel="stylesheet" href="/static/css/animationSuccess.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.1/TweenMax.min.js"></script>
@@ -135,13 +137,11 @@ MathJax.Hub.Config({
     let algoActivityDesc = [
         "Introduction au concept général de l'algorithme",
         "Série de petits exercices de préparation pour introduire l'idée derrière l'algorithme<br>Leur correction est automatisée.",
-        "Explication de l'objectif et du fonctionnement de l'activité.<br>Nécessaire pour la réalisation de l'étape suivante !",
         "Activité interactive de l'algorithme considéré.<br>Ca sera l'étape finale pour prouver ta compréhension et dévcouvrir le secret caché de cet algorithme !"
     ];
     let algoActivityIcon = [
         "<i class=\"far fa-lightbulb\"></i>",
         "<i class=\"fas fa-dumbbell\"></i>",
-        "<i class=\"far fa-question-circle\"></i>",
         "<i class=\"fas fa-flag-checkered\"></i>"
     ];
     // We can't use javascript variable into jekyll, so we precompute the values here
@@ -197,15 +197,15 @@ MathJax.Hub.Config({
 
     function getAllHrefForAlgo(algoConfingIndex) {
         let ret = [];
-        let pagesDefaultName = ["Introduction", "Exercices préparatoires", "Consignes pour l'activité", "Activité"];
-        let pagesDefaultHref = ["intro", "exercice", "activite-aide", "activite"];
+        let pagesDefaultName = ["Introduction", "Exercices préparatoires", "Activité"];
+        let pagesDefaultHref = ["intro", "exercice", "activite"];
 
         for (let i = 0; i < pagesDefaultName.length; i++) {
             let link = $('<a>');
             link.attr('href', algoPrefix + algoHRef[algoConfingIndex] + "/" + pagesDefaultHref[i]);
 
             let linkText = pagesDefaultName[i];
-            if (i === 3) {
+            if (i === 2) {
                 linkText += ` (${algoActivityName[algoConfingIndex]})`;
             }
             link.html(algoActivityIcon[i] + " " + linkText);
@@ -232,33 +232,59 @@ MathJax.Hub.Config({
 
 </script>
 <main role="main" class="container" style="max-width: 95%">
-    <h1>Réseau neuronnal</h1>
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab-activity" role="tablist">
+            <a class="nav-item nav-link" data-toggle="tab" href="#nav-objective" role="tab" aria-controls="nav-objective" aria-selected="true"><i class="fas fa-flag-checkered"></i> Objectif</a>
+            <a class="nav-item nav-link active" data-toggle="tab" href="#nav-activity" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="fas fa-gamepad"></i> Activité</a>
+            
+            
+            <a class="nav-item nav-link" data-toggle="tab" href="#nav-details" role="tab" aria-controls="nav-details" aria-selected="false"><i class="fas fa-info"></i> Détails sur l'interface</a>
+        </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent-activity">
+        <!-- Objective Tab -->
+        <div class="tab-pane fade" id="nav-objective" role="tabpanel" aria-labelledby="nav-objective-tab">
+            <h1>Objectif</h1>
+            <p>
+                L'objectif de cette mission est d'obtenir un score de 100% pour cette l'activité.
+                Une fois ce score atteint, le secret de cette activité te seras révélé.
+            </p>
+            <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%; height: 32px">100.00%</div>
+            <p>
+                Le score est mis à jour à chaque fois que tu presse le bouton d'exécution <button type="button" class="btn btn-primary"><i class="fas fa-play"></i></button>.
+            </p>
 
-    <!-- Toolbox -->
-    <div id="toolBox"></div>
-    <script src="/static/js/shared/ToolBox.js"></script>
-    <script>
-        let TB = new ToolBox("toolBox");
-        TB.setToolBarForExercice("KNN");
-        TB.draw();
-    </script>
+            
+        </div>
+        <!-- Activity Tab -->
+        <div class="tab-pane fade show active" id="nav-activity" role="tabpanel" aria-labelledby="nav-activity-tab">
+            <h1>Réseau neuronnal</h1>
 
-    <!-- Progress bar of prediction -->
-    <div class="mt-2 col-md-12" >
-        <h6 style="float: left; margin-right: 1em;"> Précision actuelle : </h6>
-        <div id="progressBar"></div>
-    </div>
-    <script src="/static/js/successBar.js"></script>
-    <script>
-        let pb = new ProgressBar("progressBar");
-        function exerciceSuccess() {
-            $('#exerciceSuccess').modal('toggle');
-            fancyPopIn();
-        }
-    </script>
+            <!-- Toolbox -->
+            <div id="toolBox"></div>
+            <script src="/static/js/shared/ToolBox.js"></script>
+            <script>
+                let TB = new ToolBox("toolBox");
+                TB.setToolBarForExercice("KNN");
+                TB.draw();
+            </script>
 
-    <!-- Main content of the activity -->
-    <div class="row mt-2 col-md-12">
+            <!-- Progress bar of prediction -->
+            <div class="mt-2 col-md-12" >
+                <h6 style="float: left; margin-right: 1em;"> Précision actuelle : </h6>
+                <div id="progressBar"></div>
+            </div>
+            <script src="/static/js/successBar.js"></script>
+            <script>
+                let pb = new ProgressBar("progressBar");
+                function exerciceSuccess() {
+                    $('#exerciceSuccess').modal('toggle');
+                    fancyPopIn();
+                }
+            </script>
+
+            <!-- Main content of the activity -->
+            <div class="row mt-2 col-md-12">
     <div class="col-sm-4">
         <div>
             <canvas id="can" width="280" height="280" style="top:10%;left:10%;border:2px solid; cursor:crosshair"></canvas>
@@ -575,7 +601,7 @@ MathJax.Hub.Config({
             <!-- Blockly content here -->
             <div class="tab-pane fade show active" id="tabBlockly" role="tabpanel" aria-labelledby="blockly-tab" style="height: 100%">
                 <div id="blocklyArea" style="height: 100%">
-                    <div id="blocklyDiv" style="position: static">
+                    <div id="blocklyDiv" style="width: 100%;height: 100%; min-height: 400px;">
                     </div>
                 </div>
             </div>
@@ -593,7 +619,6 @@ MathJax.Hub.Config({
 
 <script src="js/modalHandler.js"></script>
 
-</main>
 
 <xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
     <category name="NN Entrée" colour="#a55b5b">
@@ -1029,17 +1054,54 @@ MathJax.Hub.Config({
 <script src="/static/js/shared/Blockly/languageCode.js"></script>
 <script src="/static/js/shared/Blockly/BlocklyScripts.js"></script>
 <script src="js/NNBlocklyFunctions.js"></script>
+        </div>
+
+        
+        
+        <!-- Details/documentation Tab -->
+        <div class="tab-pane fade" id="nav-details" role="tabpanel" aria-labelledby="nav-details-tab">
+            <h1>Détails sur l'interface</h1>
+            <h2>Structure de la page</h2>
+            
+
+            
+
+            
+        </div>
+    </div>
+
 </main>
 
 <!-- Success Animation when activity is succeded -->
 <div class="modal" id="exerciceSuccess" tabindex="-1" role="dialog" aria-labelledby="exerciceSuccessLabel" aria-hidden="true" style="background-color: rgba(0,250,255,0.5);">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div id="congrats">
-            <h1 id="sucessMessage">Bravo !</h1>
+            <h1 id="sucessMessage">Bravo !
+            
+            </h1>
         </div>
     </div>
 </div>
 <script src="/static/js/animationSuccess.js"></script>
+
+<script src="/static/js/enlargeImageModal.js"></script>
+<!-- Creates the bootstrap modal where the image will appear -->
+<div class="modal fade bd-example-modal-xl" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" target="_blank" id="imagepreviewLink"> <i class="fas fa-external-link-alt"></i></a>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="mx-auto" align="center">
+                    <img src="" class="imagepreview" data-dismiss="modal" style="max-width: 100%; height:auto">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 </body>
 </html>

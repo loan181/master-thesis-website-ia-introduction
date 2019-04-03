@@ -1,4 +1,8 @@
 
+function showObjectiveTab() {
+    $('[href="#nav-objective"]').tab('show');
+}
+
 class ToolBox{
     constructor(idToolbox) {
         this.toolBox=document.getElementById(idToolbox);
@@ -77,8 +81,11 @@ class ToolBox{
         return this.addButton("buttonRun", "btn-primary", onclickAction, "fas fa-play", dataTooltip)
     }
 
+
+
     createButtonHelp(href) {
-        return this.addButtonLink("buttonLinkHelp", href, "btn-warning", "fas fa-question-circle", "help")
+
+        return this.addButton("buttonLinkHelp","btn-warning", "showObjectiveTab()", "fas fa-question-circle", "Help")
     }
 
     createButtonLanguage() {
@@ -164,8 +171,8 @@ class ToolBox{
         }
     }
 
-    drawExplanation(exerciceName, id, explanations) {
-        this.setToolBarForExercice(exerciceName);
+    drawExplanation(id, explanations) {
+        //this.setToolBarForExercice(exerciceName);
 
         let html = "";
         html += `

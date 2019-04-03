@@ -103,6 +103,8 @@ MathJax.Hub.Config({
 
     
 
+    <script src="/static/js/contentForTeacher.js"></script>
+
     <!-- Success Message -->
     <link rel="stylesheet" href="/static/css/animationSuccess.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.1/TweenMax.min.js"></script>
@@ -140,13 +142,11 @@ MathJax.Hub.Config({
     let algoActivityDesc = [
         "Introduction au concept général de l'algorithme",
         "Série de petits exercices de préparation pour introduire l'idée derrière l'algorithme<br>Leur correction est automatisée.",
-        "Explication de l'objectif et du fonctionnement de l'activité.<br>Nécessaire pour la réalisation de l'étape suivante !",
         "Activité interactive de l'algorithme considéré.<br>Ca sera l'étape finale pour prouver ta compréhension et dévcouvrir le secret caché de cet algorithme !"
     ];
     let algoActivityIcon = [
         "<i class=\"far fa-lightbulb\"></i>",
         "<i class=\"fas fa-dumbbell\"></i>",
-        "<i class=\"far fa-question-circle\"></i>",
         "<i class=\"fas fa-flag-checkered\"></i>"
     ];
     // We can't use javascript variable into jekyll, so we precompute the values here
@@ -202,15 +202,15 @@ MathJax.Hub.Config({
 
     function getAllHrefForAlgo(algoConfingIndex) {
         let ret = [];
-        let pagesDefaultName = ["Introduction", "Exercices préparatoires", "Consignes pour l'activité", "Activité"];
-        let pagesDefaultHref = ["intro", "exercice", "activite-aide", "activite"];
+        let pagesDefaultName = ["Introduction", "Exercices préparatoires", "Activité"];
+        let pagesDefaultHref = ["intro", "exercice", "activite"];
 
         for (let i = 0; i < pagesDefaultName.length; i++) {
             let link = $('<a>');
             link.attr('href', algoPrefix + algoHRef[algoConfingIndex] + "/" + pagesDefaultHref[i]);
 
             let linkText = pagesDefaultName[i];
-            if (i === 3) {
+            if (i === 2) {
                 linkText += ` (${algoActivityName[algoConfingIndex]})`;
             }
             link.html(algoActivityIcon[i] + " " + linkText);
@@ -237,33 +237,79 @@ MathJax.Hub.Config({
 
 </script>
 <main role="main" class="container" style="max-width: 95%">
-    <h1>Méthode des K plus proches voisins interactif</h1>
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab-activity" role="tablist">
+            <a class="nav-item nav-link" data-toggle="tab" href="#nav-objective" role="tab" aria-controls="nav-objective" aria-selected="true"><i class="fas fa-flag-checkered"></i> Objectif</a>
+            <a class="nav-item nav-link active" data-toggle="tab" href="#nav-activity" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="fas fa-gamepad"></i> Activité</a>
+            
+            <a class="nav-item nav-link" data-toggle="tab" href="#nav-example" role="tab" aria-controls="nav-example" aria-selected="false"><i class="fas fa-drafting-compass"></i> Exemples</a>
+            
+            
+            <a class="nav-item nav-link" data-toggle="tab" href="#nav-hints" role="tab" aria-controls="nav-hints" aria-selected="false"><i class="fas fa-puzzle-piece"></i> Aide pour résoudre l'activité</a>
+            
+            <a class="nav-item nav-link" data-toggle="tab" href="#nav-details" role="tab" aria-controls="nav-details" aria-selected="false"><i class="fas fa-info"></i> Détails sur l'interface</a>
+        </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent-activity">
+        <!-- Objective Tab -->
+        <div class="tab-pane fade" id="nav-objective" role="tabpanel" aria-labelledby="nav-objective-tab">
+            <h1>Objectif</h1>
+            <p>
+                L'objectif de cette mission est d'obtenir un score de 100% pour cette l'activité.
+                Une fois ce score atteint, le secret de cette activité te seras révélé.
+            </p>
+            <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%; height: 32px">100.00%</div>
+            <p>
+                Le score est mis à jour à chaque fois que tu presse le bouton d'exécution <button type="button" class="btn btn-primary"><i class="fas fa-play"></i></button>.
+            </p>
 
-    <!-- Toolbox -->
-    <div id="toolBox"></div>
-    <script src="/static/js/shared/ToolBox.js"></script>
-    <script>
-        let TB = new ToolBox("toolBox");
-        TB.setToolBarForExercice("KNN");
-        TB.draw();
-    </script>
+            
+                <h2>Le score</h2>
+                <p>
+    Ton score dépend de la qualité de la fonction <code>classify(newIris)</code>.<br>
+    Cette fonction prend une fleur en argument <code>newIris</code> et renvoie le nom prédit de cette fleur.
+</p> <div class="mx-auto" align="center">
+    <img src="/static/img/KNN/classifyFunction.svg" class="img-fluid">
+</div> <p>
+    Des fleurs de classes connues sont cachées et servent à définir si ta fonction de classification est bonne ou pas.<br>
+    Le score augmente chaque fois qu'une de ces fleur est correctement prédite.<br>
+</p> <p>
+    Pour atteindre les 100%, il faut que tu modifies la fonction de manière qu’elle implémente le concept vu de l’algorithme des K plus proches voisins.<br>
+    En plus de cela tu as différents paramètres que tu peux faire varier,
+    tu devras trouver la combinaison qui te donnera le meilleure score.
+</p>
 
-    <!-- Progress bar of prediction -->
-    <div class="mt-2 col-md-12" >
-        <h6 style="float: left; margin-right: 1em;"> Précision actuelle : </h6>
-        <div id="progressBar"></div>
-    </div>
-    <script src="/static/js/successBar.js"></script>
-    <script>
-        let pb = new ProgressBar("progressBar");
-        function exerciceSuccess() {
-            $('#exerciceSuccess').modal('toggle');
-            fancyPopIn();
-        }
-    </script>
+            
+        </div>
+        <!-- Activity Tab -->
+        <div class="tab-pane fade show active" id="nav-activity" role="tabpanel" aria-labelledby="nav-activity-tab">
+            <h1>Méthode des K plus proches voisins interactif</h1>
 
-    <!-- Main content of the activity -->
-    <!-- 2 Rows -->
+            <!-- Toolbox -->
+            <div id="toolBox"></div>
+            <script src="/static/js/shared/ToolBox.js"></script>
+            <script>
+                let TB = new ToolBox("toolBox");
+                TB.setToolBarForExercice("KNN");
+                TB.draw();
+            </script>
+
+            <!-- Progress bar of prediction -->
+            <div class="mt-2 col-md-12" >
+                <h6 style="float: left; margin-right: 1em;"> Précision actuelle : </h6>
+                <div id="progressBar"></div>
+            </div>
+            <script src="/static/js/successBar.js"></script>
+            <script>
+                let pb = new ProgressBar("progressBar");
+                function exerciceSuccess() {
+                    $('#exerciceSuccess').modal('toggle');
+                    fancyPopIn();
+                }
+            </script>
+
+            <!-- Main content of the activity -->
+            <!-- 2 Rows -->
 <div class="row h-100 mt-2 col-md-12">
     <div class="col-sm-4" >
 
@@ -1710,14 +1756,11 @@ MathJax.Hub.Config({
     </div>
     <div id="blocklyArea" class="col-sm-8">
         <!-- Blockly here -->
-        <div id="blocklyDiv" style="position: static">
+        <div id="blocklyDiv" style="width: 100%;height: 100%; min-height: 320px">
         </div>
     </div>
 </div>
 
-
-
-</main>
 <xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
     <category name="KNN" colour="#a55b5b">
   <block type="getk"></block>
@@ -2130,17 +2173,434 @@ MathJax.Hub.Config({
 <script src="/static/js/shared/Blockly/languageCode.js"></script>
 <script src="/static/js/shared/Blockly/BlocklyScripts.js"></script>
 <script src="/static/js/shared/plot.js"></script>
+
+<script>
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        let currentTab = e.target;
+        if (currentTab.href.endsWith("#nav-activity")) {
+            resizePlot();
+            if (LanguageCode.workspace.getAllBlocks().length === 0) // Load defaut blocks if it is empty
+                Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'), LanguageCode.workspace);
+            Blockly.svgResize(LanguageCode.workspace);
+        }
+    })
+</script>
+
+        </div>
+
+        
+        <!-- Example Tab -->
+        <div class="tab-pane fade" id="nav-example" role="tabpanel" aria-labelledby="nav-example-tab">
+            <h1>Exemple</h1>
+            
+                <h3>Créer une fleur artificielle</h3>
+                <p>
+    Pour tester ton programme, il peut être utile de créer des fleurs "artificielles".
+    Ce sont des fleurs qui apparaîtront sur le graphe, mais qui ne sont pas dans le training set.<br>
+</p> <p>
+    Pour cela on va d'abord créer une fleur avec le bloc supplémentaire en spécifiant les coordonnées <code>x</code> et <code>y</code> désirés.
+</p> <div class="mx-auto" align="center">
+    <img src="/static/img/blocklyBlocks/createFlower.svg" class="img-fluid">
+</div> <p>
+    Après cela il faut qu'on exécute le code pour mettre à jour le graphe via le bouton
+    <button id="buttonDebug" type="button" class="btn btn-warning"><i class="fas fa-bug"></i></button><br>
+    Une croix cyan apparaitra comme marqueur de ta/tes fleur(s) ajouté.
+</p> <div class="card">
+    <div class="card-body">
+        <p>
+            Attention que le graphique se mettra à jour selon les paramètres que tu as choisis pour l’axe x et y dans le panneau des paramètres.<br>
+        </p>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm">
+                    <img src="/static/img/KNN/addFlowerPar1.PNG" class="img-fluid float-left">
+                </div>
+                <div class="col-sm">
+                    <img src="/static/img/KNN/addFlowerPar2.PNG" class="img-fluid float-right">
+                </div>
+            </div>
+        </div>
+        <small class="text-muted"><br>Ici la même fleur est ajoutée (au coordonnées (6.1, 1.7)), mais les axes sont différents</small>
+    </div>
+</div>
+
+            
+                <h3>Manipuler une fleur artificielle</h3>
+                <p>
+    Les fleurs que tu créés artificiellement sont considérées comme des fleurs "classiques" dans le code.
+    Tu peux les utiliser avec tous les autres blocs utilisant des fleurs.
+</p> <p>
+    Voici un exemple un peu complexe d'utilisation possible:
+</p> <div class="mx-auto" align="center">
+    <img src="/static/img/KNN/exampleBlockAppCompteur2.svg" class="img-fluid"><br>
+</div> <br> <div class="mx-auto" align="center">
+    <img src="/static/img/KNN/exampleBlockAppCompteurRes2.PNG" class="img-fluid">
+</div> <small class="text-muted">
+    Dans cet exemple, on ajoute une fleur artificielle en (4.9, 4.2) avec comme axe x le sepal length et y le petal length.<br>
+    On commence par réinitialiser les compteurs des 3 fleurs en les mettant à zéro<br>
+    Ensuite, on ajoute au compteur de la fleur la plus proche la valeur -10. Dans notre cas, la fleur la plus proche est un carré vert (virginica), son compteur étant de 0, il passe à -10.<br>
+    Après cela, on ajoute au compteur de la 2ème fleur la plus proche la valeur 20. Dans notre cas, la 2ème fleur la plus proche est un triangle rouge (versicolor), son compteur étant de 0, il passe à 20.<br>
+    Enfin, on affiche la valeur des compteurs :
+    <ul>
+        <li>0 pour les Iris-setosa</li>
+        <li>20 pour les Iris-versicolor</li>
+        <li>-10 pour les Iris-virginica</li>
+    </ul>
+    Attention que <code>K</code> est totalement ignoré dans cet exemple, il faudra le prendre en compte quand tu devras résoudre le problème ;)
+</small> <br> <br> <div class="mx-auto" align="center">
+    <img src="/static/img/KNN/exampleBlockAppCompteur.svg" class="img-fluid"><br>
+</div> <br> <div class="mx-auto" align="center">
+    <img src="/static/img/KNN/exampleBlockAppCompteurRes.PNG" class="img-fluid">
+</div> <small class="text-muted">
+    Pareil que l'exemple précédent, sauf qu'au lieu d'afficher les valeurs des compteurs on indique les fleurs avec les valeurs de compteur minimale et maximale
+</small>
+
+            
+        </div>
+        
+        
+            <!-- Hints/Help for solving the activity Tab -->
+            <div class="tab-pane fade" id="nav-hints" role="tabpanel" aria-labelledby="nav-hints-tab">
+                <h1>Aide pour résoudre l'activité</h1>
+                <p>
+                    L’algorithme peut être séparé en plusieurs étapes distinctes qui, petit à petit, te rapprocheront de la solution.
+                    Je vais t’aider dans cette partie à atteindre la bonne solution en te donnant les intuitions.<br>
+                    Libre à toi de faire autrement si tu le souhaites tant que la prédiction finale est bonne.
+                </p>
+                
+                    <h3>Etape 1 : Bien commencer !</h3>
+                    <p>
+    Dans la section <code>TODO</code> de la boite à outil de blockly tu trouvera une première implémentation de la fonction que tu dois faire.<br>
+    Commence par la prendre et test le résultat de ton prédicteur avec.
+</p> <div class="mx-auto" align="center">
+    <img src="/static/img/KNN/classifyFunctionDefault.svg" class="img-fluid">
+</div>
+<p>
+    Normalement tu devrais avoir un résultat d’environ 33% et chaque fois que tu re-test le prédicteur,
+    il donnera un résultat différent.<br>
+    C’est normal car le prédicteur que je te donne ici est totalement aléatoire et se contente de donner un nom parmi ceux disponible de manière aléatoire.
+    Autrement dit, pour chaque fleur il a 1 chance sur 3 de deviner correctement (d’ou les 33%).
+</p>
+<div class="mt-2 col-md-12">
+    <h6 style="float: left; margin-right: 1em;"> Prédiction courante : </h6>
+    <div class="progress" style="height: 32px;">
+        <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated" role="progressbar" style="width: 33%;">33.33%</div>
+    </div>
+</div>
+
+                    
+                    
+                    
+                
+                    <h3>Etape 2 : implémenter les K plus proches voisins</h3>
+                    <p>
+    Pour réaliser à bien ce projet il est important que tu comprenne bien comment utiliser les compteurs et à quoi ils vont nous servir.<br><br>
+    L'idée générale est d'augmenter le compteur de chacune des K fleurs les plus proches pour ensuite déterminer celle qui est en majorité
+</p>
+<p>
+    Voilà différents exemple pour t'entrainer et voir si tes résultats sont correctes :
+</p> <small class="text-muted">
+    Le code principal de l'algorithme est ici caché ici dans la fonction <code>code...</code>, mait tu n'es bien-entendu pas obliger d'implémenter une fonction pour ça ;)<br>
+    Tu peux recopier la partie du code avec <code>afficher...</code> si tu veux avoir le même affichage que moi (en supposant que tes compteurs se mettent correctement à jour)<br>
+    Fais bien attention que les paramètres et les coordonnées de la fleur créé changent entre chacun des exemples !
+</small>
+<div class="mx-auto" align="center">
+    <img src="/static/img/KNN/stepMainEx1.PNG" class="img-fluid">
+    <br>
+    <img src="/static/img/KNN/stepMainEx2.PNG" class="img-fluid">
+    <br>
+    <img src="/static/img/KNN/stepMainEx3.PNG" class="img-fluid">
+</div>
+
+                    
+                        
+<div class="card border-info mb-3">
+    <div class="card-header">
+        <button class="btn btn-link" type="button" onclick="toggleNext(this)">
+            Blocs recommandés
+        </button>
+    </div>
+    <div class="hide collapse show" style="">
+        <div class="card-body">
+
+            <div class="container">
+                <div class="row">
+                    
+                    
+                    
+                    
+                        <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
+                            <div class="card">
+                                <img src="/static/img/blocklyBlocks/countersIncrease.svg" class="img-fluid">
+                            </div>
+                        </div>
+                    
+                        <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
+                            <div class="card">
+                                <img src="/static/img/blocklyBlocks/countersGetMinMax.svg" class="img-fluid">
+                            </div>
+                        </div>
+                    
+                        <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
+                            <div class="card">
+                                <img src="/static/img/blocklyBlocks/getK.svg" class="img-fluid">
+                            </div>
+                        </div>
+                    
+                        <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
+                            <div class="card">
+                                <img src="/static/img/blocklyBlocks/countersReset.svg" class="img-fluid">
+                            </div>
+                        </div>
+                    
+                        <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
+                            <div class="card">
+                                <img src="/static/img/blocklyBlocks/forI.svg" class="img-fluid">
+                            </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+                    
+                    
+                        <div class="card border-warning mb-3">
+    <div class="card-header">
+        <button class="btn btn-link" type="button" onclick="toggleNext(this)">
+            Aide
+        </button>
+    </div>
+    <div class="collapse hide">
+        <div class="card-body">
+            <p class="card-text">
+                Une structure correcte du code est la suivante : <ol>
+    <li>Réinitialiser le compteur, chacune des trois fleurs à un compteur qui est mis à 0</li>
+    <li>Pour chacune des K fleurs les plus proches, il faudra augmenter leur compteur individuel de 1</li>
+    <li>Une fois les K fleurs parcouru, il suffit de choisir celle qui à la valeur de compteur la plus haute et mettre à jour le résultat renvoyé</li>
+</ol>
+
+            </p>
+        </div>
+    </div>
+</div>
+                    
+                    
+                        <div class="card border-success mb-3 onlyTeacher collapse">
+    <div class="card-header">Correction</div>
+    <div class="card-body text-success">
+        <p class="card-text">
+            <div class="mx-auto" align="center">
+    <img src="/static/img/KNN/solutionKNN.svg" class="img-fluid">
+</div>
+
+        </p>
+    </div>
+</div>
+                    
+                
+                    <h3>Etape 3 : Obtenir 100%</h3>
+                    <p>
+    Une fois que ton implémentation te parait correxte, il ne te reste plus qu’à faire un peu le tri dans ton code !
+    Enlève tout les <code>afficher ...</code> qui seront gênant quand tu évaluera ton prédicteur,
+    choisis bien tes paramètres (K, Axe x et Axe y) et croise les doigts pour atteindre les 100% !
+</p>
+
+                    
+                    
+                    
+                        <div class="card border-success mb-3 onlyTeacher collapse">
+    <div class="card-header">Correction</div>
+    <div class="card-body text-success">
+        <p class="card-text">
+            <div class="mx-auto" align="center">
+    <img src="/static/img/KNN/solutionKNN.svg" class="img-fluid">
+</div> Avec par exemple comme paramètres : <div class="mx-auto" align="center">
+    <img src="/static/img/KNN/solParametersKNN.png" class="img-fluid">
+</div>
+
+        </p>
+    </div>
+</div>
+                    
+                
+
+            </div>
+        
+        <!-- Details/documentation Tab -->
+        <div class="tab-pane fade" id="nav-details" role="tabpanel" aria-labelledby="nav-details-tab">
+            <h1>Détails sur l'interface</h1>
+            <h2>Structure de la page</h2>
+            
+                <h3>Barre d'outil</h3>
+                <p>
+                    Dans la partie supérieure de l’écran tu as différents boutons te permettant de réaliser certaines actions que nous allons détailler ici.
+                </p>
+                <div id="toolboxExplanation"></div>
+                <script>
+                    //let TBEXplanation = new ToolBox();
+                    let explanations = [];
+                    
+                    explanations.push("Commencer un nouveau projet. Cela effacera tous les blocs.");
+                    
+                    explanations.push("Sauvegarder/télécharger ton projet sur ton ordinateur (uniquement les blocs de Blockly).<br>Les paramètres ne sont pas enregistrés");
+                    
+                    explanations.push("Ouvrir un projet précédemment sauvegardé.<br>Uniquement les blocs Blockly sont chargés");
+                    
+                    explanations.push("Exporte le projet (blocs) sous forme d’image (SVG (vectoriel) ou PNG ).<br>Attention que si tu exportes en image tu ne peux pas l’ouvrir comme projet");
+                    
+                    explanations.push("Voir le code JavaScript généré par Blockly dans une fenêtre pop-up");
+                    
+                    explanations.push("Tester le code. Se contentera d’exécuter le code du projet tel quel.");
+                    
+                    explanations.push("<b>Tester le classifieur</b>. Lance le programme en évaluant si les prédictions sont correctes.<br>Cela te permettra de réussir ton objectif !");
+                    
+                    explanations.push("Renvoie vers la page d'aide (celle-ci)");
+                    
+                    explanations.push("Te permet de choisir la langue.<br>Seulement le français et l’anglais sont pleinement compatible. Les autres changeront uniquement le texte des blocs de Blockly.");
+                    
+                    TB.drawExplanation("toolboxExplanation", explanations);
+                </script>
+            
+
+            
+                <h3>Données et Paramètres</h3>
+                La partie de gauche te permet d'observer les données ainsi que de modifier les paramètres de l'algorithme.
+
+                <ul class="list-unstyled">
+                    
+                        <li class="media">
+                            <img src="/static/img/KNN/site-graphAndDatas.png" class="mr-3 img-fluid" >
+                            <div class="media-body">
+                                <h4 class="mt-0 mb-1">Panneau Graphe et Données</h4>
+                                Te permet de consulter et visualiser les données du modèle d'entrainement. Chaque point du graphe correspond à une fleur du modèle d'entrainement. Sa forme et couleur définit sa classe comme légendé en dessous du graphe.<br> Tu peux survoler avec ta souris un point pour obtenir des informations le concernant.<br> Tu pourras également ajouter des fleurs "artificielle" dans le graphe via Blockly. Pour effacer ces derniers tu pourras utiliser le bouton jaune avec la gomme<br>
+
+                            </div>
+                        </li>
+                    
+                        <li class="media">
+                            <img src="/static/img/KNN/site-parameters.png" class="mr-3 img-fluid" >
+                            <div class="media-body">
+                                <h4 class="mt-0 mb-1">Panneau paramètres</h4>
+                                Te permet de modifier certains paramètres de l'algorithme des K plus proches voisins.<br> La modification des axes mettra également à jour le graphe du modèle d'entrainement selon le choix.
+
+                            </div>
+                        </li>
+                    
+                </ul>
+            
+
+            
+                <h3>Blockly</h3>
+                <p>
+                    La partie de droite est l'emplacement où tu pourras modifier le code de l'algorithme afin de réussir l'objectif.
+                </p>
+
+                
+                    <h4>Blocs supplémentaires</h4>
+
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">Bloc</th>
+                            <th scope="col">Explication</th>
+                            <th scope="col">Type de retour</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        
+                            <tr>
+                                <td><img src="/static/img/blocklyBlocks/getK.svg" class="img-fluid"></td>
+                                <td>Donne la valeur de K définie dans le Panneau Paramètres</td>
+                                
+                                    <td>Nombre</td>
+                                
+                            </tr>
+                        
+                            <tr>
+                                <td><img src="/static/img/blocklyBlocks/countersReset.svg" class="img-fluid"></td>
+                                <td>Permet de mettre le compteur de chaque fleur à zéro</td>
+                                
+                                    <td><i>Rien</i></td>
+                                
+                            </tr>
+                        
+                            <tr>
+                                <td><img src="/static/img/blocklyBlocks/countersIncrease.svg" class="img-fluid"></td>
+                                <td>Ajoute la valeur donné à la classe de la i-ème fleur la plus proche.</td>
+                                
+                                    <td><i>Rien</i></td>
+                                
+                            </tr>
+                        
+                            <tr>
+                                <td><img src="/static/img/blocklyBlocks/countersGetMinMax.svg" class="img-fluid"></td>
+                                <td>Récupère la fleur associée au compteur avec la valeur minimale/maximale</td>
+                                
+                                    <td>Texte (nom de fleur)</td>
+                                
+                            </tr>
+                        
+                            <tr>
+                                <td><img src="/static/img/blocklyBlocks/getCounters.svg" class="img-fluid"></td>
+                                <td>Permet de consulter la valeur des compteurs.<br>Ce bloc est utile seulement pour débugger afin de pouvoir voir les valeurs des compteurs</td>
+                                
+                                    <td>Texte</td>
+                                
+                            </tr>
+                        
+                            <tr>
+                                <td><img src="/static/img/blocklyBlocks/createFlower.svg" class="img-fluid"></td>
+                                <td>Permet de créer une fleur artificielle qui aura les valeurs données en <code>x</code> et <code>y</code> (dépend de ce que tu as fixé comme paramètres).<br>Voir exemples ci-dessous</td>
+                                
+                                    <td>Fleur</td>
+                                
+                            </tr>
+                        
+                        </tbody>
+                    </table>
+                
+            
+        </div>
+    </div>
+
 </main>
 
 <!-- Success Animation when activity is succeded -->
 <div class="modal" id="exerciceSuccess" tabindex="-1" role="dialog" aria-labelledby="exerciceSuccessLabel" aria-hidden="true" style="background-color: rgba(0,250,255,0.5);">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div id="congrats">
-            <h1 id="sucessMessage">Bravo !</h1>
+            <h1 id="sucessMessage">Bravo !
+            
+                <br>
+                Le secret de cet exercice est : cookie<br>
+                <i class="fas fa-cookie-bite"></i>
+            
+            </h1>
         </div>
     </div>
 </div>
 <script src="/static/js/animationSuccess.js"></script>
+
+<script src="/static/js/enlargeImageModal.js"></script>
+<!-- Creates the bootstrap modal where the image will appear -->
+<div class="modal fade bd-example-modal-xl" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" target="_blank" id="imagepreviewLink"> <i class="fas fa-external-link-alt"></i></a>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="mx-auto" align="center">
+                    <img src="" class="imagepreview" data-dismiss="modal" style="max-width: 100%; height:auto">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 </body>
 </html>
