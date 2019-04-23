@@ -25,6 +25,11 @@ var out2;
 var out3;
 var output;
 
+function resetNNInput() {
+    nnInput = Array(784).fill(null);
+}
+resetNNInput();
+
 function resetW12() {
     w12 = JSON.parse(JSON.stringify(w12Orig));
 }
@@ -39,13 +44,20 @@ resetW23();
 function nn(dataPic, w12, bias2, w23, bias3) {
     data = dataPic;
     // just some incomplete sanity checks to find the most obvious errors
-    if (!Array.isArray(data) || data.length == 0 ||
-        !Array.isArray(w12) || w12.length == 0 || !Array.isArray(w12[0]) || data.length != w12[0].length || !Array.isArray(bias2) || bias2.length != w12.length ||
-        !Array.isArray(w23) || w23.length == 0 || !Array.isArray(w23[0]) || w12.length != w23[0].length || !Array.isArray(bias3) || bias3.length != w23.length) {
+    if (!Array.isArray(data) || data.length === 0 ||
+        !Array.isArray(w12) || w12.length === 0 || !Array.isArray(w12[0]) || data.length !== w12[0].length || !Array.isArray(bias2) || bias2.length !== w12.length ||
+        !Array.isArray(w23) || w23.length === 0 || !Array.isArray(w23[0]) || w12.length !== w23[0].length || !Array.isArray(bias3) || bias3.length !== w23.length) {
         console.error('nn(): invalid parameters');
         console.log('d: '+data.length+', w12: '+w12.length+', w12[0]: '+w12[0].length+', bias2: '+bias2.length+
             ', w23: '+w23.length+', w23[0]: '+w23[0].length+', bias3: '+bias3.length);
         return undefined;
+    }
+
+    // Check if all entry neurons values are defined
+    for (let i = 0; i < dataPic.length; i++) {
+        if (dataPic[i] === null) {
+            throw `Impossible de calculer la valeur des neurones de la couche cachée. Le neurone de la couche d'entrée n°${i+1} n'a pas de valeur !`;
+        }
     }
     var t1 = new Date();
 
@@ -150,11 +162,7 @@ function imageDataToGrayscale(imgData) {
     return grayscaleImg;
 }
 
-// takes the image in the canvas, centers & resizes it, then puts into 10x10 px bins
-// to give a 28x28 grayscale image; then, computes class probability via neural network
-function recognize() {
-    var t1 = new Date();
-
+function getCanvaPictureToArray() {
     // convert RGBA image to a grayscale array, then compute bounding rectangle and center of mass
     var imgData = canvasDrawCtx.getImageData(0, 0, 280, 280);
     grayscaleImg = imageDataToGrayscale(imgData);
@@ -198,34 +206,18 @@ function recognize() {
     }
 
 
-    // now bin image into 10x10 blocks (giving a 28x28 image)
 
-    nnInput = processPicture(copyCtx).flat();
-    // imgData = copyCtx.getImageData(0, 0, 280, 280);
-    // grayscaleImg = imageDataToGrayscale(imgData);
-    // var nnInput = new Array(784);
-    // for (var y = 0; y < 28; y++) {
-    //     for (var x = 0; x < 28; x++) {
-    //         var mean = 0;
-    //         for (var v = 0; v < 10; v++) {
-    //             for (var h = 0; h < 10; h++) {
-    //                 mean += grayscaleImg[y*10 + v][x*10 + h];
-    //             }
-    //         }
-    //         mean = (1 - mean / 100); // average and invert
-    //         nnInput[x*28+y] = (mean - .5) / .5;
-    //     }
-    // }
-    // console.log(nnInput2)
+    // now bin image into 10x10 blocks (giving a 28x28 image)
+    let ret = processPicture(copyCtx).flat();
 
     // for visualization/debugging: paint the input to the neural net.
-    if (document.getElementById('preprocessing').checked == true) {
+    if (document.getElementById('preprocessing').checked === true) {
         canvasDrawCtx.clearRect(0, 0, canvasDraw.width, canvasDraw.height);
         canvasDrawCtx.drawImage(copyCtx.canvas, 0, 0);
         for (var y = 0; y < 28; y++) {
             for (var x = 0; x < 28; x++) {
                 var block = canvasDrawCtx.getImageData(x * 10, y * 10, 10, 10);
-                var newVal = 255 * (0.5 - nnInput[x*28+y]/2);
+                var newVal = 255 * (0.5 - ret[x*28+y]/2);
                 for (var i = 0; i < 4 * 10 * 10; i+=4) {
                     block.data[i] = newVal;
                     block.data[i+1] = newVal;
@@ -236,6 +228,16 @@ function recognize() {
             }
         }
     }
+
+    return ret;
+}
+
+// takes the image in the canvas, centers & resizes it, then puts into 10x10 px bins
+// to give a 28x28 grayscale image; then, computes class probability via neural network
+function recognize() {
+    var t1 = new Date();
+
+    nnInput = getCanvaPictureToArray();
 
     //for copy & pasting the digit into matlab
     //document.getElementById('nnInput').innerHTML=JSON.stringify(nnInput)+';<br><br><br><br>';

@@ -255,6 +255,31 @@ MathJax.Hub.Config({
             </p>
 
             
+                <h2>Le score</h2>
+                <p>
+    Dans cette activité, un réseau de neurone déjà entrainée t'es donné.<br>
+    Comme celui des exercices il ne possède qu'une seule couche cachée, cependant le nombre de neurone est bien plus élevé !
+    La première couche est composée de 784 neurones, la couche cachée de 200 neurones et la couche de sortie de 10 neurones.<br>
+    Ce réseau de neurone a été entrainé afin de reconnaitre un chiffre (de 0 à 9) d'une image en nuance de gris de dimension 28 x 28.
+</p> <p>
+    Ton score dépend de la qualité de ton classifieur (ici le réseau de neurone).
+    Celui-ci dépend de 2 fonctions que tu devra correctement implémenter :
+    <code>gérer la couche d'entrée(image)</code> et <code>prédire valeur(valeur des neurones de la couche de sortie)</code>.<br>
+</p> <div class="mx-auto" align="center">
+    <img src="/static/img/NN/acti/handleEntryEmpty.svg" class="img-fluid" style="padding-right: 16px">
+    <img src="/static/img/NN/acti/handleOutputEmpty.svg" class="img-fluid">
+</div>
+<p>
+    Tu auras donc 2 missions dans cette activité.<br>
+    Tu devra d'abord gérer correctement les valeurs des neurones d'entrées à partir d'une image en nuance de gris.<br>
+    Il faudra aussi que tu gère la dernière couche, pour cela les valeurs des neurones de cette couche te seront données, à toi d'en tirer le chiffre résultant.<br>
+    Toute la gestion des calculs entre les couches (produits matriciels, etc.) sont géré automatiquement pour toi, tu n'aura pas à t'en soucier ici ;)
+</p> <p>
+    Le score augmente chaque fois que ton classifieur trouve le chiffre correspondant à celui de l'image testé.<br>
+    Pour atteindre 100%, il faut donc qu'il les classent toutes correctement.
+</p>
+
+            
         </div>
         <!-- Activity Tab -->
         <div class="tab-pane fade show active" id="nav-activity" role="tabpanel" aria-labelledby="nav-activity-tab">
@@ -621,18 +646,43 @@ MathJax.Hub.Config({
 
 
 <xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
-    <category name="NN Entrée" colour="#a55b5b">
-  <block type="flattenpicture"></block>
-  <block type="variables_set">
-    <field name="VAR" id="MXvcOAlxfrtjHmcEITU2" variabletype="">imageAplatie</field>
-  </block>
-  <block type="nn_picture_w"></block>
-  <block type="nn_entry_neuron_value"></block>
-  <block type="nn_get_value_of_picture"></block>
+    <category name="NN Image" colour="#a5805b">
+  <block type="nnimgdrawn"></block>
+  <block type="nnimgempty"></block>
+  <block type="nnimgzero"></block>
+  <block type="nnimgone"></block>
+  <block type="nnimgtwo"></block>
+  <block type="nnimgthree"></block>
+  <block type="nnimgfour"></block>
+  <block type="nnimgfive"></block>
+  <block type="nnimgsix"></block>
+  <block type="nnimgseven"></block>
+  <block type="nnimgeight"></block>
+  <block type="nnimgnine"></block>
+  <block type="nnimgmario"></block>
+</category>
+<category name="NN Entrée" colour="#a55b5b">
+<block type="flattenpicture"></block>
+<block type="variables_set">
+  <field name="VAR" id="MXvcOAlxfrtjHmcEITU2" variabletype="">imageAplatie</field>
+</block>
+<block type="nn_picture_w"></block>
+<block type="nn_entry_neuron_value"></block>
+<block type="nn_get_value_of_picture"></block>
 </category>
 <category name="NN Sortie" colour="#5b93a5">
 <block type="nn_choose_value">
   <field name="NAME">min</field>
+</block>
+</category>
+<category name="NN Test" colour="#5b93a5">
+<block type="classifynn"></block>
+<block type="text_print">
+  <value name="TEXT">
+    <shadow type="text">
+      <field name="TEXT">abc</field>
+    </shadow>
+  </value>
 </block>
 </category>
 <category name="TODO" colour="#a5a55b">
