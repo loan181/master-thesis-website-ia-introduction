@@ -237,7 +237,8 @@ MathJax.Hub.Config({
             <a class="nav-item nav-link" data-toggle="tab" href="#nav-objective" role="tab" aria-controls="nav-objective" aria-selected="true"><i class="fas fa-flag-checkered"></i> Objectif</a>
             <a class="nav-item nav-link active" data-toggle="tab" href="#nav-activity" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="fas fa-gamepad"></i> Activité</a>
             
-            <a class="nav-item nav-link" data-toggle="tab" href="#nav-example" role="tab" aria-controls="nav-example" aria-selected="false"><i class="fas fa-drafting-compass"></i> Exemples</a>
+            
+                <a class="nav-item nav-link" data-toggle="tab" href="#nav-actions" role="tab" aria-controls="nav-actions" aria-selected="false"><i class="far fa-lightbulb"></i> Bon à savoir</a>
             
             
             <a class="nav-item nav-link" data-toggle="tab" href="#nav-details" role="tab" aria-controls="nav-details" aria-selected="false"><i class="fas fa-info"></i> Détails sur l'interface</a>
@@ -416,13 +417,12 @@ MathJax.Hub.Config({
 </script>
         </div>
 
+        <!-- Useful actions Tab -->
         
-        <!-- Example Tab -->
-        <div class="tab-pane fade" id="nav-example" role="tabpanel" aria-labelledby="nav-example-tab">
-            <h1>Exemple</h1>
-            
-                <h3>Ajouter un nouveau noeud interne / Créer deux nouvelles feuilles</h3>
-                <p>
+            <div class="tab-pane fade" id="nav-actions" role="tabpanel" aria-labelledby="nav-actions-tab">
+                
+                    <h3>Ajouter un nouveau noeud interne / Créer deux nouvelles feuilles</h3>
+                    <p>
     Pour ajouter un nouveau noeud interne à l'arbre, il suffit de cliquer sur une des feuilles existantes de l'arbre.
     Elles sont indiquées par un cercle avec un "+" noir à l'intérieur.<br>
     Une fois cliquée, une boite de dialogue vous demandera de choisir une métrique (l'axe <code>x</code> ou l'axe <code>y</code>), un opérateur et la valeur avec laquelle comparé.
@@ -430,24 +430,24 @@ MathJax.Hub.Config({
     Ainsi, deux branches seront créés, celle de gauche contenant l'ensemble des données du modèle d'entrainement répondant à l'évaluation, et celle de droite n'y répondant pas.
 </p> <img class="img-fluid mx-auto d-block" src="/static/img/arbre/animCreation.gif">
 
-            
-                <h3>Modifier un noeud interne</h3>
-                <p>
+                
+                    <h3>Modifier un noeud interne</h3>
+                    <p>
     Pour cela il te suffit de cliquer sur un noeud interne existant.
     Une boite de dialogue identique à celle d'ajout de noeud apparaitra permettant de modifier les données
 </p> <img class="img-fluid mx-auto d-block" src="/static/img/arbre/animModification.gif">
 
-            
-                <h3>Supprimer un noeud interne / Transformer un noeud interne en feuille</h3>
-                <p>
+                
+                    <h3>Supprimer un noeud interne / Transformer un noeud interne en feuille</h3>
+                    <p>
     Pour cela in suffit de cliquer sur un noeud interne existant.
     Dans la boite de dialogue apparaissant un boutton te permet de supprimer le noeud.<br>
     La supression du noeud interne crééra automatiquement une feuille et détruira tout les enfants du noeud.
 </p> <img class="img-fluid mx-auto d-block" src="/static/img/arbre/animSupression.gif">
 
-            
-                <h3>Visualiser les données</h3>
-                <p>
+                
+                    <h3>Visualiser les données</h3>
+                    <p>
     Afin d'éviter de surcharger l'interface, les données n'apparaissent que lorsque tu survole de la souris des éléments spécifiques.
 </p> <p>
     Lors du survol d'une feuille, un texte apparait en dessous avec les proportions de chaque classe ainsi que la classe majoritaire indiquée en gras.<br>
@@ -472,8 +472,10 @@ MathJax.Hub.Config({
     </small>
 </div>
 
-            
-        </div>
+                
+            </div>
+        
+
         
         
         <!-- Details/documentation Tab -->
@@ -566,6 +568,20 @@ MathJax.Hub.Config({
     </div>
 </div>
 <script src="/static/js/animationSuccess.js"></script>
+<script>
+    function giveCorrection(elem) {
+        if (confirm("Souhaite tu vraiment afficher la correction ? ")) {
+            let correctionNode = elem.nextElementSibling;
+            if (correctionNode.className.includes("onlyTeacher")) {
+                correctionNode.style.display = "block";
+                $(correctionNode).collapse({
+                    toggle: true
+                })
+            }
+            elem.remove();
+        }
+    }
+</script>
 
 <script src="/static/js/enlargeImageModal.js"></script>
 <!-- Creates the bootstrap modal where the image will appear -->

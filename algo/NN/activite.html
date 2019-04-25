@@ -237,6 +237,9 @@ MathJax.Hub.Config({
             <a class="nav-item nav-link" data-toggle="tab" href="#nav-objective" role="tab" aria-controls="nav-objective" aria-selected="true"><i class="fas fa-flag-checkered"></i> Objectif</a>
             <a class="nav-item nav-link active" data-toggle="tab" href="#nav-activity" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="fas fa-gamepad"></i> Activité</a>
             
+                <a class="nav-item nav-link" data-toggle="tab" href="#nav-hints" role="tab" aria-controls="nav-hints" aria-selected="false"><i class="fas fa-puzzle-piece"></i> Aide pour résoudre l'activité</a>
+            
+            
             
             <a class="nav-item nav-link" data-toggle="tab" href="#nav-details" role="tab" aria-controls="nav-details" aria-selected="false"><i class="fas fa-info"></i> Détails sur l'interface</a>
         </div>
@@ -702,7 +705,7 @@ MathJax.Hub.Config({
       </value>
       <value name="TO">
         <shadow type="math_number">
-          <field name="NUM">10</field>
+          <field name="NUM">784</field>
         </shadow>
       </value>
       <value name="BY">
@@ -718,7 +721,27 @@ MathJax.Hub.Config({
             </block>
           </value>
           <value name="picture_pixel">
-            <shadow type="math_random_float"></shadow>
+            <shadow type="math_arithmetic">
+              <field name="OP">MULTIPLY</field>
+              <value name="A">
+                <shadow type="math_arithmetic">
+                  <field name="OP">MINUS</field>
+                  <value name="A">
+                    <shadow type="math_random_float"></shadow>
+                  </value>
+                  <value name="B">
+                    <shadow type="math_number">
+                      <field name="NUM">0.5</field>
+                    </shadow>
+                  </value>
+                </shadow>
+              </value>
+              <value name="B">
+                <shadow type="math_number">
+                  <field name="NUM">2</field>
+                </shadow>
+              </value>
+            </shadow>
           </value>
         </block>
       </statement>
@@ -1106,7 +1129,166 @@ MathJax.Hub.Config({
 <script src="js/NNBlocklyFunctions.js"></script>
         </div>
 
+        <!-- Useful actions Tab -->
         
+
+        
+        
+            <!-- Hints/Help for solving the activity Tab -->
+            <div class="tab-pane fade" id="nav-hints" role="tabpanel" aria-labelledby="nav-hints-tab">
+                <h1>Aide pour résoudre l'activité</h1>
+                <p>
+                    L’algorithme peut être séparé en plusieurs étapes distinctes qui, petit à petit, te rapprocheront de la solution.
+                    Je vais t’aider dans cette partie à atteindre la bonne solution en te donnant les intuitions.<br>
+                    Libre à toi de faire autrement si tu le souhaites tant que la prédiction finale est bonne.
+                </p>
+                
+                    <h3>Etape 1 : Bien commencer !</h3>
+                    <p>
+    Dans la section <code>TODO</code> de la boite à outil de blockly tu trouvera une première implémentation pour les 2 fonctions que tu dois implémenter<br>
+    Commence par les prendre et glisse les dans ton code.
+</p> <div class="mx-auto" align="center">
+    <img src="/static/img/NN/acti/defaultBlocks.svg" class="img-fluid">
+</div>
+<p>
+   Si tu essaye lance la prédiction tu auras normalement un taux de prédiction assez faible, dans les alentours des 10%.<br>
+    C'est normal, pour l'instant il est paramétré aléatoirement et comme il y a 10 résultats possibles, il à 10% de chance de réussir pour chaque prédiction.
+</p>
+<div class="mt-2 col-md-12">
+    <h6 style="float: left; margin-right: 1em;"> Prédiction courante : </h6>
+    <div class="progress" style="height: 32px;">
+        <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated" role="progressbar" style="width: 10%;">10.00%</div>
+    </div>
+</div>
+
+                    
+                    
+                    
+                
+                    <h3>Etape 2 : Implémentation de la fonction pour gérer les valeurs des neurones d'entrées</h3>
+                    <p>
+    Commencons par gérer correctement les valeurs de nos neurones de la couche d'entrées.
+    L'idée de l'implémentation est la même que <a href="exercice#valeur-des-neurones-de-la-premi-re-couche" target="_blank">le premier exercice préparatoire</a>.
+</p> <p>
+    Cette fonction prends une image en nuance de gris de taille 28 x 28 en argument.<br>
+    Le but de cette fonction est d'initialiser la valeur de tout les neurones de la couche d'entrée à partir de la couleur des pixels de l'image.<br>
+</p> <div class="mx-auto" align="center">
+    <img src="/static/img/NN/acti/handleEntryDefault.svg" class="img-fluid">
+</div>
+<p>
+    Dans l'état présent les 784 neurones de la couche d'entrée sont initialisé aléatoirement sans prendre en compte l'image !<br>
+</p>
+<p>
+    Nous sommes cencé attribuer à chaque neurone la valeur de couleur du pixel correspondant de l'image de la même manière que dans <a href="exercice#valeur-des-neurones-de-la-premi-re-couche" target="_blank">le premier exercice préparatoire</a>.<br>
+    Avec l'implémentation par défaut et tout les blocs de la section <code>NN Entrée</code> tu as tout le nécessaire pour implémenter la fonction ;). <br>
+    Le bloc <img src="/static/img/NN/acti/flattenPicture.svg" class="img-fluid"> te permetra "d'aplatir" une image,
+    l'idée étant de transformer l'image originale en 2D de taille 28 x 28 à son équivalent applatie en 1D de taille 784 ($28 \times 28$)
+ </p>
+
+<div class="mx-auto" align="center">
+    <img src="/static/img/NN/acti/flattenExample.png" class="img-fluid"><br>
+    <small class="text-muted">Exemple d'aplatisement d'une image en noir et blanc de taille 3 x 3. Le résultat aplatie est une image à 1 dimension de taille 9</small>
+</div>
+
+                    
+                    
+                        <div class="card border-warning mb-3">
+    <div class="card-header">
+        <button class="btn btn-link" type="button" onclick="toggleNext(this)">
+            Aide
+        </button>
+    </div>
+    <div class="collapse hide">
+        <div class="card-body">
+            <p class="card-text">
+                Voici la structure à suivre pour résoudre cette partie : <ol>
+    <li>Aplatir l'image et la sauvegarder dans <code>imageAplatie</code></li>
+    <li>Pour tout les neurones de 1 à 784 (la longueur de l'image aplatie)</li>
+    <li>Donner au neurone d'entrée du numéro courant la valeur du pixel de l'image du numéro courant de l'image aplatie</li>
+</ol>
+
+            </p>
+        </div>
+    </div>
+</div>
+                    
+                    
+                        <button type="button" class="btn btn-success" onclick="giveCorrection(this)"><i class="fas fa-puzzle-piece"></i> Afficher la correction</button>
+                        <div class="card border-success mb-3 onlyTeacher collapse">
+    <div class="card-header">Correction</div>
+    <div class="card-body text-success">
+        <p class="card-text">
+            <div class="mx-auto" align="center">
+    <img src="/static/img/NN/acti/handleEntryCorection.svg" class="img-fluid"><br>
+</div> Cela fonctionne aussi en mettant 784 comme borne de la boucle.
+
+        </p>
+    </div>
+</div>
+                    
+                
+                    <h3>Etape 3 : Implémentation de la fonction pour gérer la conclusion des neurones de sortie</h3>
+                    <p>
+    La dernière partie de cette activité consiste à déduire une conclusion à partir des valeurs des neurones de sortie.<br>
+    L'idée de l'implémentation est la même qu'un des <a href="exercice#tirer-des-conclusions-de-nos-r-sultats" target="_blank">exercice préparatoire</a>.<br>
+</p> <p>
+    Les valeurs des neurones de sortie sont automatiquement calculé à partir des neurones des autres couches.<br>
+    Les neurones de la couche de sortie ont une valeur entre 0 et 1. Leur somme fait toujours 1.<br>
+    Les 10 neurones de cette couche représente chaque chiffre de 0 à 9. La valeur du neurone représente la probabilité du chiffre qui lui est associé.<br>
+    <small class="text-muted">Par exemple si le 1er neurone à la valeur 0.4, cela signifie qu'il y a 40% de chance que l'image représente le chiffre 0.</small>
+</p> <div class="mx-auto" align="center">
+    <img src="/static/img/NN/acti/handleOutputDefault.svg" class="img-fluid">
+</div>
+<p>
+    Dans l'état présent c'est le chiffre de probabilité minimale qui est renvoyé. Mais c'est incorrect.<br>
+</p>
+
+                    
+                    
+                        <div class="card border-warning mb-3">
+    <div class="card-header">
+        <button class="btn btn-link" type="button" onclick="toggleNext(this)">
+            Aide
+        </button>
+    </div>
+    <div class="collapse hide">
+        <div class="card-body">
+            <p class="card-text">
+                Imagine que la valeur des 10 neurones de la couche de sortie soit : <ol start="0">
+    <li>0.1</li>
+    <li>0</li>
+    <li>0</li>
+    <li>0.7</li>
+    <li>0</li>
+    <li>0</li>
+    <li>0</li>
+    <li>0.15</li>
+    <li>0</li>
+    <li>0.05</li>
+</ol> Quel serait le chiffre qui devrait être déduit ?<br> <code>3</code>, car il a <b>la plus grande</b> probabilité !
+
+            </p>
+        </div>
+    </div>
+</div>
+                    
+                    
+                        <button type="button" class="btn btn-success" onclick="giveCorrection(this)"><i class="fas fa-puzzle-piece"></i> Afficher la correction</button>
+                        <div class="card border-success mb-3 onlyTeacher collapse">
+    <div class="card-header">Correction</div>
+    <div class="card-body text-success">
+        <p class="card-text">
+            <div class="mx-auto" align="center">
+    <img src="/static/img/NN/acti/handleOutputCorection.svg" class="img-fluid"><br>
+</div> Très simple ici, il suffit de changer le "minimum" en "maximum". C'est le chiffre avec la plus grande probababilité qui nous intéresse !
+
+        </p>
+    </div>
+</div>
+                    
+                
+
+            </div>
         
         <!-- Details/documentation Tab -->
         <div class="tab-pane fade" id="nav-details" role="tabpanel" aria-labelledby="nav-details-tab">
@@ -1133,6 +1315,20 @@ MathJax.Hub.Config({
     </div>
 </div>
 <script src="/static/js/animationSuccess.js"></script>
+<script>
+    function giveCorrection(elem) {
+        if (confirm("Souhaite tu vraiment afficher la correction ? ")) {
+            let correctionNode = elem.nextElementSibling;
+            if (correctionNode.className.includes("onlyTeacher")) {
+                correctionNode.style.display = "block";
+                $(correctionNode).collapse({
+                    toggle: true
+                })
+            }
+            elem.remove();
+        }
+    }
+</script>
 
 <script src="/static/js/enlargeImageModal.js"></script>
 <!-- Creates the bootstrap modal where the image will appear -->

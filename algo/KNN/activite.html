@@ -242,10 +242,13 @@ MathJax.Hub.Config({
             <a class="nav-item nav-link" data-toggle="tab" href="#nav-objective" role="tab" aria-controls="nav-objective" aria-selected="true"><i class="fas fa-flag-checkered"></i> Objectif</a>
             <a class="nav-item nav-link active" data-toggle="tab" href="#nav-activity" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="fas fa-gamepad"></i> Activité</a>
             
-            <a class="nav-item nav-link" data-toggle="tab" href="#nav-example" role="tab" aria-controls="nav-example" aria-selected="false"><i class="fas fa-drafting-compass"></i> Exemples</a>
+                <a class="nav-item nav-link" data-toggle="tab" href="#nav-hints" role="tab" aria-controls="nav-hints" aria-selected="false"><i class="fas fa-puzzle-piece"></i> Aide pour résoudre l'activité</a>
             
             
-            <a class="nav-item nav-link" data-toggle="tab" href="#nav-hints" role="tab" aria-controls="nav-hints" aria-selected="false"><i class="fas fa-puzzle-piece"></i> Aide pour résoudre l'activité</a>
+                <a class="nav-item nav-link" data-toggle="tab" href="#nav-actions" role="tab" aria-controls="nav-actions" aria-selected="false"><i class="far fa-lightbulb"></i> Bon à savoir</a>
+            
+            
+                <a class="nav-item nav-link" data-toggle="tab" href="#nav-example" role="tab" aria-controls="nav-example" aria-selected="false"><i class="fas fa-drafting-compass"></i> Exemples</a>
             
             <a class="nav-item nav-link" data-toggle="tab" href="#nav-details" role="tab" aria-controls="nav-details" aria-selected="false"><i class="fas fa-info"></i> Détails sur l'interface</a>
         </div>
@@ -2188,13 +2191,12 @@ MathJax.Hub.Config({
 
         </div>
 
+        <!-- Useful actions Tab -->
         
-        <!-- Example Tab -->
-        <div class="tab-pane fade" id="nav-example" role="tabpanel" aria-labelledby="nav-example-tab">
-            <h1>Exemple</h1>
-            
-                <h3>Créer une fleur artificielle</h3>
-                <p>
+            <div class="tab-pane fade" id="nav-actions" role="tabpanel" aria-labelledby="nav-actions-tab">
+                
+                    <h3>Créer une fleur artificielle</h3>
+                    <p>
     Pour tester ton programme, il peut être utile de créer des fleurs "artificielles".
     Ce sont des fleurs qui apparaîtront sur le graphe, mais qui ne sont pas dans le training set.<br>
 </p> <p>
@@ -2224,9 +2226,9 @@ MathJax.Hub.Config({
     </div>
 </div>
 
-            
-                <h3>Manipuler une fleur artificielle</h3>
-                <p>
+                
+                    <h3>Manipuler une fleur artificielle</h3>
+                    <p>
     Les fleurs que tu créés artificiellement sont considérées comme des fleurs "classiques" dans le code.
     Tu peux les utiliser avec tous les autres blocs utilisant des fleurs.
 </p> <p>
@@ -2254,6 +2256,32 @@ MathJax.Hub.Config({
 </div> <small class="text-muted">
     Pareil que l'exemple précédent, sauf qu'au lieu d'afficher les valeurs des compteurs on indique les fleurs avec les valeurs de compteur minimale et maximale
 </small>
+
+                
+            </div>
+        
+
+        
+        <!-- Example Tab -->
+        <div class="tab-pane fade" id="nav-example" role="tabpanel" aria-labelledby="nav-example-tab">
+            <h1>Exemple</h1>
+            
+                <h3></h3>
+                <p>
+    Dans les exemples suivants, le code principal de l'algorithme est caché dans la fonction <code>code...</code>, mais tu n'es bien-entendu pas obliger d'implémenter une fonction pour ça ;)<br>
+    Tu peux recopier la partie du code avec <code>afficher...</code> si tu veux avoir le même affichage que moi (en supposant que tes compteurs se mettent correctement à jour)<br>
+    Fais bien attention que les paramètres et les coordonnées de la fleur créé changent entre chacun des exemples !
+</p>
+
+            
+                <h3></h3>
+                <div class="mx-auto" align="center">
+    <img src="/static/img/KNN/stepMainEx1.PNG" class="img-fluid" style="padding-bottom: 30px">
+    <br>
+    <img src="/static/img/KNN/stepMainEx2.PNG" class="img-fluid" style="padding-bottom: 30px">
+    <br>
+    <img src="/static/img/KNN/stepMainEx3.PNG" class="img-fluid">
+</div>
 
             
         </div>
@@ -2292,25 +2320,11 @@ MathJax.Hub.Config({
                     
                     
                 
-                    <h3>Etape 2 : implémenter les K plus proches voisins</h3>
+                    <h3>Etape 2 : Implémenter les K plus proches voisins</h3>
                     <p>
     Pour réaliser à bien ce projet il est important que tu comprenne bien comment utiliser les compteurs et à quoi ils vont nous servir.<br><br>
     L'idée générale est d'augmenter le compteur de chacune des K fleurs les plus proches pour ensuite déterminer celle qui est en majorité
 </p>
-<p>
-    Voilà différents exemple pour t'entrainer et voir si tes résultats sont correctes :
-</p> <small class="text-muted">
-    Le code principal de l'algorithme est ici caché ici dans la fonction <code>code...</code>, mait tu n'es bien-entendu pas obliger d'implémenter une fonction pour ça ;)<br>
-    Tu peux recopier la partie du code avec <code>afficher...</code> si tu veux avoir le même affichage que moi (en supposant que tes compteurs se mettent correctement à jour)<br>
-    Fais bien attention que les paramètres et les coordonnées de la fleur créé changent entre chacun des exemples !
-</small>
-<div class="mx-auto" align="center">
-    <img src="/static/img/KNN/stepMainEx1.PNG" class="img-fluid">
-    <br>
-    <img src="/static/img/KNN/stepMainEx2.PNG" class="img-fluid">
-    <br>
-    <img src="/static/img/KNN/stepMainEx3.PNG" class="img-fluid">
-</div>
 
                     
                         
@@ -2331,7 +2345,13 @@ MathJax.Hub.Config({
                     
                         <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
                             <div class="card">
-                                <img src="/static/img/blocklyBlocks/countersIncrease.svg" class="img-fluid">
+                                <img src="/static/img/blocklyBlocks/countersGetMinMax.svg" class="img-fluid">
+                            </div>
+                        </div>
+                    
+                        <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
+                            <div class="card">
+                                <img src="/static/img/blocklyBlocks/getK.svg" class="img-fluid">
                             </div>
                         </div>
                     
@@ -2343,19 +2363,13 @@ MathJax.Hub.Config({
                     
                         <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
                             <div class="card">
+                                <img src="/static/img/blocklyBlocks/countersIncrease.svg" class="img-fluid">
+                            </div>
+                        </div>
+                    
+                        <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
+                            <div class="card">
                                 <img src="/static/img/blocklyBlocks/countersReset.svg" class="img-fluid">
-                            </div>
-                        </div>
-                    
-                        <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
-                            <div class="card">
-                                <img src="/static/img/blocklyBlocks/countersGetMinMax.svg" class="img-fluid">
-                            </div>
-                        </div>
-                    
-                        <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
-                            <div class="card">
-                                <img src="/static/img/blocklyBlocks/getK.svg" class="img-fluid">
                             </div>
                         </div>
                     
@@ -2387,12 +2401,19 @@ MathJax.Hub.Config({
 </div>
                     
                     
+                        <button type="button" class="btn btn-success" onclick="giveCorrection(this)"><i class="fas fa-puzzle-piece"></i> Afficher la correction</button>
                         <div class="card border-success mb-3 onlyTeacher collapse">
     <div class="card-header">Correction</div>
     <div class="card-body text-success">
         <p class="card-text">
-            <div class="mx-auto" align="center">
+            <p class="lead">Meilleur correction : </p> <div class="mx-auto" align="center">
     <img src="/static/img/KNN/solutionKNN.svg" class="img-fluid">
+</div> <hr /> <p>Il existe d'autres solutions équivalents qui mèneront aussi à 100% mais moins robustes tel que : </p> <p>
+    En mettant <code>3</code> au lieu du bloc <img src="/static/img/blocklyBlocks/getK.svg">.
+</p> <p>
+    On peut également aussi répéter l'instruction <img src="/static/img/blocklyBlocks/countersIncrease.svg"> plusieurs fois au lieu d'utiliser une boucle, par ex :
+</p> <div class="mx-auto" align="center">
+    <img src="/static/img/KNN/blocklyCorrAlternative.svg" class="img-fluid">
 </div>
 
         </p>
@@ -2403,13 +2424,13 @@ MathJax.Hub.Config({
                     <h3>Etape 3 : Obtenir 100%</h3>
                     <p>
     Une fois que ton implémentation te parait correxte, il ne te reste plus qu’à faire un peu le tri dans ton code !
-    Enlève tout les <code>afficher ...</code> qui seront gênant quand tu évaluera ton prédicteur,
-    choisis bien tes paramètres (K, Axe x et Axe y) et croise les doigts pour atteindre les 100% !
+    Choisis bien tes paramètres (K, Axe x et Axe y) et croise les doigts pour atteindre les 100% !
 </p>
 
                     
                     
                     
+                        <button type="button" class="btn btn-success" onclick="giveCorrection(this)"><i class="fas fa-puzzle-piece"></i> Afficher la correction</button>
                         <div class="card border-success mb-3 onlyTeacher collapse">
     <div class="card-header">Correction</div>
     <div class="card-body text-success">
@@ -2582,6 +2603,20 @@ MathJax.Hub.Config({
     </div>
 </div>
 <script src="/static/js/animationSuccess.js"></script>
+<script>
+    function giveCorrection(elem) {
+        if (confirm("Souhaite tu vraiment afficher la correction ? ")) {
+            let correctionNode = elem.nextElementSibling;
+            if (correctionNode.className.includes("onlyTeacher")) {
+                correctionNode.style.display = "block";
+                $(correctionNode).collapse({
+                    toggle: true
+                })
+            }
+            elem.remove();
+        }
+    }
+</script>
 
 <script src="/static/js/enlargeImageModal.js"></script>
 <!-- Creates the bootstrap modal where the image will appear -->
