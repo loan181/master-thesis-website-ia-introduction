@@ -237,6 +237,8 @@ MathJax.Hub.Config({
             <a class="nav-item nav-link" data-toggle="tab" href="#nav-objective" role="tab" aria-controls="nav-objective" aria-selected="true"><i class="fas fa-flag-checkered"></i> Objectif</a>
             <a class="nav-item nav-link active" data-toggle="tab" href="#nav-activity" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="fas fa-gamepad"></i> Activité</a>
             
+                <a class="nav-item nav-link" data-toggle="tab" href="#nav-hints" role="tab" aria-controls="nav-hints" aria-selected="false"><i class="fas fa-puzzle-piece"></i> Aide pour résoudre l'activité</a>
+            
             
                 <a class="nav-item nav-link" data-toggle="tab" href="#nav-actions" role="tab" aria-controls="nav-actions" aria-selected="false"><i class="far fa-lightbulb"></i> Bon à savoir</a>
             
@@ -477,6 +479,74 @@ MathJax.Hub.Config({
         
 
         
+        
+            <!-- Hints/Help for solving the activity Tab -->
+            <div class="tab-pane fade" id="nav-hints" role="tabpanel" aria-labelledby="nav-hints-tab">
+                <h1>Aide pour résoudre l'activité</h1>
+                <p>
+                    L’algorithme peut être séparé en plusieurs étapes distinctes qui, petit à petit, te rapprocheront de la solution.
+                    Je vais t’aider dans cette partie à atteindre la bonne solution en te donnant les intuitions.<br>
+                    Libre à toi de faire autrement si tu le souhaites tant que la prédiction finale est bonne.
+                </p>
+                
+                    <h3>Etape 1 : Créer l'arbre de décision</h3>
+                    <p>
+    Dans l'état présent notre arbre de décision classifie très mal.<br>
+    Il classifie toutes les fleurs comme des <i>Iris-setosa</i>, du coup seulement 1/3 des fleurs testés sont correctes.
+</p> <div class="mt-2 col-md-12">
+    <h6 style="float: left; margin-right: 1em;"> Prédiction courante : </h6>
+    <div class="progress" style="height: 32px;">
+        <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated" role="progressbar" style="width: 33%;">33.33%</div>
+    </div>
+</div> <p>
+    Il faudra chercher un peu à taton pour créer ton arbre de décision.<br>
+    Ton but étant de séparer au mieux les 3 classes de fleurs différentes en choisissant bien tes axes, operations et paramètres.
+</p>
+
+                    
+                    
+                        <div class="card border-warning mb-3">
+    <div class="card-header">
+        <button class="btn btn-link" type="button" onclick="toggleNext(this)">
+            Aide
+        </button>
+    </div>
+    <div class="collapse hide">
+        <div class="card-body">
+            <p class="card-text">
+                <p>
+    Il faut déjà bien fixer nos axes, les 2 qui sépare mieux les groupes sont les métriques de pétale (largeur et longueur).<br>
+    Après ça il faut trouver les valeurs qui "coupe" les groupes en 2.<br>
+    Par exemple dans les alentours de 3 en largeur pétale (avec l'opérateur > par exemple) permet de mettre toutes les <i>setosa</i> d'un coté et les 2 autres classes de l'autre.<br>
+    Il nous reste maintenant à séparer ce nouveau groupe pour différencier une <i>versicolor</i> d'une <i>viriginica</i>.
+</p>
+
+            </p>
+        </div>
+    </div>
+</div>
+                    
+                    
+                        <button type="button" class="btn btn-success" onclick="giveCorrection(this)"><i class="fas fa-puzzle-piece"></i> Afficher la correction</button>
+                        <div class="card border-success mb-3 onlyTeacher collapse">
+    <div class="card-header">Correction</div>
+    <div class="card-body text-success">
+        <p class="card-text">
+            Un exemple d'arbre qui fonctionne à 100% est le suivant :<br> <div class="mx-auto" align="center">
+    <img src="/static/img/arbre/arbreSol.JPG" class="img-fluid"><br>
+</div> Avec les paramètres d'axes :<br> <div class="mx-auto" align="center">
+    <img src="/static/img/arbre/paraSol.JPG" class="img-fluid"><br>
+</div> <br> Le graphique ressemblerai à :<br> <div class="mx-auto" align="center">
+    <img src="/static/img/arbre/plotCorr.jpg" class="img-fluid"><br>
+</div>
+
+        </p>
+    </div>
+</div>
+                    
+                
+
+            </div>
         
         <!-- Details/documentation Tab -->
         <div class="tab-pane fade" id="nav-details" role="tabpanel" aria-labelledby="nav-details-tab">
