@@ -1234,7 +1234,7 @@ MathJax.Hub.Config({
     Afin de déterminer la classe d'un fruit inconnu, on choisi la classe majoritaire dans la feuille de l'arbre de décision.
 </p> <p>
     Pour cet exercice sers toi de l'arbre de décision suivant :
-</p> <img src="/static/img/arbre/ex3Tree.png" class="img-fluid mx-auto d-block">
+</p> <img id="fruitDecisionTree" src="/static/img/arbre/ex3Tree.png" class="img-fluid mx-auto d-block pinnable">
 </div>
     
 
@@ -1249,39 +1249,93 @@ MathJax.Hub.Config({
             <div class="card-body text-primary">
                 
                     
-                          
-                                Fruit rond et jaune :<br> <select class="form-control col-sm-9" data-answer="Citron">
-    <option>Citron</option>
-    <option>Pomme</option>
-    <option>Cerise</option>
-    <option>Orange</option>
-    <option>Poire</option>
-    <option>Banane</option>
-    <option>Melon</option>
-    <option>Noix de coco</option>
-</select>
-Fruit rond et rouge :<br> <select class="form-control col-sm-9" data-answer="Pomme">
-    <option>Citron</option>
-    <option>Pomme</option>
-    <option>Cerise</option>
-    <option>Orange</option>
-    <option>Poire</option>
-    <option>Banane</option>
-    <option>Melon</option>
-    <option>Noix de coco</option>
-</select>
-Fruit ovale :<br> <select class="form-control col-sm-9" data-answer="Melon">
-    <option>Citron</option>
-    <option>Pomme</option>
-    <option>Cerise</option>
-    <option>Orange</option>
-    <option>Poire</option>
-    <option>Banane</option>
-    <option>Melon</option>
-    <option>Noix de coco</option>
-</select>
-
                         
+                                <label>
+                                    Fruit rond et jaune
+                                    <select 
+                                            class="form-control" data-answer="Citron">
+                                        <option>---</option>
+                                        
+                                            <option>Citron</option>
+                                        
+                                            <option>Pomme</option>
+                                        
+                                            <option>Cerise</option>
+                                        
+                                            <option>Orange</option>
+                                        
+                                            <option>Poire</option>
+                                        
+                                            <option>Banane</option>
+                                        
+                                            <option>Melon</option>
+                                        
+                                            <option>Noix de coco</option>
+                                        
+                                    </select>
+                                </label>
+
+                            
+                        
+                        <br>
+                    
+                        
+                                <label>
+                                    Fruit rond et rouge
+                                    <select 
+                                            class="form-control" data-answer="Pomme">
+                                        <option>---</option>
+                                        
+                                            <option>Citron</option>
+                                        
+                                            <option>Pomme</option>
+                                        
+                                            <option>Cerise</option>
+                                        
+                                            <option>Orange</option>
+                                        
+                                            <option>Poire</option>
+                                        
+                                            <option>Banane</option>
+                                        
+                                            <option>Melon</option>
+                                        
+                                            <option>Noix de coco</option>
+                                        
+                                    </select>
+                                </label>
+
+                            
+                        
+                        <br>
+                    
+                        
+                                <label>
+                                    Fruit ovale
+                                    <select 
+                                            class="form-control" data-answer="Melon">
+                                        <option>---</option>
+                                        
+                                            <option>Citron</option>
+                                        
+                                            <option>Pomme</option>
+                                        
+                                            <option>Cerise</option>
+                                        
+                                            <option>Orange</option>
+                                        
+                                            <option>Poire</option>
+                                        
+                                            <option>Banane</option>
+                                        
+                                            <option>Melon</option>
+                                        
+                                            <option>Noix de coco</option>
+                                        
+                                    </select>
+                                </label>
+
+                            
                         
                         <br>
                     
@@ -1303,7 +1357,197 @@ Fruit ovale :<br> <select class="form-control col-sm-9" data-answer="Melon">
     <div class="card-header">Correction</div>
     <div class="card-body text-success">
         <p class="card-text">
-            <img src="/static/img/arbre/ex1corr1.PNG" class="img-fluid">
+            Citron, Pomme et Melon.<br> Il suffit de traverser l'arbre en commençant par en haut.<br>
+
+        </p>
+    </div>
+</div>
+    
+
+    
+        <div class="card border-warning mb-3">
+    <div class="card-header">
+        <button class="btn btn-link" type="button" onclick="toggleNext(this)">
+            Aide
+        </button>
+    </div>
+    <div class="collapse hide">
+        <div class="card-body">
+            <p class="card-text">
+                Faisons le premier ensemble, le fruit est "rond et rouge".<br> On commence en haut de l'arbre, la première question est s'il est rond.<br> C'est le cas, on va donc dans la partie gauche.<br> La prochaine question est de savoir s'il est jaune.<br> C'est pas le cas, on va donc dans la partie de droite.<br> La prochaine question est de savoir s'il est rouge.<br> C'est le cas, on va donc dans la partie de gauche.<br> On est dans une feuille, il ne nous reste plus qu'à prendre le fruit avec le plus grand pourcentage.<br> La réponse ici est donc la pomme !
+
+            </p>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+<div data-ex="exercice">
+    
+        <h3 data-ex="title">La classification</h3>
+    
+
+    
+        <div data-ex="intro"><p>
+    Quand tu as besoin de classifier un élément avec un arbre de décision, tu choisi la classe majoritaire de la feuille correspondant à l'élément.
+</p> <p>
+    Utilise l'arbre de décision de <a href="#fruitDecisionTree">l'exercice précédent</a>
+</p>
+</div>
+    
+
+    
+        <div data-ex="question">Quel est le résultat de la classification des éléments suivants en utilisant l'arbre de décision de <a href="#fruitDecisionTree">l'exercice précédent</a> ?
+</div>
+    
+
+    
+        <div class="card border-primary mb-3">
+            <div class="card-header">Réponse</div>
+            <div class="card-body text-primary">
+                
+                    
+                        
+                                <label>
+                                    Fruit rond et jaune
+                                    <select 
+                                            class="form-control" data-answer="Citron">
+                                        <option>---</option>
+                                        
+                                            <option>Citron</option>
+                                        
+                                            <option>Pomme</option>
+                                        
+                                            <option>Cerise</option>
+                                        
+                                            <option>Orange</option>
+                                        
+                                            <option>Poire</option>
+                                        
+                                            <option>Banane</option>
+                                        
+                                            <option>Melon</option>
+                                        
+                                            <option>Noix de coco</option>
+                                        
+                                    </select>
+                                </label>
+
+                            
+                        
+                        <br>
+                    
+                        
+                                <label>
+                                    Fruit rond et rouge
+                                    <select 
+                                            class="form-control" data-answer="Pomme">
+                                        <option>---</option>
+                                        
+                                            <option>Citron</option>
+                                        
+                                            <option>Pomme</option>
+                                        
+                                            <option>Cerise</option>
+                                        
+                                            <option>Orange</option>
+                                        
+                                            <option>Poire</option>
+                                        
+                                            <option>Banane</option>
+                                        
+                                            <option>Melon</option>
+                                        
+                                            <option>Noix de coco</option>
+                                        
+                                    </select>
+                                </label>
+
+                            
+                        
+                        <br>
+                    
+                        
+                                <label>
+                                    Fruit ovale
+                                    <select 
+                                            class="form-control" data-answer="Melon">
+                                        <option>---</option>
+                                        
+                                            <option>Citron</option>
+                                        
+                                            <option>Pomme</option>
+                                        
+                                            <option>Cerise</option>
+                                        
+                                            <option>Orange</option>
+                                        
+                                            <option>Poire</option>
+                                        
+                                            <option>Banane</option>
+                                        
+                                            <option>Melon</option>
+                                        
+                                            <option>Noix de coco</option>
+                                        
+                                    </select>
+                                </label>
+
+                            
+                        
+                        <br>
+                    
+                        
+                                <label>
+                                    Fruit rond et vert
+                                    <select 
+                                            class="form-control" data-answer="Orange">
+                                        <option>---</option>
+                                        
+                                            <option>Citron</option>
+                                        
+                                            <option>Pomme</option>
+                                        
+                                            <option>Cerise</option>
+                                        
+                                            <option>Orange</option>
+                                        
+                                            <option>Poire</option>
+                                        
+                                            <option>Banane</option>
+                                        
+                                            <option>Melon</option>
+                                        
+                                            <option>Noix de coco</option>
+                                        
+                                    </select>
+                                </label>
+
+                            
+                        
+                        <br>
+                    
+
+
+                
+            </div>
+            <div class="card-footer">
+                <button type="button" class="btn btn-primary" onclick="checkAnswer(this)" data-attempts="0"><i class="fas fa-play"></i> Vérifier réponse</button>
+                <span class="exFeedback"></span>
+                <button type="button" class="btn btn-success correctionButton collapse" onclick="showCorrection(this)"><i class="fas fa-puzzle-piece"></i> Afficher la correction</button>
+            </div>
+        </div>
+    
+
+
+    
+        <div class="card border-success mb-3 onlyTeacher collapse">
+    <div class="card-header">Correction</div>
+    <div class="card-body text-success">
+        <p class="card-text">
+            Citron, Pomme, Melon et Orange.<br> Les résultats sont exactement les mêmes que l'exercice précédent ! Mis à part pour le dernier.<br> D'ailleur une orange n'est pas verte, mais rien ne nous permet de différencier un fruit de couleur orange d'un vert dans notre arbre
 
         </p>
     </div>
@@ -1315,6 +1559,21 @@ Fruit ovale :<br> <select class="form-control col-sm-9" data-answer="Melon">
 
 
 
+
+<h2>Bilan</h2>
+    <ul>
+        
+        <li>Le procédé d'un arbre de décision repose sur un principe assez simple.</li>
+        
+        <li>Un arbre est composé de 2 types d'éléments : les feuilles et les noeuds internes. Ils sont liés par des branches.</li>
+        
+        <li>Un noeud interne est une question qui peut-être répondu par oui ou non. La branche de gauche représentera toujours la réponse « oui » et celle de droite la réponse « non ».</li>
+        
+        <li>Les feuilles représente l'ensemble des données ayant répondu à tout les critères des branches ayant mené à la feuille.</li>
+        
+        <li>La classe ayant le plus grand pourcentage dans la feuille est appelé classe majoritaire. Si on cherche à prédire une donné et qu'elle se retrouve dans cette feuille, c'est cette classe qui sera déduite.</li>
+        
+    </ul>
 
 
 <script>

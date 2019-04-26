@@ -241,7 +241,7 @@ MathJax.Hub.Config({
             
             
             
-                <a class="nav-item nav-link" data-toggle="tab" href="#nav-example" role="tab" aria-controls="nav-example" aria-selected="false"><i class="fas fa-drafting-compass"></i> Exemples</a>
+                <a id="nav-tab-activity-examples" class="nav-item nav-link" data-toggle="tab" href="#nav-example" role="tab" aria-controls="nav-example" aria-selected="false"><i class="fas fa-drafting-compass"></i> Exemples</a>
             
             <a class="nav-item nav-link" data-toggle="tab" href="#nav-details" role="tab" aria-controls="nav-details" aria-selected="false"><i class="fas fa-info"></i> Détails sur l'interface</a>
         </div>
@@ -1311,9 +1311,117 @@ MathJax.Hub.Config({
             <h1>Détails sur l'interface</h1>
             <h2>Structure de la page</h2>
             
+                <h3>Barre d'outil</h3>
+                <p>
+                    Dans la partie supérieure de l’écran tu as différents boutons te permettant de réaliser certaines actions que nous allons détailler ici.
+                </p>
+                <div id="toolboxExplanation"></div>
+                <script>
+                    //let TBEXplanation = new ToolBox();
+                    let explanations = [];
+                    
+                    explanations.push("Commencer un nouveau projet. Cela effacera tous les blocs.");
+                    
+                    explanations.push("Sauvegarder/télécharger ton projet sur ton ordinateur (uniquement les blocs de Blockly).<br>Les paramètres ne sont pas enregistrés");
+                    
+                    explanations.push("Ouvrir un projet précédemment sauvegardé.<br>Uniquement les blocs Blockly sont chargés");
+                    
+                    explanations.push("Exporte le projet (blocs) sous forme d’image (SVG (vectoriel) ou PNG ).<br>Attention que si tu exportes en image tu ne peux pas l’ouvrir comme projet");
+                    
+                    explanations.push("Voir le code JavaScript généré par Blockly dans une fenêtre pop-up");
+                    
+                    explanations.push("Tester le code. Se contentera d’exécuter le code du projet tel quel.");
+                    
+                    explanations.push("<b>Tester le classifieur</b>. Lance le programme en évaluant si les prédictions sont correctes.<br>Cela te permettra de réussir ton objectif !");
+                    
+                    explanations.push("Renvoie vers la page d'aide (celle-ci)");
+                    
+                    explanations.push("Te permet de choisir la langue.<br>Seulement le français est pleinement compatible. Les autres changeront uniquement le texte des blocs de Blockly.");
+                    
+                    TB.drawExplanation("toolboxExplanation", explanations);
+                </script>
+            
 
             
 
+            
+                <h3>Blockly</h3>
+                <p>
+                    La partie de droite est l'emplacement où tu pourras modifier le code de l'algorithme afin de réussir l'objectif.
+                </p>
+
+                
+                    <h4>Blocs supplémentaires</h4>
+
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">Bloc</th>
+                            <th scope="col">Explication</th>
+                            <th scope="col">Type de retour</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        
+                            <tr>
+                                <td><img src="/static/img/blocklyBlocks/NNDrawnPicture.svg" class="img-fluid"></td>
+                                <td>Permet de récupérer sous forme d'image le dessin dans le cadre noir</td>
+                                
+                                    <td>Image</td>
+                                
+                            </tr>
+                        
+                            <tr>
+                                <td><img src="/static/img/blocklyBlocks/NNZeroPicture.svg" class="img-fluid"></td>
+                                <td>Image pré-dessiné d'un zero (il y a une image pour chaque chiffre)</td>
+                                
+                                    <td>Image</td>
+                                
+                            </tr>
+                        
+                            <tr>
+                                <td><img src="/static/img/blocklyBlocks/NNPictureWidth.svg" class="img-fluid"></td>
+                                <td>Calcul et retourne la longueur de l'image. C'est le nombre de pixel horizontal. L'image peut être en 2D ou en 1D.</td>
+                                
+                                    <td>Nombre</td>
+                                
+                            </tr>
+                        
+                            <tr>
+                                <td><img src="/static/img/blocklyBlocks/NNGiveNeuronValue.svg" class="img-fluid"></td>
+                                <td>Permet de donner une certaine valeur à un certain neurone de la couche d'entrée</td>
+                                
+                                    <td><i>Rien</i></td>
+                                
+                            </tr>
+                        
+                            <tr>
+                                <td><img src="/static/img/blocklyBlocks/NNGetPicturePixelValue.svg" class="img-fluid"></td>
+                                <td>Récupère la valeur d'un certain pixel de l'image, l'image doit être à 1 dimension.</td>
+                                
+                                    <td>Nombre</td>
+                                
+                            </tr>
+                        
+                            <tr>
+                                <td><img src="/static/img/blocklyBlocks/NNGetMaxMinOutput.svg" class="img-fluid"></td>
+                                <td>Récupère le numéro du neurone de probabilité minimale/maximale.</td>
+                                
+                                    <td>Nombre</td>
+                                
+                            </tr>
+                        
+                            <tr>
+                                <td><img src="/static/img/blocklyBlocks/NNClassify.svg" class="img-fluid"></td>
+                                <td>Permet d'utiliser le réseau de neurone pour classifier une image.<br>Cela te sera utile seulement en <a href="#" onclick="$('#nav-tab-activity-examples').tab('show')">debug</a></td>
+                                
+                                    <td>Nombre</td>
+                                
+                            </tr>
+                        
+                        </tbody>
+                    </table>
+                
             
         </div>
     </div>
