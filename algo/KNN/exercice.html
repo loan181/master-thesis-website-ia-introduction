@@ -426,9 +426,19 @@ MathJax.Hub.Config({
 <h2>Exercices</h2>
 
     
-<div data-ex="exercice">
+
+
+
+
+
+<div data-ex="exercice" class="border border-warning" style="padding: 10px; margin-bottom: 10px; background-color:rgba(255, 193, 7, 0.07);">
     
         <h3 data-ex="title">Identification de 2 facteurs importants</h3>
+    
+
+    
+        <span class='badge badge-warning'>Moyen</span>
+        <br>
     
 
     
@@ -475,7 +485,7 @@ MathJax.Hub.Config({
 
                             
                         
-                            <img id="previewMetricGraph" class="img-fluid" src="" style="display: none;"> <script>
+                            <br> <img id="previewMetricGraph" class="img-fluid" src="" style="display: none;"> <script>
     let picturePath = "/static/img/KNN/graphs/";
     let correspondingPicture = ["SWSH", "SWPW", "SWPH", "SHPW", "SHPH", "PWPH"];
     let target = $("#previewMetricGraph");
@@ -521,12 +531,38 @@ MathJax.Hub.Config({
     
 
     
+        <div class="card border-warning mb-3">
+    <div class="card-header">
+        <button class="btn btn-link" type="button" onclick="toggleNext(this)">
+            Aide
+        </button>
+    </div>
+    <div class="collapse hide">
+        <div class="card-body">
+            <p class="card-text">
+                Ton but est de choisir 2 axes de manière que cela forme des petits groupes distinct (pas tout mélanger) les plus éloignés possibles.
+
+            </p>
+        </div>
+    </div>
+</div>
+    
 </div>
 
     
-<div data-ex="exercice">
+
+
+
+
+
+<div data-ex="exercice" class="border border-warning" style="padding: 10px; margin-bottom: 10px; background-color:rgba(255, 193, 7, 0.07);">
     
         <h3 data-ex="title">Identifier une nouvelle fleur</h3>
+    
+
+    
+        <span class='badge badge-warning'>Moyen</span>
+        <br>
     
 
     
@@ -612,17 +648,43 @@ MathJax.Hub.Config({
     
 
     
+        <div class="card border-warning mb-3">
+    <div class="card-header">
+        <button class="btn btn-link" type="button" onclick="toggleNext(this)">
+            Aide
+        </button>
+    </div>
+    <div class="collapse hide">
+        <div class="card-body">
+            <p class="card-text">
+                Pour cette exercice il faut regarder les valeurs et les comparer à celle du <a href="#table1">Tableau 1</a>, par exemple ici on à une longueur de sépale de 5.1, si on regarde le <a href="#table1">Tableau 1</a> ça ne nous donne pas beaucoup d'information car les 3 variété de fleur ont des valeurs très proches.<br> Par contre si on regarde la longueur de pétale, 4.7, la valeur est très proche d'une seule variété de fleur dans le tableau.
+
+            </p>
+        </div>
+    </div>
+</div>
+    
 </div>
 
     
-<div data-ex="exercice">
+
+
+
+
+
+<div data-ex="exercice" class="border border-warning" style="padding: 10px; margin-bottom: 10px; background-color:rgba(255, 193, 7, 0.07);">
     
         <h3 data-ex="title">Vérification graphique</h3>
     
 
     
+        <span class='badge badge-warning'>Moyen</span>
+        <br>
+    
+
+    
         <div data-ex="intro"><p>
-    Voici le graphique correspondant aux données du <a href="#table1">Tableau 1</a> en utilisant la sépale comme mesure pour les axes :
+    Voici le graphique correspondant aux données du <a href="#table1">Tableau 1</a> en utilisant la pétale comme mesure pour les axes :
     <img src="/static/img/KNN/GrilleKNNCorr.png" class="img-fluid"><br>
     Visualise où serait la <a href="#unknownIrisPar">nouvelle fleur</a> dans le graphique.
 </p>
@@ -675,12 +737,38 @@ MathJax.Hub.Config({
     
 
     
+        <div class="card border-warning mb-3">
+    <div class="card-header">
+        <button class="btn btn-link" type="button" onclick="toggleNext(this)">
+            Aide
+        </button>
+    </div>
+    <div class="collapse hide">
+        <div class="card-body">
+            <p class="card-text">
+                <img src="/static/img/KNN/GrilleKNNCorrFInc.jpg" class="img-fluid">
+
+            </p>
+        </div>
+    </div>
+</div>
+    
 </div>
 
     
-<div data-ex="exercice">
+
+
+
+
+
+<div data-ex="exercice" class="border border-success" style="padding: 10px; margin-bottom: 10px; background-color:rgba(40, 167, 69, 0.07);">
     
         <h3 data-ex="title">K-plus proches voisins</h3>
+    
+
+    
+        <span class='badge badge-success'>Facile</span>
+        <br>
     
 
     
@@ -748,7 +836,17 @@ MathJax.Hub.Config({
 </div>
 
     
-<div data-ex="exercice">
+
+
+
+
+
+<div data-ex="exercice" class="border border-success" style="padding: 10px; margin-bottom: 10px; background-color:rgba(40, 167, 69, 0.07);">
+    
+
+    
+        <span class='badge badge-success'>Facile</span>
+        <br>
     
 
     
@@ -847,7 +945,17 @@ MathJax.Hub.Config({
 </div>
 
     
-<div data-ex="exercice">
+
+
+
+
+
+<div data-ex="exercice" class="border border-success" style="padding: 10px; margin-bottom: 10px; background-color:rgba(40, 167, 69, 0.07);">
+    
+
+    
+        <span class='badge badge-success'>Facile</span>
+        <br>
     
 
     
@@ -910,7 +1018,17 @@ MathJax.Hub.Config({
 </div>
 
     
-<div data-ex="exercice">
+
+
+
+
+
+<div data-ex="exercice" class="border border-warning" style="padding: 10px; margin-bottom: 10px; background-color:rgba(255, 193, 7, 0.07);">
+    
+
+    
+        <span class='badge badge-warning'>Moyen</span>
+        <br>
     
 
     
@@ -982,7 +1100,17 @@ MathJax.Hub.Config({
 </div>
 
     
-<div data-ex="exercice">
+
+
+
+
+
+<div data-ex="exercice" class="border border-success" style="padding: 10px; margin-bottom: 10px; background-color:rgba(40, 167, 69, 0.07);">
+    
+
+    
+        <span class='badge badge-success'>Facile</span>
+        <br>
     
 
     
@@ -1038,9 +1166,19 @@ MathJax.Hub.Config({
 </div>
 
     
-<div data-ex="exercice">
+
+
+
+
+
+<div data-ex="exercice" class="border border-success" style="padding: 10px; margin-bottom: 10px; background-color:rgba(40, 167, 69, 0.07);">
     
         <h3 data-ex="title">Utilisation de compteur</h3>
+    
+
+    
+        <span class='badge badge-success'>Facile</span>
+        <br>
     
 
     
@@ -1171,7 +1309,17 @@ MathJax.Hub.Config({
 </div>
 
     
-<div data-ex="exercice">
+
+
+
+
+
+<div data-ex="exercice" class="border border-warning" style="padding: 10px; margin-bottom: 10px; background-color:rgba(255, 193, 7, 0.07);">
+    
+
+    
+        <span class='badge badge-warning'>Moyen</span>
+        <br>
     
 
     
@@ -1248,9 +1396,19 @@ MathJax.Hub.Config({
 </div>
 
     
-<div data-ex="exercice">
+
+
+
+
+
+<div data-ex="exercice" class="" style="padding: 10px; margin-bottom: 10px; background-color:;">
     
         <h3 data-ex="title">Prédiction</h3>
+    
+
+    
+        
+        <br>
     
 
     
@@ -1310,9 +1468,17 @@ MathJax.Hub.Config({
 </div>
 
     
-<div data-ex="exercice">
+
+
+
+
+
+<div data-ex="exercice" class="border border-danger" style="padding: 10px; margin-bottom: 10px; background-color:rgba(220, 53, 69, 0.07);">
     
-        <h3 data-ex="title">Prédiction pour différentes métriques</h3>
+
+    
+        <span class='badge badge-danger'>Difficile</span>
+        <br>
     
 
     
@@ -1320,16 +1486,15 @@ MathJax.Hub.Config({
     Soit les trois fleurs données dans le <a href="#table2">Tableau 2</a>, avec le <a href="#table1">Tableau 1</a>
     comme modèle d’entrainement.
     Tu détermineras la classe de la fleur en regardant la majorité parmi <b>les trois voisins les plus proches</b>.<br>
-    Pour cela tu peux t'aider des graphiques que je te donne : <br>
+    Pour cela tu peux t'aider du graphiques que je te donne : <br>
 </p> <div style="text-align: center">
     <img src="/static/img/KNN/exKNNGraphiqueMetriqueSepale.png" class="img-fluid pinnable" style="padding-right: 16px">
-    <img src="/static/img/KNN/exKNNGraphiqueMetriquePetale.png" class="img-fluid pinnable">
 </div>
 </div>
     
 
     
-        <div data-ex="question">Détermine les fleurs avec les métriques suivantes:
+        <div data-ex="question">Détermine les fleurs avec la métrique sépale :
 </div>
     
 
@@ -1341,7 +1506,7 @@ MathJax.Hub.Config({
                     
                         
                                 <label>
-                                    Classifieur 1 Iris 1
+                                    Iris inconnue 1
                                     <select 
                                             class="form-control" data-answer="Iris virginica">
                                         <option>---</option>
@@ -1361,7 +1526,7 @@ MathJax.Hub.Config({
                     
                         
                                 <label>
-                                    Classifieur 1 Iris 2
+                                    Iris inconnue 2
                                     <select 
                                             class="form-control" data-answer="Iris setosa">
                                         <option>---</option>
@@ -1381,7 +1546,7 @@ MathJax.Hub.Config({
                     
                         
                                 <label>
-                                    Classifieur 1 Iris 3
+                                    Iris inconnue 3
                                     <select 
                                             class="form-control" data-answer="Iris versicolor">
                                         <option>---</option>
@@ -1399,9 +1564,87 @@ MathJax.Hub.Config({
                         
                         <br>
                     
+
+
+                
+            </div>
+            <div class="card-footer">
+                <button type="button" class="btn btn-primary" onclick="checkAnswer(this)" data-attempts="0"><i class="fas fa-play"></i> Vérifier réponse</button>
+                <span class="exFeedback"></span>
+                <button type="button" class="btn btn-success correctionButton collapse" onclick="showCorrection(this)"><i class="fas fa-puzzle-piece"></i> Afficher la correction</button>
+            </div>
+        </div>
+    
+
+
+    
+        <div class="card border-success mb-3 onlyTeacher collapse">
+    <div class="card-header">Correction</div>
+    <div class="card-body text-success">
+        <p class="card-text">
+            Les données sont choisies de sorte qu’il n’y ait pas d’ambiguïtés pour déterminer la majorité.<br> Classifieur 1 : Virginica, Setosa et Versicolor <br>
+
+        </p>
+    </div>
+</div>
+    
+
+    
+        <div class="card border-warning mb-3">
+    <div class="card-header">
+        <button class="btn btn-link" type="button" onclick="toggleNext(this)">
+            Aide
+        </button>
+    </div>
+    <div class="collapse hide">
+        <div class="card-body">
+            <p class="card-text">
+                Il suffit de regarder le graphique est de voir la majorité avec les 3 fleurs les plus proches.<br> Par exemple pour le premier, les 3 points plus proches de ma fleur Inconnue 1 sont des carrés vert, ça serait donc une <i>Versicolor</i>.
+
+            </p>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
+
+
+
+
+<div data-ex="exercice" class="border border-danger" style="padding: 10px; margin-bottom: 10px; background-color:rgba(220, 53, 69, 0.07);">
+    
+
+    
+        <span class='badge badge-danger'>Difficile</span>
+        <br>
+    
+
+    
+        <div data-ex="intro"><p>
+    Question identique à la précédente, j'ai juste modifié les métriques.
+</p> <div style="text-align: center">
+    <img src="/static/img/KNN/exKNNGraphiqueMetriquePetale.png" class="img-fluid pinnable">
+</div>
+</div>
+    
+
+    
+        <div data-ex="question">Détermine les fleurs avec la métrique pétale:
+</div>
+    
+
+    
+        <div class="card border-primary mb-3">
+            <div class="card-header">Réponse</div>
+            <div class="card-body text-primary">
+                
+                    
                         
                                 <label>
-                                    Classifieur 2 Iris 1
+                                    Iris inconnue 1
                                     <select 
                                             class="form-control" data-answer="Iris setosa">
                                         <option>---</option>
@@ -1421,7 +1664,7 @@ MathJax.Hub.Config({
                     
                         
                                 <label>
-                                    Classifieur 2 Iris 2
+                                    Iris inconnue 2
                                     <select 
                                             class="form-control" data-answer="Iris versicolor">
                                         <option>---</option>
@@ -1441,7 +1684,7 @@ MathJax.Hub.Config({
                     
                         
                                 <label>
-                                    Classifieur 2 Iris 3
+                                    Iris inconnue 3
                                     <select 
                                             class="form-control" data-answer="Iris virginica">
                                         <option>---</option>
@@ -1477,7 +1720,7 @@ MathJax.Hub.Config({
     <div class="card-header">Correction</div>
     <div class="card-body text-success">
         <p class="card-text">
-            Les données sont choisies de sorte qu’il n’y ait pas d’ambiguïtés pour déterminer la majorité.<br> Classifieur 1 : Virginica, Setosa et Versicolor <br> Classifieur 2 : Setosa, Versicolor et Virginica <br>
+            Les données sont choisies de sorte qu’il n’y ait pas d’ambiguïtés pour déterminer la majorité.<br> Classifieur 2 : Setosa, Versicolor et Virginica <br>
 
         </p>
     </div>
@@ -1488,9 +1731,19 @@ MathJax.Hub.Config({
 </div>
 
     
-<div data-ex="exercice">
+
+
+
+
+
+<div data-ex="exercice" class="border border-danger" style="padding: 10px; margin-bottom: 10px; background-color:rgba(220, 53, 69, 0.07);">
     
         <h3 data-ex="title">Précision de notre prédiction</h3>
+    
+
+    
+        <span class='badge badge-danger'>Difficile</span>
+        <br>
     
 
     
@@ -1611,7 +1864,17 @@ MathJax.Hub.Config({
 </div>
 
     
-<div data-ex="exercice">
+
+
+
+
+
+<div data-ex="exercice" class="border border-danger" style="padding: 10px; margin-bottom: 10px; background-color:rgba(220, 53, 69, 0.07);">
+    
+
+    
+        <span class='badge badge-danger'>Difficile</span>
+        <br>
     
 
     
@@ -1796,8 +2059,8 @@ MathJax.Hub.Config({
     function pinElementTransformation(elem) {
         elem.find("table").addBack('table').addClass("table-sm"); // Reduce table size
         elem.find("img").addBack('img')
-            .click(imgOnClick) // Possible to enlarge the picture
-            .css("height", "100%"); // Scale the image (keeping aspect ratio)
+            .click(imgOnClick); // Possible to enlarge the picture
+            //.css("height", "100%"); // Scale the image (keeping aspect ratio)
         elem.each(function () {
             this.removeAttribute('id');
         })

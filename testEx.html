@@ -426,9 +426,19 @@ MathJax.Hub.Config({
 <h2>Exercices</h2>
 
     
-<div data-ex="exercice">
+
+
+
+
+
+<div data-ex="exercice" class="" style="padding: 10px; margin-bottom: 10px; background-color:;">
     
         <h3 data-ex="title">Identification de 2 facteurs importants</h3>
+    
+
+    
+        
+        <br>
     
 
     
@@ -494,9 +504,19 @@ MathJax.Hub.Config({
 </div>
 
     
-<div data-ex="exercice">
+
+
+
+
+
+<div data-ex="exercice" class="" style="padding: 10px; margin-bottom: 10px; background-color:;">
     
         <h3 data-ex="title">Identifier une nouvelle fleur</h3>
+    
+
+    
+        
+        <br>
     
 
     
@@ -574,7 +594,17 @@ MathJax.Hub.Config({
 </div>
 
     
-<div data-ex="exercice">
+
+
+
+
+
+<div data-ex="exercice" class="" style="padding: 10px; margin-bottom: 10px; background-color:;">
+    
+
+    
+        
+        <br>
     
 
     
@@ -634,9 +664,19 @@ MathJax.Hub.Config({
 </div>
 
     
-<div data-ex="exercice">
+
+
+
+
+
+<div data-ex="exercice" class="" style="padding: 10px; margin-bottom: 10px; background-color:;">
     
         <h3 data-ex="title">Vérification graphique</h3>
+    
+
+    
+        
+        <br>
     
 
     
@@ -698,9 +738,19 @@ MathJax.Hub.Config({
 </div>
 
     
-<div data-ex="exercice">
+
+
+
+
+
+<div data-ex="exercice" class="" style="padding: 10px; margin-bottom: 10px; background-color:;">
     
         <h3 data-ex="title">K-plus proche voisins</h3>
+    
+
+    
+        
+        <br>
     
 
     
@@ -760,7 +810,17 @@ MathJax.Hub.Config({
 </div>
 
     
-<div data-ex="exercice">
+
+
+
+
+
+<div data-ex="exercice" class="" style="padding: 10px; margin-bottom: 10px; background-color:;">
+    
+
+    
+        
+        <br>
     
 
     
@@ -821,7 +881,17 @@ MathJax.Hub.Config({
 </div>
 
     
-<div data-ex="exercice">
+
+
+
+
+
+<div data-ex="exercice" class="" style="padding: 10px; margin-bottom: 10px; background-color:;">
+    
+
+    
+        
+        <br>
     
 
     
@@ -876,7 +946,17 @@ MathJax.Hub.Config({
 </div>
 
     
-<div data-ex="exercice">
+
+
+
+
+
+<div data-ex="exercice" class="" style="padding: 10px; margin-bottom: 10px; background-color:;">
+    
+
+    
+        
+        <br>
     
 
     
@@ -934,7 +1014,17 @@ MathJax.Hub.Config({
 </div>
 
     
-<div data-ex="exercice">
+
+
+
+
+
+<div data-ex="exercice" class="" style="padding: 10px; margin-bottom: 10px; background-color:;">
+    
+
+    
+        
+        <br>
     
 
     
@@ -991,9 +1081,19 @@ MathJax.Hub.Config({
 </div>
 
     
-<div data-ex="exercice">
+
+
+
+
+
+<div data-ex="exercice" class="" style="padding: 10px; margin-bottom: 10px; background-color:;">
     
         <h3 data-ex="title">Prédiction</h3>
+    
+
+    
+        
+        <br>
     
 
     
@@ -1054,9 +1154,19 @@ MathJax.Hub.Config({
 </div>
 
     
-<div data-ex="exercice">
+
+
+
+
+
+<div data-ex="exercice" class="" style="padding: 10px; margin-bottom: 10px; background-color:;">
     
         <h3 data-ex="title">Prédiction pour différente métriques</h3>
+    
+
+    
+        
+        <br>
     
 
     
@@ -1141,9 +1251,19 @@ MathJax.Hub.Config({
 </div>
 
     
-<div data-ex="exercice">
+
+
+
+
+
+<div data-ex="exercice" class="" style="padding: 10px; margin-bottom: 10px; background-color:;">
     
         <h3 data-ex="title">Précision de notre prédiction</h3>
+    
+
+    
+        
+        <br>
     
 
     
@@ -1238,7 +1358,17 @@ MathJax.Hub.Config({
 </div>
 
     
-<div data-ex="exercice">
+
+
+
+
+
+<div data-ex="exercice" class="" style="padding: 10px; margin-bottom: 10px; background-color:;">
+    
+
+    
+        
+        <br>
     
 
     
@@ -1387,8 +1517,8 @@ MathJax.Hub.Config({
     function pinElementTransformation(elem) {
         elem.find("table").addBack('table').addClass("table-sm"); // Reduce table size
         elem.find("img").addBack('img')
-            .click(imgOnClick) // Possible to enlarge the picture
-            .css("height", "100%"); // Scale the image (keeping aspect ratio)
+            .click(imgOnClick); // Possible to enlarge the picture
+            //.css("height", "100%"); // Scale the image (keeping aspect ratio)
         elem.each(function () {
             this.removeAttribute('id');
         })

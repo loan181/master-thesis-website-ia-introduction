@@ -269,7 +269,17 @@ MathJax.Hub.Config({
 <h2>Exercices</h2>
 
     
-<div data-ex="exercice">
+
+
+
+
+
+<div data-ex="exercice" class="border border-success" style="padding: 10px; margin-bottom: 10px; background-color:rgba(40, 167, 69, 0.07);">
+    
+
+    
+        <span class='badge badge-success'>Facile</span>
+        <br>
     
 
     
@@ -326,7 +336,17 @@ MathJax.Hub.Config({
 </div>
 
     
-<div data-ex="exercice">
+
+
+
+
+
+<div data-ex="exercice" class="border border-warning" style="padding: 10px; margin-bottom: 10px; background-color:rgba(255, 193, 7, 0.07);">
+    
+
+    
+        <span class='badge badge-warning'>Moyen</span>
+        <br>
     
 
     
@@ -383,7 +403,17 @@ MathJax.Hub.Config({
 </div>
 
     
-<div data-ex="exercice">
+
+
+
+
+
+<div data-ex="exercice" class="border border-success" style="padding: 10px; margin-bottom: 10px; background-color:rgba(40, 167, 69, 0.07);">
+    
+
+    
+        <span class='badge badge-success'>Facile</span>
+        <br>
     
 
     
@@ -432,7 +462,17 @@ MathJax.Hub.Config({
 </div>
 
     
-<div data-ex="exercice">
+
+
+
+
+
+<div data-ex="exercice" class="border border-danger" style="padding: 10px; margin-bottom: 10px; background-color:rgba(220, 53, 69, 0.07);">
+    
+
+    
+        <span class='badge badge-danger'>Difficile</span>
+        <br>
     
 
     
@@ -596,8 +636,8 @@ MathJax.Hub.Config({
     function pinElementTransformation(elem) {
         elem.find("table").addBack('table').addClass("table-sm"); // Reduce table size
         elem.find("img").addBack('img')
-            .click(imgOnClick) // Possible to enlarge the picture
-            .css("height", "100%"); // Scale the image (keeping aspect ratio)
+            .click(imgOnClick); // Possible to enlarge the picture
+            //.css("height", "100%"); // Scale the image (keeping aspect ratio)
         elem.each(function () {
             this.removeAttribute('id');
         })

@@ -265,13 +265,26 @@ MathJax.Hub.Config({
     <caption>Tableau 1 : Exemple de fruits avec différentes caractéristiques (forme et couleur)</caption>
 </table>
 
+Exemple d'arbre de décision :
+<img src="/static/img/arbre/arbreExemple.PNG" class="img-fluid mx-auto d-block pinnable">
+
 
 <h2>Exercices</h2>
 
     
-<div data-ex="exercice">
+
+
+
+
+
+<div data-ex="exercice" class="border border-success" style="padding: 10px; margin-bottom: 10px; background-color:rgba(40, 167, 69, 0.07);">
     
         <h3 data-ex="title">Construire un arbre de décision</h3>
+    
+
+    
+        <span class='badge badge-success'>Facile</span>
+        <br>
     
 
     
@@ -474,10 +487,36 @@ MathJax.Hub.Config({
     
 
     
+        <div class="card border-warning mb-3">
+    <div class="card-header">
+        <button class="btn btn-link" type="button" onclick="toggleNext(this)">
+            Aide
+        </button>
+    </div>
+    <div class="collapse hide">
+        <div class="card-body">
+            <p class="card-text">
+                Prenons la feuille 1 par exemple.<br> C'est tout les fruit qui sont orange. Dans notre cas il n'y à que l'orange qui est orange. Elle représente donc 100%, les autres fruits eux sont à 0%.<br> La feuille 2 correspond à tout les fruits qui ne sont pas orange, mais courbé, ...
+
+            </p>
+        </div>
+    </div>
+</div>
+    
 </div>
 
     
-<div data-ex="exercice">
+
+
+
+
+
+<div data-ex="exercice" class="border border-success" style="padding: 10px; margin-bottom: 10px; background-color:rgba(40, 167, 69, 0.07);">
+    
+
+    
+        <span class='badge badge-success'>Facile</span>
+        <br>
     
 
     
@@ -719,7 +758,17 @@ MathJax.Hub.Config({
 </div>
 
     
-<div data-ex="exercice">
+
+
+
+
+
+<div data-ex="exercice" class="border border-success" style="padding: 10px; margin-bottom: 10px; background-color:rgba(40, 167, 69, 0.07);">
+    
+
+    
+        <span class='badge badge-success'>Facile</span>
+        <br>
     
 
     
@@ -835,10 +884,36 @@ MathJax.Hub.Config({
     
 
     
+        <div class="card border-warning mb-3">
+    <div class="card-header">
+        <button class="btn btn-link" type="button" onclick="toggleNext(this)">
+            Aide
+        </button>
+    </div>
+    <div class="collapse hide">
+        <div class="card-body">
+            <p class="card-text">
+                Oui aucun fruit ne correspond à toute ses questions, c'est le but.<br> Mais du coup si j'ai un fruit qui n'est ni rose, ni hélicoidale, ni bleue, quelle fruit ça peut être dans notre tableau ? <small class="text-muted"> (tous)</small>
+
+            </p>
+        </div>
+    </div>
+</div>
+    
 </div>
 
     
-<div data-ex="exercice">
+
+
+
+
+
+<div data-ex="exercice" class="border border-warning" style="padding: 10px; margin-bottom: 10px; background-color:rgba(255, 193, 7, 0.07);">
+    
+
+    
+        <span class='badge badge-warning'>Moyen</span>
+        <br>
     
 
     
@@ -900,14 +975,24 @@ MathJax.Hub.Config({
 </div>
 
     
-<div data-ex="exercice">
+
+
+
+
+
+<div data-ex="exercice" class="border border-warning" style="padding: 10px; margin-bottom: 10px; background-color:rgba(255, 193, 7, 0.07);">
     
-        <h3 data-ex="title">Classifier quand il y à des classes identiques</h3>
+        <h3 data-ex="title">Classifier quand il y a des classes identiques</h3>
+    
+
+    
+        <span class='badge badge-warning'>Moyen</span>
+        <br>
     
 
     
         <div data-ex="intro"><p>
-    Precedamment, nous avons considéré que chaque fruit était distinct, cepandant cela peut ne pas être le cas.<br>
+    Précédemment, nous avons considéré que chaque fruit était distinct, cepandant cela peut ne pas être le cas.<br>
     Je peux par exemple avoir des pommes qui sont de couleurs jaunes en plus.<br>
     Tu remarquera qu'avec ses nouvelles pommes, il nous est impossible de les distinguer des citrons maintenant !
 </p>
@@ -1023,13 +1108,23 @@ MathJax.Hub.Config({
 </div>
 
     
-<div data-ex="exercice">
+
+
+
+
+
+<div data-ex="exercice" class="border border-warning" style="padding: 10px; margin-bottom: 10px; background-color:rgba(255, 193, 7, 0.07);">
+    
+
+    
+        <span class='badge badge-warning'>Moyen</span>
+        <br>
     
 
     
 
     
-        <div data-ex="question"><img src="/static/img/arbre/ex2help.PNG" class="img-fluid mx-auto d-block">
+        <div data-ex="question"><img src="/static/img/arbre/ex2help.PNG" class="img-fluid mx-auto d-block" style="padding-bottom: 5px;">
 </div>
     
 
@@ -1221,12 +1316,38 @@ MathJax.Hub.Config({
     
 
     
+        <div class="card border-warning mb-3">
+    <div class="card-header">
+        <button class="btn btn-link" type="button" onclick="toggleNext(this)">
+            Aide
+        </button>
+    </div>
+    <div class="collapse hide">
+        <div class="card-body">
+            <p class="card-text">
+                La subtilité ici est que la feuille 1 n'est plus la même qu'avec le tableau du début des exercices. En effet, il ne faut pas oublier nos nouvelles pommes dedans !<br> Pour les pourcentage, je te laisse deviner ;) mais c'est très lié à l'exercice précédent.
+
+            </p>
+        </div>
+    </div>
+</div>
+    
 </div>
 
     
-<div data-ex="exercice">
+
+
+
+
+
+<div data-ex="exercice" class="border border-success" style="padding: 10px; margin-bottom: 10px; background-color:rgba(40, 167, 69, 0.07);">
     
         <h3 data-ex="title">Classe majoritaire</h3>
+    
+
+    
+        <span class='badge badge-success'>Facile</span>
+        <br>
     
 
     
@@ -1384,9 +1505,19 @@ MathJax.Hub.Config({
 </div>
 
     
-<div data-ex="exercice">
+
+
+
+
+
+<div data-ex="exercice" class="border border-success" style="padding: 10px; margin-bottom: 10px; background-color:rgba(40, 167, 69, 0.07);">
     
         <h3 data-ex="title">La classification</h3>
+    
+
+    
+        <span class='badge badge-success'>Facile</span>
+        <br>
     
 
     
@@ -1667,8 +1798,8 @@ MathJax.Hub.Config({
     function pinElementTransformation(elem) {
         elem.find("table").addBack('table').addClass("table-sm"); // Reduce table size
         elem.find("img").addBack('img')
-            .click(imgOnClick) // Possible to enlarge the picture
-            .css("height", "100%"); // Scale the image (keeping aspect ratio)
+            .click(imgOnClick); // Possible to enlarge the picture
+            //.css("height", "100%"); // Scale the image (keeping aspect ratio)
         elem.each(function () {
             this.removeAttribute('id');
         })
