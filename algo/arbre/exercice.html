@@ -1695,19 +1695,44 @@ Exemple d'arbre de décision :
 
 
 <h2>Bilan</h2>
-    <ul>
+    <ul class="list-group list-group-flush">
         
-        <li>Le procédé d'un arbre de décision repose sur un principe assez simple.</li>
+            <li class="list-group-item">Le procédé d'un arbre de décision repose sur un principe assez simple.</li>
         
-        <li>Un arbre est composé de 2 types d'éléments : les feuilles et les noeuds internes. Ils sont liés par des branches.</li>
+            <li class="list-group-item">Un arbre est composé de 2 types d'éléments : les feuilles et les noeuds internes. Ils sont liés par des branches.</li>
         
-        <li>Un noeud interne est une question qui peut-être répondu par oui ou non. La branche de gauche représentera toujours la réponse « oui » et celle de droite la réponse « non ».</li>
+            <li class="list-group-item">Un noeud interne est une question qui peut-être répondu par oui ou non. La branche de gauche représentera toujours la réponse « oui » et celle de droite la réponse « non ».</li>
         
-        <li>Les feuilles représente l'ensemble des données ayant répondu à tout les critères des branches ayant mené à la feuille.</li>
+            <li class="list-group-item">Les feuilles représente l'ensemble des données ayant répondu à tout les critères des branches ayant mené à la feuille.</li>
         
-        <li>La classe ayant le plus grand pourcentage dans la feuille est appelé classe majoritaire. Si on cherche à prédire une donné et qu'elle se retrouve dans cette feuille, c'est cette classe qui sera déduite.</li>
+            <li class="list-group-item">La classe ayant le plus grand pourcentage dans la feuille est appelé classe majoritaire. Si on cherche à prédire une donné et qu'elle se retrouve dans cette feuille, c'est cette classe qui sera déduite.</li>
         
     </ul>
+
+
+
+    <div class="card" style="margin-top: 20px;">
+        <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#collapseOne">
+            <h2 class="mb-0">
+                <button class="btn btn-link" type="button" aria-expanded="true" aria-controls="collapseOne">
+                    <i class="fas fa-info-circle"></i> Pour en savoir plus !
+                </button>
+            </h2>
+        </div>
+
+        <div id="collapseOne" class="collapse">
+            <div class="card-body">
+                <ul>
+                    
+                        <li>Dans un vrai arbre de décision, les questions ne sont pas forcément binaire. C'est à dire que chaque question peut avoir autant de branche qu'elle veut. Par exemple si on demande l'age, on pourrait avoir une branche "age <= 18 ans" une autre "18 < age < 60" et une dernière "age >= 60 ans".</li>
+                    
+                        <li>Les arbres peuvent être généré très efficacement par des algorithmes de Machine Learning comme <a target="_blank" href="https://fr.wikipedia.org/wiki/Algorithme_ID3">ID3</a>, cependant son utilisation est complexe et repose sur des concepts mathématique et informatique trop avancé (l'entropie de Shannon, logarithme, récursivité, ...).<br> Les arbres de décisions ici sont suffisamment petit pour pouvoir les créer à la main très efficacement sans difficulté, mais en pratique, avec beaucoup de données, des algorithmes sont employés.
+</li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
 
 
 <script>
