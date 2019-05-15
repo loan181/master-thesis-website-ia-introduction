@@ -122,3 +122,12 @@ function showCorrection(elem) {
         })
     }
 }
+
+function revealHarderExercice(button) {
+    let notEasyExercices = $(".ex-medium, .ex-hard");
+        notEasyExercices.show(2000);
+        $('html, body').animate({
+            scrollTop: notEasyExercices.get(0).offsetTop
+        }, 2000);
+        button.parentNode.remove();
+}

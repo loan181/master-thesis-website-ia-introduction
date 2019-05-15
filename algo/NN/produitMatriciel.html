@@ -277,7 +277,7 @@ MathJax.Hub.Config({
 
 
 
-<div data-ex="exercice" class="border border-success" style="padding: 10px; margin-bottom: 10px; background-color:rgba(40, 167, 69, 0.07);">
+<div data-ex="exercice" class="exercice border border-success ex-easy" style="padding: 10px; margin-bottom: 10px; background-color:rgba(40, 167, 69, 0.07);">
     
 
     
@@ -334,7 +334,33 @@ MathJax.Hub.Config({
 
 
     
+        <div class="card border-success mb-3 onlyTeacher collapse">
+    <div class="card-header">Correction</div>
+    <div class="card-body text-success">
+        <p class="card-text">
+            $\begin{pmatrix} 1 \times 2 + 0 \times 0 & 1 \times (-1) + 0 \times 1\\ 2 \times 2 + (-1) \times 0 & 2 \times (-1) + (-1) \times 1 \end{pmatrix}$ = $\begin{pmatrix} 2 & -1 \\ 4 & -3 \end{pmatrix}$
 
+        </p>
+    </div>
+</div>
+    
+
+    
+        <div class="card border-warning mb-3">
+    <div class="card-header" onclick="toggleSib(this)">
+        <button class="btn btn-link" type="button" onclick="toggleNext(this)">
+            Aide
+        </button>
+    </div>
+    <div class="collapse hide">
+        <div class="card-body">
+            <p class="card-text">
+                La difficulté consiste à bien choisir les nombres !<br> Je t'aide pour la première colonne : <br> $\begin{pmatrix} 1 \times 2 + 0 \times 0 & ...\\ 2 \times 2 + (-1) \times 0 & ...\end{pmatrix}$
+
+            </p>
+        </div>
+    </div>
+</div>
     
 </div>
 
@@ -344,7 +370,7 @@ MathJax.Hub.Config({
 
 
 
-<div data-ex="exercice" class="border border-warning" style="padding: 10px; margin-bottom: 10px; background-color:rgba(255, 193, 7, 0.07);">
+<div data-ex="exercice" class="exercice border border-warning ex-medium" style="padding: 10px; margin-bottom: 10px; background-color:rgba(255, 193, 7, 0.07);">
     
 
     
@@ -401,6 +427,16 @@ MathJax.Hub.Config({
 
 
     
+        <div class="card border-success mb-3 onlyTeacher collapse">
+    <div class="card-header">Correction</div>
+    <div class="card-body text-success">
+        <p class="card-text">
+            $\begin{pmatrix} 1 \times 2 + 2 \times 0 & 1 \times (-1) + 2 \times 1\\ 3 \times 2 + 4 \times 0 & 3 \times (-1) + 4 \times 1 \end{pmatrix}$ = $\begin{pmatrix} 2 & 1 \\ 6 & 1 \end{pmatrix}$
+
+        </p>
+    </div>
+</div>
+    
 
     
 </div>
@@ -411,7 +447,7 @@ MathJax.Hub.Config({
 
 
 
-<div data-ex="exercice" class="border border-success" style="padding: 10px; margin-bottom: 10px; background-color:rgba(40, 167, 69, 0.07);">
+<div data-ex="exercice" class="exercice border border-success ex-easy" style="padding: 10px; margin-bottom: 10px; background-color:rgba(40, 167, 69, 0.07);">
     
 
     
@@ -460,6 +496,16 @@ MathJax.Hub.Config({
 
 
     
+        <div class="card border-success mb-3 onlyTeacher collapse">
+    <div class="card-header">Correction</div>
+    <div class="card-body text-success">
+        <p class="card-text">
+            $\begin{pmatrix} 1 \times 1 + 2 \times 0 + 3 \times (-1) + 4 \times 2 \end{pmatrix}$ = $\begin{pmatrix} 1 - 3 + 8 \end{pmatrix}$ = $\begin{pmatrix} 6 \end{pmatrix}$
+
+        </p>
+    </div>
+</div>
+    
 
     
 </div>
@@ -470,7 +516,7 @@ MathJax.Hub.Config({
 
 
 
-<div data-ex="exercice" class="border border-danger" style="padding: 10px; margin-bottom: 10px; background-color:rgba(220, 53, 69, 0.07);">
+<div data-ex="exercice" class="exercice border border-danger ex-hard" style="padding: 10px; margin-bottom: 10px; background-color:rgba(220, 53, 69, 0.07);">
     
 
     
@@ -540,11 +586,26 @@ MathJax.Hub.Config({
 
 
     
+        <div class="card border-success mb-3 onlyTeacher collapse">
+    <div class="card-header">Correction</div>
+    <div class="card-body text-success">
+        <p class="card-text">
+            $\begin{pmatrix} 5 & -2 & -1\\ 11 & -4 & -3\\ 5 & -2 & -1 \\ 11 & -4 & -3  \end{pmatrix}$
+
+        </p>
+    </div>
+</div>
+    
 
     
 </div>
 
-
+<div>
+    <p>
+        Tu as terminé tout les exercices <span class="badge badge-success">Facile</span> ? <br>
+    </p>
+    <button type="button" onclick="revealHarderExercice(this)" class="btn btn-success">Afficher des exercices <b>plus difficiles</b> !</button>
+</div>
 
 
 

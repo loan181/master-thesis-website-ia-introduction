@@ -280,7 +280,7 @@ Exemple d'arbre de décision :
 
 
 
-<div data-ex="exercice" class="border border-success" style="padding: 10px; margin-bottom: 10px; background-color:rgba(40, 167, 69, 0.07);">
+<div data-ex="exercice" class="exercice border border-success ex-easy" style="padding: 10px; margin-bottom: 10px; background-color:rgba(40, 167, 69, 0.07);">
     
         <h3 data-ex="title">Construire un arbre de décision</h3>
     
@@ -491,7 +491,7 @@ Exemple d'arbre de décision :
 
     
         <div class="card border-warning mb-3">
-    <div class="card-header">
+    <div class="card-header" onclick="toggleSib(this)">
         <button class="btn btn-link" type="button" onclick="toggleNext(this)">
             Aide
         </button>
@@ -514,7 +514,7 @@ Exemple d'arbre de décision :
 
 
 
-<div data-ex="exercice" class="border border-success" style="padding: 10px; margin-bottom: 10px; background-color:rgba(40, 167, 69, 0.07);">
+<div data-ex="exercice" class="exercice border border-success ex-easy" style="padding: 10px; margin-bottom: 10px; background-color:rgba(40, 167, 69, 0.07);">
     
 
     
@@ -766,7 +766,7 @@ Exemple d'arbre de décision :
 
 
 
-<div data-ex="exercice" class="border border-success" style="padding: 10px; margin-bottom: 10px; background-color:rgba(40, 167, 69, 0.07);">
+<div data-ex="exercice" class="exercice border border-success ex-easy" style="padding: 10px; margin-bottom: 10px; background-color:rgba(40, 167, 69, 0.07);">
     
 
     
@@ -888,7 +888,7 @@ Exemple d'arbre de décision :
 
     
         <div class="card border-warning mb-3">
-    <div class="card-header">
+    <div class="card-header" onclick="toggleSib(this)">
         <button class="btn btn-link" type="button" onclick="toggleNext(this)">
             Aide
         </button>
@@ -911,7 +911,7 @@ Exemple d'arbre de décision :
 
 
 
-<div data-ex="exercice" class="border border-warning" style="padding: 10px; margin-bottom: 10px; background-color:rgba(255, 193, 7, 0.07);">
+<div data-ex="exercice" class="exercice border border-warning ex-medium" style="padding: 10px; margin-bottom: 10px; background-color:rgba(255, 193, 7, 0.07);">
     
 
     
@@ -983,7 +983,7 @@ Exemple d'arbre de décision :
 
 
 
-<div data-ex="exercice" class="border border-warning" style="padding: 10px; margin-bottom: 10px; background-color:rgba(255, 193, 7, 0.07);">
+<div data-ex="exercice" class="exercice border border-warning ex-medium" style="padding: 10px; margin-bottom: 10px; background-color:rgba(255, 193, 7, 0.07);">
     
         <h3 data-ex="title">Classifier quand il y a des classes identiques</h3>
     
@@ -1116,7 +1116,7 @@ Exemple d'arbre de décision :
 
 
 
-<div data-ex="exercice" class="border border-warning" style="padding: 10px; margin-bottom: 10px; background-color:rgba(255, 193, 7, 0.07);">
+<div data-ex="exercice" class="exercice border border-warning ex-medium" style="padding: 10px; margin-bottom: 10px; background-color:rgba(255, 193, 7, 0.07);">
     
 
     
@@ -1320,7 +1320,7 @@ Exemple d'arbre de décision :
 
     
         <div class="card border-warning mb-3">
-    <div class="card-header">
+    <div class="card-header" onclick="toggleSib(this)">
         <button class="btn btn-link" type="button" onclick="toggleNext(this)">
             Aide
         </button>
@@ -1343,7 +1343,7 @@ Exemple d'arbre de décision :
 
 
 
-<div data-ex="exercice" class="border border-success" style="padding: 10px; margin-bottom: 10px; background-color:rgba(40, 167, 69, 0.07);">
+<div data-ex="exercice" class="exercice border border-success ex-easy" style="padding: 10px; margin-bottom: 10px; background-color:rgba(40, 167, 69, 0.07);">
     
         <h3 data-ex="title">Classe majoritaire</h3>
     
@@ -1490,7 +1490,7 @@ Exemple d'arbre de décision :
 
     
         <div class="card border-warning mb-3">
-    <div class="card-header">
+    <div class="card-header" onclick="toggleSib(this)">
         <button class="btn btn-link" type="button" onclick="toggleNext(this)">
             Aide
         </button>
@@ -1513,7 +1513,7 @@ Exemple d'arbre de décision :
 
 
 
-<div data-ex="exercice" class="border border-success" style="padding: 10px; margin-bottom: 10px; background-color:rgba(40, 167, 69, 0.07);">
+<div data-ex="exercice" class="exercice border border-success ex-easy" style="padding: 10px; margin-bottom: 10px; background-color:rgba(40, 167, 69, 0.07);">
     
         <h3 data-ex="title">La classification</h3>
     
@@ -1691,7 +1691,12 @@ Exemple d'arbre de décision :
     
 </div>
 
-
+<div>
+    <p>
+        Tu as terminé tout les exercices <span class="badge badge-success">Facile</span> ? <br>
+    </p>
+    <button type="button" onclick="revealHarderExercice(this)" class="btn btn-success">Afficher des exercices <b>plus difficiles</b> !</button>
+</div>
 
 
 <h2>Bilan</h2>

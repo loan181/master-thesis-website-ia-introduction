@@ -420,8 +420,8 @@ MathJax.Hub.Config({
         //figure.data[0].marker.name = "Kiwi";
         modifyXAxisName("longueur");
         modifyYAxisName("hauteur");
-        $('#axisXName').text(frenchTranslationCat("longueur"));
-        $('#axisYName').text(frenchTranslationCat("hauteur"));
+        $('#axisXName').text("longueur");
+        $('#axisYName').text("hauteur");
         redrawPlot();
     }
 
@@ -530,7 +530,7 @@ MathJax.Hub.Config({
                     
                     
                         <div class="card border-warning mb-3">
-    <div class="card-header">
+    <div class="card-header" onclick="toggleSib(this)">
         <button class="btn btn-link" type="button" onclick="toggleNext(this)">
             Aide
         </button>
