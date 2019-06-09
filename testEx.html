@@ -120,9 +120,9 @@ MathJax.Hub.Config({
         "<i class=\"fas fa-flag-checkered\"></i>"
     ];
     // We can't use javascript variable into jekyll, so we precompute the values here
-    let algoName = [ "Arbre de décisions",  "Méthodes des K plus proches voisins",  "Réseau neuronal", ];
+    let algoName = [ "Arbre de décision",  "Méthodes des K plus proches voisins",  "Réseau neuronal", ];
     let algoHRef = [ "arbre",  "KNN",  "NN", ];
-    let algoActivityName = [ "Arbre interactif",  "Blockly",  "Réseau de neurone interactif", ];
+    let algoActivityName = [ "Arbre interactif",  "Blockly",  "Réseau de neurones interactif", ];
     let algoIcon = [ '<i class="fas fa-tree"></i>',  '<i class="far fa-dot-circle"></i>',  '<svg class="icon icon-cart" role="img" xmlns="http://www.w3.org/2000/svg" style="height:21px" viewBox="0 0 640 512" class="svg-inline--fa fa-chart-network fa-w-20"><path fill="currentColor" d="M568 368c-19.1 0-36.3 7.6-49.2 19.7L440.6 343c4.5-12.2 7.4-25.2 7.4-39 0-61.9-50.1-112-112-112-8.4 0-16.6 1.1-24.4 2.9l-32.2-69c15-13.2 24.6-32.3 24.6-53.8 0-39.8-32.2-72-72-72s-72 32.2-72 72 32.2 72 72 72c.9 0 1.8-.2 2.7-.3l33.5 71.7C241.5 235.9 224 267.8 224 304c0 61.9 50.1 112 112 112 30.7 0 58.6-12.4 78.8-32.5l82.2 47c-.4 3.1-1 6.3-1 9.5 0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72zM232 96c-13.2 0-24-10.8-24-24s10.8-24 24-24 24 10.8 24 24-10.8 24-24 24zm104 272c-35.3 0-64-28.7-64-64s28.7-64 64-64 64 28.7 64 64-28.7 64-64 64zm232 96c-13.2 0-24-10.8-24-24s10.8-24 24-24 24 10.8 24 24-10.8 24-24 24zm-54.4-261.2l-19.2-25.6-48 36 19.2 25.6 48-36zM576 192c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64zM152 320h48v-32h-48v32zm-88-80c-35.3 0-64 28.7-64 64s28.7 64 64 64 64-28.7 64-64-28.7-64-64-64z" class="" data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path></svg>', ];
 
     function populateNavBar() {
@@ -586,7 +586,7 @@ MathJax.Hub.Config({
     <div class="card-header">Correction</div>
     <div class="card-body text-success">
         <p class="card-text">
-            C'est (probalement) une <i>Iris-virginica</i>.<br> La longueur et la largeur de la sépale ne nous permettent pas de pouvoir donner des informations fiables sur la fleur.<br> Cepandant la longueur et la largeur de la sépale sont très proche des <i>Iris-virginica</i> existantes.
+            C'est (probalement) une <i>Iris-virginica</i>.<br> La longueur et la largeur de la sépale ne nous permettent pas de pouvoir donner des informations fiables sur la fleur.<br> Cependant la longueur et la largeur de la sépale sont très proche des <i>Iris-virginica</i> existantes.
 
         </p>
     </div>
@@ -758,7 +758,7 @@ MathJax.Hub.Config({
 
     
         <div data-ex="intro"><p>
-    Sur le graphique suivant, visualise un marqueur au coordonnée (5.1, 2.6)
+    Sur le graphique suivant, visualise un marqueur aux coordonnées (5.1, 2.6)
 </p> <img src="/static/img/KNN/exKNNGraphique.png">
 </div>
     
@@ -1031,7 +1031,7 @@ MathJax.Hub.Config({
     
 
     
-        <div data-ex="intro">Supposons maintenant que les points jaunes représente des <i>Iris-versicolor</i> et les verts des <i>Iris-virginica</i>.</div>
+        <div data-ex="intro">Supposons maintenant que les triangles rouges représente des <i>Iris-versicolor</i> et les carrés verts des <i>Iris-virginica</i>.</div>
     
 
     
@@ -1073,7 +1073,7 @@ MathJax.Hub.Config({
     <div class="card-header">Correction</div>
     <div class="card-body text-success">
         <p class="card-text">
-            Si on se fie uniquement à la fleur la plus proche on peut penser que c’est une versicolor. Mais si l’on regarde les fleurs plus éloigné, il est plus probable que ça soit une iris-virginica.<br> Cette exercice n’a pas de réponse absolue, l’important c’est que tu comprenne la notion de majorité et que selon les paramètres qu’on pose (ici le nombre de voisins) la réponse peut changer.
+            Si on se fie uniquement à la fleur la plus proche on peut penser que c’est une versicolor. Mais si l’on regarde les fleurs plus éloigné, il est plus probable que ça soit une iris-virginica.<br> Cet exercice n’a pas de réponse absolue, l’important c’est que tu comprennes la notion de majorité et que selon les paramètres qu’on pose (ici le nombre de voisins) la réponse peut changer.
 
         </p>
     </div>
@@ -1377,7 +1377,7 @@ MathJax.Hub.Config({
     
 
     
-        <div data-ex="question">A partir de tes résultats, quel prédicateur utiliserai tu pour deviner une fleur d'iris ? Pourquoi ?
+        <div data-ex="question">A partir de tes résultats, quel prédicateur utiliserais tu pour deviner une fleur d'iris ? Pourquoi ?
 </div>
     
 
@@ -1427,7 +1427,7 @@ MathJax.Hub.Config({
 
 <div id="moreExercices">
     <p>
-        Tu as terminé tout les exercices <span class="badge badge-success">Facile</span> ? <br>
+        Tu as terminé tous les exercices <span class="badge badge-success">Facile</span> ? <br>
     </p>
     <button id="moreExercicesBtn" type="button" onclick="revealHarderExercice(this)" class="btn btn-success">Afficher des exercices <b>plus difficiles</b> !</button>
 </div>

@@ -120,9 +120,9 @@ MathJax.Hub.Config({
         "<i class=\"fas fa-flag-checkered\"></i>"
     ];
     // We can't use javascript variable into jekyll, so we precompute the values here
-    let algoName = [ "Arbre de décisions",  "Méthodes des K plus proches voisins",  "Réseau neuronal", ];
+    let algoName = [ "Arbre de décision",  "Méthodes des K plus proches voisins",  "Réseau neuronal", ];
     let algoHRef = [ "arbre",  "KNN",  "NN", ];
-    let algoActivityName = [ "Arbre interactif",  "Blockly",  "Réseau de neurone interactif", ];
+    let algoActivityName = [ "Arbre interactif",  "Blockly",  "Réseau de neurones interactif", ];
     let algoIcon = [ '<i class="fas fa-tree"></i>',  '<i class="far fa-dot-circle"></i>',  '<svg class="icon icon-cart" role="img" xmlns="http://www.w3.org/2000/svg" style="height:21px" viewBox="0 0 640 512" class="svg-inline--fa fa-chart-network fa-w-20"><path fill="currentColor" d="M568 368c-19.1 0-36.3 7.6-49.2 19.7L440.6 343c4.5-12.2 7.4-25.2 7.4-39 0-61.9-50.1-112-112-112-8.4 0-16.6 1.1-24.4 2.9l-32.2-69c15-13.2 24.6-32.3 24.6-53.8 0-39.8-32.2-72-72-72s-72 32.2-72 72 32.2 72 72 72c.9 0 1.8-.2 2.7-.3l33.5 71.7C241.5 235.9 224 267.8 224 304c0 61.9 50.1 112 112 112 30.7 0 58.6-12.4 78.8-32.5l82.2 47c-.4 3.1-1 6.3-1 9.5 0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72zM232 96c-13.2 0-24-10.8-24-24s10.8-24 24-24 24 10.8 24 24-10.8 24-24 24zm104 272c-35.3 0-64-28.7-64-64s28.7-64 64-64 64 28.7 64 64-28.7 64-64 64zm232 96c-13.2 0-24-10.8-24-24s10.8-24 24-24 24 10.8 24 24-10.8 24-24 24zm-54.4-261.2l-19.2-25.6-48 36 19.2 25.6 48-36zM576 192c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64zM152 320h48v-32h-48v32zm-88-80c-35.3 0-64 28.7-64 64s28.7 64 64 64 64-28.7 64-64-28.7-64-64-64z" class="" data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path></svg>', ];
 
     function populateNavBar() {
@@ -242,28 +242,28 @@ MathJax.Hub.Config({
     Un réseau neuronal est un système inspiré par le fonctionnement des neurones biologiques.
 </p>
 <p>
-    Un tel réseau est capable d'apprendre par l'expérience. Ils sont donc ainsi capable de faire de la classification et de la généralisation.
+    Un tel réseau est capable d'apprendre par l'expérience. Il est donc ainsi capable de faire de la classification et de la généralisation.
 </p>
 <p>
-    Il existe de nombreux modèles de réseau neuronal, l'idée générale est : une sucession de couche composés de <b>neurones</b> dont chacune prends ses entrées sur les sorties de la précédente.<br>
+    Il existe de nombreux modèles de réseaux neuronaux, l'idée générale est : une succession de couches composées de <b>neurones</b> dont chacune prend ses entrées sur les sorties de la précédente.<br>
     On appellera <b>poids</b> ces connections entre chaque couche.<br>
-    La première couche est appellée la <i>couche d'entrée</i> et la dernière la <i>couche de sortie</i>, les autres sont des <i>couches cachées</i>.
+    La première couche est appelée la <i>couche d'entrée</i> et la dernière la <i>couche de sortie</i>, les autres sont des <i>couches cachées</i>.
     <img class="img-fluid mx-auto d-block" src="https://www.researchgate.net/profile/Larbi_Houichi/publication/262451664/figure/fig2/AS:296678314790914@1447745030713/Diagramme-schematique-du-reseau-de-neurone-MLP.png">
 </p>
 <p>
-    Un réseau neuronal est aussi un modèle mathématique/statistique, chaque neuronne et poids ont une certaine valeur.<br>
+    Un réseau neuronal est aussi un modèle mathématique/statistique.<br> Chaque neurone et poids ont une certaine valeur.<br>
     Dans notre cas, la valeur des poids est toujours connue et te sera donnée.
-    Celle des neurones devra être calculée en fonction des neuronnes et poids de la couche précédentes, excepté celles en entrées qui te seront donnés.<br>
-    La valeur obtenu par les neurones de la couche de sortie nous permettront de tirer des conclusions de notre entrée.
+    La valeur des neurones devra être calculée en fonction des neurones et poids de la couche précédente. La valeur des neurones en entrée qui te sera donnée.<br>
+    La valeur obtenue par les neurones de la couche de sortie nous permettra de tirer des conclusions de notre entrée.
 </p>
 <p>
-    Par exemple : en entrée on reçoit une image de chien, cette image sera décomposé pour être traité par le neuronne, les calculs des neuronnes se font couche après couche pour enfin terminer dans la sortie.
+    Par exemple : en entrée on reçoit une image de chien, cette image sera décomposée pour être traitée par le neurone, les calculs des neurones se font couche après couche pour enfin terminer dans la sortie.
     A partir de la valeur de sortie on peut en tirer des conclusions.
 </p>
 <img class="img-fluid mx-auto d-block" src="https://cdn-images-1.medium.com/max/2560/1*36MELEhgZsPFuzlZvObnxA.gif">
 
     
-        <h2>Cas pratique</h2>
+        <h2>Cas pratiques</h2>
         <div id="useCases" class="card-deck">
             
                 <div class="card">
@@ -282,11 +282,11 @@ MathJax.Hub.Config({
             
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Identification de système et controles</h5>
+                        <h5 class="card-title">Identification de système et contrôle</h5>
                         <p class="card-text">Technique de l'automatique consistant à obtenir un modèle mathématique d'un système à partir de mesures
 </p>
                         
-                            <p class="text-muted">Exemples : Controle de véhicule (smart cars), prédiction de trajectoire, supervision informatique, gestion des ressources naturelles, ...</p>
+                            <p class="text-muted">Exemples : Contrôle de véhicules (smart cars), prédiction de trajectoire, supervision informatique, gestion des ressources naturelles...</p>
                         
                         
                             <a href="https://fr.wikipedia.org/wiki/Identification_de_syst%C3%A8me" class="btn btn-info" target="_blank"><i class="fas fa-link"></i></a>
@@ -300,7 +300,7 @@ MathJax.Hub.Config({
                         <p class="card-text">Ce terme désigne la possibilité d'une intelligence artificielle à être capable de jouer à plus d'un jeu à la fois avec succès.
 </p>
                         
-                            <p class="text-muted">Exemples : Une même IA capable de jouer aussi bien aux échecs qu'au dame, ...</p>
+                            <p class="text-muted">Exemples : Une même IA capable de jouer aussi bien aux échecs qu'aux dames...</p>
                         
                         
                             <a href="https://en.wikipedia.org/wiki/General_game_playing" class="btn btn-info" target="_blank"><i class="fas fa-link"></i></a>
@@ -324,7 +324,7 @@ MathJax.Hub.Config({
                     <div class="card-body">
                         <h5 class="card-title">Simplement faire des prédictions en général</h5>
                         <p class="card-text">Il suffit d'avoir un ensemble de données avec certaines caractéristiques pour appliquer l'algorithme. Ainsi on peut l'utiliser dans divers domaines de prédiction.</p>
-                        <p class="text-muted">Exemples : météo, médecine, évolution économique, pari sportif, ...</p>
+                        <p class="text-muted">Exemples : météo, médecine, évolution économique, pari sportif...</p>
                     </div>
                 </div>
             `);
