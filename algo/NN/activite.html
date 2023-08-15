@@ -33,7 +33,7 @@
     firebase.initializeApp(config);
 </script>
 
-<script src="/static/js/Database.js"></script>
+<script src="/master-thesis-website-ia-introduction/static/js/Database.js"></script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134452435-1"></script>
@@ -55,7 +55,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 
 <!-- Custom css -->
-<link rel="stylesheet" href="/static/css/style.css">
+<link rel="stylesheet" href="/master-thesis-website-ia-introduction/static/css/style.css">
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -84,11 +84,11 @@ MathJax.Hub.Config({
 
     <!-- Custom Extra scripts -->
     
-        <script type="text/javascript" src="/static/js/shared/Blockly/src/blockly_compressed.js"></script>
+        <script type="text/javascript" src="/master-thesis-website-ia-introduction/static/js/shared/Blockly/src/blockly_compressed.js"></script>
     
-        <script type="text/javascript" src="/static/js/shared/Blockly/src/blocks_compressed.js"></script>
+        <script type="text/javascript" src="/master-thesis-website-ia-introduction/static/js/shared/Blockly/src/blocks_compressed.js"></script>
     
-        <script type="text/javascript" src="/static/js/shared/Blockly/src/javascript_compressed.js"></script>
+        <script type="text/javascript" src="/master-thesis-website-ia-introduction/static/js/shared/Blockly/src/javascript_compressed.js"></script>
     
 
     
@@ -98,10 +98,10 @@ MathJax.Hub.Config({
 
     
 
-    <script src="/static/js/contentForTeacher.js"></script>
+    <script src="/master-thesis-website-ia-introduction/static/js/contentForTeacher.js"></script>
 
     <!-- Success Message -->
-    <link rel="stylesheet" href="/static/css/animationSuccess.css">
+    <link rel="stylesheet" href="/master-thesis-website-ia-introduction/static/css/animationSuccess.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.1/TweenMax.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
 </head>
@@ -116,13 +116,13 @@ MathJax.Hub.Config({
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul id="mainNavbarUl" class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/"><i class="fas fa-home"></i></a>
+                <a class="nav-link" href="/master-thesis-website-ia-introduction/"><i class="fas fa-home"></i></a>
             </li>
             <!-- Rest is filled automatically -->
         </ul>
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="/contact.html"><i class="far fa-envelope"></i> Me contacter</a>
+                <a class="nav-link" href="/master-thesis-website-ia-introduction/contact.html"><i class="far fa-envelope"></i> Me contacter</a>
             </li>
         </ul>
         <!--<form class="form-inline my-2 my-lg-0">-->
@@ -133,7 +133,7 @@ MathJax.Hub.Config({
 </nav>
 
 <script>
-    let algoPrefix = "/algo/";
+    let algoPrefix = "/master-thesis-website-ia-introduction/algo/";
     let algoActivityDesc = [
         "Introduction au concept général de l'algorithme",
         "Série de petits exercices de préparation pour introduire l'idée derrière l'algorithme.<br>Leur correction est automatisée.",
@@ -274,8 +274,8 @@ MathJax.Hub.Config({
     Celui-ci dépend de 2 fonctions que tu devras correctement implémenter :
     <code>gérer_la_couche_d'entrée(image)</code> et <code>prédire_valeur(valeur des neurones de la couche de sortie)</code>.<br>
 </p> <div class="mx-auto" align="center">
-    <img src="/static/img/NN/acti/handleEntryEmpty.svg" class="img-fluid" style="padding-right: 16px">
-    <img src="/static/img/NN/acti/handleOutputEmpty.svg" class="img-fluid">
+    <img src="/master-thesis-website-ia-introduction/static/img/NN/acti/handleEntryEmpty.svg" class="img-fluid" style="padding-right: 16px">
+    <img src="/master-thesis-website-ia-introduction/static/img/NN/acti/handleOutputEmpty.svg" class="img-fluid">
 </div>
 <p>
     Tu auras donc 2 missions dans cette activité.<br>
@@ -295,7 +295,7 @@ MathJax.Hub.Config({
 
             <!-- Toolbox -->
             <div id="toolBox"></div>
-            <script src="/static/js/shared/ToolBox.js"></script>
+            <script src="/master-thesis-website-ia-introduction/static/js/shared/ToolBox.js"></script>
             <script>
                 let TB = new ToolBox("toolBox");
                 TB.setToolBarForExercice("KNN");
@@ -307,7 +307,7 @@ MathJax.Hub.Config({
                 <h6 style="float: left; margin-right: 1em;"> Précision actuelle : </h6>
                 <div id="progressBar"></div>
             </div>
-            <script src="/static/js/successBar.js"></script>
+            <script src="/master-thesis-website-ia-introduction/static/js/successBar.js"></script>
             <script>
                 let pb = new ProgressBar("progressBar");
                 function exerciceSuccess() {
@@ -1104,12 +1104,12 @@ MathJax.Hub.Config({
     <variables><variable type="" id="*6p?S_wD}keQZ,fzP8uZ">image</variable><variable type="" id="VJchVf59Wm99f:PfLv_M">valeur des neurones de la couche de sortie</variable><variable type="" id="Eg4`9@Hrn91U4iCj+#m%">i</variable><variable type="" id="Z,b1ch;11Tk4y[4YA7bt">chiffrePrédit</variable></variables><block type="procedures_defnoreturn" id="db-}-8UA`UY3tqKh?PUD" x="13" y="38"><mutation><arg name="image" varid="*6p?S_wD}keQZ,fzP8uZ"></arg></mutation><field name="NAME">gérer la couche d'entrée</field><comment pinned="false" h="80" w="160">Describe this function...</comment><statement name="STACK"><block type="controls_for" id=")[Pcuz]$aRjz(2GM4@!N"><field name="VAR" id="Eg4`9@Hrn91U4iCj+#m%" variabletype="">i</field><value name="FROM"><block type="math_number" id="{0?EhEj8b*v4^H_U-M^e"><field name="NUM">1</field></block></value><value name="TO"><shadow type="math_number" id="F=yX#Xsc$%ovuV9`a%Ki"><field name="NUM">784</field></shadow></value><value name="BY"><block type="math_number" id="gJ:}Y+e]Ds/RZD@gw6:d"><field name="NUM">1</field></block></value><statement name="DO"><block type="nn_entry_neuron_value" id="n2!NJm](]ALjO;@J^8,h"><value name="neuron_ind"><block type="variables_get" id="}9#;mg/ZQU*V5Kv)$B6d"><field name="VAR" id="Eg4`9@Hrn91U4iCj+#m%" variabletype="">i</field></block></value><value name="picture_pixel"><shadow type="math_arithmetic" id="vd.oz6Np:RB|ZQur-!?W"><field name="OP">MULTIPLY</field><value name="A"><shadow type="math_arithmetic" id="ZH7c9r%%v`k1n/`8pAkK"><field name="OP">MINUS</field><value name="A"><shadow type="math_random_float" id="bzfT%.B=Yqnj)RPvaXOZ"></shadow></value><value name="B"><shadow type="math_number" id="ky9h65tLs1p6U[=`I+hj"><field name="NUM">0.5</field></shadow></value></shadow></value><value name="B"><shadow type="math_number" id="/?eb*OU4^+=d,.2XUo{J"><field name="NUM">2</field></shadow></value></shadow></value></block></statement></block></statement></block><block type="procedures_defreturn" id="@YQ@E3B8P`8is#39N-|%" x="12" y="212"><mutation><arg name="valeur des neurones de la couche de sortie" varid="VJchVf59Wm99f:PfLv_M"></arg></mutation><field name="NAME">prédire valeur</field><comment pinned="false" h="80" w="160">Describe this function...</comment><statement name="STACK"><block type="variables_set" id="^Rq/bfoCYt=k7Lvz{g(["><field name="VAR" id="Z,b1ch;11Tk4y[4YA7bt" variabletype="">chiffrePrédit</field><value name="VALUE"><block type="nn_choose_value" id=":VPF7QekDKYj}7#*`d*c"><field name="NAME">min</field><value name="NAME"><block type="variables_get" id="h)MB@G~VT|9Qj4ot1T/F"><field name="VAR" id="VJchVf59Wm99f:PfLv_M" variabletype="">valeur des neurones de la couche de sortie</field></block></value></block></value></block></statement><value name="RETURN"><block type="variables_get" id="09W#GxJ,%M9t,AgpkVK+"><field name="VAR" id="Z,b1ch;11Tk4y[4YA7bt" variabletype="">chiffrePrédit</field></block></value></block>
 </xml>
 
-<script src="/static/js/shared/Blockly/src/blockly_compressed.js"></script>
-<script src="/static/js/shared/Blockly/src/blocks_compressed.js"></script>
-<script src="/static/js/shared/Blockly/src/javascript_compressed.js"></script>
+<script src="/master-thesis-website-ia-introduction/static/js/shared/Blockly/src/blockly_compressed.js"></script>
+<script src="/master-thesis-website-ia-introduction/static/js/shared/Blockly/src/blocks_compressed.js"></script>
+<script src="/master-thesis-website-ia-introduction/static/js/shared/Blockly/src/javascript_compressed.js"></script>
 
-<script src="/static/js/shared/Blockly/languageCode.js"></script>
-<script src="/static/js/shared/Blockly/BlocklyScripts.js"></script>
+<script src="/master-thesis-website-ia-introduction/static/js/shared/Blockly/languageCode.js"></script>
+<script src="/master-thesis-website-ia-introduction/static/js/shared/Blockly/BlocklyScripts.js"></script>
 <script src="js/NNBlocklyFunctions.js"></script>
         </div>
 
@@ -1132,20 +1132,20 @@ MathJax.Hub.Config({
             
                 <h3>Reconnaitre le chiffre dans une image avec le réseau de neurones</h3>
                 <p>
-    Le bloc <img src="/static/img/NN/acti/classify.svg"> te permet de classifier l'image donnée en argument, en utilisant le réseau de neurones.<br>
+    Le bloc <img src="/master-thesis-website-ia-introduction/static/img/NN/acti/classify.svg"> te permet de classifier l'image donnée en argument, en utilisant le réseau de neurones.<br>
     Tu as également plusieurs images disponibles dans la section <code>NN Images</code> que tu peux utiliser avec le bloc précédent afin de vérifier si tes prédictions sont correctes.<br>
 </p> <div class="mx-auto" align="center">
-    <img src="/static/img/NN/acti/exampleClassify.JPG" class="img-fluid"><br>
+    <img src="/master-thesis-website-ia-introduction/static/img/NN/acti/exampleClassify.JPG" class="img-fluid"><br>
     <p class="text-muted">Je demande de classifier une image d'un 2 à mon réseau de neurones et d'afficher le résultat à l'écran.<br>Le résultat affiché dans la boite de dialogue est bien le chiffre annoncé</p>
 </div>
 <p>
     Tu peux aussi dessiner dans le cadre noir à gauche afin qu'il l'utilise comme image.
 </p> <div class="mx-auto" align="center">
-    <img src="/static/img/NN/acti/exampleClassifyDraw2.JPG" class="img-fluid"><br>
+    <img src="/master-thesis-website-ia-introduction/static/img/NN/acti/exampleClassifyDraw2.JPG" class="img-fluid"><br>
     <p class="text-muted" style="padding-bottom: 32px">Le réseau a bien reconnu mon superbe 2 !</p>
-    <img src="/static/img/NN/acti/exampleClassifyDraw3.JPG" class="img-fluid" ><br>
+    <img src="/master-thesis-website-ia-introduction/static/img/NN/acti/exampleClassifyDraw3.JPG" class="img-fluid" ><br>
     <p class="text-muted" style="padding-bottom: 32px">Je n'ai rien changé au code! J'ai juste dessiné l'image d'un autre chiffre </p>
-    <img src="/static/img/NN/acti/exampleClassifyDrawBG.JPG" class="img-fluid"><br>
+    <img src="/master-thesis-website-ia-introduction/static/img/NN/acti/exampleClassifyDrawBG.JPG" class="img-fluid"><br>
     <p class="text-muted">Le réseau de neurones fera toujours de son mieux pour trouver un chiffre dans l'image dessinée...</p>
 </div>
 
@@ -1167,7 +1167,7 @@ MathJax.Hub.Config({
     Dans la section <code>TODO</code> de la boite à outil de Blockly tu trouveras une première implémentation pour les 2 fonctions que tu dois créer.<br>
     Commence par les prendre et glisse les dans ton code.
 </p> <div class="mx-auto" align="center">
-    <img src="/static/img/NN/acti/defaultBlocks.svg" class="img-fluid">
+    <img src="/master-thesis-website-ia-introduction/static/img/NN/acti/defaultBlocks.svg" class="img-fluid">
 </div>
 <p>
    Pour essayer, lance la prédiction : tu auras normalement un taux de prédiction assez faible, dans les alentours des 10%.<br>
@@ -1192,7 +1192,7 @@ MathJax.Hub.Config({
     Cette fonction prend une image en nuances de gris de taille 28 x 28 en argument.<br>
     Le but de cette fonction est d'initialiser la valeur de tous les neurones de la couche d'entrée à partir de la couleur des pixels de l'image.<br>
 </p> <div class="mx-auto" align="center">
-    <img src="/static/img/NN/acti/handleEntryDefault.svg" class="img-fluid">
+    <img src="/master-thesis-website-ia-introduction/static/img/NN/acti/handleEntryDefault.svg" class="img-fluid">
 </div>
 <p>
     Dans l'état présent, les 784 neurones de la couche d'entrée sont initialisés aléatoirement sans prendre en compte l'image !<br>
@@ -1200,12 +1200,12 @@ MathJax.Hub.Config({
 <p>
     Nous sommes censés attribuer à chaque neurone la valeur de couleur du pixel correspondant de l'image de la même manière que dans <a href="exercice#valeur-des-neurones-de-la-premi-re-couche" target="_blank">le premier exercice préparatoire</a>.<br>
     Avec l'implémentation par défaut et tous les blocs de la section <code>NN Entrée</code> tu as tout le nécessaire pour implémenter la fonction ;). <br>
-    Le bloc <img src="/static/img/NN/acti/flattenPicture.svg" class="img-fluid"> te permettra "d'aplatir" une image,
+    Le bloc <img src="/master-thesis-website-ia-introduction/static/img/NN/acti/flattenPicture.svg" class="img-fluid"> te permettra "d'aplatir" une image,
     l'idée étant de transformer l'image originale en 2D de taille 28 x 28 à son équivalent aplatie en 1D de taille 784 ($28 \times 28$)
  </p>
 
 <div class="mx-auto" align="center">
-    <img src="/static/img/NN/acti/flattenExample.png" class="img-fluid"><br>
+    <img src="/master-thesis-website-ia-introduction/static/img/NN/acti/flattenExample.png" class="img-fluid"><br>
     <small class="text-muted">Exemple d'aplatisement d'une image en noir et blanc de taille 3 x 3. Le résultat aplatie est une image à 1 dimension de taille 9</small>
 </div>
 
@@ -1238,7 +1238,7 @@ MathJax.Hub.Config({
     <div class="card-body text-success">
         <p class="card-text">
             <div class="mx-auto" align="center">
-    <img src="/static/img/NN/acti/handleEntryCorection.svg" class="img-fluid"><br>
+    <img src="/master-thesis-website-ia-introduction/static/img/NN/acti/handleEntryCorection.svg" class="img-fluid"><br>
 </div> Cela fonctionne aussi en mettant 784 comme borne de la boucle.
 
         </p>
@@ -1256,7 +1256,7 @@ MathJax.Hub.Config({
     Les 10 neurones de cette couche représentent chaque chiffre de 0 à 9. La valeur du neurone représente la probabilité du chiffre qui lui est associé.<br>
     <small class="text-muted">Par exemple si le 1er neurone à la valeur 0.4, cela signifie qu'il y a 40% de chance que l'image représente le chiffre 0.</small>
 </p> <div class="mx-auto" align="center">
-    <img src="/static/img/NN/acti/handleOutputDefault.svg" class="img-fluid">
+    <img src="/master-thesis-website-ia-introduction/static/img/NN/acti/handleOutputDefault.svg" class="img-fluid">
 </div>
 <p>
     Dans l'état présent c'est le chiffre de probabilité minimale qui est renvoyé. Mais c'est incorrect.<br>
@@ -1298,7 +1298,7 @@ MathJax.Hub.Config({
     <div class="card-body text-success">
         <p class="card-text">
             <div class="mx-auto" align="center">
-    <img src="/static/img/NN/acti/handleOutputCorection.svg" class="img-fluid"><br>
+    <img src="/master-thesis-website-ia-introduction/static/img/NN/acti/handleOutputCorection.svg" class="img-fluid"><br>
 </div> Très simple ici, il suffit de changer le "minimum" en "maximum". C'est le chiffre avec la plus grande probabilité qui nous intéresse !
 
         </p>
@@ -1353,7 +1353,7 @@ MathJax.Hub.Config({
                 <ul class="list-unstyled">
                     
                         <li class="media">
-                            <img src="/static/img/NN/acti/parts/DrawFrame.JPG" class="mr-3 img-fluid" >
+                            <img src="/master-thesis-website-ia-introduction/static/img/NN/acti/parts/DrawFrame.JPG" class="mr-3 img-fluid" >
                             <div class="media-body">
                                 <h4 class="mt-0 mb-1">Panneau Graphe et Données</h4>
                                 Cadre de dessin, utilise-le avec la souris ou au doigt (avec écran tactile) pour dessiner dedans.<br> Tu peux y dessiner ce que tu veux, mais le réseau neuronal tentera de reconnaître toujours un chiffre dans l'image.<br> La case à cocher en dessous te permet d'afficher l'image transformée après que tu aies lancé la recherche (par le réseau). Tu y verras normalement une image de 28 x 28 sur fond blanc de ton dessin, c'est cette image transformée qui servira comme entrée au réseau de neurones lors de la reconnaissance.
@@ -1362,7 +1362,7 @@ MathJax.Hub.Config({
                         </li>
                     
                         <li class="media">
-                            <img src="/static/img/NN/acti/parts/buttons.JPG" class="mr-3 img-fluid" >
+                            <img src="/master-thesis-website-ia-introduction/static/img/NN/acti/parts/buttons.JPG" class="mr-3 img-fluid" >
                             <div class="media-body">
                                 <h4 class="mt-0 mb-1">Boutons permettant d'interagir avec le réseau</h4>
                                 Le premier bouton te permet de lancer la reconnaissance par le réseau de neurones. L'image dessinée sera lue, les neurones de la couche d'entrée prendront leur valeur à partir de l'image transformée et la classification se lancera.<br> Le dernier bouton te permet simplement d'effacer l'image dessinée.<br> Le second bouton est un peu plus technique, il te permet de modifier directement la valeur des poids de ton réseau de neurones ainsi que consulter les valeurs des neurones. Attention, si tu fais ça, ton réseau de neurones risque de ne plus être en mesure de reconnaître correctement les chiffres ! Une explication plus détaillée de l'utilisation de ce bouton se trouve sur <a href="explicationModificationReseau" target="_blank">cette page</a>.
@@ -1380,7 +1380,7 @@ MathJax.Hub.Config({
                 </p>
 
                 
-                    <h2>Graphique du réseau</h2> <img src="/static/img/NN/acti/parts/NetworkRepr.JPG" class="img-fluid"> <p>
+                    <h2>Graphique du réseau</h2> <img src="/master-thesis-website-ia-introduction/static/img/NN/acti/parts/NetworkRepr.JPG" class="img-fluid"> <p>
     Un cercle représente un neurone, son numéro est indiqué à l'intérieur. Plus sa couleur est foncée, plus sa valeur est grande.<br>
     Les lignes reliant les cercles représentent les poids, plus la ligne est opaque, plus sa valeur est grande.<br>
     Chaque colonne correspond à une couche, elles augmentent de gauche à droite.<br>
@@ -1405,7 +1405,7 @@ MathJax.Hub.Config({
                         <tbody>
                         
                             <tr>
-                                <td><img src="/static/img/blocklyBlocks/NNDrawnPicture.svg" class="img-fluid"></td>
+                                <td><img src="/master-thesis-website-ia-introduction/static/img/blocklyBlocks/NNDrawnPicture.svg" class="img-fluid"></td>
                                 <td>Permet de récupérer sous forme d'image le dessin dans le cadre noir</td>
                                 
                                     <td>Image</td>
@@ -1413,7 +1413,7 @@ MathJax.Hub.Config({
                             </tr>
                         
                             <tr>
-                                <td><img src="/static/img/blocklyBlocks/NNZeroPicture.svg" class="img-fluid"></td>
+                                <td><img src="/master-thesis-website-ia-introduction/static/img/blocklyBlocks/NNZeroPicture.svg" class="img-fluid"></td>
                                 <td>Image pré-dessinée d'un zéro (il y a une image pour chaque chiffre)</td>
                                 
                                     <td>Image</td>
@@ -1421,7 +1421,7 @@ MathJax.Hub.Config({
                             </tr>
                         
                             <tr>
-                                <td><img src="/static/img/blocklyBlocks/NNPictureWidth.svg" class="img-fluid"></td>
+                                <td><img src="/master-thesis-website-ia-introduction/static/img/blocklyBlocks/NNPictureWidth.svg" class="img-fluid"></td>
                                 <td>Calcule et retourne la longueur de l'image. C'est le nombre de pixels horizontaux. L'image peut être en 2D ou en 1D</td>
                                 
                                     <td>Nombre</td>
@@ -1429,7 +1429,7 @@ MathJax.Hub.Config({
                             </tr>
                         
                             <tr>
-                                <td><img src="/static/img/blocklyBlocks/NNGiveNeuronValue.svg" class="img-fluid"></td>
+                                <td><img src="/master-thesis-website-ia-introduction/static/img/blocklyBlocks/NNGiveNeuronValue.svg" class="img-fluid"></td>
                                 <td>Permet de donner une certaine valeur à un certain neurone de la couche d'entrée</td>
                                 
                                     <td><i>Rien</i></td>
@@ -1437,7 +1437,7 @@ MathJax.Hub.Config({
                             </tr>
                         
                             <tr>
-                                <td><img src="/static/img/blocklyBlocks/NNGetPicturePixelValue.svg" class="img-fluid"></td>
+                                <td><img src="/master-thesis-website-ia-introduction/static/img/blocklyBlocks/NNGetPicturePixelValue.svg" class="img-fluid"></td>
                                 <td>Récupère la valeur d'un certain pixel de l'image, l'image doit être en 1 dimension</td>
                                 
                                     <td>Nombre</td>
@@ -1445,7 +1445,7 @@ MathJax.Hub.Config({
                             </tr>
                         
                             <tr>
-                                <td><img src="/static/img/blocklyBlocks/NNGetMaxMinOutput.svg" class="img-fluid"></td>
+                                <td><img src="/master-thesis-website-ia-introduction/static/img/blocklyBlocks/NNGetMaxMinOutput.svg" class="img-fluid"></td>
                                 <td>Récupère le numéro du neurone de probabilité minimale/maximale</td>
                                 
                                     <td>Nombre</td>
@@ -1453,7 +1453,7 @@ MathJax.Hub.Config({
                             </tr>
                         
                             <tr>
-                                <td><img src="/static/img/blocklyBlocks/NNClassify.svg" class="img-fluid"></td>
+                                <td><img src="/master-thesis-website-ia-introduction/static/img/blocklyBlocks/NNClassify.svg" class="img-fluid"></td>
                                 <td>Permet d'utiliser le réseau de neurones pour classifier une image <br>Cela te sera utile seulement en <a href="#" onclick="$('#nav-tab-activity-examples').tab('show')">debug</a></td>
                                 
                                     <td>Nombre</td>
@@ -1483,7 +1483,7 @@ MathJax.Hub.Config({
         </div>
     </div>
 </div>
-<script src="/static/js/animationSuccess.js"></script>
+<script src="/master-thesis-website-ia-introduction/static/js/animationSuccess.js"></script>
 <script>
     function giveCorrection(elem) {
         if (confirm("Souhaites-tu vraiment afficher la correction ? ")) {
@@ -1499,7 +1499,7 @@ MathJax.Hub.Config({
     }
 </script>
 
-<script src="/static/js/enlargeImageModal.js"></script>
+<script src="/master-thesis-website-ia-introduction/static/js/enlargeImageModal.js"></script>
 <!-- Creates the bootstrap modal where the image will appear -->
 <div class="modal fade bd-example-modal-xl" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">

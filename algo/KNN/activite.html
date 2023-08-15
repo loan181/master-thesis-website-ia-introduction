@@ -33,7 +33,7 @@
     firebase.initializeApp(config);
 </script>
 
-<script src="/static/js/Database.js"></script>
+<script src="/master-thesis-website-ia-introduction/static/js/Database.js"></script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134452435-1"></script>
@@ -55,7 +55,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 
 <!-- Custom css -->
-<link rel="stylesheet" href="/static/css/style.css">
+<link rel="stylesheet" href="/master-thesis-website-ia-introduction/static/css/style.css">
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -77,9 +77,9 @@ MathJax.Hub.Config({
 
     
         <!-- Plotlyjs -->
-        <script type="text/javascript" src="/static/js/shared/plotlyjs-bundle.js"></script>
-        <script type="text/javascript" src="/static/js/shared/figure.js"></script>
-        <script type="text/javascript" src="/static/js/shared/plotInteraction.js"></script>
+        <script type="text/javascript" src="/master-thesis-website-ia-introduction/static/js/shared/plotlyjs-bundle.js"></script>
+        <script type="text/javascript" src="/master-thesis-website-ia-introduction/static/js/shared/figure.js"></script>
+        <script type="text/javascript" src="/master-thesis-website-ia-introduction/static/js/shared/plotInteraction.js"></script>
         <script type="text/javascript" src="customJS/plotInteraction.js"></script>
         <script src="https://cdn.plot.ly/plotly-locale-fr-latest.js"></script>
     
@@ -88,25 +88,25 @@ MathJax.Hub.Config({
 
     <!-- Custom Extra scripts -->
     
-        <script type="text/javascript" src="/static/js/shared/iris.js"></script>
+        <script type="text/javascript" src="/master-thesis-website-ia-introduction/static/js/shared/iris.js"></script>
     
-        <script type="text/javascript" src="/static/js/shared/GraphFunctions.js"></script>
+        <script type="text/javascript" src="/master-thesis-website-ia-introduction/static/js/shared/GraphFunctions.js"></script>
     
         <script type="text/javascript" src="customJS/KNNFunctions.js"></script>
     
-        <script type="text/javascript" src="/static/js/shared/Blockly/src/blockly_compressed.js"></script>
+        <script type="text/javascript" src="/master-thesis-website-ia-introduction/static/js/shared/Blockly/src/blockly_compressed.js"></script>
     
-        <script type="text/javascript" src="/static/js/shared/Blockly/src/blocks_compressed.js"></script>
+        <script type="text/javascript" src="/master-thesis-website-ia-introduction/static/js/shared/Blockly/src/blocks_compressed.js"></script>
     
-        <script type="text/javascript" src="/static/js/shared/Blockly/src/javascript_compressed.js"></script>
-    
-
+        <script type="text/javascript" src="/master-thesis-website-ia-introduction/static/js/shared/Blockly/src/javascript_compressed.js"></script>
     
 
-    <script src="/static/js/contentForTeacher.js"></script>
+    
+
+    <script src="/master-thesis-website-ia-introduction/static/js/contentForTeacher.js"></script>
 
     <!-- Success Message -->
-    <link rel="stylesheet" href="/static/css/animationSuccess.css">
+    <link rel="stylesheet" href="/master-thesis-website-ia-introduction/static/css/animationSuccess.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.1/TweenMax.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
 </head>
@@ -121,13 +121,13 @@ MathJax.Hub.Config({
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul id="mainNavbarUl" class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/"><i class="fas fa-home"></i></a>
+                <a class="nav-link" href="/master-thesis-website-ia-introduction/"><i class="fas fa-home"></i></a>
             </li>
             <!-- Rest is filled automatically -->
         </ul>
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="/contact.html"><i class="far fa-envelope"></i> Me contacter</a>
+                <a class="nav-link" href="/master-thesis-website-ia-introduction/contact.html"><i class="far fa-envelope"></i> Me contacter</a>
             </li>
         </ul>
         <!--<form class="form-inline my-2 my-lg-0">-->
@@ -138,7 +138,7 @@ MathJax.Hub.Config({
 </nav>
 
 <script>
-    let algoPrefix = "/algo/";
+    let algoPrefix = "/master-thesis-website-ia-introduction/algo/";
     let algoActivityDesc = [
         "Introduction au concept général de l'algorithme",
         "Série de petits exercices de préparation pour introduire l'idée derrière l'algorithme.<br>Leur correction est automatisée.",
@@ -275,7 +275,7 @@ MathJax.Hub.Config({
     Ton score dépend de la qualité de la fonction <code>classify(newIris)</code>.<br>
     Cette fonction prend une fleur en argument <code>newIris</code> et renvoie le nom prédit de cette fleur.
 </p> <div class="mx-auto" align="center">
-    <img src="/static/img/KNN/classifyFunction.svg" class="img-fluid">
+    <img src="/master-thesis-website-ia-introduction/static/img/KNN/classifyFunction.svg" class="img-fluid">
 </div> <p>
     Des fleurs de classes connues sont cachées et servent à définir si ta fonction de classification est bonne ou pas.<br>
     Le score augmente chaque fois qu'une de ces fleur est correctement prédite.<br>
@@ -293,7 +293,7 @@ MathJax.Hub.Config({
 
             <!-- Toolbox -->
             <div id="toolBox"></div>
-            <script src="/static/js/shared/ToolBox.js"></script>
+            <script src="/master-thesis-website-ia-introduction/static/js/shared/ToolBox.js"></script>
             <script>
                 let TB = new ToolBox("toolBox");
                 TB.setToolBarForExercice("KNN");
@@ -305,7 +305,7 @@ MathJax.Hub.Config({
                 <h6 style="float: left; margin-right: 1em;"> Précision actuelle : </h6>
                 <div id="progressBar"></div>
             </div>
-            <script src="/static/js/successBar.js"></script>
+            <script src="/master-thesis-website-ia-introduction/static/js/successBar.js"></script>
             <script>
                 let pb = new ProgressBar("progressBar");
                 function exerciceSuccess() {
@@ -2171,9 +2171,9 @@ MathJax.Hub.Config({
 </block>
 </xml>
 
-<script src="/static/js/shared/Blockly/languageCode.js"></script>
-<script src="/static/js/shared/Blockly/BlocklyScripts.js"></script>
-<script src="/static/js/shared/plot.js"></script>
+<script src="/master-thesis-website-ia-introduction/static/js/shared/Blockly/languageCode.js"></script>
+<script src="/master-thesis-website-ia-introduction/static/js/shared/Blockly/BlocklyScripts.js"></script>
+<script src="/master-thesis-website-ia-introduction/static/js/shared/plot.js"></script>
 
 <script>
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
@@ -2200,7 +2200,7 @@ MathJax.Hub.Config({
 </p> <p>
     Pour cela on va d'abord créer une fleur avec le bloc supplémentaire, en spécifiant les coordonnées <code>x</code> et <code>y</code> désirées.
 </p> <div class="mx-auto" align="center">
-    <img src="/static/img/blocklyBlocks/createFlower.svg" class="img-fluid">
+    <img src="/master-thesis-website-ia-introduction/static/img/blocklyBlocks/createFlower.svg" class="img-fluid">
 </div> <p>
     Après cela il faut qu'on exécute le code pour mettre à jour le graphe via le bouton
     <button id="buttonDebug" type="button" class="btn btn-warning"><i class="fas fa-bug"></i></button><br>
@@ -2213,10 +2213,10 @@ MathJax.Hub.Config({
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm">
-                    <img src="/static/img/KNN/addFlowerPar1.PNG" class="img-fluid float-left">
+                    <img src="/master-thesis-website-ia-introduction/static/img/KNN/addFlowerPar1.PNG" class="img-fluid float-left">
                 </div>
                 <div class="col-sm">
-                    <img src="/static/img/KNN/addFlowerPar2.PNG" class="img-fluid float-right">
+                    <img src="/master-thesis-website-ia-introduction/static/img/KNN/addFlowerPar2.PNG" class="img-fluid float-right">
                 </div>
             </div>
         </div>
@@ -2232,9 +2232,9 @@ MathJax.Hub.Config({
 </p> <p>
     Voici un exemple un peu complexe d'utilisation possible:
 </p> <div class="mx-auto" align="center">
-    <img src="/static/img/KNN/exampleBlockAppCompteur2.svg" class="img-fluid"><br>
+    <img src="/master-thesis-website-ia-introduction/static/img/KNN/exampleBlockAppCompteur2.svg" class="img-fluid"><br>
 </div> <br> <div class="mx-auto" align="center">
-    <img src="/static/img/KNN/exampleBlockAppCompteurRes2.PNG" class="img-fluid">
+    <img src="/master-thesis-website-ia-introduction/static/img/KNN/exampleBlockAppCompteurRes2.PNG" class="img-fluid">
 </div> <small class="text-muted">
     Dans cet exemple, on ajoute une fleur artificielle en (4.9, 4.2) avec comme axe x le sepal length et y le petal length.<br>
     On commence par réinitialiser les compteurs des 3 fleurs en les mettant à zéro.<br>
@@ -2248,9 +2248,9 @@ MathJax.Hub.Config({
     </ul>
     Attention : <code>K</code> est totalement ignoré dans cet exemple, il faudra le prendre en compte quand tu devras résoudre le problème ;)
 </small> <br> <br> <div class="mx-auto" align="center">
-    <img src="/static/img/KNN/exampleBlockAppCompteur.svg" class="img-fluid"><br>
+    <img src="/master-thesis-website-ia-introduction/static/img/KNN/exampleBlockAppCompteur.svg" class="img-fluid"><br>
 </div> <br> <div class="mx-auto" align="center">
-    <img src="/static/img/KNN/exampleBlockAppCompteurRes.PNG" class="img-fluid">
+    <img src="/master-thesis-website-ia-introduction/static/img/KNN/exampleBlockAppCompteurRes.PNG" class="img-fluid">
 </div> <small class="text-muted">
     Pareil que l'exemple précédent, sauf qu'au lieu d'afficher les valeurs des compteurs on indique les fleurs avec les valeurs de compteur minimale et maximale.
 </small>
@@ -2274,11 +2274,11 @@ MathJax.Hub.Config({
             
                 <h3></h3>
                 <div class="mx-auto" align="center">
-    <img src="/static/img/KNN/stepMainEx1.PNG" class="img-fluid" style="padding-bottom: 30px">
+    <img src="/master-thesis-website-ia-introduction/static/img/KNN/stepMainEx1.PNG" class="img-fluid" style="padding-bottom: 30px">
     <br>
-    <img src="/static/img/KNN/stepMainEx2.PNG" class="img-fluid" style="padding-bottom: 30px">
+    <img src="/master-thesis-website-ia-introduction/static/img/KNN/stepMainEx2.PNG" class="img-fluid" style="padding-bottom: 30px">
     <br>
-    <img src="/static/img/KNN/stepMainEx3.PNG" class="img-fluid">
+    <img src="/master-thesis-website-ia-introduction/static/img/KNN/stepMainEx3.PNG" class="img-fluid">
 </div>
 
             
@@ -2299,7 +2299,7 @@ MathJax.Hub.Config({
     Dans la section <code>TODO</code> de la boite à outil de Blockly tu trouveras une première implémentation de la fonction que tu dois créer.<br>
     Commence par la prendre et teste le résultat de ton prédicteur avec.
 </p> <div class="mx-auto" align="center">
-    <img src="/static/img/KNN/classifyFunctionDefault.svg" class="img-fluid">
+    <img src="/master-thesis-website-ia-introduction/static/img/KNN/classifyFunctionDefault.svg" class="img-fluid">
 </div>
 <p>
     Normalement tu devrais avoir un résultat d’environ 33% et chaque fois que tu re-testes le prédicteur,
@@ -2343,31 +2343,31 @@ MathJax.Hub.Config({
                     
                         <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
                             <div class="card">
-                                <img src="/static/img/blocklyBlocks/forI.svg" class="img-fluid">
+                                <img src="/master-thesis-website-ia-introduction/static/img/blocklyBlocks/forI.svg" class="img-fluid">
                             </div>
                         </div>
                     
                         <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
                             <div class="card">
-                                <img src="/static/img/blocklyBlocks/countersReset.svg" class="img-fluid">
+                                <img src="/master-thesis-website-ia-introduction/static/img/blocklyBlocks/getK.svg" class="img-fluid">
                             </div>
                         </div>
                     
                         <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
                             <div class="card">
-                                <img src="/static/img/blocklyBlocks/countersGetMinMax.svg" class="img-fluid">
+                                <img src="/master-thesis-website-ia-introduction/static/img/blocklyBlocks/countersGetMinMax.svg" class="img-fluid">
                             </div>
                         </div>
                     
                         <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
                             <div class="card">
-                                <img src="/static/img/blocklyBlocks/countersIncrease.svg" class="img-fluid">
+                                <img src="/master-thesis-website-ia-introduction/static/img/blocklyBlocks/countersIncrease.svg" class="img-fluid">
                             </div>
                         </div>
                     
                         <div class="col-sm-4" style="padding-left: 2px;padding-right: 2px;">
                             <div class="card">
-                                <img src="/static/img/blocklyBlocks/getK.svg" class="img-fluid">
+                                <img src="/master-thesis-website-ia-introduction/static/img/blocklyBlocks/countersReset.svg" class="img-fluid">
                             </div>
                         </div>
                     
@@ -2405,13 +2405,13 @@ MathJax.Hub.Config({
     <div class="card-body text-success">
         <p class="card-text">
             <p class="lead">Meilleur correction : </p> <div class="mx-auto" align="center">
-    <img src="/static/img/KNN/solutionKNN.svg" class="img-fluid">
+    <img src="/master-thesis-website-ia-introduction/static/img/KNN/solutionKNN.svg" class="img-fluid">
 </div> <hr /> <p>Il existe d'autres solutions équivalentes qui mèneront aussi à 100% mais moins robustes telles que : </p> <p>
-    En mettant <code>3</code> au lieu du bloc <img src="/static/img/blocklyBlocks/getK.svg">.
+    En mettant <code>3</code> au lieu du bloc <img src="/master-thesis-website-ia-introduction/static/img/blocklyBlocks/getK.svg">.
 </p> <p>
-    On peut également aussi répéter l'instruction <img src="/static/img/blocklyBlocks/countersIncrease.svg"> plusieurs fois au lieu d'utiliser une boucle, par ex :
+    On peut également aussi répéter l'instruction <img src="/master-thesis-website-ia-introduction/static/img/blocklyBlocks/countersIncrease.svg"> plusieurs fois au lieu d'utiliser une boucle, par ex :
 </p> <div class="mx-auto" align="center">
-    <img src="/static/img/KNN/blocklyCorrAlternative.svg" class="img-fluid">
+    <img src="/master-thesis-website-ia-introduction/static/img/KNN/blocklyCorrAlternative.svg" class="img-fluid">
 </div>
 
         </p>
@@ -2434,9 +2434,9 @@ MathJax.Hub.Config({
     <div class="card-body text-success">
         <p class="card-text">
             <div class="mx-auto" align="center">
-    <img src="/static/img/KNN/solutionKNN.svg" class="img-fluid">
+    <img src="/master-thesis-website-ia-introduction/static/img/KNN/solutionKNN.svg" class="img-fluid">
 </div> Avec par exemple comme paramètres : <div class="mx-auto" align="center">
-    <img src="/static/img/KNN/solParametersKNN.png" class="img-fluid">
+    <img src="/master-thesis-website-ia-introduction/static/img/KNN/solParametersKNN.png" class="img-fluid">
 </div>
 
         </p>
@@ -2490,7 +2490,7 @@ MathJax.Hub.Config({
                 <ul class="list-unstyled">
                     
                         <li class="media">
-                            <img src="/static/img/KNN/site-graphAndDatas.png" class="mr-3 img-fluid" >
+                            <img src="/master-thesis-website-ia-introduction/static/img/KNN/site-graphAndDatas.png" class="mr-3 img-fluid" >
                             <div class="media-body">
                                 <h4 class="mt-0 mb-1">Panneau Graphe et Données</h4>
                                 Te permet de consulter et visualiser les données du modèle d'entrainement. Chaque point du graphe correspond à une fleur du modèle d'entrainement. Sa forme et couleur définit sa classe comme légendé en dessous du graphe.<br> Tu peux survoler avec ta souris un point pour obtenir des informations le concernant.<br> Tu pourras également ajouter des fleurs "artificielles" dans le graphe via Blockly. Pour effacer ces dernières tu pourras utiliser le bouton jaune avec la gomme.<br>
@@ -2499,7 +2499,7 @@ MathJax.Hub.Config({
                         </li>
                     
                         <li class="media">
-                            <img src="/static/img/KNN/site-parameters.png" class="mr-3 img-fluid" >
+                            <img src="/master-thesis-website-ia-introduction/static/img/KNN/site-parameters.png" class="mr-3 img-fluid" >
                             <div class="media-body">
                                 <h4 class="mt-0 mb-1">Panneau paramètres</h4>
                                 Te permet de modifier certains paramètres de l'algorithme des K plus proches voisins.<br> La modification des axes mettra également à jour le graphe du modèle d'entrainement selon le choix.
@@ -2531,7 +2531,7 @@ MathJax.Hub.Config({
                         <tbody>
                         
                             <tr>
-                                <td><img src="/static/img/blocklyBlocks/getK.svg" class="img-fluid"></td>
+                                <td><img src="/master-thesis-website-ia-introduction/static/img/blocklyBlocks/getK.svg" class="img-fluid"></td>
                                 <td>Donne la valeur de K définie dans le Panneau Paramètres</td>
                                 
                                     <td>Nombre</td>
@@ -2539,7 +2539,7 @@ MathJax.Hub.Config({
                             </tr>
                         
                             <tr>
-                                <td><img src="/static/img/blocklyBlocks/countersReset.svg" class="img-fluid"></td>
+                                <td><img src="/master-thesis-website-ia-introduction/static/img/blocklyBlocks/countersReset.svg" class="img-fluid"></td>
                                 <td>Permet de mettre le compteur de chaque fleur à zéro</td>
                                 
                                     <td><i>Rien</i></td>
@@ -2547,7 +2547,7 @@ MathJax.Hub.Config({
                             </tr>
                         
                             <tr>
-                                <td><img src="/static/img/blocklyBlocks/countersIncrease.svg" class="img-fluid"></td>
+                                <td><img src="/master-thesis-website-ia-introduction/static/img/blocklyBlocks/countersIncrease.svg" class="img-fluid"></td>
                                 <td>Ajoute la valeur donnée à la classe de la i-ème fleur la plus proche</td>
                                 
                                     <td><i>Rien</i></td>
@@ -2555,7 +2555,7 @@ MathJax.Hub.Config({
                             </tr>
                         
                             <tr>
-                                <td><img src="/static/img/blocklyBlocks/countersGetMinMax.svg" class="img-fluid"></td>
+                                <td><img src="/master-thesis-website-ia-introduction/static/img/blocklyBlocks/countersGetMinMax.svg" class="img-fluid"></td>
                                 <td>Récupère la fleur associée au compteur avec la valeur minimale/maximale</td>
                                 
                                     <td>Texte (nom de fleur)</td>
@@ -2563,7 +2563,7 @@ MathJax.Hub.Config({
                             </tr>
                         
                             <tr>
-                                <td><img src="/static/img/blocklyBlocks/getCounters.svg" class="img-fluid"></td>
+                                <td><img src="/master-thesis-website-ia-introduction/static/img/blocklyBlocks/getCounters.svg" class="img-fluid"></td>
                                 <td>Permet de consulter la valeur des compteurs<br>(Ce bloc est utile seulement pour débugger, afin de pouvoir voir les valeurs des compteurs)</td>
                                 
                                     <td>Texte</td>
@@ -2571,7 +2571,7 @@ MathJax.Hub.Config({
                             </tr>
                         
                             <tr>
-                                <td><img src="/static/img/blocklyBlocks/createFlower.svg" class="img-fluid"></td>
+                                <td><img src="/master-thesis-website-ia-introduction/static/img/blocklyBlocks/createFlower.svg" class="img-fluid"></td>
                                 <td>Permet de créer une fleur artificielle qui aura les valeurs données en <code>x</code> et <code>y</code> (dépend de ce que tu as fixé comme paramètres)<br>Voir exemples ci-dessous</td>
                                 
                                     <td>Fleur</td>
@@ -2601,7 +2601,7 @@ MathJax.Hub.Config({
         </div>
     </div>
 </div>
-<script src="/static/js/animationSuccess.js"></script>
+<script src="/master-thesis-website-ia-introduction/static/js/animationSuccess.js"></script>
 <script>
     function giveCorrection(elem) {
         if (confirm("Souhaites-tu vraiment afficher la correction ? ")) {
@@ -2617,7 +2617,7 @@ MathJax.Hub.Config({
     }
 </script>
 
-<script src="/static/js/enlargeImageModal.js"></script>
+<script src="/master-thesis-website-ia-introduction/static/js/enlargeImageModal.js"></script>
 <!-- Creates the bootstrap modal where the image will appear -->
 <div class="modal fade bd-example-modal-xl" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
